@@ -9,11 +9,6 @@
 #import "AFHTTPRequestOperationManager.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 
-@class DistributionSite;
-@class DistributionAccount;
-@class VehicleModel;
-
-
 #define API_SYSTEM_PATH             @"/mobile_app/system"
 #define API_SIGNIN_PATH             @"/sign_in"
 #define API_SIGNUP_PATH             @"/sign_up"
@@ -134,18 +129,6 @@
 // API/vehicle/spec/list_by_vin"
 - (void)checkVehicleVin:(NSString *)vinCode andBlock:(void (^)(id responseObject, NSError *error))block;
 
-// API/share/account/create
-- (void)createDistributionSiteWithAccount:(DistributionAccount *)account
-                                       block:(void (^)(id responseObject, NSError *error))block;
-
-// API/share/account/delete
-- (void)deleteDistributionSiteWithAccount:(DistributionAccount *)account
-                                       block:(void (^)(id responseObject, NSError *error))block;
-
-
-// API/share/account/list
-- (void)listDistributionSiteWithAccountType:(NSString *)accountType andBlock:(void (^)(id responseObject, NSError *error))block;
-
 
 // API/merchant/share
 - (void)sendShareWithDict:(NSDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block;
@@ -198,22 +181,6 @@
                             andPage:(NSInteger)page
                             andSize:(NSInteger)size
                            andBlock:(void (^)(id responseObject, NSError *error))block;
-
-
-#pragma mark 获取第三方车型ID
-//  第一步
-- (void)getThirdModelStepOneWithSite:(NSString *)site
-                            andBlock:(void (^)(id responseObject, NSError *error))block;
-
-//  第二步
-- (void)getThirdModelStepTwoWithSite:(NSString *)site
-                            andModel:(VehicleModel *)model
-                            andBlock:(void (^)(id responseObject, NSError *error))block;
-
-//  第三步
-- (void)getThirdModelStepThreeWithSite:(NSString *)site
-                              andModel:(VehicleModel *)model
-                              andBlock:(void (^)(id responseObject, NSError *error))block;
 
 #pragma mark 选择第三方车型后重新发车
 - (void)shareHistoryRestartWithShareJobId:(NSString *)shareJobId

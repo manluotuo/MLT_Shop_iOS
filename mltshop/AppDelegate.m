@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Me.h"
 
 @interface AppDelegate ()
 

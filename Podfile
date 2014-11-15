@@ -11,4 +11,8 @@ pod 'MagicalRecord',	'2.2'
 pod 'KGStatusBar',	'1.0'
 pod 'StyledPageControl', '1.0'
 pod 'SDWebImage', 	'3.7.1'
+#pod 'LBBlurredImage',	'0.2.0'
 pod 'BlocksKit',	'2.2.5'
+#pod 'AMSmoothAlert',	'1.1'
+#pod 'FXBlurView',	'1.6.3'
+

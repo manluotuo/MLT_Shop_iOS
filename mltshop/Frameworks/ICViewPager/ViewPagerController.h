@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, ViewPagerComponent) {
 @protocol ViewPagerDataSource;
 @protocol ViewPagerDelegate;
 
-@interface ViewPagerController : KKViewController
+@interface ViewPagerController : UIViewController
 
 /**
  * The object that acts as the data source of the receiving viewPager

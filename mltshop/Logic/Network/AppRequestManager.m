@@ -9,9 +9,7 @@
 #import "AppRequestManager.h"
 #import "AppDelegate.h"
 #import "Me.h"
-#import "DistributionSite.h"
 #import "AFURLSessionManager.h"
-#import "VehicleModel.h"
 
 static NSString * const kAppNetworkAPIBaseURLString = BASE_API;
 static AppRequestManager *_sharedManager = nil;
@@ -543,64 +541,6 @@ static dispatch_once_t onceToken;
     
 }
 
-- (void)createDistributionSiteWithAccount:(DistributionAccount *)account
-                                       block:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postURL = API_CREATE_SHARE_ACCOUNT;
-
-    NSLog(@"ME %@",XAppDelegate.me);
-    
-    NSDictionary *postDict = [[NSDictionary alloc]init];
-    if (account.type == DistributionAccountBig) {
-        postDict = @{@"userId":XAppDelegate.me.userId,
-                                   @"website":account.website,
-                                   @"accountType":[DistributionAccount stringWithAccountType:account.type]
-                                   };
-
-    }else{
-        postDict = @{@"userId":XAppDelegate.me.userId,
-                                   @"website":account.website,
-                                   @"username":account.username,
-                                   @"password":account.password,
-                                   @"accountType":[DistributionAccount stringWithAccountType:account.type]
-                                   };
-    }
-    
-    postDict = [DataTrans makePostDict:postDict];
-    
-    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject, nil);
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block) {
-            block(nil , error);
-        }
-    }];
-}
-
-- (void)deleteDistributionSiteWithAccount:(DistributionAccount *)account
-                                       block:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postURL = API_DELETE_SHARE_ACCOUNT;
-    
-    NSDictionary *postDict = @{@"id":account.accountId};
-    
-    postDict = [DataTrans makePostDict:postDict];
-
-    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject, nil);
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block) {
-            block(nil , error);
-        }
-    }];
-}
-
 
 /**
  *  请求已经绑定的账号
@@ -963,74 +903,6 @@ static dispatch_once_t onceToken;
         }
     }];
 
-}
-
-#pragma mark 获取第三方车型ID
-
-//  第一步返回brand
-- (void)getThirdModelStepOneWithSite:(NSString *)site
-                          andBlock:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postUrl = API_GET_THIRD_MODELID;
-    NSDictionary *postDict = @{@"step": @"1",
-                               @"site": site};
-    
-    [[AppRequestManager sharedManager]GET:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject, nil);
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block) {
-            block(nil , error);
-        }
-    }];
-}
-
-//  第二步返回供应商和车系
-- (void)getThirdModelStepTwoWithSite:(NSString *)site
-                           andModel:(VehicleModel *)model
-                           andBlock:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postUrl = API_GET_THIRD_MODELID;
-    NSDictionary *postDict = @{@"step": @"2",
-                               @"site": site,
-                               @"brand": model.brand};
-    
-    [[AppRequestManager sharedManager]GET:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject, nil);
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block) {
-            block(nil , error);
-        }
-    }];
-}
-
-//  第三步返回name和ID
-- (void)getThirdModelStepThreeWithSite:(NSString *)site
-                       andModel:(VehicleModel *)model
-                       andBlock:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postUrl = API_GET_THIRD_MODELID;
-    NSDictionary *postDict = @{@"step": @"3",
-                               @"site": site,
-                               @"brand": model.brand,
-                               @"vendor": model.maker,
-                               @"series": model.series};
-    
-    [[AppRequestManager sharedManager]GET:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject, nil);
-        }
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block) {
-            block(nil , error);
-        }
-    }];
 }
 
 #pragma mark 选择第三方车型后重新发车
