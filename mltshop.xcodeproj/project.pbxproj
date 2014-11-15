@@ -85,7 +85,6 @@
 		26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3A4E1A170421009F37B4 /* SGSheetMenu.m */; };
 		26BE3AA71A170421009F37B4 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3A521A170421009F37B4 /* UIScrollView+SVInfiniteScrolling.m */; };
 		26BE3AA81A170421009F37B4 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3A541A170421009F37B4 /* UIScrollView+SVPullToRefresh.m */; };
-		26BE3AA91A170421009F37B4 /* YWDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3A571A170421009F37B4 /* YWDictionary.m */; };
 		26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3A5C1A170421009F37B4 /* AppRequestManager.m */; };
 		26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AAB1A170464009F37B4 /* mltshop.xcdatamodeld */; };
 		26BE3AB01A170486009F37B4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AAE1A170486009F37B4 /* ViewController.m */; };
@@ -215,8 +214,6 @@
 		26BE3A521A170421009F37B4 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		26BE3A531A170421009F37B4 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		26BE3A541A170421009F37B4 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
-		26BE3A561A170421009F37B4 /* YWDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWDictionary.h; sourceTree = "<group>"; };
-		26BE3A571A170421009F37B4 /* YWDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWDictionary.m; sourceTree = "<group>"; };
 		26BE3A5B1A170421009F37B4 /* AppRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRequestManager.h; sourceTree = "<group>"; };
 		26BE3A5C1A170421009F37B4 /* AppRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRequestManager.m; sourceTree = "<group>"; };
 		26BE3AAC1A170464009F37B4 /* mltshop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mltshop.xcdatamodel; sourceTree = "<group>"; };
@@ -418,7 +415,6 @@
 				26BE3A3D1A170421009F37B4 /* ICViewPager */,
 				26BE3A401A170421009F37B4 /* SGActionView */,
 				26BE3A4F1A170421009F37B4 /* SVPullToRefresh */,
-				26BE3A551A170421009F37B4 /* YWDictionary */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -534,15 +530,6 @@
 				26BE3A541A170421009F37B4 /* UIScrollView+SVPullToRefresh.m */,
 			);
 			path = SVPullToRefresh;
-			sourceTree = "<group>";
-		};
-		26BE3A551A170421009F37B4 /* YWDictionary */ = {
-			isa = PBXGroup;
-			children = (
-				26BE3A561A170421009F37B4 /* YWDictionary.h */,
-				26BE3A571A170421009F37B4 /* YWDictionary.m */,
-			);
-			path = YWDictionary;
 			sourceTree = "<group>";
 		};
 		26BE3A581A170421009F37B4 /* Logic */ = {
@@ -836,7 +823,6 @@
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
-				26BE3AA91A170421009F37B4 /* YWDictionary.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,
 				26BE3A9C1A170421009F37B4 /* UIFont+FontAwesome.m in Sources */,
 			);
