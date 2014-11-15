@@ -806,13 +806,6 @@ NS_INLINE BOOL OSVersionIsAtLeastiOS8() {
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
-//if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-//    // code here
-//}
-//
-//if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
-//    // code here
-//}
 
 
 NS_INLINE BOOL StringHasValue(id str) {

@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		266FA8001A134A72000C2AAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA7FF1A134A72000C2AAE /* main.m */; };
 		266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA8021A134A72000C2AAE /* AppDelegate.m */; };
-		266FA80C1A134A72000C2AAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80A1A134A72000C2AAE /* Main.storyboard */; };
 		266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80D1A134A72000C2AAE /* Images.xcassets */; };
-		266FA8111A134A72000C2AAE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80F1A134A72000C2AAE /* LaunchScreen.xib */; };
 		266FA81D1A134A72000C2AAE /* mltshopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA81C1A134A72000C2AAE /* mltshopTests.m */; };
 		26BE3A611A170421009F37B4 /* Museo500-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26BE39E21A170421009F37B4 /* Museo500-Regular.otf */; };
 		26BE3A621A170421009F37B4 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE39E51A170421009F37B4 /* bg.png */; };
@@ -116,9 +114,7 @@
 		266FA7FF1A134A72000C2AAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		266FA8011A134A72000C2AAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		266FA8021A134A72000C2AAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		266FA80B1A134A72000C2AAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		266FA80D1A134A72000C2AAE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		266FA8101A134A72000C2AAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		266FA8161A134A72000C2AAE /* mltshopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mltshopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266FA81B1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA81C1A134A72000C2AAE /* mltshopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mltshopTests.m; sourceTree = "<group>"; };
@@ -224,7 +220,7 @@
 		26BE3A5B1A170421009F37B4 /* AppRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRequestManager.h; sourceTree = "<group>"; };
 		26BE3A5C1A170421009F37B4 /* AppRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRequestManager.m; sourceTree = "<group>"; };
 		26BE3AAC1A170464009F37B4 /* mltshop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mltshop.xcdatamodel; sourceTree = "<group>"; };
-		26BE3AAE1A170486009F37B4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		26BE3AAE1A170486009F37B4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; usesTabs = 0; };
 		26BE3AAF1A170486009F37B4 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		26BE3AB11A1713B8009F37B4 /* AppDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDefs.h; sourceTree = "<group>"; };
 		26BE3AB31A173739009F37B4 /* FAIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAIconButton.m; sourceTree = "<group>"; };
@@ -302,9 +298,7 @@
 				26BE3A5D1A170421009F37B4 /* Presentation */,
 				266FA8011A134A72000C2AAE /* AppDelegate.h */,
 				266FA8021A134A72000C2AAE /* AppDelegate.m */,
-				266FA80A1A134A72000C2AAE /* Main.storyboard */,
 				266FA80D1A134A72000C2AAE /* Images.xcassets */,
-				266FA80F1A134A72000C2AAE /* LaunchScreen.xib */,
 				266FA7FD1A134A72000C2AAE /* Supporting Files */,
 			);
 			path = mltshop;
@@ -786,11 +780,9 @@
 				26BE3A641A170421009F37B4 /* cheliangtuiguang_ico.png in Resources */,
 				26BE3A6B1A170421009F37B4 /* kehuguanli_ico.png in Resources */,
 				26BE3A6D1A170421009F37B4 /* shouchang_btn.png in Resources */,
-				266FA80C1A134A72000C2AAE /* Main.storyboard in Resources */,
 				26BE3A821A170421009F37B4 /* qq_share_ico.png in Resources */,
 				26BE3A841A170421009F37B4 /* shoucang_btn.png in Resources */,
 				26BE3A651A170421009F37B4 /* daiyunying_ico-04.png in Resources */,
-				266FA8111A134A72000C2AAE /* LaunchScreen.xib in Resources */,
 				26BE3A771A170421009F37B4 /* intro_3_960@2x.jpg in Resources */,
 				26BE3A6C1A170421009F37B4 /* next_btn.png in Resources */,
 				26BE3A861A170421009F37B4 /* sina_share_ico.png in Resources */,
@@ -929,25 +921,6 @@
 			targetProxy = 266FA8171A134A72000C2AAE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		266FA80A1A134A72000C2AAE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				266FA80B1A134A72000C2AAE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		266FA80F1A134A72000C2AAE /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				266FA8101A134A72000C2AAE /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		266FA81E1A134A72000C2AAE /* Debug */ = {
