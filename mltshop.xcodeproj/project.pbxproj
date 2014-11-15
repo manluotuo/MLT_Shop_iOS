@@ -961,9 +961,12 @@
 			baseConfigurationReference = 3F62F1EABD7B4A5EA96D194D /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qian Meng (ZD2PU3WQP4)";
 				INFOPLIST_FILE = mltshop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7f9d29dd-c5e3-477f-8fa3-859a366aeca0";
 			};
 			name = Debug;
 		};
@@ -972,9 +975,12 @@
 			baseConfigurationReference = 3F62F1EABD7B4A5EA96D194D /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qian Meng (ZD2PU3WQP4)";
 				INFOPLIST_FILE = mltshop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7f9d29dd-c5e3-477f-8fa3-859a366aeca0";
 			};
 			name = Release;
 		};
