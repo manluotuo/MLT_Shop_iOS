@@ -7,24 +7,116 @@
 //
 
 #import "AppDelegate.h"
-#import "Me.h"
-#import "ViewController.h"
+#import "GreenNavigationController.h"
+#import "MMNavigationController.h"
+#import <MMDrawerController/MMDrawerController.h>
+#import <MMDrawerController/MMDrawerVisualState.h>
+#import "LeftMenuViewController.h"
+#import "RightMenuViewController.h"
+#import "AppRequestManager.h"
+#import "KKDrawerViewController.h"
 
+
+//#import "LoginViewController.h"
+//#import "WelcomeViewController.h"
+//#import "InitDataHelper.h"
+//#import "ModelHelper.h"
+//#import "FirstHelpViewController.h"
+//#import "ProfileFormViewController.h"
+//#import "AccountListViewController.h"
+
+//#import "ShareHelper.h"
+//#import "WXApi.h"
+//#import "WeiboSDK.h"
+#define MR_LOGGING_ENABLED 1
 @interface AppDelegate ()
+@property(nonatomic, strong)KKDrawerViewController * drawerController;
+@property (strong, nonatomic)RightMenuViewController *rightSideDrawerViewController;
+//@property(nonatomic, strong)LoginViewController *loginViewController;
+//@property(nonatomic, strong)WelcomeViewController *welcomeViewController;
+//@property(nonatomic, strong)FirstHelpViewController *firstHelpViewController;
+@property(nonatomic, strong)NSString *versonUrl;
 
 @end
 
 @implementation AppDelegate
-
+@synthesize drawerController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    ViewController *vc = [[ViewController alloc]init];
+//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
+//    NSString *nowVersion = NOWVERSION;
+//    NSString *nowBuild = NOWBUILD;
+//    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
+//    
+//    [WXApi registerApp:WXAPI_APP_ID];
+//    [WeiboSDK registerApp:WEIBO_APP_KEY];
+    
+    
+    // TODO: 先初始化 用来none insert vehicle
+    //    [self managedObjectContext];
+    
+    // MagicalRecord
+    //    [MagicalRecord setupCoreDataStack];
+    NSString *storeNamed = @"merchant.sqlite";
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:storeNamed];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window setRootViewController:vc];
-    [self.window addSubview:vc.view];
-    [self.window makeKeyAndVisible];
+    // Override point for customization after application launch.
+//    self.me = [[ModelHelper sharedHelper]findOnlyMe];
 
+    
+    
+    
+    /**
+     *  DRAWER ViewController
+     */
+    UIViewController *leftSideDrawerViewController = [[LeftMenuViewController alloc]init];
+    self.centerViewController = [[HostViewController alloc] init];
+    self.rightSideDrawerViewController = [[RightMenuViewController alloc]init];
+    
+    UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
+    [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
+    
+    if(OSVersionIsAtLeastiOS7()){
+        UINavigationController * rightSideNavController = [[MMNavigationController alloc] initWithRootViewController:self.rightSideDrawerViewController];
+        [rightSideNavController setRestorationIdentifier:@"MMExampleRightNavigationControllerRestorationKey"];
+        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftSideDrawerViewController];
+        [leftSideNavController setRestorationIdentifier:@"MMExampleLeftNavigationControllerRestorationKey"];
+        self.drawerController = [[KKDrawerViewController alloc]
+                                 initWithCenterViewController:navigationController
+                                 leftDrawerViewController:leftSideNavController
+                                 rightDrawerViewController:nil];
+        [self.drawerController setShowsShadow:NO];
+    }
+    else{
+        self.drawerController = [[KKDrawerViewController alloc]
+                                 initWithCenterViewController:navigationController
+                                 leftDrawerViewController:leftSideDrawerViewController
+                                 rightDrawerViewController:nil];
+    }
+    
+    // custom drawer style
+    
+    [self.drawerController setRestorationIdentifier:@"MMDrawer"];
+    [self.drawerController setMaximumLeftDrawerWidth:MAX_LEFT_DRAWER_WIDTH];
+    [self.drawerController setMaximumRightDrawerWidth:MAX_LEFT_DRAWER_WIDTH];
+    [self.drawerController setShowsShadow:YES];
+    [self.drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideAndScaleVisualStateBlock]];
+    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModePanningNavigationBar];
+    [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    
+//    [self checkUserLogin];
+    
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    [[UINavigationBar appearance] setTintColor:WHITECOLOR];
+    
+    if (!OSVersionIsAtLeastiOS7()) {
+        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+    }
+    
+    
     return YES;
 }
 
@@ -49,87 +141,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
-}
-
-#pragma mark - Core Data stack
-
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-- (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.manluotuo.mltshop" in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-- (NSManagedObjectModel *)managedObjectModel {
-    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"mltshop" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    // Create the coordinator and store
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"mltshop.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _persistentStoreCoordinator;
-}
-
-
-- (NSManagedObjectContext *)managedObjectContext {
-    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return _managedObjectContext;
-}
-
-#pragma mark - Core Data Saving support
-
-- (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
 }
 
 @end

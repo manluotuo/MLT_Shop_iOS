@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 pod 'NYXImagesKit',	'2.3'
 pod 'NJKWebViewProgress', '0.2'

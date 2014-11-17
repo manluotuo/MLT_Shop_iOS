@@ -91,7 +91,7 @@
 #define QQ_API_URL_ID       @"tencent1102352264"
 #define QQ_API_ID           @"1102352264"
 
-#define UMENG_APPKEY        @"53b3abd656240bcc8d010083"
+#define UMENG_APPKEY        @""
 
 #define YXAPI_APP_ID        @"yx7c36bf998216415482e82be16083074b"
 

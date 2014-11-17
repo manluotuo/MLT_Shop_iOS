@@ -24,6 +24,8 @@
 #import <CoreData/CoreData.h>
 #import "AppDefs.h"
 #import "DataTrans.h"
+#import "PassValueDelegate.h"
+#import "KKViewController.h"
 #import "CoreData+MagicalRecord.h"
 #import "KGStatusBar.h"
 //    #import <NSLogger/LoggerClient.h>
