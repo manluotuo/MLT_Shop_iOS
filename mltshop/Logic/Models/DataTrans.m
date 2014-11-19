@@ -303,7 +303,7 @@
 //    result[@"username"] = [DataTrans noNullStringObj:theMe.username];
     result[@"name"] = [DataTrans noNullStringObj:theMe.nickname];
 //    result[@"gender"] = [DataTrans noNullStringObj:theMe.gender];
-    result[@"avatarUrl"] = [DataTrans noNullStringObj:theMe.avatarUrl];
+    result[@"avatarUrl"] = [DataTrans noNullStringObj:theMe.avatarURL];
     return result;
 }
 

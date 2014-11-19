@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8841A1CE8020040ACC0 /* CommonListViewController.m */; };
+		265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */; };
+		265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */; };
+		265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88E1A1CEA180040ACC0 /* ModelHelper.m */; };
+		265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8911A1CEFCF0040ACC0 /* RoundedAvatarButton.m */; };
+		265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8931A1CF1CC0040ACC0 /* NoDataView.m */; };
+		265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8981A1CF4B50040ACC0 /* YWDictionary.m */; };
 		266FA8001A134A72000C2AAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA7FF1A134A72000C2AAE /* main.m */; };
 		266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA8021A134A72000C2AAE /* AppDelegate.m */; };
 		266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80D1A134A72000C2AAE /* Images.xcassets */; };
@@ -117,6 +124,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		265BB8831A1CE8020040ACC0 /* CommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonListViewController.h; sourceTree = "<group>"; };
+		265BB8841A1CE8020040ACC0 /* CommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonListViewController.m; sourceTree = "<group>"; };
+		265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOnlineViewController.m; sourceTree = "<group>"; };
+		265BB8871A1CE8D90040ACC0 /* ListOnlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOnlineViewController.h; sourceTree = "<group>"; };
+		265BB8891A1CE96B0040ACC0 /* ListMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListMainViewController.h; sourceTree = "<group>"; };
+		265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListMainViewController.m; sourceTree = "<group>"; };
+		265BB88D1A1CEA180040ACC0 /* ModelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelHelper.h; sourceTree = "<group>"; };
+		265BB88E1A1CEA180040ACC0 /* ModelHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelHelper.m; sourceTree = "<group>"; };
+		265BB8901A1CEFCF0040ACC0 /* RoundedAvatarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAvatarButton.h; sourceTree = "<group>"; };
+		265BB8911A1CEFCF0040ACC0 /* RoundedAvatarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAvatarButton.m; sourceTree = "<group>"; };
+		265BB8931A1CF1CC0040ACC0 /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataView.m; sourceTree = "<group>"; };
+		265BB8941A1CF1CC0040ACC0 /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
+		265BB8971A1CF4B50040ACC0 /* YWDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWDictionary.h; sourceTree = "<group>"; };
+		265BB8981A1CF4B50040ACC0 /* YWDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWDictionary.m; sourceTree = "<group>"; };
 		266FA7FA1A134A72000C2AAE /* mltshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mltshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		266FA7FE1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA7FF1A134A72000C2AAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -292,6 +313,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		265BB88C1A1CE9740040ACC0 /* ListVC */ = {
+			isa = PBXGroup;
+			children = (
+				265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */,
+				265BB8871A1CE8D90040ACC0 /* ListOnlineViewController.h */,
+				265BB8831A1CE8020040ACC0 /* CommonListViewController.h */,
+				265BB8841A1CE8020040ACC0 /* CommonListViewController.m */,
+				265BB8891A1CE96B0040ACC0 /* ListMainViewController.h */,
+				265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */,
+			);
+			name = ListVC;
+			sourceTree = "<group>";
+		};
+		265BB8961A1CF4B50040ACC0 /* YWDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				265BB8971A1CF4B50040ACC0 /* YWDictionary.h */,
+				265BB8981A1CF4B50040ACC0 /* YWDictionary.m */,
+			);
+			path = YWDictionary;
+			sourceTree = "<group>";
+		};
 		266FA7F11A134A72000C2AAE = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +501,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				265BB8961A1CF4B50040ACC0 /* YWDictionary */,
 				26BE3AC81A17377D009F37B4 /* CDatePickerViewEx */,
 				26BE3A151A170421009F37B4 /* Categories */,
 				26BE3A2A1A170421009F37B4 /* Delegate */,
@@ -593,6 +637,8 @@
 		26BE3A591A170421009F37B4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				265BB88D1A1CEA180040ACC0 /* ModelHelper.h */,
+				265BB88E1A1CEA180040ACC0 /* ModelHelper.m */,
 				26BE3AD51A173C3D009F37B4 /* DataTrans.m */,
 				26BE3AD61A173C3D009F37B4 /* DataTrans.h */,
 				26BE3AD01A17391E009F37B4 /* Entities */,
@@ -630,6 +676,7 @@
 		26BE3A5F1A170421009F37B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				265BB88C1A1CE9740040ACC0 /* ListVC */,
 				26BE3AEF1A19795E009F37B4 /* HostViewVC */,
 				26BE3AE81A1978FB009F37B4 /* LeftMenuVC */,
 				26BE3ADE1A197865009F37B4 /* MMDrawCustom */,
@@ -644,6 +691,10 @@
 		26BE3A601A170421009F37B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				265BB8931A1CF1CC0040ACC0 /* NoDataView.m */,
+				265BB8941A1CF1CC0040ACC0 /* NoDataView.h */,
+				265BB8901A1CEFCF0040ACC0 /* RoundedAvatarButton.h */,
+				265BB8911A1CEFCF0040ACC0 /* RoundedAvatarButton.m */,
 				26BE3AB31A173739009F37B4 /* FAIconButton.m */,
 				26BE3AB41A173739009F37B4 /* FAInfoButton.m */,
 				26BE3AB51A173739009F37B4 /* FAHoverButton.m */,
@@ -926,6 +977,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BE3AD71A173C3D009F37B4 /* DataTrans.m in Sources */,
+				265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */,
 				26BE3AC31A173739009F37B4 /* FAHoverButton.m in Sources */,
 				26BE3A8E1A170421009F37B4 /* NSData+Conversion.m in Sources */,
 				26BE3AA71A170421009F37B4 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
@@ -941,15 +993,19 @@
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
+				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
+				265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */,
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
 				26BE3A921A170421009F37B4 /* NSObject+JSONWriting.m in Sources */,
 				26BE3AA81A170421009F37B4 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				26BE3AE61A197865009F37B4 /* MMNavigationController.m in Sources */,
+				265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */,
 				26BE3A911A170421009F37B4 /* NSDate-Utilities.m in Sources */,
 				26BE3A971A170421009F37B4 /* UIViewController+ImageBackButton.m in Sources */,
 				26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */,
+				265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */,
 				26BE3AA01A170421009F37B4 /* SGActionView.m in Sources */,
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
@@ -966,7 +1022,9 @@
 				26BE3AA41A170421009F37B4 /* SGMultiMenu.m in Sources */,
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
+				265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */,
 				26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */,
+				265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */,
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,

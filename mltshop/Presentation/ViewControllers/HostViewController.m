@@ -7,21 +7,18 @@
 //
 
 #import "HostViewController.h"
-#import "ListViewController.h"
+#import "ListMainViewController.h"
 #import "ListOnlineViewController.h"
 #import "GreenNavigationController.h"
 #import "AppRequestManager.h"
 #import "PassValueDelegate.h"
-#import "RoundedAvatarButton.h"
 #import "AppDelegate.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "ModelHelper.h"
 #import "UIViewController+ImageBackButton.h"
 #import "NSString+Size.h"
 #import "FAHoverButton.h"
-#import "GalleryViewController.h"
-#import "ModelPickerViewController.h"
-#import "WebViewController.h"
+#import "NSString+FontAwesome.h"
 
 
 @interface HostViewController ()<ViewPagerDataSource, ViewPagerDelegate, PassValueDelegate>
@@ -63,9 +60,9 @@
     
     // last is empty for add button
     
-    self.tabArray = @[@{@"name": @"本地预览", @"type":INT(VehicleCloudLocal)},
-                      @{@"name": @"上架推广", @"type":INT(VehicleCloudOnline)},
-                      @{@"name": @"下架维护", @"type":INT(VehicleCloudOffline)}];
+    self.tabArray = @[@{@"name": @"首页", @"categoryId":INT(0)},
+                      @{@"name": @"毛绒玩具", @"categoryId":INT(1)},
+                      @{@"name": @"下架维护", @"categoryId":INT(2)}];
     
 //    NSLog(@"Host view tabarray: %@",self.tabArray);
     
@@ -135,29 +132,22 @@
 
 -(void)setupRightMenuButton{
     FAHoverButton *rightButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setTitle:ICON_PLUS forState:UIControlStateNormal];
+
+    [rightButton setTitle:[NSString fontAwesomeIconStringForEnum:FAQrcode] forState:UIControlStateNormal];
     [rightButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
     
     [rightButton addTarget:self action:@selector(rightDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *rightDrawerButton = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     
-    //    MMDrawerBarButtonItem * leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(leftDrawerButtonPress:)];
     [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
 }
 
--(void)rightDrawerButtonPress:(id)sender{
-    // add a car
-    NSString *vehicleId = STR_INT((NSInteger)[[NSDate date]timeIntervalSince1970]);
-        
-    GalleryViewController *viewController = [[GalleryViewController alloc]initWithNibName:nil bundle:nil];
-    [viewController initGalleryWithGalleryId:[NSString stringWithFormat:@"vehicle_%@",vehicleId]
-                                 cloudStatus:INT(VehicleCloudLocal)];
-    
-    GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:viewController];
-    
-    [self.navigationController presentViewController:popNavController animated:YES completion:^{}];
+- (void)rightDrawerButtonPress
+{
+    // TODO: 打开扫描界面
 }
+
 /////////////////////////////////////////////////////
 #pragma mark - viewPagerDataSource
 /////////////////////////////////////////////////////
@@ -186,27 +176,17 @@
     
     NSDictionary *rowData  = [self.tabArray objectAtIndex:index];
     
-
-    if (index == HOST_LOCAL_TAB) {
-        [MobClick event:UMENG_ViewLocalVehicle];
-    }else if (index == HOST_ONLINE_TAB){
-        [MobClick event:UMENG_ViewOnlineVehicle];
-    }else{
-        [MobClick event:UMENG_ViewOfflineVehicle];
-    }
     
     if (index == HOST_LOCAL_TAB) {
-        ListViewController *listVC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
-        listVC.vehicleStatus = rowData[@"type"];
+        ListMainViewController *listVC = [[ListMainViewController alloc]initWithNibName:nil bundle:nil];
         listVC.delegateForHostView = self;
         return listVC;
     }else{
         ListOnlineViewController *listOnlineVC = [[ListOnlineViewController alloc]initWithNibName:nil bundle:nil];
-        listOnlineVC.vehicleStatus = rowData[@"type"];
+        listOnlineVC.categoryId = rowData[@"categoryId"];
         listOnlineVC.delegateForHostView = self;
         return listOnlineVC;
     }
-//    PicListViewController
 }
 
 - (void)passSignalValue:(NSString *)value andData:(id)data

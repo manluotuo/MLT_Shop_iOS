@@ -7,17 +7,14 @@
 //
 
 #import "MMViewController.h"
-#import "RoundedAvatarButton.h"
 #import "AppDelegate.h"
 #import "PassValueDelegate.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface MMViewController ()<PassValueDelegate>
-@property(strong, nonatomic)RoundedAvatarButton *leftDrawerAvatarButton;
 @end
 
 @implementation MMViewController
-@synthesize leftDrawerAvatarButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,7 +64,6 @@
 
 #pragma mark - Button Handlers
 -(void)leftDrawerButtonPress:(id)sender{
-    [MobClick event:UMENG_ViewLeftMenu];
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 

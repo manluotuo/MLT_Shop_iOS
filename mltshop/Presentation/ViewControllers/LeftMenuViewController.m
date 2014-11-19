@@ -9,7 +9,7 @@
 #import "LeftMenuViewController.h"
 #import "MMNavigationController.h"
 #import "GreenNavigationController.h"
-#import "LMViewController.h"
+//#import "LMViewController.h"
 #import "AppDelegate.h"
 #import "Me.h"
 #import "AppRequestManager.h"
@@ -20,12 +20,12 @@
 #import "UIViewController+ImageBackButton.h"
 
 
-#import "AccountListViewController.h"
-#import "ProfileFormViewController.h"
-#import "WebHelpViewController.h"
-#import "HistoryListViewController.h"
-#import "MoreViewController.h"
-#import "ProfileTableViewCell.h"
+//#import "AccountListViewController.h"
+//#import "ProfileFormViewController.h"
+//#import "WebHelpViewController.h"
+//#import "HistoryListViewController.h"
+//#import "MoreViewController.h"
+//#import "ProfileTableViewCell.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, PassValueDelegate>
 {
@@ -192,11 +192,11 @@
 
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     
-    if (XAppDelegate.me.group > UserGroupGuest) {
-        [self.loginContainerView setHidden:YES];
-    }else{
-        [self.avatarContainerView setHidden:YES];
-    }
+//    if (XAppDelegate.me.group > UserGroupGuest) {
+//        [self.loginContainerView setHidden:YES];
+//    }else{
+//        [self.avatarContainerView setHidden:YES];
+//    }
     
     //  重新获取昵称和头像
     nickName = XAppDelegate.me.nickname;
@@ -372,20 +372,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
-        ProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"profileCell"];
-        if (cell == nil) {
-            cell = [[ProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"profileCell"];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.nickNameLabel.text = nickName;
-        if (StringHasValue(XAppDelegate.me.avatarURL)) {
-            [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:@"head_bg"]];
-        } else {
-            cell.iconImageView.image = [UIImage imageNamed:@"head_bg"];
-        }
-        return cell;
-    } else {
+    
         static NSString *CellIdentifier = @"LeftSettingCell";
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -395,8 +382,6 @@
         }
         [self configureCell:cell forIndexPath:indexPath];
         return cell;
-    }
-    return nil;
 }
 
 
@@ -472,127 +457,127 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    LMViewController* viewController;
-    ProfileFormViewController* profileViewController;
-    AccountListViewController* accountListViewController;
-    HistoryListViewController* historyListViewController;
-    MoreViewController *moreViewController;
-    
-    NSDictionary *cellData = (NSDictionary *)[self.dataSource objectAtIndex:indexPath.row];
-    NSInteger function = [(NSNumber *)[cellData objectForKey:@"function"] integerValue];
-    
-    switch (function) {
-        case LeftMenuBinding:
-            accountListViewController = [[AccountListViewController alloc]initWithNibName:nil bundle:nil];
-            break;
-        case LeftMenuProfile:
-            profileViewController = [[ProfileFormViewController alloc]initWithNibName:nil bundle:nil];
-            [profileViewController initFormUserId:XAppDelegate.me.userId];
-            break;
-        case LeftMenuHistory:
-            historyListViewController = [[HistoryListViewController alloc]initWithNibName:nil bundle:nil];
-            historyListViewController.isSingle = NO;
-            break;
-        case LeftMenuMore:
-            moreViewController = [[MoreViewController alloc] initWithNibName:nil bundle:nil];
-            break;
-        default:
-            break;
-    }
-    
-    if (function == LeftMenuHelp){
-        
-        NSString *strUrl = @"http://app.kanche.com/help";
-        // TODO: hold on
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:strUrl]];
-        
-        
-        WebHelpViewController *webViewController = [[WebHelpViewController alloc] initWithAddress:strUrl];
-        webViewController.barsTintColor = WHITECOLOR;
-        [self presentViewController:webViewController animated:YES completion:nil];
-
-        
-        
-    }else if(function == LeftMenuBinding){
-        
-        CATransition *transition = [CATransition animation];
-        transition.duration = 0.3;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        transition.type = kCATransitionPush;
-        transition.subtype = kCATransitionFromRight;
-        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-        
-        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:accountListViewController];
-        
-        [self presentViewController:popNavController animated:YES completion:nil];
-        [accountListViewController changeNavigationUIForLeftSide];
-
-//        [self.navigationController presentViewController:popNavController animated:NO completion:^{
-//            //
-//            [accountListViewController changeNavigationUIForLeftSide];
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    LMViewController* viewController;
+//    ProfileFormViewController* profileViewController;
+//    AccountListViewController* accountListViewController;
+//    HistoryListViewController* historyListViewController;
+//    MoreViewController *moreViewController;
+//    
+//    NSDictionary *cellData = (NSDictionary *)[self.dataSource objectAtIndex:indexPath.row];
+//    NSInteger function = [(NSNumber *)[cellData objectForKey:@"function"] integerValue];
+//    
+//    switch (function) {
+//        case LeftMenuBinding:
+//            accountListViewController = [[AccountListViewController alloc]initWithNibName:nil bundle:nil];
+//            break;
+//        case LeftMenuProfile:
+//            profileViewController = [[ProfileFormViewController alloc]initWithNibName:nil bundle:nil];
+//            [profileViewController initFormUserId:XAppDelegate.me.userId];
+//            break;
+//        case LeftMenuHistory:
+//            historyListViewController = [[HistoryListViewController alloc]initWithNibName:nil bundle:nil];
+//            historyListViewController.isSingle = NO;
+//            break;
+//        case LeftMenuMore:
+//            moreViewController = [[MoreViewController alloc] initWithNibName:nil bundle:nil];
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    if (function == LeftMenuHelp){
+//        
+//        NSString *strUrl = @"http://app.kanche.com/help";
+//        // TODO: hold on
+////        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:strUrl]];
+//        
+//        
+//        WebHelpViewController *webViewController = [[WebHelpViewController alloc] initWithAddress:strUrl];
+//        webViewController.barsTintColor = WHITECOLOR;
+//        [self presentViewController:webViewController animated:YES completion:nil];
 //
-//        }];
-    }
-    else if(function == LeftMenuProfile){
-                
-        CATransition *transition = [CATransition animation];
-        transition.duration = 0.3;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        transition.type = kCATransitionPush;
-        transition.subtype = kCATransitionFromRight;
-        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-        
-        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:profileViewController];
-        [profileViewController changeNavigationUIForLeftSide];
-        [self presentViewController:popNavController animated:YES completion:nil];
-        
-//        [self.navigationController presentViewController:popNavController animated:NO completion:^{
-//            //
-//        }];
-    }
-    
-    else if(function == LeftMenuHistory){
-        CATransition *transition = [CATransition animation];
-        transition.duration = 0.3;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        transition.type = kCATransitionPush;
-        transition.subtype = kCATransitionFromRight;
-        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-        
-        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:historyListViewController];
-        [historyListViewController changeNavigationUIForLeftSide];
-        [self presentViewController:popNavController animated:YES completion:nil];
-        
-    }
-    
-    else if (function == LeftMenuMore) {
-        CATransition *transition = [CATransition animation];
-        transition.duration = 0.3;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        transition.type = kCATransitionPush;
-        transition.subtype = kCATransitionFromRight;
-        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:moreViewController];
-        [self presentViewController:popNavController animated:YES completion:nil];
-    }
-    
-    else if (function == LeftMenuQuickAdd){
-        [MobClick event:UMENG_QuickAdd];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_QUICK_ADD_STEP
-                                                            object:self
-                                                          userInfo:nil];
-    }else if (function == LeftMenuList){
-
-    }
-    else{
-        [DataTrans showWariningTitle:@"制作中" andCheatsheet:ICON_TIMES];
-    }
-    
-    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
-
-}
+//        
+//        
+//    }else if(function == LeftMenuBinding){
+//        
+//        CATransition *transition = [CATransition animation];
+//        transition.duration = 0.3;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionPush;
+//        transition.subtype = kCATransitionFromRight;
+//        [self.view.window.layer addAnimation:transition forKey:kCATransition];
+//        
+//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:accountListViewController];
+//        
+//        [self presentViewController:popNavController animated:YES completion:nil];
+//        [accountListViewController changeNavigationUIForLeftSide];
+//
+////        [self.navigationController presentViewController:popNavController animated:NO completion:^{
+////            //
+////            [accountListViewController changeNavigationUIForLeftSide];
+////
+////        }];
+//    }
+//    else if(function == LeftMenuProfile){
+//                
+//        CATransition *transition = [CATransition animation];
+//        transition.duration = 0.3;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionPush;
+//        transition.subtype = kCATransitionFromRight;
+//        [self.view.window.layer addAnimation:transition forKey:kCATransition];
+//        
+//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:profileViewController];
+//        [profileViewController changeNavigationUIForLeftSide];
+//        [self presentViewController:popNavController animated:YES completion:nil];
+//        
+////        [self.navigationController presentViewController:popNavController animated:NO completion:^{
+////            //
+////        }];
+//    }
+//    
+//    else if(function == LeftMenuHistory){
+//        CATransition *transition = [CATransition animation];
+//        transition.duration = 0.3;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionPush;
+//        transition.subtype = kCATransitionFromRight;
+//        [self.view.window.layer addAnimation:transition forKey:kCATransition];
+//        
+//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:historyListViewController];
+//        [historyListViewController changeNavigationUIForLeftSide];
+//        [self presentViewController:popNavController animated:YES completion:nil];
+//        
+//    }
+//    
+//    else if (function == LeftMenuMore) {
+//        CATransition *transition = [CATransition animation];
+//        transition.duration = 0.3;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionPush;
+//        transition.subtype = kCATransitionFromRight;
+//        [self.view.window.layer addAnimation:transition forKey:kCATransition];
+//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:moreViewController];
+//        [self presentViewController:popNavController animated:YES completion:nil];
+//    }
+//    
+//    else if (function == LeftMenuQuickAdd){
+//        [MobClick event:UMENG_QuickAdd];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_QUICK_ADD_STEP
+//                                                            object:self
+//                                                          userInfo:nil];
+//    }else if (function == LeftMenuList){
+//
+//    }
+//    else{
+//        [DataTrans showWariningTitle:@"制作中" andCheatsheet:ICON_TIMES];
+//    }
+//    
+//    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+//
+//}
 
 
 

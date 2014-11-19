@@ -14,7 +14,7 @@
 
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSString * password;
-@property (nonatomic, retain) NSString * avatarUrl;
+@property (nonatomic, retain) NSString * avatarURL;
 @property (nonatomic, retain) NSString * mobile;
 @property (nonatomic, retain) NSString * userToken;
 @property (nonatomic, retain) NSString * userId;

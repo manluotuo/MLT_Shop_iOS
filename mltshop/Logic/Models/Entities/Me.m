@@ -13,7 +13,7 @@
 
 @dynamic username;
 @dynamic password;
-@dynamic avatarUrl;
+@dynamic avatarURL;
 @dynamic mobile;
 @dynamic userToken;
 @dynamic userId;

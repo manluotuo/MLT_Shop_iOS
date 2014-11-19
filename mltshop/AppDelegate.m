@@ -78,23 +78,15 @@
     UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
     [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
     
-    if(OSVersionIsAtLeastiOS7()){
-        UINavigationController * rightSideNavController = [[MMNavigationController alloc] initWithRootViewController:self.rightSideDrawerViewController];
-        [rightSideNavController setRestorationIdentifier:@"MMExampleRightNavigationControllerRestorationKey"];
-        UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftSideDrawerViewController];
-        [leftSideNavController setRestorationIdentifier:@"MMExampleLeftNavigationControllerRestorationKey"];
-        self.drawerController = [[KKDrawerViewController alloc]
-                                 initWithCenterViewController:navigationController
-                                 leftDrawerViewController:leftSideNavController
-                                 rightDrawerViewController:nil];
-        [self.drawerController setShowsShadow:NO];
-    }
-    else{
-        self.drawerController = [[KKDrawerViewController alloc]
-                                 initWithCenterViewController:navigationController
-                                 leftDrawerViewController:leftSideDrawerViewController
-                                 rightDrawerViewController:nil];
-    }
+    UINavigationController * rightSideNavController = [[MMNavigationController alloc] initWithRootViewController:self.rightSideDrawerViewController];
+    [rightSideNavController setRestorationIdentifier:@"MMExampleRightNavigationControllerRestorationKey"];
+    UINavigationController * leftSideNavController = [[MMNavigationController alloc] initWithRootViewController:leftSideDrawerViewController];
+    [leftSideNavController setRestorationIdentifier:@"MMExampleLeftNavigationControllerRestorationKey"];
+    self.drawerController = [[KKDrawerViewController alloc]
+                             initWithCenterViewController:navigationController
+                             leftDrawerViewController:leftSideNavController
+                             rightDrawerViewController:nil];
+    [self.drawerController setShowsShadow:NO];
     
     // custom drawer style
     
@@ -116,8 +108,18 @@
         [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     }
     
+    [self showDrawerView];
+    
     
     return YES;
+}
+
+- (void)showDrawerView
+{
+    NSLog(@"showMainView");
+    [self.window setRootViewController:self.drawerController];
+    [self.window addSubview:self.drawerController.view];
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
