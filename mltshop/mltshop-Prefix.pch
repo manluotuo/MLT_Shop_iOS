@@ -28,6 +28,7 @@
 #import "KKViewController.h"
 #import "CoreData+MagicalRecord.h"
 #import "KGStatusBar.h"
+#import "NSString+FontAwesome.h"
 //    #import <NSLogger/LoggerClient.h>
 #import "UIView+frameAdjust.h"
 #endif

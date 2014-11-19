@@ -18,7 +18,6 @@
 #import "UIViewController+ImageBackButton.h"
 #import "NSString+Size.h"
 #import "FAHoverButton.h"
-#import "NSString+FontAwesome.h"
 
 
 @interface HostViewController ()<ViewPagerDataSource, ViewPagerDelegate, PassValueDelegate>
@@ -47,7 +46,7 @@
     
 //  TODO click logo and refresh current view
     UILabel *logoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, TITLE_HEIGHT)];
-    [logoLabel setText:T(@"车辆管理")];
+    [logoLabel setText:T(@"漫骆驼")];
     [logoLabel setTextAlignment:NSTextAlignmentCenter];
     [logoLabel setTextColor:WHITECOLOR];
     [logoLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];

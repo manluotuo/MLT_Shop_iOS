@@ -140,7 +140,7 @@
 {
     self.noDataView = [[NoDataView alloc] initWithFrame:
                               CGRectMake((TOTAL_WIDTH-NO_DATA_WIDTH)/2, (TOTAL_HEIGHT*0.8-NO_DATA_HEIGHT)/2, NO_DATA_WIDTH, NO_DATA_HEIGHT)];
-    [self.noDataView setTitleString:T(@"添加车辆")];
+    [self.noDataView setTitleString:T(@"暂无商品")];
     [self.noDataView addTarget:self.commonListDelegate action:@selector(triggerCreateVehicle:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.noDataView];
 }

@@ -72,75 +72,50 @@
 //    self.title = T(@"用户菜单");
     self.view.backgroundColor = BlACKCOLOR;
     
-    NSDictionary *dict8 = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"商家个人信息"), @"title",
-                           ICON_MINE, @"icon",
+    NSDictionary *dictA = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"首页"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAslack], @"icon",
                            INT(LeftMenuProfile), @"function",
                            nil];
     
-    NSDictionary *dict9 = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"推广账号绑定"), @"title",
-                           ICON_CHAIN, @"icon",
+    NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"个人中心"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAUser], @"icon",
                            INT(LeftMenuBinding), @"function",
                            nil];
     
-    NSDictionary *dictA = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"车辆管理"), @"title",
-                           ICON_LIST, @"icon",
+    NSDictionary *dictC = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"分类搜索"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FASearch], @"icon",
                            INT(LeftMenuList), @"function",
                            nil];
 
-//    NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
-//                           T(@"市场价格"), @"title",
-//                           ICON_INFO, @"icon",
-//                           INT(LeftMenuFeedback), @"function",
-//                           nil];
+    NSDictionary *dictD = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"购物车"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAShoppingCart], @"icon",
+                           INT(LeftMenuFeedback), @"function",
+                           nil];
     
-    NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"快速添加车辆"), @"title",
-                           ICON_PLUS, @"icon",
+    NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"帮助/客服"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAPhone], @"icon",
                            INT(LeftMenuQuickAdd), @"function",
                            nil];
     
-    NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"发布历史"), @"title",
-                           ICON_CLOCK, @"icon",
+    NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"设置"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FACog], @"icon",
                            INT(LeftMenuHistory), @"function",
                            nil];
     
-    
-//    NSDictionary *dictH = [[NSDictionary alloc]initWithObjectsAndKeys:
-//                           T(@"查看帮助"), @"title",
-//                           ICON_HELP, @"icon",
-//                           INT(LeftMenuHelp), @"function",
-//                           nil];
 
     
     NSString *nowVersion = NOWVERSION;
     NSString *nowBuild = NOWBUILD;
     nowVersion = [NSString stringWithFormat:@"V_%@#%@", nowVersion, nowBuild];
     
-    NSDictionary *dictI = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           nowVersion, @"title",
-                           ICON_INFO, @"icon",
-                           INT(LeftMenuUpdate), @"function",
-                           nil];
-    
-    
-    NSDictionary *dictJ = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"更多"), @"title",
-                           ICON_MORE, @"icon",
-                           INT(LeftMenuMore), @"function",
-                           nil];
-    
-//    NSDictionary *dictG = [[NSDictionary alloc]initWithObjectsAndKeys:
-//                           T(@"退出登录"), @"title",
-//                           ICON_LOGOUT, @"icon",
-//                           INT(LeftMenuLogout), @"function",
-//                           nil];
-
-    // init left side menu
-    self.dataSource = [[NSMutableArray alloc]initWithObjects:dict8,dictA,dict9,dictF,dictB, dictJ,nil];
+        // init left side menu
+    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictA,dictB,dictC,dictD,dictE, dictF,nil];
 //    if (XAppDelegate.me.userToken) {
 //        [self.dataSource addObject:dictG];
 //    }
