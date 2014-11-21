@@ -26,7 +26,6 @@
 - (void)showDrawerView;
 
 
-- (NSURL *)applicationDocumentsDirectory;
 
 
 @end

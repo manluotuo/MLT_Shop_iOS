@@ -172,7 +172,6 @@
     HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
     HUD.text = T(@"登录中...");
     [HUD showInView:self.view];
-    [MobClick event:UMENG_UserLogin];
 
 
 
@@ -193,7 +192,7 @@
             if (error.code == -1004) {
                 [DataTrans showWariningTitle:T(@"网络错误") andCheatsheet:ICON_TIMES];
             }else{
-                [DataTrans showFontAwesomeWithTitle:T(@"用户名或密码错误") andCheatsheet:ICON_TIMES];
+                [DataTrans showWariningTitle:T(@"用户名或密码错误") andCheatsheet:ICON_TIMES];
             }
         }
 

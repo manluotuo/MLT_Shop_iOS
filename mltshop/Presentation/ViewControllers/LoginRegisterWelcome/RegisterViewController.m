@@ -225,7 +225,7 @@
         if(error != nil)
         {
             [HUD removeFromSuperview];
-            [DataTrans showFontAwesomeWithTitle:T(@"用户名或密码错误") andCheatsheet:ICON_TIMES];
+            [DataTrans showWariningTitle:T(@"用户名或密码错误") andCheatsheet:ICON_TIMES];
         }
         
     }];
