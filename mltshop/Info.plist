@@ -19,12 +19,14 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>20</string>
+	<string>22</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
+		<string>DINPro-Medium.otf</string>
+		<string>Museo500-Regular.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string></string>

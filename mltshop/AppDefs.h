@@ -165,6 +165,11 @@
 #define CUSTOMFONT [UIFont fontWithName:@"Museo" size:16.0f]
 #define LITTLECUSTOMFONT [UIFont fontWithName:@"Museo" size:13.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
+#define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
+#define DINFONT_14 [UIFont fontWithName:@"DINPro" size:14.0f]
+#define DINFONT_20 [UIFont fontWithName:@"DINPro" size:20.0f]
+#define DINFONT_30 [UIFont fontWithName:@"DINPro" size:30.0f]
+#define DINFONT_40 [UIFont fontWithName:@"DINPro" size:40.0f]
 // font Gotham Family
 #define FONT_BOLD_15 [UIFont fontWithName:@"Gotham-Bold" size:15.0f]
 #define FONT_BLACK_15 [UIFont fontWithName:@"Gotham-Black" size:15.0f]

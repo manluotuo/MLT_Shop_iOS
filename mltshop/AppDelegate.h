@@ -18,6 +18,14 @@
 @property(nonatomic, assign)NSObject<PassValueDelegate> *passDelegate;
 @property(nonatomic, strong)HostViewController *centerViewController;
 
+// 跳过intro
+- (void)skipIntroView;
+// 打开注册页面
+- (void)showRegisterView;
+// 随便看看
+- (void)showDrawerView;
+
+
 - (NSURL *)applicationDocumentsDirectory;
 
 

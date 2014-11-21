@@ -15,13 +15,15 @@
 #import "RightMenuViewController.h"
 #import "AppRequestManager.h"
 #import "KKDrawerViewController.h"
+#import "ModelHelper.h"
 
 
 //#import "LoginViewController.h"
 //#import "WelcomeViewController.h"
 //#import "InitDataHelper.h"
 //#import "ModelHelper.h"
-//#import "FirstHelpViewController.h"
+#import "FirstHelpViewController.h"
+#import "RegisterViewController.h"
 //#import "ProfileFormViewController.h"
 //#import "AccountListViewController.h"
 
@@ -33,14 +35,15 @@
 @property(nonatomic, strong)KKDrawerViewController * drawerController;
 @property (strong, nonatomic)RightMenuViewController *rightSideDrawerViewController;
 //@property(nonatomic, strong)LoginViewController *loginViewController;
-//@property(nonatomic, strong)WelcomeViewController *welcomeViewController;
-//@property(nonatomic, strong)FirstHelpViewController *firstHelpViewController;
+@property(nonatomic, strong)RegisterViewController *registerViewController;
+@property(nonatomic, strong)FirstHelpViewController *firstHelpViewController;
 @property(nonatomic, strong)NSString *versonUrl;
 
 @end
 
 @implementation AppDelegate
 @synthesize drawerController;
+@synthesize firstHelpViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -58,12 +61,12 @@
     
     // MagicalRecord
     //    [MagicalRecord setupCoreDataStack];
-    NSString *storeNamed = @"merchant.sqlite";
+    NSString *storeNamed = @"manluotuo.sqlite";
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:storeNamed];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-//    self.me = [[ModelHelper sharedHelper]findOnlyMe];
+    self.me = [[ModelHelper sharedHelper]findOnlyMe];
 
     
     
@@ -108,7 +111,7 @@
         [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     }
     
-    [self showDrawerView];
+    [self skipIntroView];
     
     
     return YES;
@@ -121,6 +124,47 @@
     [self.window addSubview:self.drawerController.view];
     [self.window makeKeyAndVisible];
 }
+
+- (void)skipIntroView
+{
+    // 用户第一次打开
+    NSNumber *result = GET_DEFAULT(@"HELPSEEN_INTRO");
+    
+    if (!result.boolValue) {
+        [self showIntroductionView];
+    }else{
+        NSLog(@"APP ME  %@",self.me);
+        if (!StringHasValue(self.me.userId)) {
+            NSLog(@"用户还没有登录");
+            [self showDrawerView];
+        }else{
+            NSLog(@"用户已经登录");
+        }
+    }
+}
+
+- (void)showIntroductionView
+{
+    SET_DEFAULT(NUM_BOOL(YES), @"HELPSEEN_INTRO");
+    NSLog(@"showIntroductionView");
+    self.firstHelpViewController = [[FirstHelpViewController alloc]initWithNibName:nil bundle:nil];
+    
+    [self.window setRootViewController:self.firstHelpViewController];
+    [self.window addSubview:self.firstHelpViewController.view];
+    [self.window makeKeyAndVisible];
+}
+
+- (void)showRegisterView
+{
+    NSLog(@"showRegisterView");
+    self.registerViewController = [[RegisterViewController alloc]initWithNibName:nil bundle:nil];
+    
+    [self.window setRootViewController:self.registerViewController];
+    [self.window addSubview:self.registerViewController.view];
+    [self.window makeKeyAndVisible];
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

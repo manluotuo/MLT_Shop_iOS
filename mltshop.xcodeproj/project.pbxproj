@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */; };
+		26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB01A1EBDB600E117A0 /* LoginViewController.m */; };
+		26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB61A1EC07E00E117A0 /* RegisterViewController.m */; };
 		265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8841A1CE8020040ACC0 /* CommonListViewController.m */; };
 		265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */; };
 		265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */; };
@@ -124,6 +127,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26435AAD1A1EBDB600E117A0 /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
+		26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
+		26435AAF1A1EBDB600E117A0 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		26435AB01A1EBDB600E117A0 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		26435AB61A1EC07E00E117A0 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		26435AB71A1EC07E00E117A0 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		265BB8831A1CE8020040ACC0 /* CommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonListViewController.h; sourceTree = "<group>"; };
 		265BB8841A1CE8020040ACC0 /* CommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonListViewController.m; sourceTree = "<group>"; };
 		265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOnlineViewController.m; sourceTree = "<group>"; };
@@ -313,6 +322,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26435AAC1A1EBDB600E117A0 /* LoginRegisterWelcome */ = {
+			isa = PBXGroup;
+			children = (
+				26435AB61A1EC07E00E117A0 /* RegisterViewController.m */,
+				26435AB71A1EC07E00E117A0 /* RegisterViewController.h */,
+				26435AAD1A1EBDB600E117A0 /* FirstHelpViewController.h */,
+				26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */,
+				26435AAF1A1EBDB600E117A0 /* LoginViewController.h */,
+				26435AB01A1EBDB600E117A0 /* LoginViewController.m */,
+			);
+			path = LoginRegisterWelcome;
+			sourceTree = "<group>";
+		};
 		265BB88C1A1CE9740040ACC0 /* ListVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,6 +698,7 @@
 		26BE3A5F1A170421009F37B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				26435AAC1A1EBDB600E117A0 /* LoginRegisterWelcome */,
 				265BB88C1A1CE9740040ACC0 /* ListVC */,
 				26BE3AEF1A19795E009F37B4 /* HostViewVC */,
 				26BE3AE81A1978FB009F37B4 /* LeftMenuVC */,
@@ -987,6 +1010,7 @@
 				26BE3AC61A173739009F37B4 /* KKIconButton.m in Sources */,
 				26BE3A9F1A170421009F37B4 /* ViewPagerController.m in Sources */,
 				26BE3A8F1A170421009F37B4 /* NSDate+timesince.m in Sources */,
+				26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */,
 				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
 				26BE3AD41A173A2B009F37B4 /* Me.m in Sources */,
@@ -1012,6 +1036,7 @@
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
 				26BE3A9A1A170421009F37B4 /* README.md in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
+				26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */,
 				266FA8001A134A72000C2AAE /* main.m in Sources */,
 				26BE3AA21A170421009F37B4 /* SGBaseMenu.m in Sources */,
 				26BE3A991A170421009F37B4 /* NSString+FontAwesome.m in Sources */,
@@ -1028,6 +1053,7 @@
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
+				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,
 				26BE3A9C1A170421009F37B4 /* UIFont+FontAwesome.m in Sources */,
