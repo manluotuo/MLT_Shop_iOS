@@ -166,21 +166,11 @@
 #define LITTLECUSTOMFONT [UIFont fontWithName:@"Museo" size:13.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
-#define DINFONT_14 [UIFont fontWithName:@"DINPro" size:14.0f]
-#define DINFONT_20 [UIFont fontWithName:@"DINPro" size:20.0f]
-#define DINFONT_30 [UIFont fontWithName:@"DINPro" size:30.0f]
-#define DINFONT_40 [UIFont fontWithName:@"DINPro" size:40.0f]
-// font Gotham Family
-#define FONT_BOLD_15 [UIFont fontWithName:@"Gotham-Bold" size:15.0f]
-#define FONT_BLACK_15 [UIFont fontWithName:@"Gotham-Black" size:15.0f]
-#define FONT_MEDIUM_12 [UIFont fontWithName:@"Gotham-Medium" size:12.0f]
-#define FONT_MEDIUM_9 [UIFont fontWithName:@"Gotham-Medium" size:9.0f]
-#define FONT_MEDIUM_40 [UIFont fontWithName:@"Gotham-Medium" size:40.0f]
-#define FONT_BOOK_12 [UIFont fontWithName:@"Gotham-Book" size:12.0f]
-#define FONT_BOOK_40 [UIFont fontWithName:@"Gotham-Book" size:40.0f]
+#define FONT_DIN_14 [UIFont fontWithName:@"DIN Alternate" size:14.0f]
+#define FONT_DIN_20 [UIFont fontWithName:@"DIN Alternate" size:20.0f]
+#define FONT_DIN_24 [UIFont fontWithName:@"DIN Alternate" size:24.0f]
+#define FONT_DIN_30 [UIFont fontWithName:@"DIN Alternate" size:30.0f]
 
-#define FONT_LIGHT_15 [UIFont fontWithName:@"Gotham-Light" size:15.0f]
-#define FONT_LIGHT_12 [UIFont fontWithName:@"Gotham-Light" size:12.0f]
 #define FONT_AWESOME_12 [UIFont fontWithName:@"FontAwesome" size:12.0f]
 #define FONT_AWESOME_14 [UIFont fontWithName:@"FontAwesome" size:14.0f]
 #define FONT_AWESOME_15 [UIFont fontWithName:@"FontAwesome" size:15.0f]
@@ -491,17 +481,14 @@ alpha:(a)]
 
 #define BGCOLOR [UIColor colorWithRed:245.0f/255.0 green:245.0f/255.0 blue:245.0f/255.0 alpha:1.0]
 
-#define GREENCOLOR [UIColor colorWithRed:57.0f/255.0f green:180.0f/255.0f blue:115.0f/255.0f alpha:1]
+#define GREENCOLOR [UIColor colorWithRed:43.0f/255.0f green:180.0f/255.0f blue:77.0f/255.0f alpha:1]
 
-#define GREENALPHACOLOR [UIColor colorWithRed:45.0f/255.0f green:173.0f/255.0f blue:105.0f/255.0f alpha:0.8]
-#define GREENLIGHTCOLOR [UIColor colorWithRed:186.0f/255.0f green:230.0f/255.0f blue:211.0f/255.0f alpha:1]
-#define GREENEXLIGHTCOLOR [UIColor colorWithRed:216.0f/255.0f green:240.0f/255.0f blue:231.0f/255.0f alpha:1]
-#define GREENDARKCOLOR [UIColor colorWithRed:27.0f/255.0f green:171.0f/255.0f blue:109.0f/255.0f alpha:1]
+#define GREENLIGHTCOLOR [UIColor colorWithRed:126.0f/255.0f green:211.0f/255.0f blue:33.0f/255.0f alpha:1]
 
 #define REDCOLOR [UIColor colorWithRed:225.0f/255.0f green:78.0f/255.0f blue:0.0f/255.0f alpha:1]
 #define GRAYCOLOR [UIColor colorWithRed:158.0f/255.0f green:158.0f/255.0f blue:158.0f/255.0f alpha:1]
 #define GRAYLIGHTCOLOR [UIColor colorWithRed:190.0f/255.0f green:190.0f/255.0f blue:190.0f/255.0f alpha:1]
-#define GRAYEXLIGHTCOLOR [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1]
+#define GRAYEXLIGHTCOLOR [UIColor colorWithRed:236.0f/255.0f green:236.0f/255.0f blue:236.0f/255.0f alpha:1]
 
 
 #define HANDLEBORDERCOLOR [UIColor colorWithRed:228.0f/255.0f green:228.0f/255.0f blue:228.0f/255.0f alpha:1].CGColor
@@ -514,7 +501,7 @@ alpha:(a)]
 #define WHITEALPHACOLOR [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:0.1]
 #define BlACKALPHACOLOR [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.3]
 
-#define ORANGECOLOR [UIColor colorWithRed:255.0f/255.0f green:236.0f/255.0f blue:76.0f/255.0f alpha:1]
+#define ORANGECOLOR [UIColor colorWithRed:245.0f/255.0f green:166.0f/255.0f blue:35.0f/255.0f alpha:1]
 #define ORANGE_DARK_COLOR [UIColor colorWithRed:239.0f/255.0f green:105.0f/255.0f blue:6.0f/255.0f alpha:1]
 #define ORANGE_LIGHT_COLOR [UIColor colorWithRed:252.0f/255.0f green:242.0f/255.0f blue:174.0f/255.0f alpha:0.4f]
 

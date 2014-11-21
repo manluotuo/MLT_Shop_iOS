@@ -145,7 +145,8 @@
 
 - (void)showIntroductionView
 {
-    SET_DEFAULT(NUM_BOOL(YES), @"HELPSEEN_INTRO");
+    // TODO: 发布时候记得打开
+//    SET_DEFAULT(NUM_BOOL(YES), @"HELPSEEN_INTRO");
     NSLog(@"showIntroductionView");
     self.firstHelpViewController = [[FirstHelpViewController alloc]initWithNibName:nil bundle:nil];
     

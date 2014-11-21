@@ -16,10 +16,8 @@
     if (self) {
         // Initialization code
         [self setBackgroundColor:GREENCOLOR];
-        [self.titleLabel setFont:FONT_16];
+        [self.titleLabel setFont:FONT_DIN_24];
         [self setTitleColor:WHITECOLOR forState:UIControlStateNormal];
-        [self.layer setBorderColor:WHITECOLOR.CGColor];
-        [self.layer setBorderWidth:1.0f];
         [self.layer setCornerRadius:H_5];
         [self.layer setMasksToBounds:YES];
         

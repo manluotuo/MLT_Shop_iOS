@@ -209,7 +209,7 @@
     self.nicknameLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, loginFrame.origin.y + 15, 150, LABEL_HEIGHT)];
     self.nicknameLabel.text = nickName;
     self.nicknameLabel.textColor = WHITECOLOR;
-    [self.nicknameLabel setFont:FONT_BLACK_15];
+    [self.nicknameLabel setFont:FONT_15];
     
     NSLog(@"XAppDelegate.me.avatarURL: %@",XAppDelegate.me.avatarURL);
     
@@ -372,7 +372,7 @@
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 10, 120, 40)];
     titleLabel.tag = CELL_TITLE_TAG;
-    titleLabel.font = FONT_BLACK_15;
+    titleLabel.font = FONT_15;
     titleLabel.textColor = WHITECOLOR;
     titleLabel.backgroundColor = [UIColor clearColor];
     

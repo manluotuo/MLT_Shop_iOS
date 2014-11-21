@@ -37,6 +37,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIImageView *bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    [bgView setImage:[UIImage imageNamed:@"intro_bg"]];
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_40, TOTAL_WIDTH, H_30)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = FONT_DIN_24;
+    titleLabel.textColor = WHITECOLOR;
+    titleLabel.text = @"Welcome!";
+    
+    [bgView addSubview:titleLabel];
+    
+    [self.view addSubview:bgView];
+    
     [self initScrollView];
 }
 
@@ -46,14 +60,12 @@
                              @"intro_1.png",
                              @"intro_2.png",
                              @"intro_3.png",
-                             @"intro_4.png",
-                             @"intro_5.png",
                              nil];
     
     CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT);
-    self.pagedScrollView = [[GCPagedScrollView alloc] initWithFrame:scrollFrame andPageControl:NO];
+    self.pagedScrollView = [[GCPagedScrollView alloc] initWithFrame:scrollFrame andPageControl:YES];
     self.pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    self.pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
+    self.pagedScrollView.backgroundColor = [UIColor clearColor];
     self.pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
     self.pagedScrollView.maximumZoomScale = 3.0; //最大到3倍
     self.pagedScrollView.clipsToBounds = YES;
@@ -66,10 +78,10 @@
     
     for (int i = 0 ; i < [self.scrollImageArray count]; i++) {
         // last one
-        UIImageView *page = [[UIImageView alloc]
-                             initWithFrame:scrollFrame];
-        [page setContentMode:UIViewContentModeCenter];
-        page.image = [UIImage imageNamed:[self.scrollImageArray objectAtIndex:i]];
+        UIView *page = [[UIImageView alloc]
+                             initWithFrame:CGRectMake(H_30, H_40, H_260, 370.0f)];
+        page.backgroundColor = GRAYEXLIGHTCOLOR;
+        [page.layer setCornerRadius:H_5];
         [self.pagedScrollView addContentSubview:page];
     }
     
@@ -78,28 +90,13 @@
     
     self.checkButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [checkButton setTitle:T(@"立即体验") forState:UIControlStateNormal];
-    [checkButton setFrame:CGRectMake(90, TOTAL_HEIGHT-H_60, 140, H_50)];
+    [checkButton setFrame:CGRectMake(90, TOTAL_HEIGHT-H_80, 140, H_50)];
     [checkButton addTarget:self action:@selector(skipAction) forControlEvents:UIControlEventTouchUpInside];
     [checkButton.titleLabel setFont:FONT_20];
-    [checkButton setHidden:YES];
     [self.view addSubview:checkButton];
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"frame: %f", scrollView.contentOffset.x);
-    if(scrollView.contentOffset.x > TOTAL_WIDTH*([self.scrollImageArray count]-1) + H_40){
-        [self skipAction];
-    }
-    if (scrollView.contentOffset.x >  TOTAL_WIDTH*([self.scrollImageArray count]-1) - H_40) {
-        [self.checkButton setHidden:NO];
-        [UIView animateWithDuration:0.5f animations:^{
-            [self.checkButton setY:TOTAL_HEIGHT-H_100];
-        }];
-    }else{
-        [self.checkButton setHidden:YES];
-    }
-}
 
 
 // FIXME: checkButton touch no response

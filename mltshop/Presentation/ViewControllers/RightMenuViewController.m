@@ -168,7 +168,7 @@
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, 100, 40)];
     titleLabel.tag = CELL_TITLE_TAG;
-    titleLabel.font = FONT_BLACK_15;
+    titleLabel.font = FONT_15;
     titleLabel.textColor = WHITECOLOR;
     
     UILabel *bubbleLabel = [[UILabel alloc]initWithFrame:CGRectMake(130, 20, 90, 20)];
