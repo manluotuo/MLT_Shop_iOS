@@ -59,9 +59,14 @@
     
     // last is empty for add button
     
-    self.tabArray = @[@{@"name": @"首页", @"categoryId":INT(0)},
-                      @{@"name": @"毛绒玩具", @"categoryId":INT(1)},
-                      @{@"name": @"下架维护", @"categoryId":INT(2)}];
+    self.tabArray = @[@{@"name": @"首页", @"catId":INT(0)},
+                      @{@"name": @"服饰鞋帽", @"catId":INT(1)},
+                      @{@"name": @"毛绒玩具", @"catId":INT(2)},
+                      @{@"name": @"模型雕塑", @"catId":INT(3)},
+                      @{@"name": @"精品挂饰", @"catId":INT(4)},
+                      @{@"name": @"卡通箱包", @"catId":INT(5)},
+                      @{@"name": @"生活娱乐", @"catId":INT(6)},
+                      @{@"name": @"图书音像", @"catId":INT(7)}];
     
 //    NSLog(@"Host view tabarray: %@",self.tabArray);
     
@@ -183,10 +188,11 @@
         return listVC;
     }else{
         ListOnlineViewController *listOnlineVC = [[ListOnlineViewController alloc]initWithNibName:nil bundle:nil];
-        listOnlineVC.categoryId = rowData[@"categoryId"];
+        listOnlineVC.categoryId = rowData[@"catId"];
         listOnlineVC.delegateForHostView = self;
         return listOnlineVC;
     }
+
 }
 
 - (void)passSignalValue:(NSString *)value andData:(id)data

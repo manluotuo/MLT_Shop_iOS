@@ -32,7 +32,7 @@
     // Do any additional setup after loading the view.
     self.commonListDelegate = self;
 
-    [self initDataSource];
+//    [self initDataSource];
     
 }
 
