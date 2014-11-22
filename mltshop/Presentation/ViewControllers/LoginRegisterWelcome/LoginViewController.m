@@ -10,20 +10,23 @@
 #import "AppRequestManager.h"
 #import "AppDelegate.h"
 #import "KKTextField.h"
+#import "FAHoverButton.h"
 #import "KKFlatButton.h"
 #import "UIViewController+ImageBackButton.h"
 #import "Me.h"
 #import "ModelHelper.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 @interface LoginViewController ()<UITextFieldDelegate, UIScrollViewDelegate>
 @property(nonatomic, strong)UIScrollView *loginPanel;
+@property(nonatomic, strong)UIView *logoView;
 @property(nonatomic, strong)KKTextField *userTextView;
 @property(nonatomic, strong)KKTextField *passTextView;
 @property(nonatomic, strong)KKFlatButton *verifyButton;
+@property(nonatomic, strong)FAHoverButton *closeButton;
 @property(nonatomic, strong)UIButton *forgotButton;
-@property(nonatomic, strong)UIImageView *logoView;
 @end
 
 @implementation LoginViewController
@@ -32,6 +35,7 @@
 @synthesize userTextView, passTextView;
 @synthesize verifyButton;
 @synthesize forgotButton;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +47,7 @@
 }
 #define LOGO_SIDE           140.0f
 #define ANIMATION_OFFSET    TOTAL_HEIGHT * 0.3
-#define OFFSET_Y            H_60
+#define OFFSET_Y            H_100
 
 - (void)viewDidLoad
 {
@@ -57,26 +61,30 @@
     self.loginPanel.delegate = self;
     self.loginPanel.showsVerticalScrollIndicator = NO;
 
-    self.logoView = [[UIImageView alloc] initWithFrame:
-                     CGRectMake((TOTAL_WIDTH-LOGO_SIDE)/2, (TOTAL_HEIGHT/2-LOGO_SIDE)/2, LOGO_SIDE, LOGO_SIDE)];
-    [self.logoView setImage:[UIImage imageNamed:@"logoTitle"]];
+    // logoview
+    self.logoView = [[UIView alloc] initWithFrame:CGRectMake(130, H_50, H_60, H_60)];
+    [self.logoView setBackgroundColor:GREENLIGHTCOLOR];
+    [self.logoView.layer setCornerRadius:H_30];
+    [self.logoView.layer setMasksToBounds:YES];
+    
+    UIImageView *logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 15, 36, 30)];
+    [logoImageView setImage:[UIImage imageNamed:@"logo_luotuo"]];
+    [self.logoView addSubview:logoImageView];
     
     
     // userTextView
-    
-    self.userTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+TOP_PADDING*3, TOTAL_WIDTH-LEFT_PADDING*6 , H_40)];
+    self.userTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50,TOTAL_WIDTH-LEFT_PADDING*6, H_50)];
     self.userTextView.delegate = self;
-    [self.userTextView setPlaceholder:T(@"手机号")];
-    [self.userTextView setIconString:ICON_MOBILE];
+    [self.userTextView setPlaceholder:T(@"用户名")];
+    [self.userTextView setIconString:[NSString fontAwesomeIconStringForEnum:FAUser]];
     self.userTextView.keyboardType = UIKeyboardTypeNumberPad;
     self.userTextView.returnKeyType = UIReturnKeyNext;
     
     // passTextView
-    
-    self.passTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_40+TOP_PADDING*5, TOTAL_WIDTH-LEFT_PADDING*6 , H_40)];
+    self.passTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*2, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
     self.passTextView.delegate = self;
     [self.passTextView setPlaceholder:T(@"密码")];
-    [self.passTextView setIconString:ICON_LOCK];
+    [self.passTextView setIconString:[NSString fontAwesomeIconStringForEnum:FALock]];
     self.passTextView.returnKeyType = UIReturnKeyDone;
     self.passTextView.secureTextEntry = YES;
 
@@ -84,15 +92,37 @@
     
     self.verifyButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [self.verifyButton setTitle:T(@"登录") forState:UIControlStateNormal];
-    [self.verifyButton setFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_40*2+TOP_PADDING*7, TOTAL_WIDTH-LEFT_PADDING*6 , H_40)];
+    [self.verifyButton setFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*3+TOP_PADDING*2, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
+    [self.verifyButton setBackgroundColor:BLUECOLOR];
     [self.verifyButton addTarget:self action:@selector(verifyPasswordAction) forControlEvents:UIControlEventTouchUpInside];
     
-//    [self.loginPanel addSubview:self.logoView];
+    // change corner
+    self.userTextView = (KKTextField *)[DataTrans roundCornersOnView:self.userTextView onTopLeft:YES topRight:YES bottomLeft:NO bottomRight:NO radius:5.0f];
+    
+    self.passTextView = (KKTextField *)[DataTrans roundCornersOnView:self.passTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:5.0f];
+
+    
+    [self.loginPanel addSubview:self.logoView];
     [self.loginPanel addSubview:self.userTextView];
     [self.loginPanel addSubview:self.passTextView];
     [self.loginPanel addSubview:self.verifyButton];
     
-    [self.view addSubview:self.loginPanel];
+    // closeButton
+    
+    self.closeButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(H_30, H_30, H_30, H_30)];
+    [self.closeButton setTitle:[NSString fontAwesomeIconStringForEnum:FATimesCircle] forState:UIControlStateNormal];
+    [self.closeButton.titleLabel setFont:FONT_AWESOME_30];
+        [self.closeButton setTitleColor:WHITECOLOR forState:UIControlStateNormal];
+    [self.closeButton addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UIImageView *bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    [bgView setImageToBlur:[UIImage imageNamed:@"train_bg"] completionBlock:^{
+        [self.view addSubview:self.loginPanel];
+        [self.view addSubview:self.closeButton];
+    }];
+    
+    [self.view addSubview:bgView];
     
     [self setUpImageDownButton:0];
 }
@@ -103,6 +133,11 @@
     [self navigationGreenStyle];
 //    self.userTextView.text = @"18600000000";
 //    self.passTextView.text = @"mengqian";
+}
+
+- (void)closeAction
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 /////////////////////////////////////////////////////////

@@ -181,9 +181,7 @@
 - (void)loginAction
 {
     LoginViewController *vc = [[LoginViewController alloc]initWithNibName:nil bundle:nil];
-    ColorNavigationController *popNavController =
-    [[ColorNavigationController alloc]initWithRootViewController:vc];
-    [self presentViewController:popNavController animated:YES completion:^{}];
+    [self presentViewController:vc animated:YES completion:^{}];
 }
 
 - (void)tourAction
@@ -373,7 +371,6 @@
         [self.loginPanel setY:0];
     }];
     
-//    [self checkAllTextField];
 }
 
 

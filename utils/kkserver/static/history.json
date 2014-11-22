@@ -1,0 +1,998 @@
+{
+  "facet": {
+    "status": [
+      "waiting"
+    ],
+    "websites": [
+      "che168.com",
+      "58.com"
+    ]
+  },
+  "items": [
+    {
+      "id": "53e0a34b8048c02003a1bcf0",
+      "shareAccount": {
+        "id": "53b53473f7d69bbd05cffd76",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "58.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.131+08:00",
+      "updateAt": "2014-08-05T17:26:35.131+08:00"
+    },
+    {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53b53473f7d69bbd05cffd76",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "58.com",
+        "username":"mactive"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "deferred",
+      "createAt": "2014-08-05T17:26:35.131+08:00",
+      "updateAt": "2014-08-05T17:26:35.131+08:00"
+    },
+    {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },
+    {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "private",
+        "username":"mactive",
+        "website": "51auto.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "rejected",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },
+        {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },    {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },
+        {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },
+        {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },
+        {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    },
+        {
+      "id": "53e0a34b8048c02003a1bcf1",
+      "shareAccount": {
+        "id": "53e0a23a90de8254b079924a",
+        "userId": "53b20e8c8048c09ab319bc91",
+        "accountType": "public",
+        "website": "che168.com"
+      },
+      "vehicle": {
+        "id": "53e09d498048c09303512be0",
+        "user": {
+          "id": "53b20e8c8048c09ab319bc91",
+          "mobile": "13811520127",
+          "username": "admin",
+          "email": "admin@kanche.com",
+          "name": "管理员",
+          "avatar": "http://cdn.kanche.com/abc123.jpg",
+          "gender": "male",
+          "publicPhone": "010-12345678",
+          "companyName": "北京看看车信息技术有限公司",
+          "companyAddress": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室",
+          "address": {
+            "postcode": "100102",
+            "detail": "北京市朝阳区阜通东大街1号院望京SOHO2-1-1507室"
+          },
+          "userType": "admin",
+          "groups": [],
+          "enabled": true,
+          "createAt": "2014-07-01T09:27:40.205+08:00",
+          "updateAt": "2014-07-01T09:27:40.205+08:00"
+        },
+        "spec": {
+          "levelId": "CBE0118A0018",
+          "maker": "一汽轿车",
+          "brand": "奔腾",
+          "series": "B70",
+          "saleName": "1.8 手自一体 时尚型",
+          "yearGroup": "2012",
+          "makeYear": "2014"
+        },
+        "summary": {
+          "color": "black",
+          "mileage": 50000,
+          "tradeTimes": 0,
+          "purpose": "personal",
+          "accident": false,
+          "maintenance": true
+        },
+        "vehicleDate": {
+          "registrationDate": "2014-08-05T00:00:00.000+08:00",
+          "inspectionDate": "2014-07-28T00:00:00.000+08:00",
+          "commercialInsuranceExpireDate": "2014-08-05T00:00:00.000+08:00",
+          "compulsoryInsuranceExpireDate": "2014-07-28T00:00:00.000+08:00"
+        },
+        "price": {
+          "quotedPrice": 80000,
+          "bidPrice": 120000
+        },
+        "status": {
+          "offline": false,
+          "sold": false,
+          "draft": true
+        },
+        "desc": {
+          "brief": "很新的车",
+          "detail": "很新，外观无划痕，机器状态良好。"
+        },
+        "document": {
+          "property": true,
+          "instruction": true,
+          "transferTicket": true,
+          "roadMaintenance": true,
+          "vehicleTax": true,
+          "maintenanceManual": true,
+          "purchaseTax": true,
+          "registrationCertificate": true
+        },
+        "gallery": {
+          "id": "53e09d788048c0d3007b9960",
+          "userId": "53b20e8c8048c09ab319bc91",
+          "photos": [
+            {
+              "name": "front",
+              "url": "http://pic.kanche.com/800c118d-4e8b-4d87-9117-1e0ee3ecc055.jpg"
+            },
+            {
+              "name": "rear",
+              "url": "http://pic.kanche.com/15d3c6c8-82a0-43d7-87e3-fc4b3706e3b3.jpg"
+            }
+          ]
+        },
+        "createAt": "2014-08-05T17:00:57.708+08:00",
+        "updateAt": "2014-08-05T17:01:44.488+08:00"
+      },
+      "status": "waiting",
+      "createAt": "2014-08-05T17:26:35.233+08:00",
+      "updateAt": "2014-08-05T17:26:35.233+08:00"
+    }
+  ],
+  "page": 0,
+  "size": 10,
+  "offset": 0,
+  "count": 2
+}

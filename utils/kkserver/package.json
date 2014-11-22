@@ -1,0 +1,10 @@
+{
+  "name": "btcServer",
+  "description": "server for btcnow",
+  "author": "mactive <mactive@gmail.com>",
+  "dependencies": {
+    "cron": "1.0.3",
+    "time":"*",
+    "sqlite3":"*"
+  }
+}

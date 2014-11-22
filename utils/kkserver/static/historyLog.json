@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "id": "53b20e8c8048c09ab319bc91",
+      "success": false,
+      "title":"加入发布队列",
+      "content":"请你耐心等待发车成功",
+      "url":"",
+      "retryMethod":"restart_job",
+      "message": "加入发布队列 http://www.58.com/cardetail/x7823810923.html",
+      "createAt": "2014-08-05T17:01:48.488+08:00"
+    },
+    {
+      "id": "53b20e8c8048c09ab319bc91",
+      "success": false,
+      "title":"车辆需要修改",
+      "content":"价格离谱",
+      "url":"",
+      "retryMethod":"edit_vehicle",
+      "message": "审核中",
+      "createAt": "2014-08-05T17:01:47.488+08:00"
+    },
+    {
+      "id": "53b20e8c8048c09ab319bc92",
+      "success": false,
+      "title":"车型库匹配失败",
+      "content":"请点击修改",
+      "url":"",
+      "retryMethod":"select_external_spec",
+      "message": "车源信息重复",
+      "createAt": "2014-08-05T17:01:46.488+08:00"
+    },
+    {
+      "id": "53b20e8c8048c09ab319bc92",
+      "success": true,
+      "title":"发布成功",
+      "content":"车辆在58发布成功",
+      "url":"http://www.58.com",
+      "retryMethod":"",
+      "message": "车源信息重复",
+      "createAt": "2014-08-05T17:01:44.488+08:00"
+    }
+  ],
+  "page": 0,
+  "size": 10,
+  "offset": 0,
+  "count": 2
+}
