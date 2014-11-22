@@ -1,19 +1,19 @@
 //
-//  GreenNavigationController.m
+//  ColorNavigationController.m
 //  bitmedia
 //
 //  Created by meng qian on 14-3-21.
 //  Copyright (c) 2014年 thinktube. All rights reserved.
 //
 
-#import "GreenNavigationController.h"
+#import "ColorNavigationController.h"
 #import "UIViewController+ImageBackButton.h"
 
-@interface GreenNavigationController ()
+@interface ColorNavigationController ()
 
 @end
 
-@implementation GreenNavigationController
+@implementation ColorNavigationController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,12 +36,12 @@
 - (void)customNavigationView
 {
     if (OSVersionIsAtLeastiOS7()) {
-        self.navigationBar.barTintColor = GREENCOLOR;
+        self.navigationBar.barTintColor = ORANGECOLOR;
         self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:WHITECOLOR};
         self.navigationBar.barStyle = UIStatusBarStyleLightContent;
     }else{
         [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-        [[UINavigationBar appearance] setBackgroundColor:GREENCOLOR];
+        [[UINavigationBar appearance] setBackgroundColor:ORANGECOLOR];
     }
 }
 

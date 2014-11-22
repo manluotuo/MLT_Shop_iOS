@@ -9,7 +9,7 @@
 #import "ListOnlineViewController.h"
 #import "AppRequestManager.h"
 #import "SGActionView.h"
-#import "GreenNavigationController.h"
+#import "ColorNavigationController.h"
 
 @interface ListOnlineViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 

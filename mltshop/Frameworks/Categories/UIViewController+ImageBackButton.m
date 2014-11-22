@@ -62,12 +62,12 @@
 - (void)navigationGreenStyle
 {
     if (OSVersionIsAtLeastiOS7()) {
-        self.navigationController.navigationBar.barTintColor = GREENCOLOR;
+        self.navigationController.navigationBar.barTintColor = ORANGECOLOR;
         self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:WHITECOLOR};
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     }else{
         [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-        [[UINavigationBar appearance] setBackgroundColor:GREENCOLOR];
+        [[UINavigationBar appearance] setBackgroundColor:ORANGECOLOR];
 
 
     }

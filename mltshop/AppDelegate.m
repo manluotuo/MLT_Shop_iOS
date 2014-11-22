@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "GreenNavigationController.h"
+#import "ColorNavigationController.h"
 #import "MMNavigationController.h"
 #import <MMDrawerController/MMDrawerController.h>
 #import <MMDrawerController/MMDrawerVisualState.h>

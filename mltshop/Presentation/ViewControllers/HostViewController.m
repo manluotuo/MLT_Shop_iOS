@@ -9,7 +9,7 @@
 #import "HostViewController.h"
 #import "ListMainViewController.h"
 #import "ListOnlineViewController.h"
-#import "GreenNavigationController.h"
+#import "ColorNavigationController.h"
 #import "AppRequestManager.h"
 #import "PassValueDelegate.h"
 #import "AppDelegate.h"
@@ -142,9 +142,10 @@
     [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
 }
 
-- (void)rightDrawerButtonPress
+- (void)rightDrawerButtonPress:(id)sender
 {
     // TODO: 打开扫描界面
+    NSLog(@"rightDrawerButtonPress");
 }
 
 /////////////////////////////////////////////////////

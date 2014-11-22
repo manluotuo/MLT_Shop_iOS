@@ -1,5 +1,5 @@
 //
-//  GreenNavigationController.h
+//  ColorNavigationController.h
 //  bitmedia
 //
 //  Created by meng qian on 14-3-21.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GreenNavigationController : UINavigationController
+@interface ColorNavigationController : UINavigationController
 
 @end

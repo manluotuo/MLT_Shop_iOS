@@ -8,7 +8,7 @@
 
 #import "LeftMenuViewController.h"
 #import "MMNavigationController.h"
-#import "GreenNavigationController.h"
+#import "ColorNavigationController.h"
 //#import "LMViewController.h"
 #import "AppDelegate.h"
 #import "Me.h"
@@ -484,7 +484,7 @@
 //        transition.subtype = kCATransitionFromRight;
 //        [self.view.window.layer addAnimation:transition forKey:kCATransition];
 //        
-//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:accountListViewController];
+//        ColorNavigationController *popNavController = [[ColorNavigationController alloc]initWithRootViewController:accountListViewController];
 //        
 //        [self presentViewController:popNavController animated:YES completion:nil];
 //        [accountListViewController changeNavigationUIForLeftSide];
@@ -504,7 +504,7 @@
 //        transition.subtype = kCATransitionFromRight;
 //        [self.view.window.layer addAnimation:transition forKey:kCATransition];
 //        
-//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:profileViewController];
+//        ColorNavigationController *popNavController = [[ColorNavigationController alloc]initWithRootViewController:profileViewController];
 //        [profileViewController changeNavigationUIForLeftSide];
 //        [self presentViewController:popNavController animated:YES completion:nil];
 //        
@@ -521,7 +521,7 @@
 //        transition.subtype = kCATransitionFromRight;
 //        [self.view.window.layer addAnimation:transition forKey:kCATransition];
 //        
-//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:historyListViewController];
+//        ColorNavigationController *popNavController = [[ColorNavigationController alloc]initWithRootViewController:historyListViewController];
 //        [historyListViewController changeNavigationUIForLeftSide];
 //        [self presentViewController:popNavController animated:YES completion:nil];
 //        
@@ -534,7 +534,7 @@
 //        transition.type = kCATransitionPush;
 //        transition.subtype = kCATransitionFromRight;
 //        [self.view.window.layer addAnimation:transition forKey:kCATransition];
-//        GreenNavigationController *popNavController = [[GreenNavigationController alloc]initWithRootViewController:moreViewController];
+//        ColorNavigationController *popNavController = [[ColorNavigationController alloc]initWithRootViewController:moreViewController];
 //        [self presentViewController:popNavController animated:YES completion:nil];
 //    }
 //    

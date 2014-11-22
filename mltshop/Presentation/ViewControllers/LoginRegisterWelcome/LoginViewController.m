@@ -50,7 +50,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = [NSString stringWithFormat:T(@"欢迎使用%@"),APP_NAME];
-    self.view.backgroundColor = GREENCOLOR;
     
     self.loginPanel = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT-1)];
     self.loginPanel.contentSize = CGSizeMake(TOTAL_WIDTH,TOTAL_HEIGHT);

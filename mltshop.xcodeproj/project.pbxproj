@@ -11,6 +11,7 @@
 		26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB01A1EBDB600E117A0 /* LoginViewController.m */; };
 		26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB61A1EC07E00E117A0 /* RegisterViewController.m */; };
 		26435ABA1A1EC1B200E117A0 /* intro_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */; };
+		26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435ABB1A2032C400E117A0 /* ColorNavigationController.m */; };
 		265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8841A1CE8020040ACC0 /* CommonListViewController.m */; };
 		265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */; };
 		265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */; };
@@ -93,7 +94,6 @@
 		26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3ACA1A17377D009F37B4 /* CDatePickerViewEx.m */; };
 		26BE3AD41A173A2B009F37B4 /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AD31A173A2B009F37B4 /* Me.m */; };
 		26BE3AD71A173C3D009F37B4 /* DataTrans.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AD51A173C3D009F37B4 /* DataTrans.m */; };
-		26BE3ADC1A19759B009F37B4 /* GreenNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AD81A19759B009F37B4 /* GreenNavigationController.m */; };
 		26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3ADB1A19759B009F37B4 /* KKViewController.m */; };
 		26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AE01A197865009F37B4 /* KKDrawerViewController.m */; };
 		26BE3AE61A197865009F37B4 /* MMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AE21A197865009F37B4 /* MMNavigationController.m */; };
@@ -123,6 +123,8 @@
 		26435AB61A1EC07E00E117A0 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		26435AB71A1EC07E00E117A0 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro_bg@2x.png"; sourceTree = "<group>"; };
+		26435ABB1A2032C400E117A0 /* ColorNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorNavigationController.m; sourceTree = "<group>"; };
+		26435ABC1A2032C400E117A0 /* ColorNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorNavigationController.h; sourceTree = "<group>"; };
 		265BB8831A1CE8020040ACC0 /* CommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonListViewController.h; sourceTree = "<group>"; };
 		265BB8841A1CE8020040ACC0 /* CommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonListViewController.m; sourceTree = "<group>"; };
 		265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOnlineViewController.m; sourceTree = "<group>"; };
@@ -258,8 +260,6 @@
 		26BE3AD31A173A2B009F37B4 /* Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Me.m; sourceTree = "<group>"; };
 		26BE3AD51A173C3D009F37B4 /* DataTrans.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTrans.m; sourceTree = "<group>"; };
 		26BE3AD61A173C3D009F37B4 /* DataTrans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTrans.h; sourceTree = "<group>"; };
-		26BE3AD81A19759B009F37B4 /* GreenNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreenNavigationController.m; sourceTree = "<group>"; };
-		26BE3AD91A19759B009F37B4 /* GreenNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreenNavigationController.h; sourceTree = "<group>"; };
 		26BE3ADA1A19759B009F37B4 /* KKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKViewController.h; sourceTree = "<group>"; };
 		26BE3ADB1A19759B009F37B4 /* KKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKViewController.m; sourceTree = "<group>"; };
 		26BE3ADF1A197865009F37B4 /* KKDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKDrawerViewController.h; sourceTree = "<group>"; };
@@ -670,8 +670,8 @@
 				26BE3AEF1A19795E009F37B4 /* HostViewVC */,
 				26BE3AE81A1978FB009F37B4 /* LeftMenuVC */,
 				26BE3ADE1A197865009F37B4 /* MMDrawCustom */,
-				26BE3AD81A19759B009F37B4 /* GreenNavigationController.m */,
-				26BE3AD91A19759B009F37B4 /* GreenNavigationController.h */,
+				26435ABC1A2032C400E117A0 /* ColorNavigationController.h */,
+				26435ABB1A2032C400E117A0 /* ColorNavigationController.m */,
 				26BE3ADA1A19759B009F37B4 /* KKViewController.h */,
 				26BE3ADB1A19759B009F37B4 /* KKViewController.m */,
 			);
@@ -986,6 +986,7 @@
 				26BE3A971A170421009F37B4 /* UIViewController+ImageBackButton.m in Sources */,
 				26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */,
 				265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */,
+				26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */,
 				26BE3AA01A170421009F37B4 /* SGActionView.m in Sources */,
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
@@ -996,7 +997,6 @@
 				266FA8001A134A72000C2AAE /* main.m in Sources */,
 				26BE3AA21A170421009F37B4 /* SGBaseMenu.m in Sources */,
 				26BE3A991A170421009F37B4 /* NSString+FontAwesome.m in Sources */,
-				26BE3ADC1A19759B009F37B4 /* GreenNavigationController.m in Sources */,
 				26BE3A981A170421009F37B4 /* FAImageView.m in Sources */,
 				26BE3AC21A173739009F37B4 /* FAInfoButton.m in Sources */,
 				26BE3AC11A173739009F37B4 /* FAIconButton.m in Sources */,

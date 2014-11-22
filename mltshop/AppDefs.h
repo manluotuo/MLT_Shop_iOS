@@ -178,6 +178,7 @@
 #define FONT_AWESOME_24 [UIFont fontWithName:@"FontAwesome" size:24.0f]
 #define FONT_AWESOME_30 [UIFont fontWithName:@"FontAwesome" size:30.0f]
 #define FONT_AWESOME_36 [UIFont fontWithName:@"FontAwesome" size:36.0f]
+#define FONT_AWESOME_70 [UIFont fontWithName:@"FontAwesome" size:70.0f]
 
 // font awesome
 #define ICON_THUMBSUP   @"\uf164"
@@ -482,8 +483,9 @@ alpha:(a)]
 #define BGCOLOR [UIColor colorWithRed:245.0f/255.0 green:245.0f/255.0 blue:245.0f/255.0 alpha:1.0]
 
 #define GREENCOLOR [UIColor colorWithRed:43.0f/255.0f green:180.0f/255.0f blue:77.0f/255.0f alpha:1]
-
 #define GREENLIGHTCOLOR [UIColor colorWithRed:126.0f/255.0f green:211.0f/255.0f blue:33.0f/255.0f alpha:1]
+#define GREENDARKCOLOR [UIColor colorWithRed:0.0f/255.0f green:104.0f/255.0f blue:76.0f/255.0f alpha:1]
+
 
 #define REDCOLOR [UIColor colorWithRed:225.0f/255.0f green:78.0f/255.0f blue:0.0f/255.0f alpha:1]
 #define GRAYCOLOR [UIColor colorWithRed:158.0f/255.0f green:158.0f/255.0f blue:158.0f/255.0f alpha:1]
