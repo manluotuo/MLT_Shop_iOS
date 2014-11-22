@@ -135,18 +135,17 @@
     }else{
         NSLog(@"APP ME  %@",self.me);
         if (!StringHasValue(self.me.userId)) {
-            NSLog(@"用户还没有登录");
-            [self showDrawerView];
+            NSLog(@"会记住登录信息,用户还没有登录");
+            [self showRegisterView];
         }else{
             NSLog(@"用户已经登录");
+            [self showDrawerView];
         }
     }
 }
 
 - (void)showIntroductionView
 {
-    // TODO: 发布时候记得打开
-//    SET_DEFAULT(NUM_BOOL(YES), @"HELPSEEN_INTRO");
     NSLog(@"showIntroductionView");
     self.firstHelpViewController = [[FirstHelpViewController alloc]initWithNibName:nil bundle:nil];
     

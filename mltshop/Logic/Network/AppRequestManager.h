@@ -90,7 +90,7 @@
 
 
 // API/sign_up
-- (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password code:(NSString *)code andBlock:(void (^)(id responseObject, NSError *error))block;
+- (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password email:(NSString *)email andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/merchant/user/me

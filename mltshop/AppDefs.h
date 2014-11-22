@@ -507,12 +507,11 @@ alpha:(a)]
 #define ORANGE_DARK_COLOR [UIColor colorWithRed:239.0f/255.0f green:105.0f/255.0f blue:6.0f/255.0f alpha:1]
 #define ORANGE_LIGHT_COLOR [UIColor colorWithRed:252.0f/255.0f green:242.0f/255.0f blue:174.0f/255.0f alpha:0.4f]
 
-#define BLUECOLOR [UIColor colorWithRed:100.0f/255.0f green:178.0f/255.0f blue:255.0f/255.0f alpha:1]
-#define BLUE_LIGHT_COLOR [UIColor colorWithRed:155.0f/255.0f green:203.0f/255.0f blue:250.0f/255.0f alpha:1]
-#define BLUE_DARK_COLOR [UIColor colorWithRed:55.0f/255.0f green:122.0f/255.0f blue:188.0f/255.0f alpha:1]
+#define BLUECOLOR [UIColor colorWithRed:79.0f/255.0f green:178.0f/255.0f blue:237.0f/255.0f alpha:1]
+#define BLUELIGHTCOLOR [UIColor colorWithRed:155.0f/255.0f green:203.0f/255.0f blue:250.0f/255.0f alpha:1]
+#define BLUEDARKCOLOR [UIColor colorWithRed:55.0f/255.0f green:122.0f/255.0f blue:188.0f/255.0f alpha:1]
 
 #define ORANGE_LINE_COLOR [UIColor colorWithRed:255.0f/255.0f green:198.0f/255.0f blue:0.0f/255.0f alpha:1]
-#define YELLOW_DOT_COLOR  [UIColor colorWithRed:251.0f/255.0f green:203.0f/255.0f blue:58.0f/255.0f alpha:1]
 
 #define SEPCOLOR [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
 

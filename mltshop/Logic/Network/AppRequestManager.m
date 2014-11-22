@@ -202,13 +202,13 @@ static dispatch_once_t onceToken;
 
 
 
-- (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password code:(NSString *)code andBlock:(void (^)(id responseObject, NSError *error))block
+- (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password email:(NSString *)email andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = API_SIGNUP_PATH;
     
     NSDictionary *postDict = @{@"mobile" :mobile,
                                @"password": password,
-                               @"verificationCode":code};
+                               @"email":email};
     postDict = [DataTrans makePostDict:postDict];
 
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {

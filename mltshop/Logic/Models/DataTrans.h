@@ -160,6 +160,7 @@
 
 // 从color 生成image
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
++ (UIView *)roundCornersOnView:(UIView *)view onTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
 
 
 @end

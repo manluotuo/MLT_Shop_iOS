@@ -961,6 +961,38 @@
     return image;
 }
 
++ (UIView *)roundCornersOnView:(UIView *)view onTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius {
+    
+    if (tl || tr || bl || br) {
+        UIRectCorner corner = 0; //holds the corner
+        //Determine which corner(s) should be changed
+        if (tl) {
+            corner = corner | UIRectCornerTopLeft;
+        }
+        if (tr) {
+            corner = corner | UIRectCornerTopRight;
+        }
+        if (bl) {
+            corner = corner | UIRectCornerBottomLeft;
+        }
+        if (br) {
+            corner = corner | UIRectCornerBottomRight;
+        }
+        
+        [view.layer setCornerRadius:0];
+        UIView *roundedView = view;
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:roundedView.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = roundedView.bounds;
+        maskLayer.path = maskPath.CGPath;
+        roundedView.layer.mask = maskLayer;
+        return roundedView;
+    } else {
+        return view;
+    }
+    
+}
+
 
 
 @end

@@ -12,6 +12,9 @@
 		26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB61A1EC07E00E117A0 /* RegisterViewController.m */; };
 		26435ABA1A1EC1B200E117A0 /* intro_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */; };
 		26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435ABB1A2032C400E117A0 /* ColorNavigationController.m */; };
+		26435ABF1A20700D00E117A0 /* train_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435ABE1A20700D00E117A0 /* train_bg@2x.png */; };
+		26435AC11A208F9200E117A0 /* logo_luotuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435AC01A208F9200E117A0 /* logo_luotuo@2x.png */; };
+		26435AC31A20B44F00E117A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26435AC21A20B44F00E117A0 /* InfoPlist.strings */; };
 		265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8841A1CE8020040ACC0 /* CommonListViewController.m */; };
 		265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */; };
 		265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */; };
@@ -125,6 +128,9 @@
 		26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro_bg@2x.png"; sourceTree = "<group>"; };
 		26435ABB1A2032C400E117A0 /* ColorNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorNavigationController.m; sourceTree = "<group>"; };
 		26435ABC1A2032C400E117A0 /* ColorNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorNavigationController.h; sourceTree = "<group>"; };
+		26435ABE1A20700D00E117A0 /* train_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "train_bg@2x.png"; sourceTree = "<group>"; };
+		26435AC01A208F9200E117A0 /* logo_luotuo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_luotuo@2x.png"; sourceTree = "<group>"; };
+		26435AC21A20B44F00E117A0 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		265BB8831A1CE8020040ACC0 /* CommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonListViewController.h; sourceTree = "<group>"; };
 		265BB8841A1CE8020040ACC0 /* CommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonListViewController.m; sourceTree = "<group>"; };
 		265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOnlineViewController.m; sourceTree = "<group>"; };
@@ -377,6 +383,7 @@
 				26BE3ACD1A1738A6009F37B4 /* mltshop-Prefix.pch */,
 				266FA7FE1A134A72000C2AAE /* Info.plist */,
 				266FA7FF1A134A72000C2AAE /* main.m */,
+				26435AC21A20B44F00E117A0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -419,6 +426,7 @@
 		26BE39E31A170421009F37B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				26435AC01A208F9200E117A0 /* logo_luotuo@2x.png */,
 				26BE39E41A170421009F37B4 /* homepage */,
 				26BE39F51A170421009F37B4 /* intro */,
 				26BE3A021A170421009F37B4 /* share */,
@@ -452,6 +460,7 @@
 		26BE39F51A170421009F37B4 /* intro */ = {
 			isa = PBXGroup;
 			children = (
+				26435ABE1A20700D00E117A0 /* train_bg@2x.png */,
 				26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */,
 			);
 			path = intro;
@@ -838,7 +847,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = 266FA7F11A134A72000C2AAE;
 			productRefGroup = 266FA7FB1A134A72000C2AAE /* Products */;
@@ -863,6 +871,7 @@
 				26BE3A851A170421009F37B4 /* shoucang_btn_pressed.png in Resources */,
 				26BE3A8D1A170421009F37B4 /* ding.wav in Resources */,
 				26BE3A8C1A170421009F37B4 /* ding.caf in Resources */,
+				26435AC11A208F9200E117A0 /* logo_luotuo@2x.png in Resources */,
 				26BE3A661A170421009F37B4 /* daiyunying_ico.png in Resources */,
 				26BE3A7F1A170421009F37B4 /* email_share_ico.png in Resources */,
 				26BE3A891A170421009F37B4 /* weixinpengyou_share_ico.png in Resources */,
@@ -871,12 +880,14 @@
 				26435ABA1A1EC1B200E117A0 /* intro_bg@2x.png in Resources */,
 				26BE3A831A170421009F37B4 /* qqkongjian_share_ico.png in Resources */,
 				26BE3A611A170421009F37B4 /* Museo500-Regular.otf in Resources */,
+				26435AC31A20B44F00E117A0 /* InfoPlist.strings in Resources */,
 				26BE3A811A170421009F37B4 /* message_share_ico.png in Resources */,
 				26BE3A711A170421009F37B4 /* xiaoxi_btn.png in Resources */,
 				26BE3A7E1A170421009F37B4 /* email@2x.png in Resources */,
 				26BE3A701A170421009F37B4 /* wodeweidian_ico.png in Resources */,
 				26BE3A681A170421009F37B4 /* gengduo_ico.png in Resources */,
 				26BE3A641A170421009F37B4 /* cheliangtuiguang_ico.png in Resources */,
+				26435ABF1A20700D00E117A0 /* train_bg@2x.png in Resources */,
 				26BE3A6B1A170421009F37B4 /* kehuguanli_ico.png in Resources */,
 				26BE3A6D1A170421009F37B4 /* shouchang_btn.png in Resources */,
 				26BE3A821A170421009F37B4 /* qq_share_ico.png in Resources */,
