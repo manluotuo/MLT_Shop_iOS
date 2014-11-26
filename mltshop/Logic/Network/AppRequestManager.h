@@ -10,7 +10,7 @@
 #import <AFNetworking/AFHTTPSessionManager.h>
 
 #define API_SYSTEM_PATH             @"/mobile_app/system"
-#define API_SIGNIN_PATH             @"/sign_in"
+#define API_SIGNIN_PATH             @"/ecmobile/?url=/user/signin"
 #define API_SIGNUP_PATH             @"/sign_up"
 #define API_MERCHANT_ME_PATH        @"/merchant/user/me"
 
@@ -81,7 +81,7 @@
 
 + (AppRequestManager *)sharedManager;
 + (AppRequestManager *)sharedWeiboManager;
-+ (void)setSharedInstance:(AppRequestManager *)instance;
++ (void) updateSharedInstance;
 //  API/System
 - (void)getSystemNotificationWithBlock:(void (^)(id responseObject, NSError *error))block;
 

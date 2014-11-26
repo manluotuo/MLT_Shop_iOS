@@ -319,12 +319,16 @@
 
 + (NSDictionary *)makePostDict:(NSDictionary *)params
 {
-    NSMutableDictionary *postParams = [[NSMutableDictionary alloc]initWithDictionary:params];
+    NSMutableDictionary *postParams = [[NSMutableDictionary alloc]init];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+    postParams[@"json"] = jsonString;
     
     // 统一增加userID
-    if (StringHasValue(XAppDelegate.me.userId)) {
-        [postParams setObject:XAppDelegate.me.userId forKey:@"userId"];
-    }
     
     return postParams;
 }

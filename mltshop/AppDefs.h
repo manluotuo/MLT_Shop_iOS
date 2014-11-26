@@ -19,40 +19,12 @@
 
 //测试地址e
 #ifdef  USE_DEV
-#define BASE_API        @"http://api.dev.kkche.cn"
-#define WD_SHARE_API    @"http://api.dev.kkche.cn/vehicle"
-#define CHART_API       @"http://chart.dev.kkche.cn"
-#define APP_API         @"http://app.dev.kkche.cn"
-
-#elif   USE_QA
-#define BASE_API        @"http://api.qa.kkche.cn"
-#define WD_SHARE_API    @"http://wd.qa.kkche.cn/vehicle"
-#define CHART_API       @"http://chart.qa.kkche.cn"
-#define APP_API         @"http://app.qa.kkche.cn"
-
-#elif   USE_RELEASE
-#define BASE_API        @"https://api.kanche.com"    
-#define WD_SHARE_API    @"http://wd.kanche.com/vehicle"
-#define CHART_API       @"http://chart.kanche.com"
-#define APP_API         @"http://app.kanche.com"
+#define BASE_API        @"http://www.manluotuo.com"
 
 #else
 //#define NSLog(...) LogMessageF( __FILE__,__LINE__,__FUNCTION__, NULL, 0, __VA_ARGS__)
 
-#define BASE_API        @"http://api.dev.kkche.cn"
-#define WD_SHARE_API    @"http://wd.dev.kkche.cn/vehicle"
-#define CHART_API       @"http://chart.dev.kkche.cn"
-#define APP_API         @"http://app.dev.kkche.cn"
-
-//#define BASE_API        @"http://api.qa.kkche.cn"
-//#define WD_SHARE_API    @"http://wd.qa.kkche.cn/vehicle"
-//#define CHART_API       @"http://chart.qa.kkche.cn"
-//#define APP_API         @"http://app.qa.kkche.cn"
-
-//#define BASE_API        @"http://api.kanche.com"
-//#define WD_SHARE_API    @"http://wd.kanche.com/vehicle"
-//#define CHART_API       @"http://chart.kanche.com"
-//#define APP_API         @"http://app.kanche.com"
+#define BASE_API        @"http://appdemo.manluotuo.com"
 
 #endif
 

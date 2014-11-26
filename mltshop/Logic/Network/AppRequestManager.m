@@ -23,15 +23,14 @@ static dispatch_once_t onceToken;
         if (_sharedManager == nil) {
             NSLog(@"kAppNetworkAPIBaseURLString %@",kAppNetworkAPIBaseURLString);
             _sharedManager = [[AppRequestManager alloc] initWithBaseURL:[NSURL URLWithString:kAppNetworkAPIBaseURLString]];
-            _sharedManager.requestSerializer = [AFJSONRequestSerializer serializer];
+            _sharedManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            [_sharedManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            
+            _sharedManager.responseSerializer = [AFJSONResponseSerializer serializer];
+
             // 设置网络超时时间
             _sharedManager.requestSerializer.timeoutInterval = 30;
             _sharedManager.securityPolicy.allowInvalidCertificates = YES;
-            
-            NSLog(@"ME %@",XAppDelegate.me);
-            if (StringHasValue(XAppDelegate.me.userToken)) {
-                [_sharedManager.requestSerializer setValue:XAppDelegate.me.userToken forHTTPHeaderField:@"X-AUTH-TOKEN"];
-            }
             
             
             [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidCompleteNotification object:nil];
@@ -59,11 +58,16 @@ static dispatch_once_t onceToken;
     return _sharedManager;
 }
 
-+ (void)setSharedInstance:(AppRequestManager *)instance {
-    if (instance == nil) onceToken = 0;
-    _sharedManager = instance;
++ (void)updateSharedInstance{
+    
+    NSLog(@"ME %@",XAppDelegate.me);
+    NSLog(@"%@",_sharedManager.requestSerializer.HTTPRequestHeaders);
+    if (![_sharedManager.requestSerializer.HTTPRequestHeaders[@"X-AUTH-TOKEN"]
+          isEqualToString:XAppDelegate.me.userToken] &&
+        StringHasValue(XAppDelegate.me.userToken)) {
+        [_sharedManager.requestSerializer setValue:XAppDelegate.me.userToken forHTTPHeaderField:@"X-AUTH-TOKEN"];
+    }
 }
-
 + (AppRequestManager *)nodejsManager {
     static AppRequestManager *_sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -95,38 +99,6 @@ static dispatch_once_t onceToken;
             [DataTrans showWariningTitle:responseObject[@"message"] andCheatsheet:nil andDuration:1.5f];
         }
     }
-    
-
-    // 不用再判断状态了, 统一 以钟宇的message 为准
-//    if (error.code == -1001) {
-//        [DataTrans showWariningTitle:T(@"网络故障链接超时") andCheatsheet:nil andDuration:1.5f];
-//    }else if (error.code == 3840){
-//        [DataTrans showWariningTitle:T(@"服务器返回格式有误") andCheatsheet:nil andDuration:1.5f];
-//    }else{
-//        
-//    }
-//    
-//    if (httpResponse.statusCode == 400){
-//        NSLog(@"Error was 401");
-//        if ([responseObject[@"code"] integerValue] == 4006) {
-//            [DataTrans showWariningTitle:T(@"用户已存在") andCheatsheet:nil andDuration:1.5f];
-//        }else if([responseObject[@"code"] integerValue] == 4101){
-//            [DataTrans showWariningTitle:T(@"绑定用户名密码不对") andCheatsheet:nil andDuration:1.5f];
-//        }else{
-//            [DataTrans showWariningTitle:T(@"接口请求无效") andCheatsheet:nil andDuration:1.5f];
-//        }
-//    }else if (httpResponse.statusCode == 403){
-//        if ([responseObject[@"code"] integerValue] == 6002) {
-//            [DataTrans showWariningTitle:T(@"此收藏已存在") andCheatsheet:nil andDuration:1.f];
-//        }else if ([responseObject[@"code"] integerValue] == 4002){
-//            [DataTrans showWariningTitle:T(@"用户没有权限") andCheatsheet:nil andDuration:1.f];
-//        }else if ([responseObject[@"code"] integerValue] == 6501){
-//            SET_DEFAULT(NUM_BOOL(YES), @"DEVICE_TOKEN_BIND_SUCCESS");
-//        }
-//    }
-//    else if(httpResponse.statusCode == 500){
-////        [DataTrans showWariningTitle:responseObject[@"result"] andCheatsheet:nil andDuration:2.0f];
-//    }
     
 }
 
@@ -175,11 +147,11 @@ static dispatch_once_t onceToken;
 {
     NSString *postURL = API_SIGNIN_PATH;
 
-    NSDictionary *postDict = @{@"mobile" :username,
+    NSDictionary *postDict = @{@"name" :username,
                                 @"password": password};
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         //
         if(responseObject != nil) {

@@ -81,7 +81,7 @@
     
     MRSave();
     XAppDelegate.me = onlyMe;
-    [AppRequestManager setSharedInstance:nil];
+    [AppRequestManager updateSharedInstance];
 
 }
 

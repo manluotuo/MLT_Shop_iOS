@@ -77,7 +77,7 @@
     self.userTextView.delegate = self;
     [self.userTextView setPlaceholder:T(@"用户名")];
     [self.userTextView setIconString:[NSString fontAwesomeIconStringForEnum:FAUser]];
-    self.userTextView.keyboardType = UIKeyboardTypeNumberPad;
+    self.userTextView.keyboardType = UIKeyboardTypeDefault;
     self.userTextView.returnKeyType = UIReturnKeyNext;
     
     // passTextView
@@ -190,10 +190,6 @@
     
     // sign_in
     
-    if (![DataTrans isValidateMobile:self.userTextView.text]) {
-        [DataTrans showWariningTitle:T(@"手机号格式有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
-        return;
-    }
     if (!StringHasValue(self.passTextView.text)) {
         [DataTrans showWariningTitle:T(@"密码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
     }
