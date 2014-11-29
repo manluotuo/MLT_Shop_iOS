@@ -18,6 +18,7 @@
 #import "RoundedAvatarButton.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIViewController+ImageBackButton.h"
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 
 //#import "AccountListViewController.h"
@@ -29,8 +30,7 @@
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, PassValueDelegate>
 {
-    NSString *nickName;
-    NSString *avatarUrl;
+    
 }
 
 @property(nonatomic, strong)UITableView *tableView;
@@ -39,11 +39,11 @@
 @property(nonatomic, strong)UIView *avatarContainerView;
 @property(nonatomic, strong)RoundedAvatarButton *avatarView;
 @property(nonatomic, strong)UILabel *nicknameLabel;
-
+@property(nonatomic, strong)UIImageView *bgView;
 
 @end
 
-#define LOGIN_AREA_HEIGHT 20.0
+#define LOGIN_AREA_HEIGHT 120.0
 
 
 @implementation LeftMenuViewController
@@ -53,6 +53,7 @@
 @synthesize loginContainerView;
 @synthesize avatarView;
 @synthesize nicknameLabel;
+@synthesize bgView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,37 +73,38 @@
 //    self.title = T(@"用户菜单");
     self.view.backgroundColor = BlACKCOLOR;
     
-    NSDictionary *dictA = [[NSDictionary alloc]initWithObjectsAndKeys:
+
+    NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"首页"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAslack], @"icon",
                            INT(LeftMenuProfile), @"function",
                            nil];
-    
-    NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
+
+    NSDictionary *dictC = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"个人中心"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAUser], @"icon",
                            INT(LeftMenuBinding), @"function",
                            nil];
     
-    NSDictionary *dictC = [[NSDictionary alloc]initWithObjectsAndKeys:
+    NSDictionary *dictD = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"分类搜索"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FASearch], @"icon",
                            INT(LeftMenuList), @"function",
                            nil];
 
-    NSDictionary *dictD = [[NSDictionary alloc]initWithObjectsAndKeys:
+    NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"购物车"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAShoppingCart], @"icon",
                            INT(LeftMenuFeedback), @"function",
                            nil];
     
-    NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
+    NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"帮助/客服"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAPhone], @"icon",
                            INT(LeftMenuQuickAdd), @"function",
                            nil];
     
-    NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
+    NSDictionary *dictG = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"设置"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FACog], @"icon",
                            INT(LeftMenuHistory), @"function",
@@ -114,45 +116,35 @@
     NSString *nowBuild = NOWBUILD;
     nowVersion = [NSString stringWithFormat:@"V_%@#%@", nowVersion, nowBuild];
     
-        // init left side menu
-    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictA,dictB,dictC,dictD,dictE, dictF,nil];
-//    if (XAppDelegate.me.userToken) {
-//        [self.dataSource addObject:dictG];
-//    }
-    
+    // init left side menu
+    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictE, dictF, dictG,nil];
 
+    // transform bg view
+    self.bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    [self.bgView setImageToBlur:[UIImage imageNamed:@"train_bg"] completionBlock:^{
+        //
+    }];
+    [self.view addSubview:self.bgView];
+    
     
     CGRect tableViewFrame = self.view.bounds;
-    tableViewFrame.origin.y = LOGIN_AREA_HEIGHT;
-    tableViewFrame.size.height = tableViewFrame.size.height - tableViewFrame.origin.y;
 
     self.tableView = [[UITableView alloc]initWithFrame:tableViewFrame style:UITableViewStylePlain];
-    self.tableView.backgroundColor = BlACKCOLOR;
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = [UIColor blackColor];
+    self.tableView.separatorColor = WHITEALPHACOLOR;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    self.tableView.scrollEnabled = NO;
     
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 30, 0, 0)];
     }
     
     [self.view addSubview:self.tableView];
     
-    // bar tint color
-
-    
-    if([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]){
-        [self.navigationController.navigationBar setBarTintColor:BlACKCOLOR];
-    }
-    else {
-        [self.navigationController.navigationBar setTintColor:BlACKCOLOR];
-    }
-    
-//    [self initAvatarContainerView];
+    [self initAvatarContainerView];
 //    [self initloginContainerView];
 //    [self checkVersion];
     
@@ -174,8 +166,7 @@
 //    }
     
     //  重新获取昵称和头像
-    nickName = XAppDelegate.me.nickname;
-    avatarUrl = XAppDelegate.me.avatarURL;
+    [self refreshAvatarContainerView];
     
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -196,37 +187,39 @@
 
 - (void)initAvatarContainerView
 {
-    CGRect loginFrame;
+    CGRect avatarFrame;
     if (OSVersionIsAtLeastiOS7()) {
-        loginFrame = CGRectMake(0, STATUS_BAR_HEIGHT, MAX_LEFT_DRAWER_WIDTH, LOGIN_AREA_HEIGHT);
+        avatarFrame = CGRectMake(0, STATUS_BAR_HEIGHT, MAX_LEFT_DRAWER_WIDTH, LOGIN_AREA_HEIGHT);
     }else{
-        loginFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), LOGIN_AREA_HEIGHT);
+        avatarFrame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), LOGIN_AREA_HEIGHT);
     }
     
-    self.avatarContainerView  = [[UIView alloc]initWithFrame:loginFrame];
-    self.avatarContainerView.backgroundColor = BlACKCOLOR;
+    self.avatarContainerView  = [[UIView alloc]initWithFrame:avatarFrame];
 
-    self.nicknameLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, loginFrame.origin.y + 15, 150, LABEL_HEIGHT)];
-    self.nicknameLabel.text = nickName;
+    self.nicknameLabel = [[UILabel alloc]initWithFrame:CGRectMake(105, avatarFrame.origin.y+H_40, 150, LABEL_HEIGHT)];
     self.nicknameLabel.textColor = WHITECOLOR;
-    [self.nicknameLabel setFont:FONT_15];
+    [self.nicknameLabel setFont:FONT_DIN_20];
     
     NSLog(@"XAppDelegate.me.avatarURL: %@",XAppDelegate.me.avatarURL);
     
-    self.avatarView = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(10, loginFrame.origin.y, 50, 50)];
+    self.avatarView = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(35, avatarFrame.origin.y+H_24, 50, 50)];
 
     [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-                                    placeholderImage:[UIImage imageNamed:@"114.png"]];
-//    [self.avatarView addTarget:self action:@selector(viewProfileAction:) forControlEvents:UIControlEventTouchUpInside];
+                                    placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
+    [self.avatarView addTarget:self action:@selector(viewProfileAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView *oneLineView = [[UIView alloc]initWithFrame:CGRectMake(0, loginFrame.size.height-1, TOTAL_WIDTH, 1.0)];
-    oneLineView.backgroundColor = [UIColor blackColor];
     
-    [self.avatarContainerView addSubview:oneLineView];
     [self.avatarContainerView addSubview:self.avatarView];
     [self.avatarContainerView addSubview:self.nicknameLabel];
     
-    [self.view addSubview:self.avatarContainerView];
+    self.tableView.tableHeaderView = self.avatarContainerView;
+}
+
+- (void)refreshAvatarContainerView
+{
+    self.nicknameLabel.text = XAppDelegate.me.username;
+    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
+                                       placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
 
 }
 
@@ -315,7 +308,7 @@
 
 -(void)getBindUserInfo
 {
-    self.nicknameLabel.text = XAppDelegate.me.nickname;
+    self.nicknameLabel.text = XAppDelegate.me.username;
     [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
                                     placeholderImage:[UIImage imageNamed:@"placeHolderSmall.png"]];
 }
@@ -329,10 +322,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 120;
-    }
-    return CELL_HEIGHT;
+    return CELL_HEIGHT-H_10;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -364,19 +354,19 @@
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     
-    UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 40 ,40)];
+    UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 10, 30 ,30)];
     iconLabel.tag = CELL_ICON_TAG;
-    iconLabel.font = FONT_AWESOME_24;
+    iconLabel.font = FONT_AWESOME_20;
     iconLabel.textColor = WHITECOLOR;
     iconLabel.backgroundColor = [UIColor clearColor];
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 10, 120, 40)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 10, 120, 30)];
     titleLabel.tag = CELL_TITLE_TAG;
-    titleLabel.font = FONT_15;
+    titleLabel.font = FONT_16;
     titleLabel.textColor = WHITECOLOR;
     titleLabel.backgroundColor = [UIColor clearColor];
     
-    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 40, H_120, H_14)];
+    UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 40, H_120, H_14)];
     detailLabel.backgroundColor = [UIColor clearColor];
     detailLabel.font = FONT_11;
     detailLabel.tag = CELL_TITLE_DETAIL_TAG;
@@ -397,8 +387,8 @@
     [cell.contentView addSubview:iconLabel];
     [cell.contentView addSubview:detailLabel];
     [cell.contentView addSubview:bubbleLabel];
-    [cell.contentView setBackgroundColor:BlACKCOLOR];
-    [cell setBackgroundColor:BlACKCOLOR];
+    [cell.contentView setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor clearColor]];
     
     return  cell;
 }
@@ -409,7 +399,7 @@
     
     // two type
     NSDictionary *cellData = [[NSDictionary alloc]init];
-    cell.contentView.backgroundColor = BlACKCOLOR;
+    cell.contentView.backgroundColor = [UIColor clearColor];
     
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = DARKCOLOR;

@@ -48,37 +48,22 @@
         onlyMe = [Me MR_createEntity];
     }
     
-    if (StringHasValue(json[@"userId"])) {
-        onlyMe.userId = json[@"userId"];
+    if (StringHasValue(json[@"session"][@"sid"])) {
+        onlyMe.sessionId = json[@"session"][@"sid"];
     }
-    // 有的时候返回值是 属性是id 不是userId
-    else if(StringHasValue(json[@"id"])){
-        onlyMe.userId = json[@"id"];
-    }else{
-        [DataTrans showWariningTitle:T(@"用户信息返回有误") andCheatsheet:ICON_TIMES andDuration:2.0f];
-        return;
-    }
-    
-    if (StringHasValue(json[@"token"])) {
-        onlyMe.userToken = json[@"token"];
-    }
-    
+
     if (DictionaryHasValue(json[@"user"])) {
-        onlyMe.avatarURL = json[@"user"][@"avatar"];
-    }else{
-        if (StringHasValue(json[@"avatar"])) {
-            onlyMe.avatarURL = json[@"avatar"];
-        }
+        NSDictionary *user = json[@"user"];
+        onlyMe.userId = [DataTrans noNullStringObj:user[@"id"]];
+        onlyMe.username = [DataTrans noNullStringObj:user[@"name"]];
+        onlyMe.rankName = [DataTrans noNullStringObj:user[@"rank_name"]];
+        onlyMe.rankLevel = [DataTrans noNullIntegerObj:user[@"rank_level"]];
+        onlyMe.collectionNum = [DataTrans noNullIntegerObj:user[@"collection_num"]];
+        onlyMe.email = [DataTrans noNullStringObj:user[@"email"]];
+        onlyMe.orderNum = [NSKeyedArchiver archivedDataWithRootObject:user[@"order_num"]];
     }
-    
-    if (StringHasValue(json[@"mobile"])) {
-        onlyMe.mobile = json[@"mobile"];
-    }
-    
-    if (StringHasValue(json[@"name"])) {
-        onlyMe.nickname = json[@"name"];
-    }
-    
+
+
     MRSave();
     XAppDelegate.me = onlyMe;
     [AppRequestManager updateSharedInstance];

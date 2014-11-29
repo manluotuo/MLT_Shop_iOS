@@ -15,6 +15,8 @@
 @interface DataTrans()
 
 + (NSString *)convertNumberToStringIfNumber:(id)obj;
++ (NSNumber *)convertStringToNumberIfString:(id)obj;
+
 
 @end
 
@@ -301,7 +303,7 @@
     
     result[@"id"] = XAppDelegate.me.userId;
 //    result[@"username"] = [DataTrans noNullStringObj:theMe.username];
-    result[@"name"] = [DataTrans noNullStringObj:theMe.nickname];
+    result[@"name"] = [DataTrans noNullStringObj:theMe.username];
 //    result[@"gender"] = [DataTrans noNullStringObj:theMe.gender];
     result[@"avatarUrl"] = [DataTrans noNullStringObj:theMe.avatarURL];
     return result;
@@ -470,7 +472,7 @@
     if (jsonData == nil){
         return [NSNumber numberWithInteger:0];
     }else{
-        return jsonData;
+        return [self convertStringToNumberIfString:jsonData];
     }
 }
 
@@ -584,6 +586,14 @@
 {
     if ([obj isKindOfClass:[NSNumber class]]) {
         return [obj stringValue];
+    }
+    return obj;
+}
+
++ (NSNumber *)convertStringToNumberIfString:(id)obj
+{
+    if ([obj isKindOfClass:[NSString class]]) {
+        return [NSNumber numberWithInteger:[obj integerValue]];
     }
     return obj;
 }
@@ -737,7 +747,7 @@
 
 + (BOOL)isCorrectResponseObject:(NSDictionary *)responseObject
 {
-    if ([responseObject[@"status"][@"successd"] isEqualToNumber:INT(1)]
+    if ([responseObject[@"status"][@"succeed"] isEqualToNumber:INT(1)]
         && DictionaryHasValue(responseObject)
         && responseObject != nil) {
         return YES;

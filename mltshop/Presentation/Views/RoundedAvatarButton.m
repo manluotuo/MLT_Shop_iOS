@@ -35,8 +35,8 @@
         self.avatarImageView.contentMode = UIViewContentModeScaleAspectFit;
 
         [[self.avatarImageView layer] setCornerRadius:imageWidth/2];
-        [[self.avatarImageView layer] setBorderColor:WHITECOLOR.CGColor];
-        [[self.avatarImageView layer] setBorderWidth:BORDER_WIDTH];
+//        [[self.avatarImageView layer] setBorderColor:WHITECOLOR.CGColor];
+//        [[self.avatarImageView layer] setBorderWidth:BORDER_WIDTH];
         self.avatarImageView.layer.masksToBounds = YES;
         
         [self addSubview:avatarImageView];

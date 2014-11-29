@@ -324,7 +324,7 @@
 // category edit button
 #define ADD_BUTTON_WIDTH        60.0
 #define TABS_VIEW_HEIGHT        44.0
-#define TABS_VIEW_WIDTH         106.6
+#define TABS_VIEW_WIDTH         80.0
 #define ROUNDED_BUTTON_HEIGHT   30.0
 
 // tabbar view height
