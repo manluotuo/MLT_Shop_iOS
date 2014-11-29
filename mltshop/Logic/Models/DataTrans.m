@@ -735,6 +735,17 @@
     
 }
 
++ (BOOL)isCorrectResponseObject:(NSDictionary *)responseObject
+{
+    if ([responseObject[@"status"][@"successd"] isEqualToNumber:INT(1)]
+        && DictionaryHasValue(responseObject)
+        && responseObject != nil) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 //+ (NSString *)colorKeyWithValue:(NSString *)value
 //{
 //    NSDictionary *colorDict = [DataTrans colorDict];

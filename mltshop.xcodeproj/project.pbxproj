@@ -100,7 +100,6 @@
 		26BE3AC61A173739009F37B4 /* KKIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AB81A173739009F37B4 /* KKIconButton.m */; };
 		26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AB91A173739009F37B4 /* KKFlatButton.m */; };
 		26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3ACA1A17377D009F37B4 /* CDatePickerViewEx.m */; };
-		26BE3AD41A173A2B009F37B4 /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AD31A173A2B009F37B4 /* Me.m */; };
 		26BE3AD71A173C3D009F37B4 /* DataTrans.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AD51A173C3D009F37B4 /* DataTrans.m */; };
 		26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3ADB1A19759B009F37B4 /* KKViewController.m */; };
 		26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AE01A197865009F37B4 /* KKDrawerViewController.m */; };
@@ -110,6 +109,7 @@
 		26BE3AEE1A197936009F37B4 /* RightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AEC1A197936009F37B4 /* RightMenuViewController.m */; };
 		26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AF11A19796E009F37B4 /* HostViewController.m */; };
 		26BE3AF51A197AE0009F37B4 /* LMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AF41A197AE0009F37B4 /* LMViewController.m */; };
+		26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FC81A29D5E6007F4B16 /* Me.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -272,8 +272,6 @@
 		26BE3AC91A17377D009F37B4 /* CDatePickerViewEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDatePickerViewEx.h; sourceTree = "<group>"; };
 		26BE3ACA1A17377D009F37B4 /* CDatePickerViewEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDatePickerViewEx.m; sourceTree = "<group>"; };
 		26BE3ACD1A1738A6009F37B4 /* mltshop-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "mltshop-Prefix.pch"; sourceTree = "<group>"; };
-		26BE3AD21A173A2B009F37B4 /* Me.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Me.h; sourceTree = "<group>"; };
-		26BE3AD31A173A2B009F37B4 /* Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Me.m; sourceTree = "<group>"; };
 		26BE3AD51A173C3D009F37B4 /* DataTrans.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataTrans.m; sourceTree = "<group>"; };
 		26BE3AD61A173C3D009F37B4 /* DataTrans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataTrans.h; sourceTree = "<group>"; };
 		26BE3ADA1A19759B009F37B4 /* KKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKViewController.h; sourceTree = "<group>"; };
@@ -292,6 +290,9 @@
 		26BE3AF11A19796E009F37B4 /* HostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostViewController.m; sourceTree = "<group>"; };
 		26BE3AF31A197AE0009F37B4 /* LMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMViewController.h; sourceTree = "<group>"; };
 		26BE3AF41A197AE0009F37B4 /* LMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMViewController.m; sourceTree = "<group>"; };
+		26DE7FC61A29D317007F4B16 /* mltshop 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mltshop 2.xcdatamodel"; sourceTree = "<group>"; };
+		26DE7FC71A29D5E6007F4B16 /* Me.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Me.h; path = mltshop/Logic/Models/Me.h; sourceTree = SOURCE_ROOT; };
+		26DE7FC81A29D5E6007F4B16 /* Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Me.m; path = mltshop/Logic/Models/Me.m; sourceTree = SOURCE_ROOT; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -747,8 +748,8 @@
 		26BE3AD01A17391E009F37B4 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				26BE3AD21A173A2B009F37B4 /* Me.h */,
-				26BE3AD31A173A2B009F37B4 /* Me.m */,
+				26DE7FC71A29D5E6007F4B16 /* Me.h */,
+				26DE7FC81A29D5E6007F4B16 /* Me.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1008,7 +1009,6 @@
 				26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */,
 				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
-				26BE3AD41A173A2B009F37B4 /* Me.m in Sources */,
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
@@ -1032,6 +1032,7 @@
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
 				26BE3A9A1A170421009F37B4 /* README.md in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
+				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,
 				26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */,
 				266FA8001A134A72000C2AAE /* main.m in Sources */,
 				26BE3AA21A170421009F37B4 /* SGBaseMenu.m in Sources */,
@@ -1254,6 +1255,7 @@
 		26BE3AAB1A170464009F37B4 /* mltshop.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				26DE7FC61A29D317007F4B16 /* mltshop 2.xcdatamodel */,
 				26BE3AAC1A170464009F37B4 /* mltshop.xcdatamodel */,
 			);
 			currentVersion = 26BE3AAC1A170464009F37B4 /* mltshop.xcdatamodel */;
