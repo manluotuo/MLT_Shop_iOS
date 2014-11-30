@@ -46,6 +46,7 @@
 #define CODE_TAG            103
 #define PASSWORD_TAG        104
 #define REPASSWORD_TAG      105
+#define EMAIL_TAG           106
 
 
 @implementation RegisterViewController
@@ -98,7 +99,7 @@
     self.userTextView.delegate = self;
     [self.userTextView setPlaceholder:T(@"用户名")];
     [self.userTextView setIconString:[NSString fontAwesomeIconStringForEnum:FAUser]];
-    self.userTextView.keyboardType = UIKeyboardTypeNumberPad;
+    self.userTextView.keyboardType = UIKeyboardTypeDefault;
     self.userTextView.returnKeyType = UIReturnKeyNext;
     self.userTextView.tag = MY_TAG;
     
@@ -107,7 +108,7 @@
     self.passTextView.delegate = self;
     [self.passTextView setPlaceholder:T(@"密码")];
     [self.passTextView setIconString:[NSString fontAwesomeIconStringForEnum:FALock]];
-    self.passTextView.returnKeyType = UIReturnKeyDone;
+    self.passTextView.returnKeyType = UIReturnKeyNext;
     self.passTextView.tag = PASSWORD_TAG;
     self.passTextView.secureTextEntry = YES;
 
@@ -117,8 +118,7 @@
     [self.emailTextView setPlaceholder:T(@"邮箱")];
     [self.emailTextView setIconString:[NSString fontAwesomeIconStringForEnum:FAEnvelope]];
     self.emailTextView.returnKeyType = UIReturnKeyDone;
-    self.emailTextView.tag = REPASSWORD_TAG;
-    self.emailTextView.secureTextEntry = YES;
+    self.emailTextView.tag = EMAIL_TAG;
     
     // verifyButton
     self.verifyButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
@@ -196,17 +196,14 @@
         [[AppRequestManager sharedManager]signUpWithMobile:self.userTextView.text password:self.passTextView.text email:self.emailTextView.text andBlock:^(id responseObject, NSError *error) {
             //
             if (responseObject != nil) {
-//                [DataTrans showWariningTitle:T(@"注册成功,正在登陆") andCheatsheet:ICON_CHECK andDuration:1.0f];
-//                run login and go main
-//                SET_DEFAULT(NUM_BOOL(NO), @"HELPSEEN_INTRO");
-//                SET_DEFAULT(NUM_BOOL(NO), @"HAS_SETTING_BINDING");
                 [self verifyPasswordAction];
-                
             }
             
             if (error != nil) {
-                if ([(NSNumber *)responseObject[@"code"] integerValue] == 4006) {
-                    [DataTrans showWariningTitle:T(@"该手机号已注册过") andCheatsheet:ICON_TIMES andDuration:1.0f];
+                NSDictionary *userDict = [error userInfo];
+                
+                if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
+                    [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
                 }
             }
             
@@ -278,13 +275,12 @@
 
 - (BOOL)checkAllTextField
 {
-    if (!StringHasValue(self.passTextView.text) || !StringHasValue(self.emailTextView.text)) {
+    if (!StringHasValue(self.passTextView.text)) {
         [DataTrans showWariningTitle:T(@"密码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
     }
-    if ([DataTrans isValidateMobile:self.userTextView.text] &&
+    if (StringHasValue(self.userTextView.text) &&
         [DataTrans isValidatePassword:self.passTextView.text] &&
-        [DataTrans isValidatePassword:self.emailTextView.text] &&
-        [self.passTextView.text isEqualToString:self.emailTextView.text]) {
+        [DataTrans isValidateEmail:self.emailTextView.text]) {
         
         return YES;
     }else{

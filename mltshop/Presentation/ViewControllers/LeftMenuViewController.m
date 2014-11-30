@@ -132,7 +132,7 @@
     self.tableView = [[UITableView alloc]initWithFrame:tableViewFrame style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = WHITEALPHACOLOR;
+    self.tableView.separatorColor = WHITEALPHACOLOR2;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -402,7 +402,7 @@
     cell.contentView.backgroundColor = [UIColor clearColor];
     
     UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = DARKCOLOR;
+    selectionColor.backgroundColor = WHITEALPHACOLOR;
     cell.selectedBackgroundView = selectionColor;
 
     cellData = [self.dataSource objectAtIndex:indexPath.row];

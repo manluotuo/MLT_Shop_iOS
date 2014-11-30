@@ -81,9 +81,9 @@ static dispatch_once_t onceToken;
 
 -(void)networkRequestDidFinish: (NSNotification *) notification
 {
-    NSError *error = [notification.userInfo objectForKey:AFNetworkingTaskDidFinishErrorKey];
+    NSError *error = [notification.userInfo objectForKey:AFNetworkingTaskDidCompleteErrorKey];
     
-    id responseObject = [notification.userInfo objectForKey:AFNetworkingTaskDidFinishSerializedResponseKey];
+    id responseObject = [notification.userInfo objectForKey:AFNetworkingTaskDidCompleteSerializedResponseKey];
 
     NSHTTPURLResponse *httpResponse = error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
     
@@ -178,17 +178,24 @@ static dispatch_once_t onceToken;
 {
     NSString *postURL = API_SIGNUP_PATH;
     
-    NSDictionary *postDict = @{@"mobile" :mobile,
+    NSDictionary *postDict = @{@"name" :mobile,
                                @"password": password,
-                               @"email":email};
+                               @"email":email,
+                               @"field":@"{SIGNUP_FIELD_VALUE}"};
+    
     postDict = [DataTrans makePostDict:postDict];
 
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
             if (block) {
-                block(responseObject , nil);
+                block(responseObject[@"data"] , nil);
             }
+        }else{
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@ %@",postURL, error);
@@ -199,26 +206,6 @@ static dispatch_once_t onceToken;
     }];
 }
 
-
-- (void)getMerchantMeWithToken:(NSString *)token andBlock:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postURL = API_MERCHANT_ME_PATH;
-    if (token) {
-        [[AppRequestManager sharedManager].requestSerializer setValue:token forHTTPHeaderField:@"X-AUTH-TOKEN"];
-    }
-    
-    [[AppRequestManager sharedManager]GET:postURL parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject , nil);
-        }
-
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block) {
-            block(nil , error);
-        }
-    }];
-    
-}
 
 
 - (void)uploadPicture:(NSURL *)url resize:(CGSize)resize andBlock:(void (^)(id responseObject, NSError *error))block

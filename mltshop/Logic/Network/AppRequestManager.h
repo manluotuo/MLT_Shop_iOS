@@ -11,8 +11,7 @@
 
 #define API_SYSTEM_PATH             @"/mobile_app/system"
 #define API_SIGNIN_PATH             @"/ecmobile/?url=/user/signin"
-#define API_SIGNUP_PATH             @"/sign_up"
-#define API_MERCHANT_ME_PATH        @"/merchant/user/me"
+#define API_SIGNUP_PATH             @"/ecmobile/?url=/user/signup"
 
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
@@ -36,7 +35,7 @@
 #define API_UPDATE_SHARE_ACCOUNT    @"/share/account/update"
 #define API_GET_SHARE_AVAILABILITY  @"/share/availability/get"
 
-#define API_USER_GET_PATH           @"/user/get"
+#define API_USER_GET_PATH           @"/ecmobile/?url=/user/info"
 #define API_USER_UPDATE_PATH        @"/user/update"
 #define API_USER_EXIST              @"/user/check"
 #define API_USER_SUMMARY            @"/user/summary"
