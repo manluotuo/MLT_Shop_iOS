@@ -126,7 +126,6 @@
     
     UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc]initWithCustomView:self.leftDrawerAvatarButton];
     
-//    MMDrawerBarButtonItem * leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(leftDrawerButtonPress:)];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
 }
 

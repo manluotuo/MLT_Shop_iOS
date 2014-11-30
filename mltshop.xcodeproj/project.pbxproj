@@ -95,6 +95,8 @@
 		26BE3AF51A197AE0009F37B4 /* LMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE3AF41A197AE0009F37B4 /* LMViewController.m */; };
 		26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FC81A29D5E6007F4B16 /* Me.m */; };
 		26DE7FCB1A2A12B8007F4B16 /* avatarIronMan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */; };
+		26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */; };
+		26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FD01A2AFEC6007F4B16 /* blurImg.png */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -263,6 +265,9 @@
 		26DE7FC71A29D5E6007F4B16 /* Me.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Me.h; path = mltshop/Logic/Models/Me.h; sourceTree = SOURCE_ROOT; };
 		26DE7FC81A29D5E6007F4B16 /* Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Me.m; path = mltshop/Logic/Models/Me.m; sourceTree = SOURCE_ROOT; };
 		26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatarIronMan@2x.png"; sourceTree = "<group>"; };
+		26DE7FCD1A2AE857007F4B16 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		26DE7FD01A2AFEC6007F4B16 /* blurImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurImg.png; sourceTree = "<group>"; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,6 +422,7 @@
 		26BE39E31A170421009F37B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				26DE7FD01A2AFEC6007F4B16 /* blurImg.png */,
 				26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */,
 				26435ACD1A20CA7900E117A0 /* Default@2x.png */,
 				26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */,
@@ -645,6 +651,7 @@
 		26BE3A5F1A170421009F37B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				26DE7FCC1A2AE833007F4B16 /* UserVC */,
 				26435AAC1A1EBDB600E117A0 /* LoginRegisterWelcome */,
 				265BB88C1A1CE9740040ACC0 /* ListVC */,
 				26BE3AEF1A19795E009F37B4 /* HostViewVC */,
@@ -734,6 +741,15 @@
 				26BE3AF11A19796E009F37B4 /* HostViewController.m */,
 			);
 			name = HostViewVC;
+			sourceTree = "<group>";
+		};
+		26DE7FCC1A2AE833007F4B16 /* UserVC */ = {
+			isa = PBXGroup;
+			children = (
+				26DE7FCD1A2AE857007F4B16 /* ProfileViewController.h */,
+				26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */,
+			);
+			name = UserVC;
 			sourceTree = "<group>";
 		};
 		80502A031C766084744D27D2 /* Pods */ = {
@@ -839,6 +855,7 @@
 				26BE3A871A170421009F37B4 /* weibo@2x.png in Resources */,
 				26435ACA1A20C55000E117A0 /* MLTLogo-60.png in Resources */,
 				26435ACC1A20C55000E117A0 /* MLTLogo-60@3x.png in Resources */,
+				26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */,
 				26BE3A851A170421009F37B4 /* shoucang_btn_pressed.png in Resources */,
 				26BE3A8D1A170421009F37B4 /* ding.wav in Resources */,
 				26BE3A8C1A170421009F37B4 /* ding.caf in Resources */,
@@ -955,6 +972,7 @@
 				265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */,
 				26BE3A911A170421009F37B4 /* NSDate-Utilities.m in Sources */,
 				26BE3A971A170421009F37B4 /* UIViewController+ImageBackButton.m in Sources */,
+				26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */,
 				26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */,
 				265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */,
 				26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */,

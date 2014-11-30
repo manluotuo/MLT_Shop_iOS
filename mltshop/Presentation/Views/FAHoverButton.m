@@ -23,8 +23,8 @@
 @synthesize iconFont;
 @synthesize signal;
 @synthesize indexPath;
-#define BUBBLE_H 15.0f
-#define BUBBLE_W 20.0f
+#define BUBBLE_H 16.0f
+#define BUBBLE_W 16.0f
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -40,13 +40,14 @@
         [self setTitleColor:WHITECOLOR forState:UIControlStateNormal];
         [self setTitleColor:WHITECOLOR forState:UIControlStateHighlighted];
         
-        self.bubbleLabel = [[UILabel alloc]initWithFrame:CGRectMake(30 , 0, BUBBLE_W, BUBBLE_H)];
-        [self.bubbleLabel setBackgroundColor:DARKCOLOR];
+        self.bubbleLabel = [[UILabel alloc]initWithFrame:CGRectMake(40 , frame.size.height/2-BUBBLE_H/2, BUBBLE_W, BUBBLE_H)];
+        [self.bubbleLabel setBackgroundColor:GREENLIGHTCOLOR];
         [self.bubbleLabel setTextColor:WHITECOLOR];
-        [self.bubbleLabel setFont:FONT_12];
+        [self.bubbleLabel setFont:LITTLECUSTOMFONT];
         [self.bubbleLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.bubbleLabel.layer setCornerRadius:BUBBLE_H/2];
+        [self.bubbleLabel.layer setMasksToBounds:YES];
         [self.bubbleLabel setHidden:YES];
-        self.bubbleLabel.backgroundColor = [UIColor clearColor];
 
         [self addSubview:self.bubbleLabel];
 
@@ -61,6 +62,9 @@
     if (StringHasValue(_bubbleString)) {
         [self.bubbleLabel setHidden:NO];
         self.bubbleLabel.text = _bubbleString;
+        self.bubbleLabel.frame = CGRectMake(self.frame.size.width - BUBBLE_W*2 , self.frame.size.height/2-BUBBLE_H/2, BUBBLE_W, BUBBLE_H);
+        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+
     }
 }
 
@@ -87,6 +91,12 @@
 - (void)setIconFont:(UIFont *)_iconFont
 {
     [self.titleLabel setFont:_iconFont];
+}
+
+- (void)setBorder
+{
+    [self.layer setBorderColor:GRAYLIGHTCOLOR.CGColor];
+    [self.layer setBorderWidth:0.5f];
 }
 
 

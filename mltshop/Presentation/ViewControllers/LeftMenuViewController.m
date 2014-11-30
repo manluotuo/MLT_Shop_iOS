@@ -22,7 +22,7 @@
 
 
 //#import "AccountListViewController.h"
-//#import "ProfileFormViewController.h"
+#import "ProfileViewController.h"
 //#import "WebHelpViewController.h"
 //#import "HistoryListViewController.h"
 //#import "MoreViewController.h"
@@ -110,6 +110,13 @@
                            INT(LeftMenuHistory), @"function",
                            nil];
     
+    NSDictionary *dictH = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"退出"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FASignOut], @"icon",
+                           INT(LeftMenuLogout), @"function",
+                           nil];
+
+    
 
     
     NSString *nowVersion = NOWVERSION;
@@ -117,7 +124,7 @@
     nowVersion = [NSString stringWithFormat:@"V_%@#%@", nowVersion, nowBuild];
     
     // init left side menu
-    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictE, dictF, dictG,nil];
+    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictE, dictF, dictG, dictH,nil];
 
     // transform bg view
     self.bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
@@ -220,6 +227,15 @@
     self.nicknameLabel.text = XAppDelegate.me.username;
     [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
                                        placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
+
+}
+
+- (void)viewProfileAction:(id)sender
+{
+//    ProfileViewController.h
+    ProfileViewController *VC = [[ProfileViewController alloc]init];
+    [self.mm_drawerController setCenterViewController:VC];
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
 
 }
 
@@ -421,6 +437,20 @@
 
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *cellData = (NSDictionary *)[self.dataSource objectAtIndex:indexPath.row];
+    NSInteger function = [(NSNumber *)[cellData objectForKey:@"function"] integerValue];
+
+    switch (function) {
+        case LeftMenuLogout:
+            [[ModelHelper sharedHelper]meLogoutWithBlock:^(BOOL exeStatus) {
+                [XAppDelegate showRegisterView];
+            }];
+        break;
+    }
+
+}
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //{

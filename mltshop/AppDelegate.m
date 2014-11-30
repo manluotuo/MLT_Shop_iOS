@@ -98,7 +98,7 @@
     [self.drawerController setMaximumRightDrawerWidth:MAX_LEFT_DRAWER_WIDTH];
     [self.drawerController setShowsShadow:YES];
     [self.drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideAndScaleVisualStateBlock]];
-    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModePanningNavigationBar];
+    [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
 //    [self checkUserLogin];
@@ -120,6 +120,11 @@
 - (void)showDrawerView
 {
     NSLog(@"showMainView");
+    
+    UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
+    [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
+
+    [self.drawerController setCenterViewController:navigationController];
     [self.window setRootViewController:self.drawerController];
     [self.window addSubview:self.drawerController.view];
     [self.window makeKeyAndVisible];

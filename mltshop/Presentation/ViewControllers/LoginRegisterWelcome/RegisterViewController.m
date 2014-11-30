@@ -275,8 +275,13 @@
 
 - (BOOL)checkAllTextField
 {
-    if (!StringHasValue(self.passTextView.text)) {
+    if (StringHasValue(self.passTextView.text)) {
+        if (![DataTrans isValidatePassword:self.passTextView.text]) {
+            [DataTrans showWariningTitle:T(@"密码应该设置为6位以上\n数字或字母组合") andCheatsheet:ICON_TIMES andDuration:1.0f];
+        }
+    }else{
         [DataTrans showWariningTitle:T(@"密码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
+        return NO;
     }
     if (StringHasValue(self.userTextView.text) &&
         [DataTrans isValidatePassword:self.passTextView.text] &&

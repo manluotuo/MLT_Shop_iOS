@@ -18,4 +18,6 @@
 @property (nonatomic, strong) UIImage *iconImage;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
+- (void)setBorder;
+
 @end
