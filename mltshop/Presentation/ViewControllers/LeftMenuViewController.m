@@ -77,37 +77,37 @@
     NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"首页"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAslack], @"icon",
-                           INT(LeftMenuProfile), @"function",
+                           INT(LeftMenuMain), @"function",
                            nil];
 
     NSDictionary *dictC = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"个人中心"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAUser], @"icon",
-                           INT(LeftMenuBinding), @"function",
+                           INT(LeftMenuProfile), @"function",
                            nil];
     
     NSDictionary *dictD = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"分类搜索"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FASearch], @"icon",
-                           INT(LeftMenuList), @"function",
+                           INT(LeftMenuSearch), @"function",
                            nil];
 
     NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"购物车"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAShoppingCart], @"icon",
-                           INT(LeftMenuFeedback), @"function",
+                           INT(LeftMenuChart), @"function",
                            nil];
     
     NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"帮助/客服"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAPhone], @"icon",
-                           INT(LeftMenuQuickAdd), @"function",
+                           INT(LeftMenuService), @"function",
                            nil];
     
     NSDictionary *dictG = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"设置"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FACog], @"icon",
-                           INT(LeftMenuHistory), @"function",
+                           INT(LeftMenuSetting), @"function",
                            nil];
     
     NSDictionary *dictH = [[NSDictionary alloc]initWithObjectsAndKeys:
@@ -232,11 +232,9 @@
 
 - (void)viewProfileAction:(id)sender
 {
-//    ProfileViewController.h
     ProfileViewController *VC = [[ProfileViewController alloc]init];
     [self.mm_drawerController setCenterViewController:VC];
     [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
-
 }
 
 - (void)checkVersion
@@ -444,10 +442,22 @@
 
     switch (function) {
         case LeftMenuLogout:
+        {
             [[ModelHelper sharedHelper]meLogoutWithBlock:^(BOOL exeStatus) {
-                [XAppDelegate showRegisterView];
+                [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+                    [XAppDelegate showRegisterView];
+                }];
             }];
+        }
         break;
+            
+        case LeftMenuMain:
+        {
+            [XAppDelegate showDrawerView];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+
+        }
+            break;
     }
 
 }

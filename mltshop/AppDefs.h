@@ -456,6 +456,7 @@ alpha:(a)]
 
 #define GREENCOLOR [UIColor colorWithRed:43.0f/255.0f green:180.0f/255.0f blue:77.0f/255.0f alpha:1]
 #define GREENLIGHTCOLOR [UIColor colorWithRed:126.0f/255.0f green:211.0f/255.0f blue:33.0f/255.0f alpha:1]
+#define GREENLIGHTCOLOR2 [UIColor colorWithRed:184.0f/255.0f green:233.0f/255.0f blue:134.0f/255.0f alpha:1]
 #define GREENDARKCOLOR [UIColor colorWithRed:0.0f/255.0f green:104.0f/255.0f blue:76.0f/255.0f alpha:1]
 
 
@@ -619,19 +620,17 @@ typedef NS_ENUM(NSInteger, InputType){
 
 typedef NS_ENUM(NSInteger, LeftMenuRow){
     LeftMenuCommon      = 0,
-    LeftMenuAvatar      = 1,
+    LeftMenuMain        = 1,
     LeftMenuProfile     = 2,
-    LeftMenuQuickAdd    = 3,
-    LeftMenuBinding     = 4,
-    LeftMenuList        = 5,
-    LeftMenuHistory     = 6,
-    LeftMenuSetting     = 9,
-    LeftMenuHelp        = 10,
-    LeftMenuFeedback    = 11,
-    LeftMenuUpdate      = 12,
-    LeftMenuLogout      = 13,
-    LeftMenuBuild       = 14,
-    LeftMenuMore        = 15
+    LeftMenuSearch      = 3,
+    LeftMenuChart       = 4,
+    LeftMenuService     = 5,
+    LeftMenuSetting     = 6,
+    LeftMenuHelp        = 7,
+    LeftMenuFeedback    = 8,
+    LeftMenuUpdate      = 9,
+    LeftMenuLogout      = 10,
+    LeftMenuMore        = 11
 };
 
 typedef NS_ENUM(NSInteger, RightMenuRow){

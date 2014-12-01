@@ -24,6 +24,7 @@
 @end
 
 #define AVATAR_Y_OFFSET 40.0f
+#define LINE_W          0.5f
 
 @implementation ProfileViewController
 
@@ -101,7 +102,8 @@
     orderLabel.text  = T(@"我的订单");
     [orderLabel setTextColor:DARKCOLOR];
     
-    FAHoverButton *buttonA = [[FAHoverButton alloc]initWithFrame:CGRectMake(0, H_45, TOTAL_WIDTH/3, H_60)];
+    
+    FAHoverButton *buttonA = [[FAHoverButton alloc]initWithFrame:CGRectMake(-LINE_W, H_45, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonA setIconFont:FONT_16];
     [buttonA setIconString:T(@"待付款")];
     [buttonA setBubbleString:@"3"];
@@ -109,17 +111,19 @@
     [buttonA setBorder];
     
     FAHoverButton *buttonB = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, H_45, TOTAL_WIDTH/3, H_60)];
-    [buttonB setTitle:T(@"待发货") forState:UIControlStateNormal];
-    [buttonB.titleLabel setTextColor:DARKCOLOR];
-    [buttonB.titleLabel setFont:FONT_14];
-    [buttonB setBubbleString:@"3"];
+    [buttonB setIconFont:FONT_16];
+    [buttonB setIconString:T(@"待发货")];
+//    [buttonB setBubbleString:@"3"];
+    [buttonB setIconColor:DARKCOLOR];
+    [buttonB setBorder];
     
     
-    FAHoverButton *buttonC = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2, H_25, TOTAL_WIDTH/3, H_60)];
-    [buttonC setTitle:T(@"待收货") forState:UIControlStateNormal];
-    [buttonC.titleLabel setTextColor:DARKCOLOR];
-    [buttonC.titleLabel setFont:FONT_14];
-    [buttonC setBubbleString:@"3"];
+    FAHoverButton *buttonC = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2-LINE_W, H_45, TOTAL_WIDTH/3+LINE_W*2, H_60)];
+    [buttonC setIconFont:FONT_16];
+    [buttonC setIconString:T(@"待收货")];
+    [buttonC setBubbleString:@"2"];
+    [buttonC setIconColor:DARKCOLOR];
+    [buttonC setBorder];
 
     [self.orderView addSubview:orderLabel];
     [self.orderView addSubview:buttonA];
@@ -127,6 +131,34 @@
     [self.orderView addSubview:buttonC];
     
     
+    KKFlatButton *buttonBigA = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [buttonBigA setTitle:T(@"历史订单") forState:UIControlStateNormal];
+    [buttonBigA setFrame:CGRectMake(H_40, H_140, H_240, H_50)];
+    [buttonBigA.titleLabel setFont:FONT_14];
+    [buttonBigA setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+    [buttonBigA setBackgroundColor:GREENLIGHTCOLOR2];
+    [buttonBigA addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    KKFlatButton *buttonBigB = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [buttonBigB setTitle:T(@"地址管理") forState:UIControlStateNormal];
+    [buttonBigB setFrame:CGRectMake(H_40, H_140+H_60, H_240, H_50)];
+    [buttonBigB.titleLabel setFont:FONT_14];
+    [buttonBigB setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+    [buttonBigB setBackgroundColor:GREENLIGHTCOLOR2];
+    [buttonBigB addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    KKFlatButton *buttonBigC = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [buttonBigC setTitle:T(@"我的收藏") forState:UIControlStateNormal];
+    [buttonBigC setFrame:CGRectMake(H_40, H_140+H_60*2, H_240, H_50)];
+    [buttonBigC.titleLabel setFont:FONT_14];
+    [buttonBigC setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+    [buttonBigC setBackgroundColor:GREENLIGHTCOLOR2];
+    [buttonBigC addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    [self.orderView addSubview:buttonBigA];
+    [self.orderView addSubview:buttonBigB];
+    [self.orderView addSubview:buttonBigC];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
