@@ -237,6 +237,7 @@
 #define TAKE_PHOTO_CELL_W 106.0f
 #define TAKE_PHOTO_CELL_H 90.0f
 #define CELL_HEIGHT             60.0f
+#define CELL_WIDTH              320.0f/3
 #define VEHICLE_CELL_HEIGHT     80.0f
 
 #define LEFT_CELL_HEIGHT        50.0f

@@ -97,6 +97,8 @@
 		26DE7FCB1A2A12B8007F4B16 /* avatarIronMan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */; };
 		26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */; };
 		26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FD01A2AFEC6007F4B16 /* blurImg.png */; };
+		26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */; };
+		26DE7FD81A2C009C007F4B16 /* AppViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD61A2C009C007F4B16 /* AppViewCell.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -268,6 +270,10 @@
 		26DE7FCD1A2AE857007F4B16 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		26DE7FD01A2AFEC6007F4B16 /* blurImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurImg.png; sourceTree = "<group>"; };
+		26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCategoryViewController.h; sourceTree = "<group>"; };
+		26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCategoryViewController.m; sourceTree = "<group>"; };
+		26DE7FD61A2C009C007F4B16 /* AppViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewCell.m; sourceTree = "<group>"; };
+		26DE7FD71A2C009C007F4B16 /* AppViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewCell.h; sourceTree = "<group>"; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -644,6 +650,8 @@
 		26BE3A5E1A170421009F37B4 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				26DE7FD61A2C009C007F4B16 /* AppViewCell.m */,
+				26DE7FD71A2C009C007F4B16 /* AppViewCell.h */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -651,6 +659,7 @@
 		26BE3A5F1A170421009F37B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				26DE7FD21A2BFE17007F4B16 /* FunctionVC */,
 				26DE7FCC1A2AE833007F4B16 /* UserVC */,
 				26435AAC1A1EBDB600E117A0 /* LoginRegisterWelcome */,
 				265BB88C1A1CE9740040ACC0 /* ListVC */,
@@ -750,6 +759,15 @@
 				26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */,
 			);
 			name = UserVC;
+			sourceTree = "<group>";
+		};
+		26DE7FD21A2BFE17007F4B16 /* FunctionVC */ = {
+			isa = PBXGroup;
+			children = (
+				26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */,
+				26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */,
+			);
+			name = FunctionVC;
 			sourceTree = "<group>";
 		};
 		80502A031C766084744D27D2 /* Pods */ = {
@@ -980,6 +998,7 @@
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
+				26DE7FD81A2C009C007F4B16 /* AppViewCell.m in Sources */,
 				26BE3A9A1A170421009F37B4 /* README.md in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
 				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,
@@ -1000,6 +1019,7 @@
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
+				26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */,
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,
 				26BE3A9C1A170421009F37B4 /* UIFont+FontAwesome.m in Sources */,

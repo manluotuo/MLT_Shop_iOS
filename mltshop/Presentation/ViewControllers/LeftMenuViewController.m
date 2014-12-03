@@ -23,6 +23,7 @@
 
 //#import "AccountListViewController.h"
 #import "ProfileViewController.h"
+#import "SearchCategoryViewController.h"
 //#import "WebHelpViewController.h"
 //#import "HistoryListViewController.h"
 //#import "MoreViewController.h"
@@ -454,6 +455,14 @@
         case LeftMenuMain:
         {
             [XAppDelegate showDrawerView];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+
+        }
+            break;
+        case LeftMenuSearch:
+        {
+            SearchCategoryViewController *VC = [[SearchCategoryViewController alloc]init];
+            [self.mm_drawerController setCenterViewController:VC];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
 
         }
