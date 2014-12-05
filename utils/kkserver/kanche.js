@@ -48,6 +48,24 @@ server = http.createServer(function(req, res){
 
     }
 
+    if(parts.pathname == '/category')
+    {            
+            filePath = folderPath + "/category.json";
+            console.log(filePath);
+            console.log("=================");
+
+            fs.readFile(filePath, encode, function(err, file) {
+                if(err){
+                    res.writeHead(404, {'Content-Type': 'text/plain'});
+                    res.end();
+                    return;
+                }
+                res.writeHead(200, {'Content-Type':'application/json'});
+                res.write(file);
+                res.end();
+            });
+    }
+
     if(parts.pathname == '/share/job/search')
     {            
             filePath = folderPath + "/history.json";

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E24B71A31CB3700DA06A2 /* CategoryModel.m */; };
 		26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */; };
 		26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB01A1EBDB600E117A0 /* LoginViewController.m */; };
 		26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB61A1EC07E00E117A0 /* RegisterViewController.m */; };
@@ -98,7 +99,7 @@
 		26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */; };
 		26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FD01A2AFEC6007F4B16 /* blurImg.png */; };
 		26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */; };
-		26DE7FD81A2C009C007F4B16 /* AppViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD61A2C009C007F4B16 /* AppViewCell.m */; };
+		26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		261E24B61A31CB3700DA06A2 /* CategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
+		261E24B71A31CB3700DA06A2 /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
 		26435AAD1A1EBDB600E117A0 /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
 		26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
 		26435AAF1A1EBDB600E117A0 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -272,8 +275,8 @@
 		26DE7FD01A2AFEC6007F4B16 /* blurImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurImg.png; sourceTree = "<group>"; };
 		26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCategoryViewController.h; sourceTree = "<group>"; };
 		26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCategoryViewController.m; sourceTree = "<group>"; };
-		26DE7FD61A2C009C007F4B16 /* AppViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewCell.m; sourceTree = "<group>"; };
-		26DE7FD71A2C009C007F4B16 /* AppViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewCell.h; sourceTree = "<group>"; };
+		26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemViewCell.m; sourceTree = "<group>"; };
+		26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemViewCell.h; sourceTree = "<group>"; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -624,6 +627,8 @@
 				26BE3AD61A173C3D009F37B4 /* DataTrans.h */,
 				26BE3AD01A17391E009F37B4 /* Entities */,
 				26BE3AAB1A170464009F37B4 /* mltshop.xcdatamodeld */,
+				261E24B61A31CB3700DA06A2 /* CategoryModel.h */,
+				261E24B71A31CB3700DA06A2 /* CategoryModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -650,8 +655,8 @@
 		26BE3A5E1A170421009F37B4 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				26DE7FD61A2C009C007F4B16 /* AppViewCell.m */,
-				26DE7FD71A2C009C007F4B16 /* AppViewCell.h */,
+				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
+				26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -981,6 +986,7 @@
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
+				261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */,
 				265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */,
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
@@ -998,7 +1004,7 @@
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
-				26DE7FD81A2C009C007F4B16 /* AppViewCell.m in Sources */,
+				26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */,
 				26BE3A9A1A170421009F37B4 /* README.md in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
 				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,

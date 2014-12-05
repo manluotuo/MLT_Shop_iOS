@@ -13,6 +13,7 @@
 #define API_SIGNIN_PATH             @"/ecmobile/?url=/user/signin"
 #define API_SIGNUP_PATH             @"/ecmobile/?url=/user/signup"
 
+#define API_CATEGORY_ALL            @"/category"
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
 #define API_UPDATE_VEHICLE_GALLERY  @"/gallery/update"
@@ -90,6 +91,8 @@
 
 // API/sign_up
 - (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password email:(NSString *)email andBlock:(void (^)(id responseObject, NSError *error))block;
+
+- (void)getCategoryAllWithBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/merchant/user/me

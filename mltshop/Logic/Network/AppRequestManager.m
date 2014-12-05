@@ -73,7 +73,7 @@ static dispatch_once_t onceToken;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 
-        _sharedManager = [[AppRequestManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost:8877"]];
+        _sharedManager = [[AppRequestManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost:8899"]];
     });
     
     return _sharedManager;
@@ -298,13 +298,13 @@ static dispatch_once_t onceToken;
 
 
 
-- (void)updateVehicleGalleryWithDict:(NSMutableDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block
+- (void)getCategoryAllWithBlock:(void (^)(id responseObject, NSError *error))block
 {
-    NSString *postURL = API_UPDATE_VEHICLE_GALLERY;
+    NSString *postURL = API_CATEGORY_ALL;
     
-    NSDictionary* postDict = [DataTrans makePostDict:dict];
+    NSDictionary* postDict = nil;
     
-    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [[AppRequestManager nodejsManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
             block(responseObject , nil);
         }

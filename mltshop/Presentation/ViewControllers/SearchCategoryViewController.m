@@ -7,7 +7,9 @@
 //
 
 #import "SearchCategoryViewController.h"
-#import "AppViewCell.h"
+#import "AppRequestManager.h"
+#import "CategoryModel.h"
+#import "CategoryItemViewCell.h"
 #import <HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     self.cateView.dataSource = self;
     [self.cateView setBackgroundColor:BGCOLOR];
     
-    [self.cateView registerClass:[AppViewCell class] forCellWithReuseIdentifier:@"appCell"];
+    [self.cateView registerClass:[CategoryItemViewCell class] forCellWithReuseIdentifier:@"appCell"];
     
     
     UIEdgeInsets currentInset = self.cateView.contentInset;
@@ -85,11 +87,12 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     
     self.dataSource = [[NSMutableArray alloc]init];
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 40)];
-    self.searchBar.placeholder = @"搜索（按姓名或电话）";
-    self.searchBar.barTintColor = UIColorFromRGB(0xdcf2e3);
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, CGRectGetWidth(self.view.frame), 40)];
+    self.searchBar.placeholder = @"搜索（商品名称）";
+    self.searchBar.barTintColor = ORANGECOLOR;
     [self.searchBar setImage:[UIImage imageNamed:@"search_btn"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     self.searchBar.delegate = self;
+    [self.view addSubview:self.searchBar];
 
 }
 
@@ -103,7 +106,6 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    self.cateView.y = 20;
     [self.searchBar setShowsCancelButton:YES animated:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self controlAccessoryView:0.5];// 显示遮盖层。
@@ -112,7 +114,6 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    self.cateView.y = IOS7_CONTENT_OFFSET_Y;
     [self.searchBar resignFirstResponder];
     [self.searchBar setShowsCancelButton:NO animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -132,19 +133,17 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (void)setupDataSource
 {
-    self.dataSource = @[
-                        @{@"name":@"name1",@"id":@"1"},
-                        @{@"name":@"name2",@"id":@"2"},
-                        @{@"name":@"name3",@"id":@"3"},
-                        @{@"name":@"name4",@"id":@"4"},
-                        @{@"name":@"name5",@"id":@"5"},
-                        @{@"name":@"name6",@"id":@"6"},
-                        @{@"name":@"name7",@"id":@"7"},
-                        @{@"name":@"name8",@"id":@"8"},
-                        @{@"name":@"name9",@"id":@"9"},
-                        @{@"name":@"name10",@"id":@"10"},
-                        ];
-    [self.cateView reloadData];
+    [[AppRequestManager sharedManager]getCategoryAllWithBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            for (int i = 0 ; i < [responseObject count]; i++) {
+                CategoryModel *model = [[CategoryModel alloc]initWithDict:responseObject[i]];
+                [self.dataSource addObject:model];
+            }
+
+            [self.cateView reloadData];
+        }
+    }];
+    
 }
 
 
@@ -188,11 +187,12 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == pickedSection) {
-        return CGSizeMake(200, 100);
+        return CGSizeMake(H_200, H_120);
     }else{
         return CGSizeMake(0, 0);
     }
 }
+
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -221,18 +221,17 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     
     NSUInteger index = indexPath.section * ITEM_PER_LINE + indexPath.row;
     
-    NSDictionary *cellData = [[NSDictionary alloc]init];
+    CategoryModel *cellData = [[CategoryModel alloc]init];
     if (index < [self.dataSource count]) {
         cellData = [self.dataSource objectAtIndex:index];
+        cellData.indexPath = indexPath;
     }
     
-    NSLog(@"index %i",index);
-    
-    AppViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier
+    CategoryItemViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier
                                                                   forIndexPath:indexPath];
     
     if (cell == nil) {
-        //        cell = [[AppViewCell alloc]initWithFrame:CGRectMake(0, 0, CELL_WIDTH,CELL_HEIGHT)];
+        //        cell = [[CategoryItemViewCell alloc]initWithFrame:CGRectMake(0, 0, CELL_WIDTH,CELL_HEIGHT)];
     }
     
     [cell setRowData:cellData];
@@ -249,9 +248,19 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         return;
     }
     
-    NSDictionary *cellData = [self.dataSource objectAtIndex:index];
     // open subcategory
+    for (int i = 0; i<[self.dataSource count]; i++) {
+        CategoryModel *cellData = self.dataSource[i];
+        if (i == index) {
+            cellData.isPicked = YES;
+        }else{
+            cellData.isPicked = NO;
+        }
+    }
+
+    
     pickedSection = indexPath.section;
+
     [self.cateView reloadData];
 }
 
