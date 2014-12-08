@@ -32,6 +32,8 @@
 		266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA8021A134A72000C2AAE /* AppDelegate.m */; };
 		266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80D1A134A72000C2AAE /* Images.xcassets */; };
 		266FA81D1A134A72000C2AAE /* mltshopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA81C1A134A72000C2AAE /* mltshopTests.m */; };
+		267B85EE1A360C170084DDEA /* ADBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 267B85ED1A360C170084DDEA /* ADBrandView.m */; };
+		267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 267B85F01A360D5F0084DDEA /* ADAreaView.m */; };
 		269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD8681A351B6600BF19B5 /* GoodsModel.m */; };
 		269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD86B1A3522CA00BF19B5 /* PhotoModel.m */; };
 		26BE3A611A170421009F37B4 /* Museo500-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26BE39E21A170421009F37B4 /* Museo500-Regular.otf */; };
@@ -158,6 +160,10 @@
 		266FA8161A134A72000C2AAE /* mltshopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mltshopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266FA81B1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA81C1A134A72000C2AAE /* mltshopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mltshopTests.m; sourceTree = "<group>"; };
+		267B85EC1A360C170084DDEA /* ADBrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBrandView.h; sourceTree = "<group>"; };
+		267B85ED1A360C170084DDEA /* ADBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBrandView.m; sourceTree = "<group>"; };
+		267B85EF1A360D5F0084DDEA /* ADAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAreaView.h; sourceTree = "<group>"; };
+		267B85F01A360D5F0084DDEA /* ADAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADAreaView.m; sourceTree = "<group>"; };
 		269FD8671A351B6600BF19B5 /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		269FD8681A351B6600BF19B5 /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
 		269FD86A1A3522CA00BF19B5 /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
@@ -414,6 +420,17 @@
 				266FA81B1A134A72000C2AAE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		267B85EB1A360BDF0084DDEA /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				267B85EC1A360C170084DDEA /* ADBrandView.h */,
+				267B85ED1A360C170084DDEA /* ADBrandView.m */,
+				267B85EF1A360D5F0084DDEA /* ADAreaView.h */,
+				267B85F01A360D5F0084DDEA /* ADAreaView.m */,
+			);
+			name = Template;
 			sourceTree = "<group>";
 		};
 		26BE39E01A170421009F37B4 /* Assets */ = {
@@ -692,6 +709,7 @@
 		26BE3A601A170421009F37B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				267B85EB1A360BDF0084DDEA /* Template */,
 				265BB8931A1CF1CC0040ACC0 /* NoDataView.m */,
 				265BB8941A1CF1CC0040ACC0 /* NoDataView.h */,
 				265BB8901A1CEFCF0040ACC0 /* RoundedAvatarButton.h */,
@@ -989,6 +1007,7 @@
 				26BE3A9F1A170421009F37B4 /* ViewPagerController.m in Sources */,
 				26BE3A8F1A170421009F37B4 /* NSDate+timesince.m in Sources */,
 				26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */,
+				267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */,
 				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
@@ -1001,6 +1020,7 @@
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
 				26BE3A921A170421009F37B4 /* NSObject+JSONWriting.m in Sources */,
+				267B85EE1A360C170084DDEA /* ADBrandView.m in Sources */,
 				26BE3AA81A170421009F37B4 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				26BE3AE61A197865009F37B4 /* MMNavigationController.m in Sources */,
 				265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */,

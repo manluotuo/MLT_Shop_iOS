@@ -266,6 +266,25 @@ static dispatch_once_t onceToken;
 }
 
 
+- (void)getHomeDataWithBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_HOME_DATA_PATH;
+    
+    NSDictionary* postDict = nil;
+    
+    [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if(responseObject != nil && block != nil) {
+            block(responseObject[@"data"] , nil);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block) {
+            block(nil , error);
+        }
+    }];
+}
+
+
 
 
 - (void)uploadPicture:(NSURL *)url resize:(CGSize)resize andBlock:(void (^)(id responseObject, NSError *error))block
@@ -364,9 +383,9 @@ static dispatch_once_t onceToken;
     
     NSDictionary* postDict = nil;
     
-    [[AppRequestManager nodejsManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
-            block(responseObject , nil);
+            block(responseObject[@"data"] , nil);
         }
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

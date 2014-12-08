@@ -55,6 +55,27 @@
 #pragma mark - goods delegate
 /////////////////////////////////////////////////////////
 
++ (NSDictionary *)parseDataFromURL:(NSString *)url
+{
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"id=([^&]+)" options:NSRegularExpressionCaseInsensitive error:nil];
+    NSArray *matches = [regex matchesInString:url options:0 range:NSMakeRange(0, url.length)];
+    NSTextCheckingResult *match = [matches objectAtIndex:0];
+    NSRange range = [match rangeAtIndex:1];
+    NSString *idString = [url substringWithRange:range];
+
+    
+    if ([url rangeOfString:@"brand"].location != NSNotFound) {
+        return @{@"type":@"brand", @"id": idString};
+    }else if([url rangeOfString:@"category"].location != NSNotFound){
+        return @{@"type":@"category", @"id": idString};
+    }else if([url rangeOfString:@"article"].location != NSNotFound){
+        return @{@"type":@"article", @"id": idString};
+    }else{
+        return @{@"type":@"url", @"id": url};
+    }
+        
+}
+
 
 
 /////////////////////////////////////////////////////////

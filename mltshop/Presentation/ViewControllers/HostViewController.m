@@ -183,7 +183,6 @@
     
     if (index == HOST_LOCAL_TAB) {
         ListMainViewController *listVC = [[ListMainViewController alloc]initWithNibName:nil bundle:nil];
-        listVC.delegateForHostView = self;
         return listVC;
     }else{
         ListOnlineViewController *listOnlineVC = [[ListOnlineViewController alloc]initWithNibName:nil bundle:nil];

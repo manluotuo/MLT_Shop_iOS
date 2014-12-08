@@ -13,6 +13,7 @@
 #import "CategoryItemViewCell.h"
 #import <HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 typedef NS_ENUM(NSInteger,recommendListType) {
     recommendContactList = 1,
@@ -219,6 +220,10 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 {
     return 1;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CELL_HEIGHT;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -230,7 +235,12 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
     cell.textLabel.text = cellData.goodsName;
+    cell.textLabel.font = FONT_12;
+    [cell.imageView setFrame:CGRectMake(0, 0, CELL_HEIGHT, CELL_HEIGHT)];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cellData.cover.thumb]
+                            placeholderImage:nil];
     return cell;
 }
 
@@ -241,7 +251,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == pickedSection) {
-        return CGSizeMake(H_200, H_120);
+        return CGSizeMake(H_200, H_150);
     }else{
         return CGSizeMake(0, 0);
     }

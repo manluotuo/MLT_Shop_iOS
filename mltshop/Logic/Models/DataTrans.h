@@ -21,7 +21,8 @@
 + (NSMutableArray *)getDataArrayWithExtendData:(id)jsonData;
 
 // Goods Info
-
+// nain info
++ (NSDictionary *)parseDataFromURL:(NSString *)url;
 
 //// Vehilce Info
 //+ (NSNumber *)getVehicleAccident:(id)jsonData;

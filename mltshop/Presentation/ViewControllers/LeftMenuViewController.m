@@ -455,7 +455,6 @@
         {
             [XAppDelegate showDrawerView];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
-
         }
             break;
         case LeftMenuSearch:
@@ -464,6 +463,14 @@
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [VC setupLeftMMButton];
             [self.mm_drawerController setCenterViewController:nav];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+
+        }
+            break;
+        case LeftMenuProfile:
+        {
+            ProfileViewController *VC = [[ProfileViewController alloc]init];
+            [self.mm_drawerController setCenterViewController:VC];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
 
         }

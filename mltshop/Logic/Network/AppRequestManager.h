@@ -13,10 +13,10 @@
 #define API_SIGNIN_PATH             @"/ecmobile/?url=/user/signin"
 #define API_SIGNUP_PATH             @"/ecmobile/?url=/user/signup"
 #define API_SEARCH_PATH             @"/ecmobile/?url=search"
+#define API_CATEGORY_ALL            @"/ecmobile/?url=/home/category"
+#define API_HOME_DATA_PATH          @"/ecmobile/?url=/home/data"
 
 
-
-#define API_CATEGORY_ALL            @"/category"
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
 #define API_UPDATE_VEHICLE_GALLERY  @"/gallery/update"
@@ -105,6 +105,9 @@
                       page:(NSInteger)page
                       size:(NSInteger)size
                   andBlock:(void (^)(id responseObject, NSError *error))block;
+
+// API/home/data
+- (void)getHomeDataWithBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/merchant/user/me

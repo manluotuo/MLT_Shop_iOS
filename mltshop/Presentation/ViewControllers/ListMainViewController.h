@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 manluotuo. All rights reserved.
 //
 
-#import "CommonListViewController.h"
+#import "MMViewController.h"
 
-@interface ListMainViewController : CommonListViewController
+@interface ListMainViewController : MMViewController
 
 @end

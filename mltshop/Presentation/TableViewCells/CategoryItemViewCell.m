@@ -65,7 +65,7 @@
     [self.layer setBorderWidth:0.5f];
     [self.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
     
-    self.subView = [[UIView alloc]initWithFrame:CGRectMake(0, CELL_HEIGHT, TOTAL_WIDTH, H_120)];
+    self.subView = [[UIView alloc]initWithFrame:CGRectMake(0, CELL_HEIGHT, TOTAL_WIDTH, H_150)];
     self.subView.backgroundColor = DARKCOLOR;
     [self.subView setHidden:YES];
     
@@ -113,7 +113,7 @@
 }
 
 #define VIEW_WIDTH  TOTAL_WIDTH/3
-#define VIEW_HEIGHT 40
+#define VIEW_HEIGHT 50
 #define X_OFFSET    0
 #define Y_OFFSET    0
 
@@ -121,7 +121,7 @@
 {
     CGFloat x = X_OFFSET * (index % preLine * 2 + 1) + VIEW_WIDTH * (index % preLine) ;
     CGFloat y = Y_OFFSET * (floor(index / preLine) * 2 + 1) + VIEW_HEIGHT * floor(index / preLine);
-    return  CGRectMake( x, y+10, VIEW_WIDTH, VIEW_HEIGHT);
+    return  CGRectMake( x, y, VIEW_WIDTH, VIEW_HEIGHT);
 }
 
 - (void)showSubBrand:(CategoryModel *)catData
