@@ -49,6 +49,14 @@
     
     return result;
 }
+
+
+/////////////////////////////////////////////////////////
+#pragma mark - goods delegate
+/////////////////////////////////////////////////////////
+
+
+
 /////////////////////////////////////////////////////////
 #pragma mark - me delegate
 /////////////////////////////////////////////////////////
@@ -467,7 +475,7 @@
         return [NSNumber numberWithBool:YES];
     }
 }
-+ (NSNumber *)noNullIntegerObj:(id)jsonData
++ (NSNumber *)noNullNumberObj:(id)jsonData
 {
     if (jsonData == nil){
         return [NSNumber numberWithInteger:0];
@@ -593,7 +601,7 @@
 + (NSNumber *)convertStringToNumberIfString:(id)obj
 {
     if ([obj isKindOfClass:[NSString class]]) {
-        return [NSNumber numberWithInteger:[obj integerValue]];
+        return [NSNumber numberWithFloat:[obj floatValue]];
     }
     return obj;
 }

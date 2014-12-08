@@ -57,8 +57,8 @@
         onlyMe.userId = [DataTrans noNullStringObj:user[@"id"]];
         onlyMe.username = [DataTrans noNullStringObj:user[@"name"]];
         onlyMe.rankName = [DataTrans noNullStringObj:user[@"rank_name"]];
-        onlyMe.rankLevel = [DataTrans noNullIntegerObj:user[@"rank_level"]];
-        onlyMe.collectionNum = [DataTrans noNullIntegerObj:user[@"collection_num"]];
+        onlyMe.rankLevel = [DataTrans noNullNumberObj:user[@"rank_level"]];
+        onlyMe.collectionNum = [DataTrans noNullNumberObj:user[@"collection_num"]];
         onlyMe.email = [DataTrans noNullStringObj:user[@"email"]];
         onlyMe.orderNum = [NSKeyedArchiver archivedDataWithRootObject:user[@"order_num"]];
     }

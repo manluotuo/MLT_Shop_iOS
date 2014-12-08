@@ -14,4 +14,6 @@
 
 -(void)contentSizeDidChange:(NSString*)size;
 
+- (void)setupLeftMMButton;
+- (void)setupRightMMButton;
 @end

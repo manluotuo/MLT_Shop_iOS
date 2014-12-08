@@ -14,12 +14,24 @@
 				{
 					"brandName":"龙猫",
 					"brandId":"3"
+				},
+				{
+					"brandName":"海贼王",
+					"brandId":"12"
+				},
+				{
+					"brandName":"EVA",
+					"brandId":"13"
+				},
+				{
+					"brandName":"罗小黑",
+					"brandId":"4"
 				}
 			]
 		},
 		{
-			"catName":"服饰鞋帽",
-			"catId":"4",
+			"catName":"毛绒玩具",
+			"catId":"7",
 			"subBrands":[
 				{
 					"brandName":"全部",
@@ -36,44 +48,8 @@
 			]
 		},
 				{
-			"catName":"服饰鞋帽",
-			"catId":"4",
-			"subBrands":[
-				{
-					"brandName":"全部",
-					"brandId":""
-				},
-				{
-					"brandName":"高达",
-					"brandId":"11"
-				},
-				{
-					"brandName":"龙猫",
-					"brandId":"3"
-				}
-			]
-		},
-		{
-			"catName":"服饰鞋帽",
-			"catId":"4",
-			"subBrands":[
-				{
-					"brandName":"全部",
-					"brandId":""
-				},
-				{
-					"brandName":"高达",
-					"brandId":"11"
-				},
-				{
-					"brandName":"龙猫",
-					"brandId":"3"
-				}
-			]
-		},
-				{
-			"catName":"服饰鞋帽",
-			"catId":"4",
+			"catName":"模型雕塑",
+			"catId":"3",
 			"subBrands":[
 				{
 					"brandName":"全部",
@@ -90,8 +66,8 @@
 			]
 		},
 		{
-			"catName":"服饰鞋帽",
-			"catId":"4",
+			"catName":"精品挂饰",
+			"catId":"6",
 			"subBrands":[
 				{
 					"brandName":"全部",
@@ -108,44 +84,8 @@
 			]
 		},
 				{
-			"catName":"服饰鞋帽",
-			"catId":"4",
-			"subBrands":[
-				{
-					"brandName":"全部",
-					"brandId":""
-				},
-				{
-					"brandName":"高达",
-					"brandId":"11"
-				},
-				{
-					"brandName":"龙猫",
-					"brandId":"3"
-				}
-			]
-		},
-		{
-			"catName":"服饰鞋帽",
-			"catId":"4",
-			"subBrands":[
-				{
-					"brandName":"全部",
-					"brandId":""
-				},
-				{
-					"brandName":"高达",
-					"brandId":"11"
-				},
-				{
-					"brandName":"龙猫",
-					"brandId":"3"
-				}
-			]
-		},
-				{
-			"catName":"服饰鞋帽",
-			"catId":"4",
+			"catName":"卡通箱包",
+			"catId":"9",
 			"subBrands":[
 				{
 					"brandName":"全部",
@@ -162,8 +102,8 @@
 			]
 		},
 		{
-			"catName":"服饰鞋帽",
-			"catId":"4",
+			"catName":"生活娱乐",
+			"catId":"2",
 			"subBrands":[
 				{
 					"brandName":"全部",
@@ -178,5 +118,23 @@
 					"brandId":"3"
 				}
 			]
-		}
+		},
+				{
+			"catName":"图书音像",
+			"catId":"5",
+			"subBrands":[
+				{
+					"brandName":"全部",
+					"brandId":""
+				},
+				{
+					"brandName":"高达",
+					"brandId":"11"
+				},
+				{
+					"brandName":"龙猫",
+					"brandId":"3"
+				}
+			]
+		}		
 	]

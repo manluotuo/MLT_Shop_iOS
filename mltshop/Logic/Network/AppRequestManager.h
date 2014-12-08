@@ -12,6 +12,9 @@
 #define API_SYSTEM_PATH             @"/mobile_app/system"
 #define API_SIGNIN_PATH             @"/ecmobile/?url=/user/signin"
 #define API_SIGNUP_PATH             @"/ecmobile/?url=/user/signup"
+#define API_SEARCH_PATH             @"/ecmobile/?url=search"
+
+
 
 #define API_CATEGORY_ALL            @"/category"
 #define API_UPLOAD_PICTURE          @"/upload/picture"
@@ -92,7 +95,16 @@
 // API/sign_up
 - (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password email:(NSString *)email andBlock:(void (^)(id responseObject, NSError *error))block;
 
+// API/category
 - (void)getCategoryAllWithBlock:(void (^)(id responseObject, NSError *error))block;
+
+// API/search
+- (void)searchWithKeywords:(NSString *)keywords
+                    cateId:(NSString *)cateId
+                   brandId:(NSString *)brandId
+                      page:(NSInteger)page
+                      size:(NSInteger)size
+                  andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/merchant/user/me

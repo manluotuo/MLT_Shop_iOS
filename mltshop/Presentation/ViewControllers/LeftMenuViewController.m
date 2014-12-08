@@ -352,16 +352,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    static NSString *CellIdentifier = @"LeftSettingCell";
     
-        static NSString *CellIdentifier = @"LeftSettingCell";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil) {
-            cell = [self tableViewCellWithReuseIdentifier:CellIdentifier];
-        }
-        [self configureCell:cell forIndexPath:indexPath];
-        return cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [self tableViewCellWithReuseIdentifier:CellIdentifier];
+    }
+    [self configureCell:cell forIndexPath:indexPath];
+    return cell;
 }
 
 
@@ -462,7 +461,9 @@
         case LeftMenuSearch:
         {
             SearchCategoryViewController *VC = [[SearchCategoryViewController alloc]init];
-            [self.mm_drawerController setCenterViewController:VC];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [VC setupLeftMMButton];
+            [self.mm_drawerController setCenterViewController:nav];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
 
         }

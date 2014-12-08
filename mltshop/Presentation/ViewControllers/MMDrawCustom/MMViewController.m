@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "PassValueDelegate.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "FAHoverButton.h"
 
 @interface MMViewController ()<PassValueDelegate>
 @end
@@ -38,9 +39,6 @@
     self.view.backgroundColor = BGCOLOR;
     
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-
-    
-//    [self setupRightMenuButton];
 }
 
 - (void)dealloc{
@@ -57,7 +55,19 @@
  *  left and rigt menu
  */
 
--(void)setupRightMenuButton{
+-(void)setupLeftMMButton{
+    FAHoverButton *leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
+    [leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
+    [leftDrawerAvatarButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
+    
+    [leftDrawerAvatarButton addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc]initWithCustomView:leftDrawerAvatarButton];
+    
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
+}
+
+-(void)setupRightMMButton{
     MMDrawerBarButtonItem * rightDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(rightDrawerButtonPress:)];
     [self.navigationItem setRightBarButtonItem:rightDrawerButton animated:YES];
 }

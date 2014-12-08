@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SearchCategoryViewController : UIViewController
+#import "MMViewController.h"
+@interface SearchCategoryViewController :MMViewController
 
 @end

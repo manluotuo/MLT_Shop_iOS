@@ -208,6 +208,66 @@ static dispatch_once_t onceToken;
 
 
 
+/**
+ *  API/guest/register
+ *  用户打开是只请求一次
+ *  @param block return {token, uid}
+ * {"filter":{"keywords":"","category_id":"4","price_range":"{PRICE_RANGE}","brand_id":"1","sort_by":"id_desc"},"pagination":{"page":"1","count":"100"}}
+ */
+
+
+- (void)searchWithKeywords:(NSString *)keywords
+                    cateId:(NSString *)cateId
+                   brandId:(NSString *)brandId
+                      page:(NSInteger)page
+                      size:(NSInteger)size
+                  andBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_SEARCH_PATH;
+    
+    NSDictionary *filter = @{@"keywords":[DataTrans noNullStringObj:keywords],
+                             @"price_range" :@"{PRICE_RANGE}",
+                             @"category_id": [DataTrans noNullStringObj:cateId],
+                             @"brand_id": [DataTrans noNullStringObj:brandId],
+                             @"sort_by":@"id_desc"};
+    
+    NSString *pageString = STR_INT(page);
+    NSString *sizeString = @"20";
+    
+    if (size > 0) {
+        sizeString = STR_INT(size);
+    }
+
+    NSDictionary *pagination = @{@"page":pageString,@"count":sizeString};
+
+    NSDictionary *postDict = @{@"filter" : filter,
+                               @"pagination": pagination};
+    
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        //
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        //
+        NSLog(@"%@ %@",postURL, error);
+        
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+}
+
+
+
+
 - (void)uploadPicture:(NSURL *)url resize:(CGSize)resize andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString* tmpFilename = [NSString stringWithFormat:@"%f", [NSDate timeIntervalSinceReferenceDate]];

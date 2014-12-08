@@ -9,6 +9,7 @@
 #import "SearchCategoryViewController.h"
 #import "AppRequestManager.h"
 #import "CategoryModel.h"
+#import "GoodsModel.h"
 #import "CategoryItemViewCell.h"
 #import <HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
@@ -22,7 +23,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 #define APP_ICON_TAG 100
 #define APP_NAME_TAG 101
 
-@interface SearchCategoryViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate>
+@interface SearchCategoryViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSInteger searchStart;
     NSInteger recommendType;
@@ -33,8 +34,9 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 @property(nonatomic, strong) UISearchBar *searchBar;
 @property(nonatomic, strong)UICollectionView *cateView;
 @property (nonatomic, strong) UIView *coverView;
-@property (nonatomic, strong) UITableView *searchTableView;
+@property (nonatomic, strong) UITableView *tableView;
 
+@property(nonatomic, strong)NSMutableArray *cateDataSource;
 @property(nonatomic, strong)NSMutableArray *dataSource;
 
 @end
@@ -42,8 +44,8 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 @implementation SearchCategoryViewController
 @synthesize searchBar;
 @synthesize cateView;
-@synthesize dataSource;
-@synthesize searchTableView;
+@synthesize cateDataSource,dataSource;
+@synthesize tableView;
 @synthesize coverView;
 
 - (void)viewDidLoad {
@@ -71,9 +73,9 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     // Manully set contentInset.
     if (OSVersionIsAtLeastiOS7()) {
         currentInset.top = self.navigationController.navigationBar.bounds.size.height;
-        self.automaticallyAdjustsScrollViewInsets = NO;
+//        self.automaticallyAdjustsScrollViewInsets = YES;
         // On iOS7, you need plus the height of status bar.
-        currentInset.top = IOS7_CONTENT_OFFSET_Y;
+        currentInset.top = H_40;
         self.cateView.height = self.cateView.height-TABBAR_HEIGHT;
         
         
@@ -81,19 +83,42 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         NSLog(@"ios 6");
         currentInset.bottom += TABBAR_HEIGHT;
     }
-    self.cateView.contentInset = currentInset;
     
+    self.cateView.contentInset = currentInset;
     [self.view addSubview:self.cateView];
     
-    self.dataSource = [[NSMutableArray alloc]init];
+    self.cateDataSource = [[NSMutableArray alloc]init];
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, CGRectGetWidth(self.view.frame), 40)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, IOS7_CONTENT_OFFSET_Y, CGRectGetWidth(self.view.frame), H_40)];
     self.searchBar.placeholder = @"搜索（商品名称）";
-    self.searchBar.barTintColor = ORANGECOLOR;
+    self.searchBar.barTintColor = GREENLIGHTCOLOR2;
     [self.searchBar setImage:[UIImage imageNamed:@"search_btn"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
+    
+    
+    [self initSearchTableView];
+}
 
+- (void)initSearchTableView
+{
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.backgroundColor = BGCOLOR;
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleGray;
+    self.tableView.separatorColor = SEPCOLOR;
+    
+    self.tableView.y = IOS7_CONTENT_OFFSET_Y+H_40;
+    self.tableView.height = self.tableView.frame.size.height - IOS7_CONTENT_OFFSET_Y+H_40;
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource  = self;
+    self.dataSource = [[NSMutableArray alloc]init];
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    [self.view addSubview:self.tableView];
+    [self.tableView setHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,12 +127,15 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     [self setupDataSource];
 }
 
+//////////////////////////////////////////////////
 #pragma mark -- UISearchBar delegate
+//////////////////////////////////////////////////
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
     [self.searchBar setShowsCancelButton:YES animated:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.cateView setHidden:YES];
     [self controlAccessoryView:0.5];// 显示遮盖层。
     return YES;
 }
@@ -116,7 +144,9 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 {
     [self.searchBar resignFirstResponder];
     [self.searchBar setShowsCancelButton:NO animated:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.cateView setHidden:NO];
+    [self.tableView setHidden:YES];
     [self controlAccessoryView:0];// 隐藏遮盖层。
 }
 
@@ -126,7 +156,8 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     [self.searchBar setShowsCancelButton:NO animated:YES];
     //  to do 搜索
     [self searchAndRefreshTableView];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.cateView setHidden:YES];
     [self controlAccessoryView:0];// 隐藏遮盖层。
 }
 
@@ -137,7 +168,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         if (responseObject != nil) {
             for (int i = 0 ; i < [responseObject count]; i++) {
                 CategoryModel *model = [[CategoryModel alloc]initWithDict:responseObject[i]];
-                [self.dataSource addObject:model];
+                [self.cateDataSource addObject:model];
             }
 
             [self.cateView reloadData];
@@ -148,24 +179,20 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 
 - (void)searchAndRefreshTableView{
-    searchStart = 0;
-//    [[AppRequestManager sharedManager] searchContactWithUserId:XAppDelegate.me.userId searchString:self.searchBar.text andPage:searchStart andSize:DEFAULT_PAGE_SIZE andBlock:^(id responseObject, NSError *error) {
-//        if (ArrayHasValue(responseObject[@"items"])) {
-//            
-//            NSArray *items = responseObject[@"items"];
-//            NSMutableArray *contactArray = [[NSMutableArray alloc]init];
-//            
-//            for (NSDictionary *dict in items) {
-//                CustomerModel *model = [[CustomerModel alloc]initWithDict:dict];
-//                [contactArray addObject:model];
-//            }
-//            
-//            searchStart += 1;
-//            
-//            [self showSetupDataSource:contactArray andError:nil];
-//        }
-//    }];
-    recommendType = recommendSearchResultList;
+    searchStart = 1;
+    [[AppRequestManager sharedManager]searchWithKeywords:self.searchBar.text cateId:nil brandId:nil page:searchStart size:100 andBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            self.dataSource = [[NSMutableArray alloc]init];
+            for (int i = 0 ; i < [responseObject count]; i++) {
+                GoodsModel *model = [[GoodsModel alloc]initWithDict:responseObject[i]];
+                [self.dataSource addObject:model];
+            }
+            [self.tableView setHidden:NO];
+            [self.cateView setHidden:YES];
+            [self.tableView reloadData];
+        }
+
+    }];
 }
 
 
@@ -178,6 +205,33 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     }completion:^(BOOL finished){
         
     }];
+}
+
+//////////////////////////////////////////////////
+#pragma mark -- UITableView delegate
+//////////////////////////////////////////////////
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dataSource count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"SearchTableView";
+    GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.textLabel.text = cellData.goodsName;
+    return cell;
 }
 
 
@@ -196,7 +250,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    NSUInteger _count = [self.dataSource count];
+    NSUInteger _count = [self.cateDataSource count];
     if ( (_count % ITEM_PER_LINE) == 0) {
         return _count / ITEM_PER_LINE;
     }else{
@@ -222,8 +276,8 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     NSUInteger index = indexPath.section * ITEM_PER_LINE + indexPath.row;
     
     CategoryModel *cellData = [[CategoryModel alloc]init];
-    if (index < [self.dataSource count]) {
-        cellData = [self.dataSource objectAtIndex:index];
+    if (index < [self.cateDataSource count]) {
+        cellData = [self.cateDataSource objectAtIndex:index];
         cellData.indexPath = indexPath;
     }
     
@@ -244,13 +298,13 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 {
     // select someone
     NSUInteger index = indexPath.section * ITEM_PER_LINE + indexPath.row;
-    if ( index >= [self.dataSource count]) {
+    if ( index >= [self.cateDataSource count]) {
         return;
     }
     
     // open subcategory
-    for (int i = 0; i<[self.dataSource count]; i++) {
-        CategoryModel *cellData = self.dataSource[i];
+    for (int i = 0; i<[self.cateDataSource count]; i++) {
+        CategoryModel *cellData = self.cateDataSource[i];
         if (i == index) {
             cellData.isPicked = YES;
         }else{

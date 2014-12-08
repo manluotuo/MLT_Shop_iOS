@@ -32,6 +32,8 @@
 		266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA8021A134A72000C2AAE /* AppDelegate.m */; };
 		266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80D1A134A72000C2AAE /* Images.xcassets */; };
 		266FA81D1A134A72000C2AAE /* mltshopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA81C1A134A72000C2AAE /* mltshopTests.m */; };
+		269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD8681A351B6600BF19B5 /* GoodsModel.m */; };
+		269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD86B1A3522CA00BF19B5 /* PhotoModel.m */; };
 		26BE3A611A170421009F37B4 /* Museo500-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26BE39E21A170421009F37B4 /* Museo500-Regular.otf */; };
 		26BE3A7E1A170421009F37B4 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE3A031A170421009F37B4 /* email@2x.png */; };
 		26BE3A7F1A170421009F37B4 /* email_share_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE3A041A170421009F37B4 /* email_share_ico.png */; };
@@ -156,6 +158,10 @@
 		266FA8161A134A72000C2AAE /* mltshopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mltshopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266FA81B1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA81C1A134A72000C2AAE /* mltshopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mltshopTests.m; sourceTree = "<group>"; };
+		269FD8671A351B6600BF19B5 /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
+		269FD8681A351B6600BF19B5 /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		269FD86A1A3522CA00BF19B5 /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
+		269FD86B1A3522CA00BF19B5 /* PhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
 		26BE39E21A170421009F37B4 /* Museo500-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Museo500-Regular.otf"; sourceTree = "<group>"; };
 		26BE3A031A170421009F37B4 /* email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email@2x.png"; sourceTree = "<group>"; };
 		26BE3A041A170421009F37B4 /* email_share_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_share_ico.png; sourceTree = "<group>"; };
@@ -629,6 +635,10 @@
 				26BE3AAB1A170464009F37B4 /* mltshop.xcdatamodeld */,
 				261E24B61A31CB3700DA06A2 /* CategoryModel.h */,
 				261E24B71A31CB3700DA06A2 /* CategoryModel.m */,
+				269FD8671A351B6600BF19B5 /* GoodsModel.h */,
+				269FD8681A351B6600BF19B5 /* GoodsModel.m */,
+				269FD86A1A3522CA00BF19B5 /* PhotoModel.h */,
+				269FD86B1A3522CA00BF19B5 /* PhotoModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1001,6 +1011,7 @@
 				265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */,
 				26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */,
 				26BE3AA01A170421009F37B4 /* SGActionView.m in Sources */,
+				269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */,
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
@@ -1017,6 +1028,7 @@
 				26BE3AC11A173739009F37B4 /* FAIconButton.m in Sources */,
 				26BE3AA41A170421009F37B4 /* SGMultiMenu.m in Sources */,
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
+				269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
 				265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */,
 				26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */,

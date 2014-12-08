@@ -20,6 +20,9 @@
 + (NSMutableArray *)getDataArray:(id)jsonData withVehicleMode:(NSInteger)VehicleMode;
 + (NSMutableArray *)getDataArrayWithExtendData:(id)jsonData;
 
+// Goods Info
+
+
 //// Vehilce Info
 //+ (NSNumber *)getVehicleAccident:(id)jsonData;
 //+ (NSNumber *)getVehicleMaintenance:(id)jsonData;
@@ -98,7 +101,7 @@
 + (NSString *)noNullStringObj:(id)jsonData;
 + (NSString *)noNullDataObj:(id)jsonData;
 + (NSNumber *)noNullBoolObj:(id)jsonData;
-+ (NSNumber *)noNullIntegerObj:(id)jsonData;
++ (NSNumber *)noNullNumberObj:(id)jsonData;
 + (NSDate *)noNullDateObj:(id)jsonData;
 
 // 根据初登日期自动计算年检时间
