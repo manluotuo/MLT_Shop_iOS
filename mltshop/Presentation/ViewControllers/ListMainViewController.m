@@ -12,16 +12,17 @@
 #import "ADAreaView.h"
 #import "ADBrandView.h"
 #import "YWDictionary.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
-@interface ListMainViewController ()
+@interface ListMainViewController ()<UIScrollViewDelegate>
 @property(nonatomic, strong)YWDictionary *fixedData;
-@property(nonatomic, strong)UIView *fixedView;
+@property(nonatomic, strong)UIScrollView *fixedView;
 
 @end
 
-#define SLIDE_FIX_HEIGHT H_160
-#define BRAND_FIX_HEIGHT H_60 //1行3个品牌的高度
-#define AREA_FIX_HEIGHT H_160 //1行一个布局
+#define SLIDE_FIX_HEIGHT    138.0
+#define BRAND_FIX_HEIGHT    H_60 //1行3个品牌的高度
+#define AREA_FIX_HEIGHT     H_160 //1行一个布局
 @implementation ListMainViewController
 
 - (void)viewDidLoad {
@@ -60,20 +61,46 @@
 - (void)buildFixedView
 {
     CGFloat fixedHeight = 0.0f;
-    self.fixedView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_100)];
+    self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
     
     for (NSString *key in [self.fixedData allKeys]) {
         
         NSArray *listData = [self.fixedData objectForKey:key];
         
+        // 滚动广告屏
         if ([key isEqualToString:@"player"]) {
-            CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
-            GCPagedScrollView *pagedView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
+            CGFloat playerY = fixedHeight;
+            CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
+            GCPagedScrollView *pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
+            
+            pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+            pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
+            pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
+            pagedScrollView.maximumZoomScale = 3.0; //最大到3倍
+            pagedScrollView.clipsToBounds = YES;
+            pagedScrollView.scrollEnabled = YES;
+            pagedScrollView.pagingEnabled = YES;
+            pagedScrollView.delegate = self;
+            [pagedScrollView removeAllContentSubviews];
+            
+            CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
+            for (int i = 0 ; i < [listData count]; i++) {
+                // last one
+                UIImageView *page = [[UIImageView alloc]
+                                     initWithFrame:scrollFrame];
+                [page setContentMode:UIViewContentModeScaleAspectFill];
+                
+                [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
+                [pagedScrollView addContentSubview:page];
+            }
+            
 
             // list data foreach add page
-            [self.fixedView addSubview:pagedView];
+            [self.fixedView addSubview:pagedScrollView];
             fixedHeight += SLIDE_FIX_HEIGHT;
-        }else if([key isEqualToString:@"brand"]){
+        }
+        //品牌分类
+        else if([key isEqualToString:@"brand"]){
             NSInteger lines = floor(listData.count / 3);
             CGFloat brandHeight = BRAND_FIX_HEIGHT * lines;
             CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, brandHeight);
@@ -82,7 +109,9 @@
             [self.fixedView addSubview:brandView];
             fixedHeight += brandHeight;
             
-        }else if([key isEqualToString:@"area"]){
+        }
+        //区域信息
+        else if([key isEqualToString:@"area"]){
             for (NSDictionary *oneArea in listData) {
                 CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, AREA_FIX_HEIGHT);
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
@@ -96,9 +125,8 @@
         }
     }
     
-    self.fixedView.height = fixedHeight;
-    
-    
+    [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
+    [self.view addSubview:self.fixedView];
 }
 
 
