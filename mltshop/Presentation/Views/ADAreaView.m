@@ -53,7 +53,40 @@
         
     }else if ([oneArea[@"template"] isEqualToString:@"L2R1"]){
         
+        ADAreaOneHeightView *rightView = [[ADAreaOneHeightView alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, TOTAL_WIDTH/2, AREA_FIX_HEIGHT)];
+        [rightView initWithItemData:self.items[2]];
+        
+        ADAreaHalfHeightView *leftView1 = [[ADAreaHalfHeightView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/2, AREA_FIX_HEIGHT/2)];
+        [leftView1 initWithItemData:self.items[0] andPositon:@"top"];
+        
+        ADAreaHalfHeightView *leftView2 = [[ADAreaHalfHeightView alloc]initWithFrame:CGRectMake(0, AREA_FIX_HEIGHT/2, TOTAL_WIDTH/2, AREA_FIX_HEIGHT/2)];
+        [leftView2 initWithItemData:self.items[1] andPositon:@"bottom"];
+        
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, 1, AREA_FIX_HEIGHT)];
+        lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
+        
+        [self addSubview:leftView1];
+        [self addSubview:leftView2];
+        [self addSubview:rightView];
+        [self addSubview:lineView1];
+        
+        
     }else if ([oneArea[@"template"] isEqualToString:@"L1R1"]){
+        ADAreaOneHeightView *leftView = [[ADAreaOneHeightView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/2, AREA_FIX_HEIGHT)];
+        [leftView initWithItemData:self.items[0]];
+        
+
+        ADAreaOneHeightView *rightView = [[ADAreaOneHeightView alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, TOTAL_WIDTH/2, AREA_FIX_HEIGHT)];
+        [rightView initWithItemData:self.items[0]];
+
+        
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, 1, AREA_FIX_HEIGHT)];
+        lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
+        
+        [self addSubview:leftView];
+        [self addSubview:rightView];
+        [self addSubview:lineView1];
+
         
     }else{
         // 同上

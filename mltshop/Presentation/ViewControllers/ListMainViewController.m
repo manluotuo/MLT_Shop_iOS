@@ -58,7 +58,7 @@
 - (void)buildFixedView
 {
     CGFloat fixedHeight = 0.0f;
-    self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
+    self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, self.view.frame.size.height)];
     
     for (NSString *key in [self.fixedData allKeys]) {
         
@@ -114,7 +114,7 @@
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
                 [areaView initWithData:oneArea];
                 [self.fixedView addSubview:areaView];
-                fixedHeight += AREA_FIX_HEIGHT;
+                fixedHeight += AREA_FIX_HEIGHT-1;
             }
             
         }else{
