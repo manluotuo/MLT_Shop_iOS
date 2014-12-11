@@ -8,7 +8,7 @@
 
 #import "HostViewController.h"
 #import "ListMainViewController.h"
-#import "ListOnlineViewController.h"
+#import "ListViewController.h"
 #import "ColorNavigationController.h"
 #import "AppRequestManager.h"
 #import "PassValueDelegate.h"
@@ -185,7 +185,7 @@
         ListMainViewController *listVC = [[ListMainViewController alloc]initWithNibName:nil bundle:nil];
         return listVC;
     }else{
-        ListOnlineViewController *listOnlineVC = [[ListOnlineViewController alloc]initWithNibName:nil bundle:nil];
+        ListViewController *listOnlineVC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
         listOnlineVC.categoryId = rowData[@"catId"];
         listOnlineVC.delegateForHostView = self;
         return listOnlineVC;

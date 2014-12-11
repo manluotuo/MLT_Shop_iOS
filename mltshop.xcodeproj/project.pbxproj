@@ -22,7 +22,7 @@
 		26435ACF1A20CA7900E117A0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435ACD1A20CA7900E117A0 /* Default@2x.png */; };
 		26435AD01A20CA7900E117A0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */; };
 		265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8841A1CE8020040ACC0 /* CommonListViewController.m */; };
-		265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */; };
+		265BB8881A1CE8D90040ACC0 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListViewController.m */; };
 		265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */; };
 		265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88E1A1CEA180040ACC0 /* ModelHelper.m */; };
 		265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8911A1CEFCF0040ACC0 /* RoundedAvatarButton.m */; };
@@ -139,8 +139,8 @@
 		26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		265BB8831A1CE8020040ACC0 /* CommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonListViewController.h; sourceTree = "<group>"; };
 		265BB8841A1CE8020040ACC0 /* CommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonListViewController.m; sourceTree = "<group>"; };
-		265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOnlineViewController.m; sourceTree = "<group>"; };
-		265BB8871A1CE8D90040ACC0 /* ListOnlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOnlineViewController.h; sourceTree = "<group>"; };
+		265BB8861A1CE8D90040ACC0 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		265BB8871A1CE8D90040ACC0 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		265BB8891A1CE96B0040ACC0 /* ListMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListMainViewController.h; sourceTree = "<group>"; };
 		265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListMainViewController.m; sourceTree = "<group>"; };
 		265BB88D1A1CEA180040ACC0 /* ModelHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelHelper.h; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 		265BB88C1A1CE9740040ACC0 /* ListVC */ = {
 			isa = PBXGroup;
 			children = (
-				265BB8861A1CE8D90040ACC0 /* ListOnlineViewController.m */,
-				265BB8871A1CE8D90040ACC0 /* ListOnlineViewController.h */,
+				265BB8871A1CE8D90040ACC0 /* ListViewController.h */,
+				265BB8861A1CE8D90040ACC0 /* ListViewController.m */,
 				265BB8831A1CE8020040ACC0 /* CommonListViewController.h */,
 				265BB8841A1CE8020040ACC0 /* CommonListViewController.m */,
 				265BB8891A1CE96B0040ACC0 /* ListMainViewController.h */,
@@ -1016,7 +1016,7 @@
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
 				261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */,
-				265BB8881A1CE8D90040ACC0 /* ListOnlineViewController.m in Sources */,
+				265BB8881A1CE8D90040ACC0 /* ListViewController.m in Sources */,
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
 				26BE3A921A170421009F37B4 /* NSObject+JSONWriting.m in Sources */,

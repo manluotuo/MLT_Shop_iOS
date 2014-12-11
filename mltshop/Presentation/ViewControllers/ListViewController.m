@@ -1,21 +1,21 @@
 //
-//  ListOnlineViewController.m
+//  ListViewController.m
 //  merchant
 //
 //  Created by mactive.meng on 13/6/14.
 //  Copyright (c) 2014 kkche. All rights reserved.
 //
 
-#import "ListOnlineViewController.h"
+#import "ListViewController.h"
 #import "AppRequestManager.h"
 #import "SGActionView.h"
 #import "ColorNavigationController.h"
 
-@interface ListOnlineViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
+@interface ListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
 @end
 
-@implementation ListOnlineViewController
+@implementation ListViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

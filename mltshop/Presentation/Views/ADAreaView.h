@@ -13,3 +13,16 @@
 - (void)initWithData:(NSDictionary *)oneArea;
 
 @end
+
+
+@interface ADAreaOneHeightView : UIButton
+
+- (void)initWithItemData:(NSDictionary *)item;
+
+@end
+
+@interface ADAreaHalfHeightView : UIButton
+
+- (void)initWithItemData:(NSDictionary *)item andPositon:(NSString *)position;
+
+@end

@@ -1,5 +1,5 @@
 //
-//  ListOnlineViewController.h
+//  ListViewController.h
 //  merchant
 //
 //  Created by mactive.meng on 13/6/14.
@@ -8,7 +8,7 @@
 
 #import "CommonListViewController.h"
 
-@interface ListOnlineViewController : CommonListViewController
+@interface ListViewController : CommonListViewController
 
 @property(nonatomic, strong)NSNumber *categoryId;
 

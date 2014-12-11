@@ -23,6 +23,8 @@
 // Goods Info
 // nain info
 + (NSDictionary *)parseDataFromURL:(NSString *)url;
++ (CGRect)calcRect:(NSInteger)index preLine:(NSInteger)preLine withRect:(CGRect)rect;
+
 
 //// Vehilce Info
 //+ (NSNumber *)getVehicleAccident:(id)jsonData;

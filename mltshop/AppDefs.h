@@ -29,6 +29,15 @@
 #endif
 
 
+//////////////////////////////////////
+// rect line //
+#define SLIDE_FIX_HEIGHT    138.0
+#define BRAND_FIX_HEIGHT    H_60 //1行3个品牌的高度
+#define AREA_FIX_HEIGHT     170.0f //1行一个布局
+#define SEP_HEIGHT          5.0f
+
+
+
 
 #define HTTP_200        200
 #define HTTP_400        400
@@ -77,7 +86,7 @@
 #define FAKE_SHARE_IMAGE    [UIImage imageNamed:@"avatar.png"]
 #define APP_ICON            [UIImage imageNamed:@"Icon.png"]
 #define GALLERY_COVER       @"GALLERY_COVER"
-
+#define PLACEHOLDERIMAGE    [UIImage imageNamed:@"placeHolder"]
 
 
 #define M_APPLEID @"802771888"
@@ -271,6 +280,7 @@
 #define H_45   45.0f
 #define H_50   50.0f
 #define H_52   52.0f
+#define H_55   55.0f
 #define H_56   56.0f
 #define H_60   60.0f
 #define H_70   70.0f
@@ -279,6 +289,7 @@
 #define H_100  100.0f
 #define H_110  110.0f
 #define H_120  120.0f
+#define H_130  130.0f
 #define H_140  140.0f
 #define H_150  150.0f
 #define H_160  160.0f

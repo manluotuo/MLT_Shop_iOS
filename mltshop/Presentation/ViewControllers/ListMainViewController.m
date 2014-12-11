@@ -20,9 +20,6 @@
 
 @end
 
-#define SLIDE_FIX_HEIGHT    138.0
-#define BRAND_FIX_HEIGHT    H_60 //1行3个品牌的高度
-#define AREA_FIX_HEIGHT     H_160 //1行一个布局
 @implementation ListMainViewController
 
 - (void)viewDidLoad {
@@ -103,7 +100,7 @@
         else if([key isEqualToString:@"brand"]){
             NSInteger lines = floor(listData.count / 3);
             CGFloat brandHeight = BRAND_FIX_HEIGHT * lines;
-            CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, brandHeight);
+            CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT, TOTAL_WIDTH, brandHeight);
             ADBrandView *brandView = [[ADBrandView alloc]initWithFrame:rect];
             [brandView initWithData:listData];
             [self.fixedView addSubview:brandView];
@@ -113,7 +110,7 @@
         //区域信息
         else if([key isEqualToString:@"area"]){
             for (NSDictionary *oneArea in listData) {
-                CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, AREA_FIX_HEIGHT);
+                CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT*2, TOTAL_WIDTH, AREA_FIX_HEIGHT);
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
                 [areaView initWithData:oneArea];
                 [self.fixedView addSubview:areaView];
