@@ -8,6 +8,7 @@
 
 #import "CommonListViewController.h"
 #import "GoodsOneTableViewCell.h"
+#import "GoodsTwoTableViewCell.h"
 #import "SVPullToRefresh.h"
 #import "AppRequestManager.h"
 #import <MMDrawerController/MMDrawerBarButtonItem.h>
@@ -351,7 +352,11 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return GOODS_CELL_HEIGHT;
+    if (self.dataSourceType == ListDataSourceTwoInLine){
+        return GOODS_CELL_HEIGHT + H_30;
+    }else{
+        return GOODS_CELL_HEIGHT;
+    }
 }
 
 #pragma mark -
@@ -369,19 +374,19 @@
 {
     static NSString *identifier = @"ListCell";
 
-    
-//    if (self.dataSourceType == ListDataSourceTwoInLine) {
-//        HistoryModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
-//        HistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//        
-//        if (cell == nil) {
-//            cell = [[HistoryTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//            cell.passDelegate = self;
-//        }
-//        [cell setNewData:cellData];
-//        return cell;
-//    }
-    if(self.dataSourceType == ListDataSourceOneInLine){
+    if (self.dataSourceType == ListDataSourceTwoInLine) {
+        NSDictionary *cellData = [self.dataSource objectAtIndex:indexPath.row];
+        GoodsTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil) {
+            cell = [[GoodsTwoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.passDelegate = self;
+        }
+        [cell setNewData:cellData];
+        
+        return cell;
+    }
+    else if(self.dataSourceType == ListDataSourceOneInLine){
         GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
         cellData.indexPath = INT(indexPath.row);
         GoodsOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];

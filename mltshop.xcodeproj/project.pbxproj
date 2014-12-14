@@ -30,6 +30,7 @@
 		265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8911A1CEFCF0040ACC0 /* RoundedAvatarButton.m */; };
 		265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8931A1CF1CC0040ACC0 /* NoDataView.m */; };
 		265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8981A1CF4B50040ACC0 /* YWDictionary.m */; };
+		266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */; };
 		266FA8001A134A72000C2AAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA7FF1A134A72000C2AAE /* main.m */; };
 		266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA8021A134A72000C2AAE /* AppDelegate.m */; };
 		266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80D1A134A72000C2AAE /* Images.xcassets */; };
@@ -157,6 +158,8 @@
 		265BB8941A1CF1CC0040ACC0 /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
 		265BB8971A1CF4B50040ACC0 /* YWDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWDictionary.h; sourceTree = "<group>"; };
 		265BB8981A1CF4B50040ACC0 /* YWDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWDictionary.m; sourceTree = "<group>"; };
+		266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsTwoTableViewCell.m; sourceTree = "<group>"; };
+		266B7E171A3D67D20001835F /* GoodsTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsTwoTableViewCell.h; sourceTree = "<group>"; };
 		266FA7FA1A134A72000C2AAE /* mltshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mltshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		266FA7FE1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA7FF1A134A72000C2AAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -690,6 +693,8 @@
 		26BE3A5E1A170421009F37B4 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				266B7E171A3D67D20001835F /* GoodsTwoTableViewCell.h */,
+				266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */,
 				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
 				26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */,
 				2658A8FC1A3D24D500D9C011 /* GoodsOneTableViewCell.h */,
@@ -1067,6 +1072,7 @@
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
+				266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
 				26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */,

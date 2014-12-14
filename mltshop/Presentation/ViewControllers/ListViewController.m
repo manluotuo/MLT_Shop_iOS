@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.commonListDelegate = self;
-    self.dataSourceType = ListDataSourceOneInLine;
+    self.dataSourceType = ListDataSourceTwoInLine;
 
     [self initDataSource];
     
@@ -60,7 +60,7 @@
 ////////////////////////////////////////////////////////////
 
 /**
- *  初始化文章
+ *  初始化文章 two goods one line
  */
 - (void)setupDataSource {
     
@@ -75,16 +75,18 @@
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSMutableArray *goodsArray = [[NSMutableArray alloc]init];
-            
-            for (id jsonData in responseObject) {
-                GoodsModel *cellData = [[GoodsModel alloc]initWithDict:jsonData];
-                //                Vehicle * cellData = [DataTrans vehilceFromDict:jsonData];
-                [goodsArray addObject:cellData];
+            double countDouble = ceil([responseObject count]/2);
+            NSUInteger count = [[NSNumber numberWithDouble:countDouble] integerValue];
+            for (int i = 0 ; i < count; i++) {
+                NSDictionary *oneDict = @{@"left":[[GoodsModel alloc]initWithDict:responseObject[i]],
+                                          @"right":[[GoodsModel alloc]initWithDict:responseObject[i+1]]
+                                          };
+                [goodsArray addObject:oneDict];
             }
             NSLog(@"Online setupDataSource ======== ");
             [self showSetupDataSource:goodsArray andError:nil];
             self.start = self.start + 1;
-            NSLog(@"start %d",self.start);
+            NSLog(@"start %ld",(long)self.start);
         }
         if (error != nil) {
             [DataTrans showWariningTitle:T(@"获取商品列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
@@ -92,6 +94,40 @@
 
     }];
 }
+
+/**
+ *  one goods one line
+ */
+//- (void)setupDataSource {
+//    
+//    self.start = 0;
+//    
+//    [[AppRequestManager sharedManager]searchWithKeywords:self.search.keywords
+//                                                  cateId:self.search.catId
+//                                                 brandId:self.search.brandId
+//                                                    page:self.start
+//                                                    size:20
+//                                                andBlock:^(id responseObject, NSError *error) {
+//                                                    if (responseObject != nil) {
+//                                                        // 集中处理所有的数据
+//                                                        NSMutableArray *goodsArray = [[NSMutableArray alloc]init];
+//                                                        
+//                                                        for (id jsonData in responseObject) {
+//                                                            GoodsModel *cellData = [[GoodsModel alloc]initWithDict:jsonData];
+//                                                            //                Vehicle * cellData = [DataTrans vehilceFromDict:jsonData];
+//                                                            [goodsArray addObject:cellData];
+//                                                        }
+//                                                        NSLog(@"Online setupDataSource ======== ");
+//                                                        [self showSetupDataSource:goodsArray andError:nil];
+//                                                        self.start = self.start + 1;
+//                                                        NSLog(@"start %d",self.start);
+//                                                    }
+//                                                    if (error != nil) {
+//                                                        [DataTrans showWariningTitle:T(@"获取商品列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
+//                                                    }
+//                                                    
+//                                                }];
+//}
 
 /**
  *  推荐新的文章

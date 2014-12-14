@@ -13,8 +13,9 @@
 
 typedef NS_ENUM(NSInteger,ListDataSourceType)
 {
-    ListDataSourceTwoInLine    = 0,    // 一行两辆车
-    ListDataSourceOneInLine    = 1,    // 一行一辆车
+    ListDataSourceMixInLine    = 0,    // 一行两辆车
+    ListDataSourceTwoInLine    = 1,    // 一行两辆车
+    ListDataSourceOneInLine    = 2,    // 一行一辆车
 };
 
 
