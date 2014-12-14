@@ -12,6 +12,7 @@
 @interface GoodsOneTableViewCell(){
     UIImageView *goodsImg;
     UILabel *titleLabel;
+    UILabel *briefLabel;
     UILabel *priceLabel;
 }
 
@@ -40,19 +41,27 @@
     
     titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_150, H_25, H_150, H_20)];
     [titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [titleLabel setTextColor:GRAYCOLOR];
+    [titleLabel setTextColor:DARKCOLOR];
     [titleLabel setTextAlignment:NSTextAlignmentLeft];
     titleLabel.numberOfLines = 0;
+    
+    briefLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_150, H_60, H_150, H_20)];
+    [briefLabel setFont:FONT_12];
+    [briefLabel setTextColor:GRAYCOLOR];
+    [briefLabel setTextAlignment:NSTextAlignmentLeft];
+    briefLabel.numberOfLines = 0;
+    
 
-    priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_150, H_60, TOTAL_WIDTH/2, H_20)];
+    priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_150, H_80, TOTAL_WIDTH/2, H_20)];
     [priceLabel setFont:LITTLECUSTOMFONT];
-    [priceLabel setTextColor:GRAYLIGHTCOLOR];
+    [priceLabel setTextColor:REDCOLOR];
     [priceLabel setTextAlignment:NSTextAlignmentLeft];
     
     
     
     [self addSubview:goodsImg];
     [self addSubview:titleLabel];
+    [self addSubview:briefLabel];
     [self addSubview:priceLabel];
     
     
@@ -74,15 +83,17 @@
 - (void)setup:(GoodsModel *)theGoods
 {
     CGSize titleSize = [(NSString *)theGoods.goodsName sizeWithWidth:H_150 andFont:FONT_14];
+    CGSize briefSize = [(NSString *)theGoods.goodsBrief sizeWithWidth:H_150 andFont:FONT_12];
     titleLabel.height = titleSize.height;
-    priceLabel.y = H_25 + titleSize.height;
+    briefLabel.height = briefSize.height;
+    briefLabel.y = H_25 + titleSize.height;
+    priceLabel.y = H_25 + titleSize.height + briefSize.height;
     
     [goodsImg sd_setImageWithURL:[NSURL URLWithString:theGoods.cover.thumb] placeholderImage:PLACEHOLDERIMAGE];
     [titleLabel setText:theGoods.goodsName];
+    [briefLabel setText:theGoods.goodsBrief];
     [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@"元"]];
     
-    
-
 }
 
 

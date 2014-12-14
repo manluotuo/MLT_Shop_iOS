@@ -15,6 +15,7 @@
     if (DictionaryHasValue(dict)) {
         _goodsId = [dict objectForKey:@"goods_id"];
         _goodsName = [dict objectForKey:@"goods_name"];
+        _goodsBrief = [dict objectForKey:@"goods_brief"];
         _marketPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];
         _shopPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"shop_price"]];
         _promotePrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];

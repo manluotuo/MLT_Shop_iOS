@@ -13,6 +13,7 @@
 
 @property(nonatomic, strong)NSString *goodsId;
 @property(nonatomic, strong)NSString *goodsName;
+@property(nonatomic, strong)NSString *goodsBrief;
 @property(nonatomic, strong)NSNumber *marketPrice;
 @property(nonatomic, strong)NSNumber *shopPrice;
 @property(nonatomic, strong)NSNumber *promotePrice;
