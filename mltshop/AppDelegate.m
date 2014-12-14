@@ -107,9 +107,9 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     [[UINavigationBar appearance] setTintColor:WHITECOLOR];
     
-    if (!OSVersionIsAtLeastiOS7()) {
-        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
-    }
+//    if (!OSVersionIsAtLeastiOS7()) {
+//        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+//    }
     
     [self skipIntroView];
     

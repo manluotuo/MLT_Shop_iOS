@@ -121,7 +121,7 @@
         
         priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_110, TOTAL_WIDTH/2, H_20)];
         [priceLabel setFont:LITTLECUSTOMFONT];
-        [priceLabel setTextColor:REDCOLOR];
+        [priceLabel setTextColor:GRAYLIGHTCOLOR];
         [priceLabel setTextAlignment:NSTextAlignmentLeft];
         
         [self addSubview:goodsImg];

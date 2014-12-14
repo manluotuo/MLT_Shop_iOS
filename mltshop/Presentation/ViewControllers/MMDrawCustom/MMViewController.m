@@ -37,8 +37,10 @@
          object:nil];
     }
     self.view.backgroundColor = BGCOLOR;
-    
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)dealloc{
