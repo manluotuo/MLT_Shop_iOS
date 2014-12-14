@@ -7,7 +7,7 @@
 //
 
 #import "CommonListViewController.h"
-//#import "ArticleTableViewCell.h"
+#import "GoodsOneTableViewCell.h"
 #import "SVPullToRefresh.h"
 #import "AppRequestManager.h"
 #import <MMDrawerController/MMDrawerBarButtonItem.h>
@@ -351,7 +351,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return VEHICLE_CELL_HEIGHT;
+    return GOODS_CELL_HEIGHT;
 }
 
 #pragma mark -
@@ -368,13 +368,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"ListCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
 
-    return cell;
     
 //    if (self.dataSourceType == ListDataSourceTwoInLine) {
 //        HistoryModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
@@ -387,21 +381,31 @@
 //        [cell setNewData:cellData];
 //        return cell;
 //    }
-//    else if(self.dataSourceType == ListDataSourceOneInLine){
-//        Vehicle *cellData = [self.dataSource objectAtIndex:indexPath.row];
-//        cellData.indexPathRow = INT(indexPath.row);
-//        ArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//        
-//        if (cell == nil) {
-//            cell = [[ArticleTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//            cell.passDelegate = self;
-//        }
-//        [cell setNewData:cellData];
-//        
-//        return cell;
-//    }else{
-//        
-//    }
+    if(self.dataSourceType == ListDataSourceOneInLine){
+        GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+        cellData.indexPath = INT(indexPath.row);
+        GoodsOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil) {
+            cell = [[GoodsOneTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.passDelegate = self;
+        }
+        [cell setNewData:cellData];
+        
+        return cell;
+    }else{
+        GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+        cellData.indexPath = INT(indexPath.row);
+        GoodsOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil) {
+            cell = [[GoodsOneTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.passDelegate = self;
+        }
+        [cell setNewData:cellData];
+        
+        return cell;
+    }
 }
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -60,13 +60,13 @@
     // last is empty for add button
     
     self.tabArray = @[@{@"name": @"首页", @"catId":INT(0)},
-                      @{@"name": @"服饰鞋帽", @"catId":INT(1)},
-                      @{@"name": @"毛绒玩具", @"catId":INT(2)},
+                      @{@"name": @"服饰鞋帽", @"catId":INT(4)},
+                      @{@"name": @"毛绒玩具", @"catId":INT(7)},
                       @{@"name": @"模型雕塑", @"catId":INT(3)},
-                      @{@"name": @"精品挂饰", @"catId":INT(4)},
-                      @{@"name": @"卡通箱包", @"catId":INT(5)},
-                      @{@"name": @"生活娱乐", @"catId":INT(6)},
-                      @{@"name": @"图书音像", @"catId":INT(7)}];
+                      @{@"name": @"精品挂饰", @"catId":INT(6)},
+                      @{@"name": @"卡通箱包", @"catId":INT(9)},
+                      @{@"name": @"生活娱乐", @"catId":INT(2)},
+                      @{@"name": @"图书音像", @"catId":INT(5)}];
     
 //    NSLog(@"Host view tabarray: %@",self.tabArray);
     
@@ -93,20 +93,6 @@
     
     [self disableScroll];
 
-    // TODO: 显示数据
-//    NSFNanoSearch *search = [NSFNanoSearch searchWithStore:XAppDelegate.nanoStore];
-//    
-//    search.attribute = @"gallery";
-//    search.match = NSFNotEqualTo;
-//    search.value = @"xxxxx";
-//    
-//    // Returns a dictionary with the UUID of the object (key) and the NanoObject (value).
-//    NSDictionary *searchResults = [search searchObjectsWithReturnType:NSFReturnObjects error:nil];
-//    NSDictionary *theValues = [searchResults allValues];
-//    
-//    for (NSFNanoObject *item in theValues) {
-//        NSLog(@"%@",item.info);
-//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -186,7 +172,7 @@
         return listVC;
     }else{
         ListViewController *listOnlineVC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
-        listOnlineVC.categoryId = rowData[@"catId"];
+        listOnlineVC.search = [[SearchModel alloc]initWithDict:@{@"catId":rowData[@"catId"]}];
         listOnlineVC.delegateForHostView = self;
         return listOnlineVC;
     }

@@ -21,6 +21,8 @@
 		26435ACC1A20C55000E117A0 /* MLTLogo-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435AC91A20C55000E117A0 /* MLTLogo-60@3x.png */; };
 		26435ACF1A20CA7900E117A0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435ACD1A20CA7900E117A0 /* Default@2x.png */; };
 		26435AD01A20CA7900E117A0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */; };
+		2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658A8F91A3A78B000D9C011 /* SearchModel.m */; };
+		2658A8FE1A3D24D500D9C011 /* GoodsOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658A8FD1A3D24D500D9C011 /* GoodsOneTableViewCell.m */; };
 		265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8841A1CE8020040ACC0 /* CommonListViewController.m */; };
 		265BB8881A1CE8D90040ACC0 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB8861A1CE8D90040ACC0 /* ListViewController.m */; };
 		265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */; };
@@ -137,6 +139,10 @@
 		26435AC91A20C55000E117A0 /* MLTLogo-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MLTLogo-60@3x.png"; sourceTree = "<group>"; };
 		26435ACD1A20CA7900E117A0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
+		2658A8F81A3A78B000D9C011 /* SearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModel.h; sourceTree = "<group>"; };
+		2658A8F91A3A78B000D9C011 /* SearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchModel.m; sourceTree = "<group>"; };
+		2658A8FC1A3D24D500D9C011 /* GoodsOneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsOneTableViewCell.h; sourceTree = "<group>"; };
+		2658A8FD1A3D24D500D9C011 /* GoodsOneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsOneTableViewCell.m; sourceTree = "<group>"; };
 		265BB8831A1CE8020040ACC0 /* CommonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonListViewController.h; sourceTree = "<group>"; };
 		265BB8841A1CE8020040ACC0 /* CommonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonListViewController.m; sourceTree = "<group>"; };
 		265BB8861A1CE8D90040ACC0 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
@@ -650,6 +656,8 @@
 				26BE3AD61A173C3D009F37B4 /* DataTrans.h */,
 				26BE3AD01A17391E009F37B4 /* Entities */,
 				26BE3AAB1A170464009F37B4 /* mltshop.xcdatamodeld */,
+				2658A8F81A3A78B000D9C011 /* SearchModel.h */,
+				2658A8F91A3A78B000D9C011 /* SearchModel.m */,
 				261E24B61A31CB3700DA06A2 /* CategoryModel.h */,
 				261E24B71A31CB3700DA06A2 /* CategoryModel.m */,
 				269FD8671A351B6600BF19B5 /* GoodsModel.h */,
@@ -684,6 +692,8 @@
 			children = (
 				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
 				26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */,
+				2658A8FC1A3D24D500D9C011 /* GoodsOneTableViewCell.h */,
+				2658A8FD1A3D24D500D9C011 /* GoodsOneTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1050,11 +1060,13 @@
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
 				269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
+				2658A8FE1A3D24D500D9C011 /* GoodsOneTableViewCell.m in Sources */,
 				265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */,
 				26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */,
 				265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */,
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
+				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
 				26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */,

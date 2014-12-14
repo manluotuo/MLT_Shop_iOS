@@ -57,6 +57,9 @@
 
 - (void)buildFixedView
 {
+    /**
+     *  fixedHeight  = 各区域高度+ 区域间隔(SEP_HEIGHT)
+     */
     CGFloat fixedHeight = 0.0f;
     self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, self.view.frame.size.height)];
     
@@ -114,6 +117,9 @@
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
                 [areaView initWithData:oneArea];
                 [self.fixedView addSubview:areaView];
+                /**
+                 *  高度-1 为了 获得一个像素的感觉
+                 */
                 fixedHeight += AREA_FIX_HEIGHT-1;
             }
             

@@ -10,6 +10,9 @@
 
 @interface ListViewController : CommonListViewController
 
+@property(nonatomic, strong)SearchModel *search;
 @property(nonatomic, strong)NSNumber *categoryId;
+
+
 
 @end

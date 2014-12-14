@@ -31,8 +31,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.commonListDelegate = self;
+    self.dataSourceType = ListDataSourceOneInLine;
 
-//    [self initDataSource];
+    [self initDataSource];
     
 }
 
@@ -64,28 +65,31 @@
 - (void)setupDataSource {
     
     self.start = 0;
-    [[AppRequestManager sharedManager] listVehicleWithMerchantId:@""
-                                                     substituted:YES
-                                                         andPage:self.start
-                                                         andSize:20
-                                                       andStatus:[self.categoryId stringValue]
-                                                        andBlock:^(id responseObject, NSError *error) {
+    
+    [[AppRequestManager sharedManager]searchWithKeywords:self.search.keywords
+                                                  cateId:self.search.catId
+                                                 brandId:self.search.brandId
+                                                    page:self.start
+                                                    size:20
+                                                andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
-            NSMutableArray *vehicleArray = [[NSMutableArray alloc]init];
+            NSMutableArray *goodsArray = [[NSMutableArray alloc]init];
+            
             for (id jsonData in responseObject) {
-//                Vehicle * cellData = [DataTrans vehilceFromDict:jsonData];
-//                NSLog(@"Online setupDataSource %@ %@ %.2f",cellData.brand, cellData.series, [cellData.quotedPrice floatValue]);
-//                [vehicleArray addObject:cellData];
+                GoodsModel *cellData = [[GoodsModel alloc]initWithDict:jsonData];
+                //                Vehicle * cellData = [DataTrans vehilceFromDict:jsonData];
+                [goodsArray addObject:cellData];
             }
             NSLog(@"Online setupDataSource ======== ");
-            [self showSetupDataSource:vehicleArray andError:nil];
+            [self showSetupDataSource:goodsArray andError:nil];
             self.start = self.start + 1;
             NSLog(@"start %d",self.start);
         }
         if (error != nil) {
-            [DataTrans showWariningTitle:T(@"获取车辆列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
+            [DataTrans showWariningTitle:T(@"获取商品列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
         }
+
     }];
 }
 
@@ -104,30 +108,20 @@
 - (void)recomendOldItems
 {
     NSLog(@"start %d",self.start);
-    
-    [[AppRequestManager sharedManager] listVehicleWithMerchantId:@""
-                                                     substituted:YES
-                                                         andPage:self.start
-                                                         andSize:20
-                                                       andStatus:[self.categoryId stringValue]
-                                                        andBlock:^(id responseObject, NSError *error) {
-        if (responseObject != nil) {
-            //
-            NSMutableArray *vehicleArray = [[NSMutableArray alloc]init];
-            for (id jsonData in responseObject) {
-//                Vehicle * cellData = [DataTrans vehilceFromDict:jsonData];
-//                [vehicleArray addObject:cellData];
-            }
-            [self showRecomendOldItems:vehicleArray andError:error];
-            self.start = self.start + 1;
-        }
-        if (error != nil) {
-            [DataTrans showWariningTitle:T(@"获取车辆列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
-        }
-                                                            
-    }];
-
 }
 
+
+- (void)passSignalValue:(NSString *)value andData:(id)data
+{
+    GoodsModel *theOne = data;
+    
+    NSLog(@"%@", theOne);
+    if ([value isEqualToString:SIGNAL_TAP_VEHICLE]) {
+//        VehicleDetailViewController *vc = [[VehicleDetailViewController alloc]initWithNibName:nil bundle:nil];
+//        vc.passDelegate = self;
+//        [vc setVehicleData:data];
+//        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 
 @end
