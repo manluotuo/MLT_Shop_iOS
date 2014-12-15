@@ -79,10 +79,10 @@
 
 - (void)changeLightStyle
 {
-    [[self layer] setBackgroundColor:GRAYEXLIGHTCOLOR.CGColor];
-    [[self layer] setBorderColor:GRAYLIGHTCOLOR.CGColor];
-    [[self layer] setBorderWidth:0.5f];
+    [[self layer] setBackgroundColor:[UIColor clearColor].CGColor];
+    [[self layer] setBorderWidth:0.0f];
     [[self layer] setCornerRadius:0.0f];
+    self.iconLabel.font = FONT_AWESOME_36;
     
 }
 

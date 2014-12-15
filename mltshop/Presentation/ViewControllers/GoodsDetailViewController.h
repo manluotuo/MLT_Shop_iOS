@@ -7,7 +7,12 @@
 //
 
 #import "KKViewController.h"
-
+#import "PassValueDelegate.h"
 @interface GoodsDetailViewController : KKViewController
+
+- (void)setGoodsData:(GoodsModel *)_goods;
+@property(nonatomic,assign) NSObject<PassValueDelegate> *passDelegate;
+
+
 
 @end

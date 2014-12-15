@@ -10,6 +10,7 @@
 #import "AppRequestManager.h"
 #import "SGActionView.h"
 #import "ColorNavigationController.h"
+#import "GoodsDetailViewController.h"
 
 @interface ListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
@@ -143,7 +144,7 @@
  */
 - (void)recomendOldItems
 {
-    NSLog(@"start %d",self.start);
+    NSLog(@"start %ld",(long)self.start);
 }
 
 
@@ -152,11 +153,13 @@
     GoodsModel *theOne = data;
     
     NSLog(@"%@", theOne);
+    
     if ([value isEqualToString:SIGNAL_TAP_VEHICLE]) {
-//        VehicleDetailViewController *vc = [[VehicleDetailViewController alloc]initWithNibName:nil bundle:nil];
-//        vc.passDelegate = self;
-//        [vc setVehicleData:data];
-//        [self.navigationController pushViewController:vc animated:YES];
+        
+        GoodsDetailViewController *vc = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+        vc.passDelegate = self;
+        [vc setGoodsData:theOne];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
     }
 }
 

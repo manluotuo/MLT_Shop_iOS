@@ -35,25 +35,21 @@
     return self;
 }
 
-#define  LEFT_TAG   0
-#define  RIGHT_TAG  1
 - (void)initCellView
 {
     leftCell = [[GoodsHalfCell alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/2, GOODS_CELL_HEIGHT)];
     rightCell = [[GoodsHalfCell alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, TOTAL_WIDTH/2, GOODS_CELL_HEIGHT)];
-    leftCell.tag = LEFT_TAG;
-    rightCell.tag = RIGHT_TAG;
     
     
     self.leftTap = [[UITapGestureRecognizer alloc]
                       initWithTarget:self
-                      action:@selector(tapSingleAction:)];
+                      action:@selector(tapLeftAction:)];
     self.leftTap.numberOfTapsRequired = 1;
     [leftCell addGestureRecognizer:self.leftTap];
 
     self.rightTap = [[UITapGestureRecognizer alloc]
                     initWithTarget:self
-                    action:@selector(tapSingleAction:)];
+                    action:@selector(tapRightAction:)];
     self.rightTap.numberOfTapsRequired = 1;
     [rightCell addGestureRecognizer:self.rightTap];
     
@@ -72,17 +68,16 @@
     
 }
 
--(void)tapSingleAction:(GoodsHalfCell *)sender
+-(void)tapLeftAction:(id)sender
 {
-    if (sender.tag == LEFT_TAG) {
-        [self.passDelegate passSignalValue:SIGNAL_TAP_VEHICLE andData:self.leftData];
-    }
-    
-    if (sender.tag == RIGHT_TAG) {
-        [self.passDelegate passSignalValue:SIGNAL_TAP_VEHICLE andData:self.rightData];
-    }
-    
+    [self.passDelegate passSignalValue:SIGNAL_TAP_VEHICLE andData:self.leftData];
 }
+
+-(void)tapRightAction:(id)sender
+{
+    [self.passDelegate passSignalValue:SIGNAL_TAP_VEHICLE andData:self.rightData];
+}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
