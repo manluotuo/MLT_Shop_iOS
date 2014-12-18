@@ -12,14 +12,15 @@
 #import "FAHoverButton.h"
 #import "FAIconButton.h"
 #import "KKFlatButton.h"
-
+#import "AppRequestManager.h"
+#import "SGActionView.h"
 #import "NSString+FontAwesome.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-
-@interface GoodsDetailViewController ()<UIScrollViewDelegate>
+@interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate>
 {
     CGFloat fixedHeight;
+    CGFloat htmlHeight;
 }
 // view
 @property(nonatomic, strong)GoodsModel *theGoods;
@@ -35,14 +36,14 @@
 @property(nonatomic, strong)FAIconButton *specificationButton;
 
 
-@property(nonatomic, strong)UIView *htmlView;
+@property(nonatomic, strong)UIWebView *htmlView;
 
 @property(nonatomic, strong)UIScrollView *fixedView;
 
 // 3个按钮
-@property(nonatomic, strong)KKFlatButton *backButton;
-@property(nonatomic, strong)KKFlatButton *shareButton;
-@property(nonatomic, strong)KKFlatButton *favButton;
+@property(nonatomic, strong)FAHoverButton *backButton;
+@property(nonatomic, strong)FAHoverButton *shareButton;
+@property(nonatomic, strong)FAHoverButton *favButton;
 
 
 
@@ -78,13 +79,42 @@
     [self initInfoView];
     [self initHtmlView];
     [self initButtons];
+    
+    [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
     [self.view addSubview:self.fixedView];
 }
 
 -(void)initButtons
 {
+    self.backButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(H_20, H_20, H_40, H_40)];
+    [self.backButton setIconString:[NSString fontAwesomeIconStringForEnum:FAChevronLeft]];
+    [self.backButton setBackgroundColor:GRAYEXLIGHTCOLOR];
+    [self.backButton setRounded];
+    [self.backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.fixedView addSubview:self.backButton];
+    
+//    self.shareButton
+    
+    self.favButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_60, TOTAL_WIDTH-H_60, H_40, H_40)];
+    [self.favButton setIconString:[NSString fontAwesomeIconStringForEnum:FAHeart]];
+    [self.favButton setBackgroundColor:GRAYEXLIGHTCOLOR];
+    [self.favButton setRounded];
+    [self.favButton addTarget:self action:@selector(favAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.fixedView addSubview:self.favButton];
     
 }
+-(void)backAction
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        //
+    }];
+}
+
+-(void)favAction
+{
+    
+}
+
 
 -(void)initInfoView
 {
@@ -145,7 +175,7 @@
     [self.specificationButton setTitleColor:GREENCOLOR];
     [self.specificationButton setIconColor:GREENCOLOR];
     [self.specificationButton changeLightStyle];
-    [self.specificationButton addTarget:self action:@selector(getTheNewestLevelId) forControlEvents:UIControlEventTouchUpInside];
+    [self.specificationButton addTarget:self action:@selector(chooseSpecAction) forControlEvents:UIControlEventTouchUpInside];
 
     [self.infoView addSubview:self.titleLabel];
     [self.infoView addSubview:self.briefLabel];
@@ -159,11 +189,16 @@
     [self.infoView addSubview:self.specificationButton];
     
     [self.fixedView addSubview:self.infoView];
+    
+    fixedHeight += H_90+H_150;
 }
 
 -(void)initHtmlView
 {
-    
+    htmlHeight = TOTAL_HEIGHT;
+    self.htmlView = [[UIWebView alloc]initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, htmlHeight)];
+    [self.fixedView addSubview:self.htmlView];
+    self.htmlView.delegate = self;
 }
 
 -(void)initGalleryView
@@ -191,8 +226,16 @@
 
 - (void)setGoodsData:(GoodsModel *)_goods
 {
-    self.theGoods = _goods;
-    
+    [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];
+            [self refreshViewWithData];
+        }
+    }];
+}
+
+- (void)refreshViewWithData
+{
     // refresh galleryView
     CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_WIDTH);
     for (int i = 0 ; i < [self.theGoods.gallery count]; i++) {
@@ -202,20 +245,51 @@
         
         [page setContentMode:UIViewContentModeScaleAspectFill];
         
-        [page sd_setImageWithURL:[NSURL URLWithString:self.theGoods.gallery[i][@"thumb"]]];
+        PhotoModel *onePhoto = self.theGoods.gallery[i];
+        [page sd_setImageWithURL:[NSURL URLWithString:onePhoto.thumb]];
         [self.galleryView addContentSubview:page];
     }
     
     self.titleLabel.text = self.theGoods.goodsName;
     self.briefLabel.text = self.theGoods.goodsBrief;
-
     
+    // 售价
+    self.priceLabel.text = STR_NUM2([self.theGoods.shopPrice floatValue]);
+    // 市场价
     NSAttributedString * marketPriceString =
-    [[NSAttributedString alloc] initWithString:@"$198"
+    [[NSAttributedString alloc] initWithString: STR_NUM2([self.theGoods.marketPrice floatValue])
                                     attributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle)}];
-
+    
+    self.marketPriceLabel.attributedText = marketPriceString;
+    
+    self.inventoryLabel.text = self.theGoods.catId;
+    [self.brandButton setTitle:self.theGoods.brandId forState:UIControlStateNormal];
+    
+    [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if ([webView isEqual:self.htmlView]) {
+        htmlHeight = self.htmlView.scrollView.contentSize.height;
+        self.htmlView.height = htmlHeight;
+        fixedHeight += htmlHeight;
+        [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
+    }
+}
+
+
+
+- (void)chooseSpecAction
+{
+    NSMutableArray *titleArray = [[NSMutableArray alloc]init];
+    for (SpecItemModel *item in self.theGoods.spec.values) {
+        [titleArray addObject:item.label];
+    }
+    [SGActionView showSheetWithTitle:T(@"选择尺码或颜色")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
+        //
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning {

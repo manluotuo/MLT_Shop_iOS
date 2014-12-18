@@ -31,6 +31,7 @@
 #import "NSString+FontAwesome.h"
 //    #import <NSLogger/LoggerClient.h>
 #import "UIView+frameAdjust.h"
+#import "NSString+FontAwesome.h"
 // customModel
 #import "SearchModel.h"
 #import "CategoryModel.h"

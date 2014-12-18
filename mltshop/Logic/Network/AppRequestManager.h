@@ -15,6 +15,7 @@
 #define API_SEARCH_PATH             @"/ecmobile/?url=search"
 #define API_CATEGORY_ALL            @"/ecmobile/?url=/home/category"
 #define API_HOME_DATA_PATH          @"/ecmobile/?url=/home/data"
+#define API_GOODS_DETAILS_PATH      @"/ecmobile/?url=/goods"
 
 
 #define API_UPLOAD_PICTURE          @"/upload/picture"
@@ -98,6 +99,9 @@
 // API/category
 - (void)getCategoryAllWithBlock:(void (^)(id responseObject, NSError *error))block;
 
+// API/Goods
+- (void)getGoodsDetailWithGoodsId:(NSString *)goodsId andBlcok:(void (^)(id responseObject, NSError *error))block;
+
 // API/search
 - (void)searchWithKeywords:(NSString *)keywords
                     cateId:(NSString *)cateId
@@ -108,6 +112,10 @@
 
 // API/home/data
 - (void)getHomeDataWithBlock:(void (^)(id responseObject, NSError *error))block;
+
+
+//API/goods
+- (void)getGoodsDetailWithBlcok:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/merchant/user/me

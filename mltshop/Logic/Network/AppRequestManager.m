@@ -286,6 +286,40 @@ static dispatch_once_t onceToken;
 
 
 
+- (void)getGoodsDetailWithGoodsId:(NSString *)goodsId andBlcok:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_GOODS_DETAILS_PATH;
+    
+    NSDictionary *postDict = @{@"goods_id" :goodsId,
+                               @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             }};
+    
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }else{
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+    
+}
+
+
 
 - (void)uploadPicture:(NSURL *)url resize:(CGSize)resize andBlock:(void (^)(id responseObject, NSError *error))block
 {

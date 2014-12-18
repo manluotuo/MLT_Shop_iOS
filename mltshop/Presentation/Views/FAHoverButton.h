@@ -19,5 +19,5 @@
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
 - (void)setBorder;
-
+- (void)setRounded;
 @end

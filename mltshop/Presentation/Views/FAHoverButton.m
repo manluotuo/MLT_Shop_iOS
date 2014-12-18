@@ -99,6 +99,10 @@
     [self.layer setBorderWidth:0.5f];
 }
 
+- (void)setRounded
+{
+    [self.layer setCornerRadius:self.frame.size.height/2];
+}
 
 
 /*

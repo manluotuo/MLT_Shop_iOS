@@ -108,6 +108,7 @@
 		26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FD01A2AFEC6007F4B16 /* blurImg.png */; };
 		26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */; };
 		26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */; };
+		26FF358C1A429AE80014A38F /* SpecModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FF358B1A429AE80014A38F /* SpecModel.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -301,6 +302,8 @@
 		26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCategoryViewController.m; sourceTree = "<group>"; };
 		26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemViewCell.m; sourceTree = "<group>"; };
 		26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItemViewCell.h; sourceTree = "<group>"; };
+		26FF358A1A429AE80014A38F /* SpecModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecModel.h; sourceTree = "<group>"; };
+		26FF358B1A429AE80014A38F /* SpecModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecModel.m; sourceTree = "<group>"; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -670,6 +673,8 @@
 				269FD8681A351B6600BF19B5 /* GoodsModel.m */,
 				269FD86A1A3522CA00BF19B5 /* PhotoModel.h */,
 				269FD86B1A3522CA00BF19B5 /* PhotoModel.m */,
+				26FF358A1A429AE80014A38F /* SpecModel.h */,
+				26FF358B1A429AE80014A38F /* SpecModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1032,6 +1037,7 @@
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,
+				26FF358C1A429AE80014A38F /* SpecModel.m in Sources */,
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
