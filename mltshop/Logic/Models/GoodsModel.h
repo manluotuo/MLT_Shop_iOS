@@ -14,6 +14,7 @@
 
 @property(nonatomic, strong)NSString *goodsId;
 @property(nonatomic, strong)NSString *brandId;
+@property(nonatomic, strong)NSString *brandName;
 @property(nonatomic, strong)NSString *catId;
 
 @property(nonatomic, strong)NSString *goodsName;

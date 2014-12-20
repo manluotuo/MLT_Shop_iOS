@@ -45,8 +45,8 @@
         self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
         if (frame.size.width > 100) {
-            [self setContentEdgeInsets:UIEdgeInsetsMake(0, 30, 0, 10)];
-            [self.iconLabel setFrame:CGRectMake(10, FONTAWESOME_OFFSET_Y, frame.size.height, frame.size.height)];
+            [self setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 10)];
+            [self.iconLabel setFrame:CGRectMake(10, FONTAWESOME_OFFSET_Y, 20, frame.size.height)];
         }else{
             [self setContentEdgeInsets:UIEdgeInsetsMake(1, 22, 0, 3)];
             [self.iconLabel setFrame:CGRectMake(0, FONTAWESOME_OFFSET_Y, frame.size.height, frame.size.height)];
@@ -82,7 +82,11 @@
     [[self layer] setBackgroundColor:[UIColor clearColor].CGColor];
     [[self layer] setBorderWidth:0.0f];
     [[self layer] setCornerRadius:0.0f];
-    self.iconLabel.font = FONT_AWESOME_36;
+    if (self.frame.size.height < H_60) {
+        self.iconLabel.font = FONT_AWESOME_14;
+    }else{
+        self.iconLabel.font = FONT_AWESOME_30;
+    }
     
 }
 

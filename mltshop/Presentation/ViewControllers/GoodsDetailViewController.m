@@ -40,6 +40,13 @@
 
 @property(nonatomic, strong)UIScrollView *fixedView;
 
+// 底部tabbar
+@property(nonatomic, strong)UIView *tabbarView;
+@property(nonatomic, strong)FAIconButton *serviceTabButton;
+@property(nonatomic, strong)FAIconButton *cartTabButton;
+@property(nonatomic, strong)FAIconButton *buyTabButton;
+
+
 // 3个按钮
 @property(nonatomic, strong)FAHoverButton *backButton;
 @property(nonatomic, strong)FAHoverButton *shareButton;
@@ -82,6 +89,53 @@
     
     [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
     [self.view addSubview:self.fixedView];
+    
+    [self initTabbarButton];
+
+}
+
+#define SERVICE_TAB_TAG 101
+#define CART_TAB_TAG    102
+#define BUY_TAB_TAG     103
+- (void)initTabbarButton
+{
+    self.tabbarView = [[UIView alloc]initWithFrame:CGRectMake(0, TOTAL_HEIGHT-H_50, TOTAL_WIDTH, H_50)];
+    self.tabbarView.backgroundColor = [UIColor colorWithRed:245 green:245 blue:245 alpha:0.8];
+    
+    self.serviceTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/3, H_50)];
+    [self.serviceTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FACommentsO]];
+    [self.serviceTabButton setTitle:T(@"客服") forState:UIControlStateNormal];
+    [self.serviceTabButton setTitleColor:DARKCOLOR];
+    [self.serviceTabButton setIconColor:ORANGECOLOR];
+    [self.serviceTabButton changeLightStyle];
+    self.serviceTabButton.tag = SERVICE_TAB_TAG;
+    [self.serviceTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.cartTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, 0, TOTAL_WIDTH/3, H_50)];
+    [self.cartTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FAShoppingCart]];
+    [self.cartTabButton setTitle:T(@"购物车") forState:UIControlStateNormal];
+    [self.cartTabButton setTitleColor:DARKCOLOR];
+    [self.cartTabButton setIconColor:ORANGECOLOR];
+    [self.cartTabButton changeLightStyle];
+    self.cartTabButton.tag = CART_TAB_TAG;
+    [self.cartTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    self.buyTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2, 0, TOTAL_WIDTH/3, H_50)];
+    [self.buyTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FACreditCard]];
+    [self.buyTabButton setTitle:T(@"直接购买") forState:UIControlStateNormal];
+    [self.buyTabButton setTitleColor:DARKCOLOR];
+    [self.buyTabButton setIconColor:ORANGECOLOR];
+    [self.buyTabButton changeLightStyle];
+    self.buyTabButton.tag = BUY_TAB_TAG;
+    [self.buyTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.tabbarView addSubview:self.serviceTabButton];
+    [self.tabbarView addSubview:self.cartTabButton];
+    [self.tabbarView addSubview:self.buyTabButton];
+    
+    [self.view addSubview:self.tabbarView];
+    
 }
 
 -(void)initButtons
@@ -93,11 +147,10 @@
     [self.backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self.fixedView addSubview:self.backButton];
     
-//    self.shareButton
     
     self.favButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_60, TOTAL_WIDTH-H_60, H_40, H_40)];
     [self.favButton setIconString:[NSString fontAwesomeIconStringForEnum:FAHeart]];
-    [self.favButton setBackgroundColor:GRAYEXLIGHTCOLOR];
+    [self.favButton setBackgroundColor:BlACKALPHACOLOR];
     [self.favButton setRounded];
     [self.favButton addTarget:self action:@selector(favAction) forControlEvents:UIControlEventTouchUpInside];
     [self.fixedView addSubview:self.favButton];
@@ -118,8 +171,9 @@
 
 -(void)initInfoView
 {
-    CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, H_90 + H_150);
+    CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, H_90 + H_150 + H_40);
     self.infoView = [[UIView alloc]initWithFrame:rect];
+    self.infoView.backgroundColor = WHITECOLOR;
 
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_15, H_260, H_20)];
     [self.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
@@ -172,10 +226,17 @@
     [self.specificationButton setIconString:[NSString fontAwesomeIconStringForEnum:FAAngleRight]];
     [self.specificationButton setTitle:T(@"选择尺码/颜色分类") forState:UIControlStateNormal];
     [self.specificationButton changeRightIcon];
-    [self.specificationButton setTitleColor:GREENCOLOR];
+    [self.specificationButton setTitleColor:GREENLIGHTCOLOR];
     [self.specificationButton setIconColor:GREENCOLOR];
     [self.specificationButton changeLightStyle];
     [self.specificationButton addTarget:self action:@selector(chooseSpecAction) forControlEvents:UIControlEventTouchUpInside];
+
+
+    UILabel *htmlTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, H_90+H_150, TOTAL_WIDTH/2, H_40)];
+    htmlTitle.text = T(@"图文详情");
+    htmlTitle.font = FONT_12;
+    htmlTitle.textAlignment = NSTextAlignmentCenter;
+    htmlTitle.backgroundColor = GRAYEXLIGHTCOLOR;
 
     [self.infoView addSubview:self.titleLabel];
     [self.infoView addSubview:self.briefLabel];
@@ -187,10 +248,27 @@
     [self.infoView addSubview:brandTitle];
     [self.infoView addSubview:self.brandButton];
     [self.infoView addSubview:self.specificationButton];
+    [self.infoView addSubview:htmlTitle];
+    
+    
+    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, H_90, TOTAL_WIDTH, 1)];
+    lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
+    UIView *lineView2 = [[UIView alloc]initWithFrame:CGRectMake(0, H_90+H_50, TOTAL_WIDTH, 1)];
+    lineView2.backgroundColor = GRAYEXLIGHTCOLOR;
+    UIView *lineView3 = [[UIView alloc]initWithFrame:CGRectMake(0, H_90+H_50*2, TOTAL_WIDTH, 1)];
+    lineView3.backgroundColor = GRAYEXLIGHTCOLOR;
+    UIView *lineView4 = [[UIView alloc]initWithFrame:CGRectMake(H_200, H_90, 1, H_50)];
+    lineView4.backgroundColor = GRAYEXLIGHTCOLOR;
+    [self.infoView addSubview:lineView1];
+    [self.infoView addSubview:lineView2];
+    [self.infoView addSubview:lineView3];
+    [self.infoView addSubview:lineView4];
+    
+    
     
     [self.fixedView addSubview:self.infoView];
     
-    fixedHeight += H_90+H_150;
+    fixedHeight += rect.size.height;
 }
 
 -(void)initHtmlView
@@ -286,7 +364,7 @@
     for (SpecItemModel *item in self.theGoods.spec.values) {
         [titleArray addObject:item.label];
     }
-    [SGActionView showSheetWithTitle:T(@"选择尺码或颜色")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
+    [SGActionView showSheetWithTitle:T(@"选择尺码/颜色分类")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
         //
     }];
 }
