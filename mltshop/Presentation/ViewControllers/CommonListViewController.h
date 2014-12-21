@@ -11,11 +11,13 @@
 #import "PassValueDelegate.h"
 
 
+
 typedef NS_ENUM(NSInteger,ListDataSourceType)
 {
-    ListDataSourceMixInLine    = 0,    // 一行两辆车
-    ListDataSourceTwoInLine    = 1,    // 一行两辆车
-    ListDataSourceOneInLine    = 2,    // 一行一辆车
+    ListDataSourceMixInLine     = 0,    // 一行两辆车
+    ListDataSourceTwoInLine     = 1,    // 一行两辆车
+    ListDataSourceOneInLine     = 2,    // 一行一辆车
+    ListDataSourceAddress       = 3,    // 一行一辆车
 };
 
 

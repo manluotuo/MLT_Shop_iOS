@@ -26,6 +26,7 @@
 #import "DataTrans.h"
 #import "PassValueDelegate.h"
 #import "KKViewController.h"
+#import "ColorNavigationController.h"
 #import "CoreData+MagicalRecord.h"
 #import "KGStatusBar.h"
 #import "NSString+FontAwesome.h"
@@ -37,6 +38,8 @@
 #import "CategoryModel.h"
 #import "GoodsModel.h"
 #import "PhotoModel.h"
+#import "AddressModel.h"
+
 #endif
 
 #endif

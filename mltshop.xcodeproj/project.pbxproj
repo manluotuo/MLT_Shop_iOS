@@ -40,6 +40,10 @@
 		267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 267B85F01A360D5F0084DDEA /* ADAreaView.m */; };
 		269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD8681A351B6600BF19B5 /* GoodsModel.m */; };
 		269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD86B1A3522CA00BF19B5 /* PhotoModel.m */; };
+		26B1C2561A46876E00295D32 /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C2551A46876E00295D32 /* AddressModel.m */; };
+		26B1C2591A4688D700295D32 /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C2581A4688D700295D32 /* AddressListViewController.m */; };
+		26B1C25C1A46890300295D32 /* AddressInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C25B1A46890300295D32 /* AddressInfoViewController.m */; };
+		26B1C25F1A46BAC400295D32 /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C25E1A46BAC400295D32 /* AddressTableViewCell.m */; };
 		26BE3A611A170421009F37B4 /* Museo500-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26BE39E21A170421009F37B4 /* Museo500-Regular.otf */; };
 		26BE3A7E1A170421009F37B4 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE3A031A170421009F37B4 /* email@2x.png */; };
 		26BE3A7F1A170421009F37B4 /* email_share_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE3A041A170421009F37B4 /* email_share_ico.png */; };
@@ -181,6 +185,14 @@
 		269FD8681A351B6600BF19B5 /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
 		269FD86A1A3522CA00BF19B5 /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
 		269FD86B1A3522CA00BF19B5 /* PhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoModel.m; sourceTree = "<group>"; };
+		26B1C2541A46876E00295D32 /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
+		26B1C2551A46876E00295D32 /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
+		26B1C2571A4688D700295D32 /* AddressListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListViewController.h; sourceTree = "<group>"; };
+		26B1C2581A4688D700295D32 /* AddressListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListViewController.m; sourceTree = "<group>"; };
+		26B1C25A1A46890300295D32 /* AddressInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoViewController.h; sourceTree = "<group>"; };
+		26B1C25B1A46890300295D32 /* AddressInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoViewController.m; sourceTree = "<group>"; };
+		26B1C25D1A46BAC400295D32 /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
+		26B1C25E1A46BAC400295D32 /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
 		26BE39E21A170421009F37B4 /* Museo500-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Museo500-Regular.otf"; sourceTree = "<group>"; };
 		26BE3A031A170421009F37B4 /* email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email@2x.png"; sourceTree = "<group>"; };
 		26BE3A041A170421009F37B4 /* email_share_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_share_ico.png; sourceTree = "<group>"; };
@@ -675,6 +687,8 @@
 				269FD86B1A3522CA00BF19B5 /* PhotoModel.m */,
 				26FF358A1A429AE80014A38F /* SpecModel.h */,
 				26FF358B1A429AE80014A38F /* SpecModel.m */,
+				26B1C2541A46876E00295D32 /* AddressModel.h */,
+				26B1C2551A46876E00295D32 /* AddressModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -707,6 +721,8 @@
 				26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */,
 				2658A8FC1A3D24D500D9C011 /* GoodsOneTableViewCell.h */,
 				2658A8FD1A3D24D500D9C011 /* GoodsOneTableViewCell.m */,
+				26B1C25D1A46BAC400295D32 /* AddressTableViewCell.h */,
+				26B1C25E1A46BAC400295D32 /* AddressTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -824,6 +840,10 @@
 			children = (
 				26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */,
 				26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */,
+				26B1C2571A4688D700295D32 /* AddressListViewController.h */,
+				26B1C2581A4688D700295D32 /* AddressListViewController.m */,
+				26B1C25A1A46890300295D32 /* AddressInfoViewController.h */,
+				26B1C25B1A46890300295D32 /* AddressInfoViewController.m */,
 			);
 			name = FunctionVC;
 			sourceTree = "<group>";
@@ -1036,7 +1056,9 @@
 				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
+				26B1C2561A46876E00295D32 /* AddressModel.m in Sources */,
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,
+				26B1C25F1A46BAC400295D32 /* AddressTableViewCell.m in Sources */,
 				26FF358C1A429AE80014A38F /* SpecModel.m in Sources */,
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
@@ -1078,6 +1100,7 @@
 				269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
 				2658A8FE1A3D24D500D9C011 /* GoodsOneTableViewCell.m in Sources */,
+				26B1C25C1A46890300295D32 /* AddressInfoViewController.m in Sources */,
 				265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */,
 				26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */,
 				265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */,
@@ -1087,6 +1110,7 @@
 				266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
+				26B1C2591A4688D700295D32 /* AddressListViewController.m in Sources */,
 				26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */,
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,

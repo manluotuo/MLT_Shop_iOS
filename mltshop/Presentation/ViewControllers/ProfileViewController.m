@@ -14,6 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import <NYXImagesKit/NYXImagesKit.h>
+#import "AddressListViewController.h"
 
 @interface ProfileViewController ()<UIScrollViewDelegate>
 
@@ -137,7 +138,7 @@
     [buttonBigA.titleLabel setFont:FONT_14];
     [buttonBigA setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [buttonBigA setBackgroundColor:GREENLIGHTCOLOR2];
-    [buttonBigA addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
+    [buttonBigA addTarget:self action:@selector(historyOrderAction) forControlEvents:UIControlEventTouchUpInside];
     
     KKFlatButton *buttonBigB = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [buttonBigB setTitle:T(@"地址管理") forState:UIControlStateNormal];
@@ -145,7 +146,7 @@
     [buttonBigB.titleLabel setFont:FONT_14];
     [buttonBigB setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [buttonBigB setBackgroundColor:GREENLIGHTCOLOR2];
-    [buttonBigB addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
+    [buttonBigB addTarget:self action:@selector(addressAction) forControlEvents:UIControlEventTouchUpInside];
     
     KKFlatButton *buttonBigC = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [buttonBigC setTitle:T(@"我的收藏") forState:UIControlStateNormal];
@@ -170,6 +171,13 @@
 - (void)avatarAction
 {
     NSLog(@"avatarAction");
+}
+
+- (void)addressAction
+{
+    AddressListViewController *VC = [[AddressListViewController alloc]init];
+    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)collectionAction

@@ -9,7 +9,6 @@
 #import "ListViewController.h"
 #import "AppRequestManager.h"
 #import "SGActionView.h"
-#import "ColorNavigationController.h"
 #import "GoodsDetailViewController.h"
 
 @interface ListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>

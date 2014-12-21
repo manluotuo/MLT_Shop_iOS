@@ -32,8 +32,8 @@
 @property(nonatomic, strong)UILabel *priceLabel;
 @property(nonatomic, strong)UILabel *marketPriceLabel;
 @property(nonatomic, strong)UILabel *inventoryLabel;
-@property(nonatomic, strong)UIButton *brandButton;
 @property(nonatomic, strong)FAIconButton *specificationButton;
+@property(nonatomic, strong)UIButton *brandButton;
 
 
 @property(nonatomic, strong)UIWebView *htmlView;
@@ -104,20 +104,22 @@
     
     self.serviceTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/3, H_50)];
     [self.serviceTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FACommentsO]];
-    [self.serviceTabButton setTitle:T(@"客服") forState:UIControlStateNormal];
+    [self.serviceTabButton setTitle:T(@"联系客服") forState:UIControlStateNormal];
     [self.serviceTabButton setTitleColor:DARKCOLOR];
     [self.serviceTabButton setIconColor:ORANGECOLOR];
     [self.serviceTabButton changeLightStyle];
     self.serviceTabButton.tag = SERVICE_TAB_TAG;
+    self.serviceTabButton.titleLabel.font = FONT_14;
     [self.serviceTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.cartTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, 0, TOTAL_WIDTH/3, H_50)];
     [self.cartTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FAShoppingCart]];
-    [self.cartTabButton setTitle:T(@"购物车") forState:UIControlStateNormal];
+    [self.cartTabButton setTitle:T(@"加购物车") forState:UIControlStateNormal];
     [self.cartTabButton setTitleColor:DARKCOLOR];
     [self.cartTabButton setIconColor:ORANGECOLOR];
     [self.cartTabButton changeLightStyle];
     self.cartTabButton.tag = CART_TAB_TAG;
+    self.cartTabButton.titleLabel.font = FONT_14;
     [self.cartTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
 
     
@@ -128,6 +130,7 @@
     [self.buyTabButton setIconColor:ORANGECOLOR];
     [self.buyTabButton changeLightStyle];
     self.buyTabButton.tag = BUY_TAB_TAG;
+    self.buyTabButton.titleLabel.font = FONT_14;
     [self.buyTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.tabbarView addSubview:self.serviceTabButton];
@@ -142,8 +145,9 @@
 {
     self.backButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(H_20, H_20, H_40, H_40)];
     [self.backButton setIconString:[NSString fontAwesomeIconStringForEnum:FAChevronLeft]];
-    [self.backButton setBackgroundColor:GRAYEXLIGHTCOLOR];
+    [self.backButton setBackgroundColor:BlACKALPHACOLOR];
     [self.backButton setRounded];
+    [self.backButton setIconFont:FONT_AWESOME_20];
     [self.backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     [self.fixedView addSubview:self.backButton];
     
@@ -152,10 +156,12 @@
     [self.favButton setIconString:[NSString fontAwesomeIconStringForEnum:FAHeart]];
     [self.favButton setBackgroundColor:BlACKALPHACOLOR];
     [self.favButton setRounded];
+    [self.favButton setIconFont:FONT_AWESOME_20];
     [self.favButton addTarget:self action:@selector(favAction) forControlEvents:UIControlEventTouchUpInside];
     [self.fixedView addSubview:self.favButton];
     
 }
+
 -(void)backAction
 {
     [self dismissViewControllerAnimated:YES completion:^{
@@ -219,8 +225,11 @@
     brandTitle.font = FONT_14;
     
     self.brandButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.brandButton setFrame:CGRectMake(H_100, H_140, H_100, H_40)];
+    [self.brandButton setFrame:CGRectMake(H_80, H_140+H_8, H_220, H_40)];
     [self.brandButton setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
+    self.brandButton.titleLabel.font = FONT_14;
+    self.brandButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [self.brandButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.specificationButton = [[FAIconButton alloc]initWithFrame:CGRectMake(H_20, H_90+H_100, H_280, H_50)];
     [self.specificationButton setIconString:[NSString fontAwesomeIconStringForEnum:FAAngleRight]];
@@ -229,10 +238,11 @@
     [self.specificationButton setTitleColor:GREENLIGHTCOLOR];
     [self.specificationButton setIconColor:GREENCOLOR];
     [self.specificationButton changeLightStyle];
+    [self.specificationButton.iconLabel setFont:FONT_AWESOME_30];
     [self.specificationButton addTarget:self action:@selector(chooseSpecAction) forControlEvents:UIControlEventTouchUpInside];
 
 
-    UILabel *htmlTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, H_90+H_150, TOTAL_WIDTH/2, H_40)];
+    UILabel *htmlTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, H_90+H_150, TOTAL_WIDTH, H_40)];
     htmlTitle.text = T(@"图文详情");
     htmlTitle.font = FONT_12;
     htmlTitle.textAlignment = NSTextAlignmentCenter;
@@ -341,7 +351,7 @@
     self.marketPriceLabel.attributedText = marketPriceString;
     
     self.inventoryLabel.text = self.theGoods.catId;
-    [self.brandButton setTitle:self.theGoods.brandId forState:UIControlStateNormal];
+    [self.brandButton setTitle:self.theGoods.brandName forState:UIControlStateNormal];
     
     [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
 }

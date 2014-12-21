@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIColor *iconColor;
 @property (nonatomic, assign) BOOL isON;
 @property (nonatomic, strong) NSIndexPath *indexPath;
+@property(nonatomic, strong)UILabel *iconLabel;
 
 - (void)changeRightIcon;
 - (void)changeCenterIcon;

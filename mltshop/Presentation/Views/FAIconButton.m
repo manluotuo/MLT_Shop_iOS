@@ -10,7 +10,6 @@
 
 @interface FAIconButton()
 
-@property(nonatomic, strong)UILabel *iconLabel;
 
 @end
 
@@ -44,12 +43,12 @@
         self.iconLabel.textAlignment = NSTextAlignmentCenter;
         self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
-        if (frame.size.width > 100) {
+        if (frame.size.width > 120) {
             [self setContentEdgeInsets:UIEdgeInsetsMake(0, 25, 0, 10)];
-            [self.iconLabel setFrame:CGRectMake(10, FONTAWESOME_OFFSET_Y, 20, frame.size.height)];
+            [self.iconLabel setFrame:CGRectMake(10, FONTAWESOME_OFFSET_Y, frame.size.height, frame.size.height)];
         }else{
             [self setContentEdgeInsets:UIEdgeInsetsMake(1, 22, 0, 3)];
-            [self.iconLabel setFrame:CGRectMake(0, FONTAWESOME_OFFSET_Y, frame.size.height, frame.size.height)];
+            [self.iconLabel setFrame:CGRectMake(10, FONTAWESOME_OFFSET_Y, 20, frame.size.height)];
         }
         
         [[self layer] setBackgroundColor:GREENCOLOR.CGColor];

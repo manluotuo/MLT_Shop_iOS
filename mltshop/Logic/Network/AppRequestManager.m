@@ -314,10 +314,97 @@ static dispatch_once_t onceToken;
         if (block) {
             block(nil , error);
         }
-        
     }];
     
 }
+
+
+/**
+ *  我的地址列表
+ *
+ *  @param block <#block description#>
+ */
+- (void)getAddressListWithBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_ADDRESS_LIST_PATH;
+    
+    NSDictionary *postDict = @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             }};
+    
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+    }];
+}
+
+
+- (void)operateAddressWithAddress:(AddressModel *)theAddress
+                         operation:(NSUInteger)operation
+                         andBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = @"";
+    NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
+                              @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             }}];
+
+
+    switch (operation) {
+        case AddressOpsGet:
+            postURL = API_ADDRESS_GET_PATH;
+            baseDict[@"address_id"] = theAddress.addressId;
+            break;
+        case AddressOpsCreate:
+            postURL = API_ADDRESS_CREATE_PATH;
+            baseDict[@"address"] = theAddress.postDict;
+            break;
+        case AddressOpsUpdate:
+            postURL = API_ADDRESS_UPDATE_PATH;
+            baseDict[@"address_id"] = theAddress.addressId;
+            baseDict[@"address"] = theAddress.postDict;
+            break;
+        case AddressOpsDelete:
+            postURL = API_ADDRESS_DELETE_PATH;
+            baseDict[@"address_id"] = theAddress.addressId;
+            break;
+        case AddressOpsDefault:
+            postURL = API_ADDRESS_DEFAULT_PATH;
+            baseDict[@"address_id"] = theAddress.addressId;
+            break;
+        default:
+            break;
+    }
+    
+
+    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+    }];
+}
+
 
 
 

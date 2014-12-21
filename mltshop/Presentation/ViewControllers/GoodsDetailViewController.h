@@ -14,5 +14,4 @@
 @property(nonatomic,assign) NSObject<PassValueDelegate> *passDelegate;
 
 
-
 @end

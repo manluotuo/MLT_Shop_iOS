@@ -9,6 +9,7 @@
 #import "CommonListViewController.h"
 #import "GoodsOneTableViewCell.h"
 #import "GoodsTwoTableViewCell.h"
+#import "AddressTableViewCell.h"
 #import "SVPullToRefresh.h"
 #import "AppRequestManager.h"
 #import <MMDrawerController/MMDrawerBarButtonItem.h>
@@ -398,7 +399,21 @@
         [cell setNewData:cellData];
         
         return cell;
-    }else{
+    }else if(self.dataSourceType == ListDataSourceAddress){
+        AddressModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+        cellData.indexPath = INT(indexPath.row);
+        AddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil) {
+            cell = [[AddressTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.passDelegate = self;
+        }
+        [cell setNewData:cellData];
+        
+        return cell;
+    }
+    
+    else{
         GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
         cellData.indexPath = INT(indexPath.row);
         GoodsOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
