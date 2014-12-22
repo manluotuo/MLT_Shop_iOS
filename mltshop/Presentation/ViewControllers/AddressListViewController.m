@@ -9,9 +9,11 @@
 #import "AddressListViewController.h"
 #import "AppRequestManager.h"
 #import "AddressInfoViewController.h"
+#import "UIViewController+ImageBackButton.h"
 
 @interface AddressListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
+@property(nonatomic, strong)NSMutableArray *dataArray;
 @end
 
 @implementation AddressListViewController
@@ -19,10 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = T(@"地址管理");
     self.commonListDelegate = self;
     self.dataSourceType = ListDataSourceAddress;
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.y = IOS7_CONTENT_OFFSET_Y;
+    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
+
+    self.dataArray = [[NSMutableArray alloc]init];
+    
     [self initDataSource];
+    [self setUpImageCloseButton];
     
 }
 
@@ -36,17 +46,17 @@
  */
 - (void)setupDataSource {
     self.start = 0;
+    self.dataArray = [[NSMutableArray alloc]init];
     [[AppRequestManager sharedManager]getAddressListWithBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
-            NSMutableArray *goodsArray = [[NSMutableArray alloc]init];
             NSUInteger count = [responseObject count];
             for (int i = 0 ; i < count; i++) {
                 AddressModel *oneAddress = [[AddressModel alloc]initWithDict:responseObject[i]];
-                [goodsArray addObject:oneAddress];
+                [self.dataArray addObject:oneAddress];
             }
             NSLog(@"Online setupDataSource ======== ");
-            [self showSetupDataSource:goodsArray andError:nil];
+            [self showSetupDataSource:self.dataArray andError:nil];
             self.start = self.start + 1;
             NSLog(@"start %ld",(long)self.start);
         }
@@ -66,6 +76,35 @@
 //    [self setupDataSource];
 }
 
+
+- (void)passSignalValue:(NSString *)value andData:(id)data
+{
+    if ([value isEqualToString:SIGNAL_TAP_VEHICLE]) {
+//        VehicleWebDetailViewController *vc = [[VehicleWebDetailViewController alloc]initWithNibName:nil bundle:nil];
+//        vc.theVehicle = data;
+//        vc.fromFavorite = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        AddressModel *vehicleModel = self.dataArray[indexPath.row];
+        [[AppRequestManager sharedManager]operateAddressWithAddress:vehicleModel operation:AddressOpsDelete andBlock:^(id responseObject, NSError *error) {
+            if (responseObject != nil) {
+                [self.dataArray removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+
+        }];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -15,13 +15,10 @@
 {
     CGFloat leftMargin = 10.0f;
     FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 12+leftMargin, 21)];
-//    [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
-//    [backButton.titleLabel setFont:FONT_AWESOME_36];
-    backButton.iconImage = [UIImage imageNamed:@"back_btn"];
+    [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
+    [backButton.titleLabel setFont:FONT_AWESOME_36];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
 
-//    [backButton setTitleColor:GREENDARKCOLOR forState:UIControlStateNormal];
-//    [backButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
     
     UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [backButton addTarget:self action:@selector(popCurrentViewController) forControlEvents:UIControlEventTouchUpInside];
@@ -31,11 +28,13 @@
 
 - (void)setUpImageCloseButton
 {
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    [leftButton setImage:[UIImage imageNamed:@"del_btn"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 22, 21)];
+    [backButton setTitle:ICON_TIMES forState:UIControlStateNormal];
+    [backButton.titleLabel setFont:FONT_AWESOME_24];
+
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
-    [leftButton addTarget:self action:@selector(downAction) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self action:@selector(downAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.hidesBackButton = YES;
 }
