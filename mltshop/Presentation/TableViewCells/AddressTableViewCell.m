@@ -32,7 +32,7 @@
 
 - (void)initCellView
 {
-    consigneeLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING, H_50, H_20)];
+    consigneeLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING, H_100, H_20)];
     consigneeLabel.font = FONT_14;
     consigneeLabel.textColor = GREENCOLOR;
     
@@ -54,7 +54,11 @@
 - (void)setNewData:(AddressModel *)_newData
 {
     self.data = _newData;
-    consigneeLabel.text = self.data.consignee;
+    if ([self.data.defaultAddress boolValue]) {
+        consigneeLabel.text = [NSString stringWithFormat:@"[默认] %@",self.data.consignee];
+    }else{
+        consigneeLabel.text = self.data.consignee;
+    }
     districtLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@",
                           self.data.countryName,
                           self.data.provinceName,

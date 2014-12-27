@@ -10,6 +10,7 @@
 
 @interface AddressInfoViewController : MMViewController
 
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 - (void)setNewData:(AddressModel *)address;
 

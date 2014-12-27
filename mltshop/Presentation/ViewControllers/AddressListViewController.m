@@ -50,6 +50,7 @@
 {
     AddressInfoViewController *vc = [[AddressInfoViewController alloc]init];
     [vc setNewData:[[AddressModel alloc]initWithDict:nil]];
+    vc.passDelegate = self;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -97,11 +98,8 @@
 
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
-    if ([value isEqualToString:SIGNAL_TAP_VEHICLE]) {
-//        VehicleWebDetailViewController *vc = [[VehicleWebDetailViewController alloc]initWithNibName:nil bundle:nil];
-//        vc.theVehicle = data;
-//        vc.fromFavorite = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
+    if ([value isEqualToString:SIGNAL_ADDRESS_OPERATE_DONE]) {
+        [self setupDataSource];
     }
 }
 
@@ -109,7 +107,7 @@
 {
     AddressInfoViewController *vc = [[AddressInfoViewController alloc]initWithNibName:nil bundle:nil];
     [vc setNewData:[self.dataSource objectAtIndex:indexPath.row]];
-
+    vc.passDelegate =self;
     [self.navigationController pushViewController:vc animated:YES];
 
 }

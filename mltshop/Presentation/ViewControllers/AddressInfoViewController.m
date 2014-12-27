@@ -12,6 +12,8 @@
 #import "KKTextField.h"
 #import <BlocksKit/BlocksKit+UIKit.h>
 #import "AreaPickerViewController.h"
+#import "AppDelegate.h"
+#import "Me.h"
 
 @interface AddressInfoViewController ()<UITextFieldDelegate, UIScrollViewDelegate, PassValueDelegate>
 {
@@ -71,9 +73,19 @@
     
 }
 
+- (void)transTextViewToAddress
+{
+    theAddress.consignee = self.consigneeTextView.text;
+    theAddress.address = self.addressTextView.text;
+    theAddress.tel = self.telTextView.text;
+    theAddress.email = self.emailTextView.text;
+    theAddress.zipcode = self.zipcodeTextView.text;
+}
+
 - (void)setNewData:(AddressModel *)address;
 {
     theAddress = address;
+    theAddress.email = XAppDelegate.me.email;
     
     self.consigneeTextView.text =theAddress.consignee;
     self.telTextView.text = theAddress.tel;
@@ -90,6 +102,7 @@
     
     
     
+    
     [self.saveButton setEnabled:NO];
     [self.defaultButton setEnabled:NO];
     [self.deleteButton setEnabled:NO];
@@ -103,7 +116,8 @@
         StringHasValue(theAddress.districtCode)
         ) {
         [self.saveButton setEnabled:YES];
-        [self.saveButton setEnabled:YES];
+        [self.defaultButton setEnabled:YES];
+        [self.deleteButton setEnabled:YES];
     }
     
 }
@@ -119,6 +133,7 @@
         StringHasValue(theAddress.cityCode) &&
         StringHasValue(theAddress.districtCode)
         ) {
+        [self transTextViewToAddress];
         return YES;
     }else{
         return NO;
@@ -128,7 +143,25 @@
 -(void)saveAction
 {
     if ([self verifyAddress]) {
-        // do save
+        if (StringHasValue(theAddress.addressId)) {
+            [[AppRequestManager sharedManager]operateAddressWithAddress:theAddress operation:AddressOpsUpdate andBlock:^(id responseObject, NSError *error) {
+                [DataTrans showWariningTitle:T(@"更新成功") andCheatsheet:ICON_CHECK];
+                [self.navigationController popViewControllerAnimated:YES];
+                [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
+
+            }];
+        }else{
+            [[AppRequestManager sharedManager]operateAddressWithAddress:theAddress operation:AddressOpsCreate andBlock:^(id responseObject, NSError *error) {
+                [DataTrans showWariningTitle:T(@"新建成功") andCheatsheet:ICON_CHECK];
+                [self.navigationController popViewControllerAnimated:YES];
+                [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
+
+            }];
+
+        }
+        
+
+
     }
 }
 
@@ -138,16 +171,25 @@
         NSString *message = [NSString stringWithFormat:@"删除%@",theAddress.consignee];
         
         [UIAlertView bk_showAlertViewWithTitle:T(@"确认删除") message:message cancelButtonTitle:T(@"取消") otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            //
+            if (buttonIndex == 0) {
+                [DataTrans showWariningTitle:T(@"删除成功") andCheatsheet:ICON_CHECK];
+                [self.navigationController popViewControllerAnimated:YES];
+                [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
+
+            }
         }];
-        
     }
 }
 
 -(void)defaultAction
 {
     if ([self verifyAddress]) {
-        // do default
+        [[AppRequestManager sharedManager]operateAddressWithAddress:theAddress operation:AddressOpsDefault andBlock:^(id responseObject, NSError *error) {
+            [DataTrans showWariningTitle:T(@"默认收货地址设置成功") andCheatsheet:ICON_CHECK];
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
+
+        }];
     }
 }
 
@@ -206,25 +248,25 @@
     self.emailTextView.tag = EMAIL_TAG;
     
     // emailTextView
-    self.zipcodeTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*3, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
-    self.zipcodeTextView.delegate = self;
-    [self.zipcodeTextView setPlaceholder:T(@"邮编")];
-    self.zipcodeTextView.returnKeyType = UIReturnKeyNext;
-    self.zipcodeTextView.tag = ZIPCODE_TAG;
-    
-    // emailTextView
-    self.locationTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*4, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
+    self.locationTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*3, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
     self.locationTextView.delegate = self;
     [self.locationTextView setPlaceholder:T(@"所在地区")];
     self.locationTextView.returnKeyType = UIReturnKeyNext;
     self.locationTextView.tag = LOCATION_TAG;
     
     // emailTextView
-    self.addressTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*5, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
+    self.addressTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*4, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
     self.addressTextView.delegate = self;
     [self.addressTextView setPlaceholder:T(@"详细地址")];
     self.addressTextView.returnKeyType = UIReturnKeyDone;
     self.addressTextView.tag = ADDRESS_TAG;
+    
+    // zipcodeTextView
+    self.zipcodeTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*5, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
+    self.zipcodeTextView.delegate = self;
+    [self.zipcodeTextView setPlaceholder:T(@"邮编")];
+    self.zipcodeTextView.returnKeyType = UIReturnKeyNext;
+    self.zipcodeTextView.tag = ZIPCODE_TAG;
     
     
     self.consigneeTextView.textIndent = TEXT_INDENT;
@@ -239,10 +281,10 @@
     self.consigneeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.consigneeTextView onTopLeft:YES topRight:YES bottomLeft:NO bottomRight:NO radius:10.0f];
     self.telTextView = (KKTextField *)[DataTrans roundCornersOnView:self.telTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     self.emailTextView = (KKTextField *)[DataTrans roundCornersOnView:self.emailTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
-    self.zipcodeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.zipcodeTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     self.locationTextView = (KKTextField *)[DataTrans roundCornersOnView:self.locationTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
-    self.addressTextView = (KKTextField *)[DataTrans roundCornersOnView:self.addressTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
-    
+    self.addressTextView = (KKTextField *)[DataTrans roundCornersOnView:self.addressTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
+    self.zipcodeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.zipcodeTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
+
     self.loginPanel = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
     [self.loginPanel setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT)];
     
@@ -261,21 +303,21 @@
     // verifyButton
     self.saveButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [self.saveButton setTitle:T(@"保存地址") forState:UIControlStateNormal];
-    [self.saveButton setFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*6+TOP_PADDING*2, TOTAL_WIDTH-LEFT_PADDING*4 , H_45)];
+    [self.saveButton setFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*6+TOP_PADDING*2, TOTAL_WIDTH-LEFT_PADDING*4 , H_40)];
     [self.saveButton addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [self.saveButton setTitleColor:GREENCOLOR andStyle:KKFlatButtonStyleLight];
     
     // verifyButton
     self.defaultButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [self.defaultButton setTitle:T(@"设为默认") forState:UIControlStateNormal];
-    [self.defaultButton setFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*7+TOP_PADDING*2, TOTAL_WIDTH/2-LEFT_PADDING*4 , H_45)];
+    [self.defaultButton setFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*7+TOP_PADDING*2, TOTAL_WIDTH/2-LEFT_PADDING*4 , H_40)];
     [self.defaultButton addTarget:self action:@selector(defaultAction) forControlEvents:UIControlEventTouchUpInside];
     [self.defaultButton setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
     
     // verifyButton
     self.deleteButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [self.deleteButton setTitle:T(@"删除地址") forState:UIControlStateNormal];
-    [self.deleteButton setFrame:CGRectMake(LEFT_PADDING*2+TOTAL_WIDTH/2, OFFSET_Y+H_50*7+TOP_PADDING*2, TOTAL_WIDTH/2-LEFT_PADDING*4 , H_45)];
+    [self.deleteButton setFrame:CGRectMake(LEFT_PADDING*2+TOTAL_WIDTH/2, OFFSET_Y+H_50*7+TOP_PADDING*2, TOTAL_WIDTH/2-LEFT_PADDING*4 , H_40)];
     [self.deleteButton addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
     [self.deleteButton setTitleColor:REDCOLOR andStyle:KKFlatButtonStyleLight];
     

@@ -16,7 +16,7 @@
     if (self) {
         // Initialization code
         [self setBackgroundColor:GREENCOLOR];
-        [self.titleLabel setFont:FONT_20];
+        [self.titleLabel setFont:FONT_16];
         [self setTitleColor:WHITECOLOR forState:UIControlStateNormal];
         [self.layer setCornerRadius:H_5];
         [self.layer setMasksToBounds:YES];
@@ -33,7 +33,7 @@
 {
     if (self.buttonStyle == KKFlatButtonStyleLight) {
         if (enabled == NO) {
-            [self setBackgroundColor:GRAYLIGHTCOLOR];
+            [self setBackgroundColor:GRAYEXLIGHTCOLOR];
         }else{
             [self setBackgroundColor:WHITECOLOR];
         }

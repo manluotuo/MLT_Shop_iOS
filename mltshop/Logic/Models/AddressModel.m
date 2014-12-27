@@ -48,13 +48,14 @@
 - (NSDictionary *)postDict
 {
     return @{@"id": [DataTrans noNullStringObj:_addressId],
-             @"name": [DataTrans noNullStringObj:_consignee],
+             @"consignee": [DataTrans noNullStringObj:_consignee],
              @"email": [DataTrans noNullStringObj:_email],
              @"zipcode": [DataTrans noNullStringObj:_zipcode],
              @"tel": [DataTrans noNullStringObj:_tel],
+             @"mobile": [DataTrans noNullStringObj:_tel],
              @"address":[DataTrans noNullStringObj:_address],
              @"country": @"1",
-             @"privince": [DataTrans noNullStringObj:_provinceCode],
+             @"province": [DataTrans noNullStringObj:_provinceCode],
              @"city": [DataTrans noNullStringObj:_cityCode],
              @"district": [DataTrans noNullStringObj:_districtCode]
             };
