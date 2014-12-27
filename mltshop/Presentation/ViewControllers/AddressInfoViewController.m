@@ -170,12 +170,13 @@
     if (StringHasValue(theAddress.addressId) ) {
         NSString *message = [NSString stringWithFormat:@"删除%@",theAddress.consignee];
         
-        [UIAlertView bk_showAlertViewWithTitle:T(@"确认删除") message:message cancelButtonTitle:T(@"取消") otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            if (buttonIndex == 0) {
-                [DataTrans showWariningTitle:T(@"删除成功") andCheatsheet:ICON_CHECK];
-                [self.navigationController popViewControllerAnimated:YES];
-                [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
-
+        [UIAlertView bk_showAlertViewWithTitle:T(@"确认删除") message:message cancelButtonTitle:T(@"取消") otherButtonTitles:@[T(@"确定")] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [[AppRequestManager sharedManager]operateAddressWithAddress:theAddress operation:AddressOpsDelete andBlock:^(id responseObject, NSError *error) {
+                    [DataTrans showWariningTitle:T(@"删除成功") andCheatsheet:ICON_CHECK];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
+                }];
             }
         }];
     }

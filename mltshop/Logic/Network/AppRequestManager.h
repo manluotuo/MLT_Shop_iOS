@@ -24,7 +24,7 @@
 #define API_ADDRESS_UPDATE_PATH     @"/ecmobile/?url=/address/update"
 #define API_ADDRESS_GET_PATH        @"/ecmobile/?url=/address/info"
 #define API_ADDRESS_DELETE_PATH     @"/ecmobile/?url=/address/delete"
-#define API_ADDRESS_DEFAULT_PATH    @"/ecmobile/?url=/address/default"
+#define API_ADDRESS_DEFAULT_PATH    @"/ecmobile/?url=/address/setDefault"
 
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
