@@ -16,6 +16,7 @@
 #define API_CATEGORY_ALL            @"/ecmobile/?url=/home/category"
 #define API_HOME_DATA_PATH          @"/ecmobile/?url=/home/data"
 #define API_GOODS_DETAILS_PATH      @"/ecmobile/?url=/goods"
+#define API_REGION_PATH             @"/ecmobile/?url=/region"
 
 
 #define API_ADDRESS_LIST_PATH       @"/ecmobile/?url=/address/list"
@@ -127,6 +128,9 @@
                         operation:(NSUInteger)operation
                         andBlock:(void (^)(id responseObject, NSError *error))block;
 
+
+// API/REGION
+- (void)getAreaWithParentID:(NSString *)parentId andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/merchant/user/me

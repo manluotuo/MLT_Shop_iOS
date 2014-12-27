@@ -32,8 +32,26 @@
     self.dataArray = [[NSMutableArray alloc]init];
     
     [self initDataSource];
-    [self setUpImageCloseButton];
+    [self setUpImageDownButton:0];
+    [self setupRightAddButton];
+}
+
+- (void)setupRightAddButton
+{
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    [backButton setTitle:T(@"新增") forState:UIControlStateNormal];
     
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.navigationItem.rightBarButtonItem = leftBarButtonItem;
+    [backButton addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)addAction
+{
+    AddressInfoViewController *vc = [[AddressInfoViewController alloc]init];
+    [vc setNewData:[[AddressModel alloc]initWithDict:nil]];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)initDataSource
@@ -85,7 +103,15 @@
 //        vc.fromFavorite = YES;
 //        [self.navigationController pushViewController:vc animated:YES];
     }
-    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AddressInfoViewController *vc = [[AddressInfoViewController alloc]initWithNibName:nil bundle:nil];
+    [vc setNewData:[self.dataSource objectAtIndex:indexPath.row]];
+
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {

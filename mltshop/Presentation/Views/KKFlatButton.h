@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger,KKFlatButtonStyle)
+{
+    KKFlatButtonStyleLight      = 0,
+    KKFlatButtonStyleColored    = 1,
+    KKFlatButtonStyleGray       = 2
+};
+
 @interface KKFlatButton : UIButton
+
+@property(nonatomic,assign)NSUInteger buttonStyle;
+
+- (void)setTitleColor:(UIColor *)color andStyle:(KKFlatButtonStyle)style;
 
 @end

@@ -10,4 +10,7 @@
 
 @interface AddressInfoViewController : MMViewController
 
+
+- (void)setNewData:(AddressModel *)address;
+
 @end

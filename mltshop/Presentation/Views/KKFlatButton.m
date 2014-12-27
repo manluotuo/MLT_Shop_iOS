@@ -31,10 +31,46 @@
 
 - (void)setEnabled:(BOOL)enabled
 {
-    if (enabled == NO) {
-        [self setBackgroundColor:GRAYCOLOR];
+    if (self.buttonStyle == KKFlatButtonStyleLight) {
+        if (enabled == NO) {
+            [self setBackgroundColor:GRAYLIGHTCOLOR];
+        }else{
+            [self setBackgroundColor:WHITECOLOR];
+        }
+    }else if (self.buttonStyle == KKFlatButtonStyleColored){
+        if (enabled == NO) {
+            [self setBackgroundColor:GRAYLIGHTCOLOR];
+        }else{
+            [self setBackgroundColor:GREENCOLOR];
+        }
     }else{
-        [self setBackgroundColor:GREENCOLOR];
+        if (enabled == NO) {
+            [self setBackgroundColor:GRAYLIGHTCOLOR];
+        }else{
+            [self setBackgroundColor:WHITECOLOR];
+        }
+    }
+}
+
+- (void)setTitleColor:(UIColor *)color andStyle:(KKFlatButtonStyle)style;
+{
+    self.buttonStyle = style;
+    if (style == KKFlatButtonStyleLight) {
+        [self setTitleColor:color forState:UIControlStateNormal];
+        [self setTitleColor:color forState:UIControlStateHighlighted];
+        self.backgroundColor = WHITECOLOR;
+    }else if (style == KKFlatButtonStyleColored) {
+        [self setTitleColor:WHITECOLOR forState:UIControlStateNormal];
+        [self setTitleColor:WHITECOLOR forState:UIControlStateHighlighted];
+        self.backgroundColor = color;
+    }else if (style == KKFlatButtonStyleGray){
+        [self setTitleColor:color forState:UIControlStateNormal];
+        [self setTitleColor:color forState:UIControlStateHighlighted];
+        self.backgroundColor = GRAYLIGHTCOLOR;
+    }else{
+        [self setTitleColor:color forState:UIControlStateNormal];
+        [self setTitleColor:color forState:UIControlStateHighlighted];
+        self.backgroundColor = WHITECOLOR;
     }
 }
 

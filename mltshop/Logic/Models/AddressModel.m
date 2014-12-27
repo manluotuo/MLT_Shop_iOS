@@ -24,12 +24,10 @@
         _tel      = dict[@"tel"];
         _zipcode      = dict[@"zipcode"];
         
-        _countryCode    = INT(1);
         _provinceCode   = dict[@"province"];
         _cityCode       = dict[@"city"];
         _districtCode   = dict[@"district"];
         
-        _countryName = T(@"中国");
         _provinceName = dict[@"province_name"];
         _cityName = dict[@"city_name"];
         _districtName = dict[@"district_name"];
@@ -38,6 +36,11 @@
         
         _indexPath = [[NSIndexPath alloc]init];
     }
+    
+    // 默认中国
+    _countryCode    = @"1";
+    _countryName    = @"中国";
+
     
     return self;
 }
@@ -51,9 +54,9 @@
              @"tel": [DataTrans noNullStringObj:_tel],
              @"address":[DataTrans noNullStringObj:_address],
              @"country": @"1",
-             @"privince": [DataTrans noNullStringObj:STR_INT([_provinceCode integerValue])],
-             @"city": [DataTrans noNullStringObj:STR_INT([_cityCode integerValue])],
-             @"district": [DataTrans noNullStringObj:STR_INT([_districtCode integerValue])]
+             @"privince": [DataTrans noNullStringObj:_provinceCode],
+             @"city": [DataTrans noNullStringObj:_cityCode],
+             @"district": [DataTrans noNullStringObj:_districtCode]
             };
 }
 

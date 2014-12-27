@@ -405,6 +405,37 @@ static dispatch_once_t onceToken;
     }];
 }
 
+/**
+ *  根据parentId 获取区域
+ *
+ *  @param parentCode <#parentCode description#>
+ *  @param block      <#block description#>
+ */
+- (void)getAreaWithParentID:(NSString *)parentId andBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_REGION_PATH;
+    
+    NSDictionary *postDict = @{@"parent_id" :parentId};
+    
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"][@"regions"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+}
+
+
 
 
 

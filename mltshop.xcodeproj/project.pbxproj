@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E24B71A31CB3700DA06A2 /* CategoryModel.m */; };
+		263D3E3C1A4E6BEA004D8181 /* MultiTablesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263D3E391A4E6BEA004D8181 /* MultiTablesView.m */; };
+		263D3E3D1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263D3E3B1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m */; };
+		263D3E401A4E6C5A004D8181 /* AreaPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263D3E3E1A4E6C5A004D8181 /* AreaPickerViewController.m */; };
 		26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */; };
 		26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB01A1EBDB600E117A0 /* LoginViewController.m */; };
 		26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB61A1EC07E00E117A0 /* RegisterViewController.m */; };
@@ -129,6 +132,12 @@
 /* Begin PBXFileReference section */
 		261E24B61A31CB3700DA06A2 /* CategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
 		261E24B71A31CB3700DA06A2 /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
+		263D3E381A4E6BEA004D8181 /* MultiTablesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiTablesView.h; sourceTree = "<group>"; };
+		263D3E391A4E6BEA004D8181 /* MultiTablesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiTablesView.m; sourceTree = "<group>"; };
+		263D3E3A1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FixedTableHeaderView.h"; sourceTree = "<group>"; };
+		263D3E3B1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FixedTableHeaderView.m"; sourceTree = "<group>"; };
+		263D3E3E1A4E6C5A004D8181 /* AreaPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaPickerViewController.m; sourceTree = "<group>"; };
+		263D3E3F1A4E6C5A004D8181 /* AreaPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaPickerViewController.h; sourceTree = "<group>"; };
 		26435AAD1A1EBDB600E117A0 /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
 		26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
 		26435AAF1A1EBDB600E117A0 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -340,6 +349,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		263D3E371A4E6BEA004D8181 /* MultiTablesView */ = {
+			isa = PBXGroup;
+			children = (
+				263D3E381A4E6BEA004D8181 /* MultiTablesView.h */,
+				263D3E391A4E6BEA004D8181 /* MultiTablesView.m */,
+				263D3E3A1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.h */,
+				263D3E3B1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m */,
+			);
+			path = MultiTablesView;
+			sourceTree = "<group>";
+		};
 		26435AAC1A1EBDB600E117A0 /* LoginRegisterWelcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +555,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				263D3E371A4E6BEA004D8181 /* MultiTablesView */,
 				265BB8961A1CF4B50040ACC0 /* YWDictionary */,
 				26BE3AC81A17377D009F37B4 /* CDatePickerViewEx */,
 				26BE3A151A170421009F37B4 /* Categories */,
@@ -838,6 +859,8 @@
 		26DE7FD21A2BFE17007F4B16 /* FunctionVC */ = {
 			isa = PBXGroup;
 			children = (
+				263D3E3E1A4E6C5A004D8181 /* AreaPickerViewController.m */,
+				263D3E3F1A4E6C5A004D8181 /* AreaPickerViewController.h */,
 				26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */,
 				26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */,
 				26B1C2571A4688D700295D32 /* AddressListViewController.h */,
@@ -1081,10 +1104,12 @@
 				26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */,
 				26BE3AA01A170421009F37B4 /* SGActionView.m in Sources */,
 				269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */,
+				263D3E401A4E6C5A004D8181 /* AreaPickerViewController.m in Sources */,
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
 				26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */,
+				263D3E3C1A4E6BEA004D8181 /* MultiTablesView.m in Sources */,
 				26BE3A9A1A170421009F37B4 /* README.md in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
 				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,
@@ -1097,6 +1122,7 @@
 				26BE3AC11A173739009F37B4 /* FAIconButton.m in Sources */,
 				26BE3AA41A170421009F37B4 /* SGMultiMenu.m in Sources */,
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
+				263D3E3D1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m in Sources */,
 				269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
 				2658A8FE1A3D24D500D9C011 /* GoodsOneTableViewCell.m in Sources */,

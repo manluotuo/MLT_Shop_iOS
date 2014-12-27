@@ -26,10 +26,10 @@ typedef NS_ENUM(NSUInteger,AddressOps)
 @property(nonatomic, strong)NSString* zipcode;
 @property(nonatomic, strong)NSString* tel;
 
-@property(nonatomic, strong)NSNumber* countryCode;
-@property(nonatomic, strong)NSNumber* provinceCode;
-@property(nonatomic, strong)NSNumber* cityCode;
-@property(nonatomic, strong)NSNumber* districtCode;
+@property(nonatomic, strong)NSString* countryCode;
+@property(nonatomic, strong)NSString* provinceCode;
+@property(nonatomic, strong)NSString* cityCode;
+@property(nonatomic, strong)NSString* districtCode;
 
 @property(nonatomic, strong)NSString *countryName;
 @property(nonatomic, strong)NSString *provinceName;
@@ -40,6 +40,12 @@ typedef NS_ENUM(NSUInteger,AddressOps)
 @property(nonatomic, strong)NSDictionary *postDict;
 
 @property(nonatomic, strong)NSIndexPath *indexPath;
+
+
+// just for multipleTableView show
+@property (nonatomic, strong) NSString * code;
+@property (nonatomic, strong) NSString * name;
+
 
 - (id)initWithDict:(NSDictionary *)dict;
 

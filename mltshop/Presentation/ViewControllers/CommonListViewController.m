@@ -355,8 +355,10 @@
 {
     if (self.dataSourceType == ListDataSourceTwoInLine){
         return GOODS_CELL_HEIGHT + H_30;
-    }else{
+    }else if(self.dataSourceType == ListDataSourceOneInLine){
         return GOODS_CELL_HEIGHT;
+    }else{
+        return CELL_HEIGHT;
     }
 }
 

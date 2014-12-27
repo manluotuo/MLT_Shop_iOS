@@ -41,14 +41,12 @@
 
 - (void)setUpImageDownButton:(NSInteger)position
 {
-    CGFloat leftMargin = 10.0f;
-    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CGRectMake(0, 0, 12+leftMargin, 21)];
+    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 22, 21)];
+    [backButton setTitle:ICON_DOWN forState:UIControlStateNormal];
+    [backButton.titleLabel setFont:FONT_AWESOME_24];
     
-    [cancelButton setImage:[UIImage imageNamed:@"back_btn"] forState:UIControlStateNormal];
-    [cancelButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
-    UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
-    [cancelButton addTarget:self action:@selector(downAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [backButton addTarget:self action:@selector(downAction) forControlEvents:UIControlEventTouchUpInside];
 
     if (position == 0) {
         self.navigationItem.leftBarButtonItem = barBackButtonItem;
