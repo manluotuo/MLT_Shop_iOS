@@ -60,7 +60,6 @@
             if (ArrayHasValue(goodsList)) {
                 for (int i = 0 ; i < count; i++) {
                     CartModel *oneCart = [[CartModel alloc]initWithDict:goodsList[i]];
-                    NSLog(@"%@",goodsList[i]);
                     [self.dataArray addObject:oneCart];
                 }
                 NSLog(@"Online setupDataSource ======== ");

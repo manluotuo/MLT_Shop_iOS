@@ -387,6 +387,7 @@
 
 #define SIGNAL_CLONE_VEHICLE        @"50200"
 #define SIGNAL_ADDRESS_OPERATE_DONE         @"50188"
+#define SIGNAL_CHANGE_CART_GOODS_COUNT      @"50189"
 
 #define SIGNAL_CHOOSE_MODLE_PICKER          @"50090" //重新选择步骤
 #define SIGNAL_UPLOAD_GALLERY_PROGRESS      @"50091"
@@ -805,23 +806,33 @@ NS_INLINE BOOL BoolHasValue(id str) {
 
 
 
-NS_INLINE BOOL DictionaryHasValue(NSDictionary *dict)
+NS_INLINE BOOL DictionaryHasValue(id dict)
 {
-    NSArray * array = [dict allKeys];
-    if ([array count]>0) {
-        return YES;
+    if ([dict isKindOfClass:[NSDictionary class]]) {
+
+        NSArray * array = [dict allKeys];
+        if ([array count]>0) {
+            return YES;
+        }else{
+            return NO;
+        }
     }else{
         return NO;
     }
 }
 
-NS_INLINE BOOL ArrayHasValue(NSArray *array)
+NS_INLINE BOOL ArrayHasValue(id array)
 {
-    if ([array count]>0) {
-        return YES;
+    if ([array isKindOfClass:[NSArray class]]) {
+        if ([array count]>0) {
+            return YES;
+        }else{
+            return NO;
+        }
     }else{
         return NO;
     }
+    
 }
 
 

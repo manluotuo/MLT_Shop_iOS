@@ -31,7 +31,7 @@
 //#import "ShareHelper.h"
 //#import "WXApi.h"
 //#import "WeiboSDK.h"
-#define MR_LOGGING_ENABLED 1
+#define MR_LOGGING_ENABLED 0
 @interface AppDelegate ()
 @property(nonatomic, strong)KKDrawerViewController * drawerController;
 @property (strong, nonatomic)RightMenuViewController *rightSideDrawerViewController;
@@ -147,9 +147,9 @@
             NSLog(@"会记住登录信息,用户还没有登录");
             [self showRegisterView];
         }else{
-//            [self loginWithSavedUserInfo];
+            [self loginWithSavedUserInfo];
 //            NSLog(@"用户已经登录");
-            [self showDrawerView];
+//            [self showDrawerView];
         }
     }
 }

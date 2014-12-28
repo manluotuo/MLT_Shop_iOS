@@ -358,6 +358,8 @@
         return GOODS_CELL_HEIGHT + H_30;
     }else if(self.dataSourceType == ListDataSourceOneInLine){
         return GOODS_CELL_HEIGHT;
+    }else if(self.dataSourceType == ListDataSourceCart){
+        return CELL_HEIGHT+H_20;
     }else{
         return CELL_HEIGHT;
     }

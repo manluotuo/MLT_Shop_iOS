@@ -21,8 +21,11 @@
         _goodsAttrId    = dict[@"goods_attr_id"];
         _subtotal       = [DataTrans noNullNumberObj:[dict objectForKey:@"subtotal"]];
         _extensionCode  = dict[@"extension_code"];
+        if (ArrayHasValue(dict[@"goods_attr"])) {
+            _goodsAttr  = dict[@"goods_attr"][0][@"value"];
+        }
         
-        _goodsNumber    = [DataTrans noNullNumberObj:[dict objectForKey:@"goods_number"]];
+        _goodsCount    = [DataTrans noNullNumberObj:[dict objectForKey:@"goods_number"]];
         _isReal         = [DataTrans noNullNumberObj:[dict objectForKey:@"is_real"]];
         _isGift         = [DataTrans noNullNumberObj:[dict objectForKey:@"is_gift"]];
         _isShipping     = [DataTrans noNullNumberObj:[dict objectForKey:@"is_shipping"]];

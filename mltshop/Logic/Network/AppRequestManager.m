@@ -157,6 +157,7 @@ static dispatch_once_t onceToken;
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
             if (block) {
+                NSLog(@"%@",responseObject[@"data"]);
                 block(responseObject[@"data"] , nil);
             }
         }
@@ -430,13 +431,13 @@ static dispatch_once_t onceToken;
         case CartOpsCreate:
             postURL = API_ADDRESS_CREATE_PATH;
             baseDict[@"goods_id"] = theCart.goodsId;
-            baseDict[@"number"] = theCart.goodsNumber;
+            baseDict[@"number"] = theCart.goodsCount;
             baseDict[@"spec"] = theCart.goodsAttrId;
             break;
         case CartOpsUpdate:
             postURL = API_ADDRESS_UPDATE_PATH;
             baseDict[@"rec_id"] = theCart.recId;
-            baseDict[@"new_number"] = theCart.goodsNumber;
+            baseDict[@"new_number"] = theCart.goodsCount;
             break;
         case CartOpsDelete:
             postURL = API_ADDRESS_DELETE_PATH;

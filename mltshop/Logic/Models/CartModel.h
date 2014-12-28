@@ -24,7 +24,8 @@ typedef NS_ENUM(NSUInteger,CartOps)
 @property(nonatomic, strong)NSString *parentId;
 @property(nonatomic, strong)NSString *goodsAttrId;
 @property(nonatomic, strong)NSNumber *subtotal;
-@property(nonatomic, strong)NSNumber *goodsNumber;
+@property(nonatomic, strong)NSNumber *goodsCount;
+@property(nonatomic, strong)NSString *goodsAttr;
 
 @property(nonatomic, strong)NSString *extensionCode;
 @property(nonatomic, strong)NSNumber *isReal;
