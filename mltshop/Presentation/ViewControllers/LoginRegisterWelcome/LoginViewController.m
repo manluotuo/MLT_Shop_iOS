@@ -15,8 +15,6 @@
 #import "UIViewController+ImageBackButton.h"
 #import "Me.h"
 #import "ModelHelper.h"
-#import <HTProgressHUD/HTProgressHUD.h>
-#import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 @interface LoginViewController ()<UITextFieldDelegate, UIScrollViewDelegate>
@@ -212,6 +210,8 @@
         if (responseObject != nil) {
             
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+            dict[@"password"] = self.passTextView.text;
+
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             [XAppDelegate skipIntroView];
 

@@ -54,6 +54,10 @@
 
     if (DictionaryHasValue(json[@"user"])) {
         NSDictionary *user = json[@"user"];
+        if (StringHasValue(json[@"password"])) {
+            onlyMe.password = json[@"password"];
+        }
+
         onlyMe.userId = [DataTrans noNullStringObj:user[@"id"]];
         onlyMe.username = [DataTrans noNullStringObj:user[@"name"]];
         onlyMe.rankName = [DataTrans noNullStringObj:user[@"rank_name"]];

@@ -229,7 +229,7 @@
             
             NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithDictionary:responseObject];
             //            dict[@"token"]  = responseObject[@"token"];
-            //            dict[@"username"]   = responseObject[@"username"];
+            dict[@"password"] = self.passTextView.text;
             
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             

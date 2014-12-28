@@ -24,6 +24,7 @@
 //#import "ModelHelper.h"
 #import "FirstHelpViewController.h"
 #import "RegisterViewController.h"
+#import "LoginViewController.h"
 //#import "ProfileFormViewController.h"
 //#import "AccountListViewController.h"
 
@@ -34,7 +35,7 @@
 @interface AppDelegate ()
 @property(nonatomic, strong)KKDrawerViewController * drawerController;
 @property (strong, nonatomic)RightMenuViewController *rightSideDrawerViewController;
-//@property(nonatomic, strong)LoginViewController *loginViewController;
+@property(nonatomic, strong)LoginViewController *loginViewController;
 @property(nonatomic, strong)RegisterViewController *registerViewController;
 @property(nonatomic, strong)FirstHelpViewController *firstHelpViewController;
 @property(nonatomic, strong)NSString *versonUrl;
@@ -44,6 +45,8 @@
 @implementation AppDelegate
 @synthesize drawerController;
 @synthesize firstHelpViewController;
+@synthesize loginViewController;
+@synthesize registerViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -139,14 +142,52 @@
         [self showIntroductionView];
     }else{
         NSLog(@"APP ME  %@",self.me);
+
         if (!StringHasValue(self.me.userId)) {
             NSLog(@"会记住登录信息,用户还没有登录");
             [self showRegisterView];
         }else{
-            NSLog(@"用户已经登录");
-            [self showDrawerView];
+            [self loginWithSavedUserInfo];
+//            NSLog(@"用户已经登录");
+//            [self showDrawerView];
         }
     }
+}
+
+// 利用现有的用户名密码登陆
+- (void)loginWithSavedUserInfo
+{
+//    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+//    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+//    HUD.text = T(@"登录中...");
+//    [HUD showInView:self.window.rootViewController.view];
+    
+    // 缺一不可
+    if (!StringHasValue(self.me.username) ||  !StringHasValue(self.me.password)) {
+        [self showLoginView];
+        return;
+    }
+    
+    [[AppRequestManager sharedManager] signInWithUsername:self.me.username password:self.me.password andBlock:^(id responseObject, NSError *error) {
+        
+//        [HUD removeFromSuperview];
+        
+        if (responseObject != nil) {
+            
+            NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+            [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
+            // 显示主页面
+            [self showDrawerView];
+        }
+        
+        if(error != nil)
+        {
+            // 显示登陆页面
+            [self showLoginView];
+        }
+        
+    }];
+
 }
 
 - (void)showIntroductionView
@@ -168,6 +209,17 @@
     [self.window addSubview:self.registerViewController.view];
     [self.window makeKeyAndVisible];
 }
+
+- (void)showLoginView
+{
+    NSLog(@"showRegisterView");
+    self.loginViewController = [[LoginViewController alloc]initWithNibName:nil bundle:nil];
+    
+    [self.window setRootViewController:self.loginViewController];
+    [self.window addSubview:self.loginViewController.view];
+    [self.window makeKeyAndVisible];
+}
+
 
 
 
