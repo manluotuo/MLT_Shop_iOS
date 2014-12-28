@@ -635,7 +635,7 @@ typedef NS_ENUM(NSInteger, LeftMenuRow){
     LeftMenuMain        = 1,
     LeftMenuProfile     = 2,
     LeftMenuSearch      = 3,
-    LeftMenuChart       = 4,
+    LeftMenuCart        = 4,
     LeftMenuService     = 5,
     LeftMenuSetting     = 6,
     LeftMenuHelp        = 7,

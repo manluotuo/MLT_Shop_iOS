@@ -147,9 +147,9 @@
             NSLog(@"会记住登录信息,用户还没有登录");
             [self showRegisterView];
         }else{
-            [self loginWithSavedUserInfo];
+//            [self loginWithSavedUserInfo];
 //            NSLog(@"用户已经登录");
-//            [self showDrawerView];
+            [self showDrawerView];
         }
     }
 }

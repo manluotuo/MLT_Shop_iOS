@@ -41,6 +41,9 @@
 		266FA81D1A134A72000C2AAE /* mltshopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA81C1A134A72000C2AAE /* mltshopTests.m */; };
 		267B85EE1A360C170084DDEA /* ADBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 267B85ED1A360C170084DDEA /* ADBrandView.m */; };
 		267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 267B85F01A360D5F0084DDEA /* ADAreaView.m */; };
+		26875B551A4FAA2900FA5335 /* CartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26875B541A4FAA2900FA5335 /* CartModel.m */; };
+		26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26875B571A4FDFC300FA5335 /* CartListViewController.m */; };
+		26875B5B1A4FE4ED00FA5335 /* CartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */; };
 		269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD8681A351B6600BF19B5 /* GoodsModel.m */; };
 		269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD86B1A3522CA00BF19B5 /* PhotoModel.m */; };
 		26B1C2561A46876E00295D32 /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C2551A46876E00295D32 /* AddressModel.m */; };
@@ -190,6 +193,12 @@
 		267B85ED1A360C170084DDEA /* ADBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBrandView.m; sourceTree = "<group>"; };
 		267B85EF1A360D5F0084DDEA /* ADAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAreaView.h; sourceTree = "<group>"; };
 		267B85F01A360D5F0084DDEA /* ADAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADAreaView.m; sourceTree = "<group>"; };
+		26875B531A4FAA2900FA5335 /* CartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartModel.h; sourceTree = "<group>"; };
+		26875B541A4FAA2900FA5335 /* CartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartModel.m; sourceTree = "<group>"; };
+		26875B561A4FDFC300FA5335 /* CartListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartListViewController.h; sourceTree = "<group>"; };
+		26875B571A4FDFC300FA5335 /* CartListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartListViewController.m; sourceTree = "<group>"; };
+		26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartTableViewCell.m; sourceTree = "<group>"; };
+		26875B5A1A4FE4ED00FA5335 /* CartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTableViewCell.h; sourceTree = "<group>"; };
 		269FD8671A351B6600BF19B5 /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		269FD8681A351B6600BF19B5 /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
 		269FD86A1A3522CA00BF19B5 /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
@@ -692,6 +701,8 @@
 		26BE3A591A170421009F37B4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				26875B531A4FAA2900FA5335 /* CartModel.h */,
+				26875B541A4FAA2900FA5335 /* CartModel.m */,
 				265BB88D1A1CEA180040ACC0 /* ModelHelper.h */,
 				265BB88E1A1CEA180040ACC0 /* ModelHelper.m */,
 				26BE3AD51A173C3D009F37B4 /* DataTrans.m */,
@@ -736,6 +747,8 @@
 		26BE3A5E1A170421009F37B4 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				26875B5A1A4FE4ED00FA5335 /* CartTableViewCell.h */,
+				26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */,
 				266B7E171A3D67D20001835F /* GoodsTwoTableViewCell.h */,
 				266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */,
 				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
@@ -867,6 +880,8 @@
 				26B1C2581A4688D700295D32 /* AddressListViewController.m */,
 				26B1C25A1A46890300295D32 /* AddressInfoViewController.h */,
 				26B1C25B1A46890300295D32 /* AddressInfoViewController.m */,
+				26875B561A4FDFC300FA5335 /* CartListViewController.h */,
+				26875B571A4FDFC300FA5335 /* CartListViewController.m */,
 			);
 			name = FunctionVC;
 			sourceTree = "<group>";
@@ -1127,13 +1142,16 @@
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
 				2658A8FE1A3D24D500D9C011 /* GoodsOneTableViewCell.m in Sources */,
 				26B1C25C1A46890300295D32 /* AddressInfoViewController.m in Sources */,
+				26875B5B1A4FE4ED00FA5335 /* CartTableViewCell.m in Sources */,
 				265BB8921A1CEFCF0040ACC0 /* RoundedAvatarButton.m in Sources */,
 				26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */,
 				265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */,
+				26875B551A4FAA2900FA5335 /* CartModel.m in Sources */,
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
 				266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */,
+				26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
 				26B1C2591A4688D700295D32 /* AddressListViewController.m in Sources */,

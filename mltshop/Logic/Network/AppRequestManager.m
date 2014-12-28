@@ -406,6 +406,66 @@ static dispatch_once_t onceToken;
 }
 
 /**
+ *  购物车操作
+ *
+ *  @param theCart   <#theCart description#>
+ *  @param operation <#operation description#>
+ *  @param block     <#block description#>
+ */
+- (void)operateCartWithAddress:(CartModel *)theCart
+                     operation:(NSUInteger)operation
+                      andBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = @"";
+    NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
+                                     @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                                     @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                                     }}];
+    
+    
+    switch (operation) {
+        case CartOpsList:
+            postURL = API_CART_LIST_PATH;
+            break;
+        case CartOpsCreate:
+            postURL = API_ADDRESS_CREATE_PATH;
+            baseDict[@"goods_id"] = theCart.goodsId;
+            baseDict[@"number"] = theCart.goodsNumber;
+            baseDict[@"spec"] = theCart.goodsAttrId;
+            break;
+        case CartOpsUpdate:
+            postURL = API_ADDRESS_UPDATE_PATH;
+            baseDict[@"rec_id"] = theCart.recId;
+            baseDict[@"new_number"] = theCart.goodsNumber;
+            break;
+        case CartOpsDelete:
+            postURL = API_ADDRESS_DELETE_PATH;
+            baseDict[@"rec_id"] = theCart.recId;
+            break;
+        default:
+            break;
+    }
+    
+    
+    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+    }];
+}
+
+
+/**
  *  根据parentId 获取区域
  *
  *  @param parentCode <#parentCode description#>

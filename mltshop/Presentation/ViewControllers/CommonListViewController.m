@@ -10,6 +10,7 @@
 #import "GoodsOneTableViewCell.h"
 #import "GoodsTwoTableViewCell.h"
 #import "AddressTableViewCell.h"
+#import "CartTableViewCell.h"
 #import "SVPullToRefresh.h"
 #import "AppRequestManager.h"
 #import <MMDrawerController/MMDrawerBarButtonItem.h>
@@ -391,7 +392,7 @@
     }
     else if(self.dataSourceType == ListDataSourceOneInLine){
         GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
-        cellData.indexPath = INT(indexPath.row);
+        cellData.indexPath = indexPath;
         GoodsOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
         if (cell == nil) {
@@ -403,7 +404,7 @@
         return cell;
     }else if(self.dataSourceType == ListDataSourceAddress){
         AddressModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
-        cellData.indexPath = INT(indexPath.row);
+        cellData.indexPath = indexPath;
         AddressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
         if (cell == nil) {
@@ -414,7 +415,19 @@
         
         return cell;
     }
-    
+    else if(self.dataSourceType == ListDataSourceCart){
+        CartModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+        cellData.indexPath = indexPath;
+        CartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil) {
+            cell = [[CartTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.passDelegate = self;
+        }
+        [cell setNewData:cellData];
+        
+        return cell;
+    }
     else{
         GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
         cellData.indexPath = INT(indexPath.row);

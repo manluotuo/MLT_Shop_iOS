@@ -20,6 +20,7 @@
 #import "UIViewController+ImageBackButton.h"
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
+#import "CartListViewController.h"
 
 //#import "AccountListViewController.h"
 #import "ProfileViewController.h"
@@ -96,7 +97,7 @@
     NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
                            T(@"购物车"), @"title",
                            [NSString fontAwesomeIconStringForEnum:FAShoppingCart], @"icon",
-                           INT(LeftMenuChart), @"function",
+                           INT(LeftMenuCart), @"function",
                            nil];
     
     NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
@@ -455,6 +456,16 @@
         {
             [XAppDelegate showDrawerView];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+        }
+            break;
+        case LeftMenuCart:
+        {
+            CartListViewController *VC = [[CartListViewController alloc]init];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [VC setupLeftMMButton];
+            [self.mm_drawerController setCenterViewController:nav];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+            
         }
             break;
         case LeftMenuSearch:

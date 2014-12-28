@@ -20,6 +20,7 @@
         _brandName = [dict objectForKey:@"brand_name"];
         _catId = [dict objectForKey:@"cat_id"];
         _goodsName = [dict objectForKey:@"goods_name"];
+        _goodsSN = [dict objectForKey:@"goods_sn"];
         _goodsBrief = [dict objectForKey:@"goods_brief"];
         _goodsDesc = [dict objectForKey:@"goods_desc"];
         _marketPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];

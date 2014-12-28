@@ -26,6 +26,11 @@
 #define API_ADDRESS_DELETE_PATH     @"/ecmobile/?url=/address/delete"
 #define API_ADDRESS_DEFAULT_PATH    @"/ecmobile/?url=/address/setDefault"
 
+#define API_CART_LIST_PATH          @"/ecmobile/?url=/cart/list"
+#define API_CART_CREATE_PATH        @"/ecmobile/?url=/cart/create"
+#define API_CART_UPDATE_PATH        @"/ecmobile/?url=/cart/update"
+#define API_CART_DELETE_PATH        @"/ecmobile/?url=/cart/delete"
+
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
 #define API_UPDATE_VEHICLE_GALLERY  @"/gallery/update"
@@ -127,6 +132,11 @@
 - (void)operateAddressWithAddress:(AddressModel *)theAddress
                         operation:(NSUInteger)operation
                         andBlock:(void (^)(id responseObject, NSError *error))block;
+
+// CART function
+- (void)operateCartWithAddress:(CartModel *)theCart
+                     operation:(NSUInteger)operation
+                      andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/REGION
