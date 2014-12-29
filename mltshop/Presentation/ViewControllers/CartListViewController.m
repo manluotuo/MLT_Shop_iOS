@@ -8,12 +8,14 @@
 
 #import "CartListViewController.h"
 #import "AppRequestManager.h"
+#import "SGActionView.h"
 #import "UIViewController+ImageBackButton.h"
 
 @interface CartListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
 @property(nonatomic, strong)NSMutableArray *dataArray;
 @property(nonatomic, strong)NSMutableDictionary *totalInfo;
+@property(nonatomic, strong)UIView *footerView;
 
 @end
 
@@ -42,6 +44,41 @@
     [super initDataSource];
 }
 
+- (void)initFooterView:(NSDictionary *)total
+{
+    self.footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_100)];
+    self.footerView.backgroundColor = WHITECOLOR;
+    
+    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 1)];
+    lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
+
+    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_40, H_20, H_200, H_20)];
+    totalShopPrice.textColor = REDCOLOR;
+    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_40, H_40, H_200, H_20)];
+    totalMarketPrice.textColor = GRAYLIGHTCOLOR;
+    UILabel *savingPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_40, H_60, H_200, H_20)];
+    savingPrice.textColor = GREENCOLOR;
+    
+    totalShopPrice.font = CUSTOMFONT;
+    totalMarketPrice.font = LITTLECUSTOMFONT;
+    savingPrice.font = LITTLECUSTOMFONT;
+
+    NSNumber *t1 = total[@"total_shop_price"];
+    NSNumber *t2 = total[@"total_market_price"];
+    NSNumber *t3 = total[@"saving"];
+    totalShopPrice.text = [NSString stringWithFormat:@"总计: %.2f元", [t1 floatValue]];
+    totalMarketPrice.text = [NSString stringWithFormat:@"市场总价: %.2f", [t2 floatValue]];
+    savingPrice.text = [NSString stringWithFormat:@"共节省: %.2f元 %@", [t3 floatValue], total[@"save_rate"]];
+    
+    [self.footerView addSubview:totalShopPrice];
+    [self.footerView addSubview:totalMarketPrice];
+    [self.footerView addSubview:savingPrice];
+    [self.footerView addSubview:lineView1];
+    
+    self.tableView.tableFooterView = self.footerView;
+
+}
+
 
 
 /**
@@ -55,6 +92,8 @@
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSArray *goodsList = responseObject[@"goods_list"];
+            [self initFooterView:responseObject[@"total"]];
+            
             NSUInteger count = [goodsList count];
             self.totalInfo = responseObject[@"total"];
             if (ArrayHasValue(goodsList)) {
@@ -93,8 +132,23 @@
 
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
-    if ([value isEqualToString:SIGNAL_ADDRESS_OPERATE_DONE]) {
-        [self setupDataSource];
+    CartModel * theCart = data;
+    if ([value isEqualToString:SIGNAL_CHANGE_CART_GOODS_COUNT]) {
+        NSArray *titles = @[@"删除", @"1", @"2", @"3", @"4", @"5", @"6", @"7"];
+        [SGActionView showGridMenuWithTitle:T(@"选择数量") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
+            if (index ==0) {
+                [[AppRequestManager sharedManager]operateCartWithAddress:theCart operation:CartOpsDelete andBlock:^(id responseObject, NSError *error) {
+                    [self setupDataSource];
+                }];
+            }else{
+                theCart.goodsCount = INT(index);
+                [[AppRequestManager sharedManager]operateCartWithAddress:theCart operation:CartOpsUpdate andBlock:^(id responseObject, NSError *error) {
+                    if (responseObject != nil) {
+                        [self setupDataSource];
+                    }
+                }];
+            }
+        }];
     }
 }
 

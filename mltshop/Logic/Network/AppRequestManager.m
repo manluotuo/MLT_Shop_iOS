@@ -429,18 +429,18 @@ static dispatch_once_t onceToken;
             postURL = API_CART_LIST_PATH;
             break;
         case CartOpsCreate:
-            postURL = API_ADDRESS_CREATE_PATH;
+            postURL = API_CART_CREATE_PATH;
             baseDict[@"goods_id"] = theCart.goodsId;
-            baseDict[@"number"] = theCart.goodsCount;
+            baseDict[@"number"] = STR_INT([theCart.goodsCount integerValue]);
             baseDict[@"spec"] = theCart.goodsAttrId;
             break;
         case CartOpsUpdate:
-            postURL = API_ADDRESS_UPDATE_PATH;
+            postURL = API_CART_UPDATE_PATH;
             baseDict[@"rec_id"] = theCart.recId;
-            baseDict[@"new_number"] = theCart.goodsCount;
+            baseDict[@"new_number"] = STR_INT([theCart.goodsCount integerValue]);
             break;
         case CartOpsDelete:
-            postURL = API_ADDRESS_DELETE_PATH;
+            postURL = API_CART_DELETE_PATH;
             baseDict[@"rec_id"] = theCart.recId;
             break;
         default:

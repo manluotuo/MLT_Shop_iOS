@@ -109,7 +109,7 @@
 
 #define T(a)    NSLocalizedString((a), nil)
 
-#define INT(a)      [NSNumber numberWithInt:(a)]
+#define INT(a)      [NSNumber numberWithInteger:(a)]
 #define FLOAT(a)    [NSNumber numberWithFloat:(a)]
 #define NUM_BOOL(a) [NSNumber numberWithBool:(a)]
 #define C_SYMBOL @"-"
