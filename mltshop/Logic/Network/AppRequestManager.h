@@ -31,6 +31,9 @@
 #define API_CART_UPDATE_PATH        @"/ecmobile/?url=/cart/update"
 #define API_CART_DELETE_PATH        @"/ecmobile/?url=/cart/delete"
 
+#define API_FLOW_CHECKORDER_PATH    @"/ecmobile/?url=/flow/checkOrder"
+#define API_FLOW_DONE_PATH          @"/ecmobile/?url=/flow/done"
+
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
 #define API_UPDATE_VEHICLE_GALLERY  @"/gallery/update"
@@ -141,6 +144,14 @@
 
 // API/REGION
 - (void)getAreaWithParentID:(NSString *)parentId andBlock:(void (^)(id responseObject, NSError *error))block;
+
+// flow checkOrder
+- (void)flowCheckOrderWithBlock:(void (^)(id responseObject, NSError *error))block;
+
+// flow done
+- (void)flowDoneWithFlowModel:(FlowModel *)flowModel andBlock:(void (^)(id responseObject, NSError *error))block;
+
+
 
 
 // API/merchant/user/me

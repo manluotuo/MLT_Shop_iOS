@@ -497,6 +497,50 @@ static dispatch_once_t onceToken;
 }
 
 
+- (void)flowCheckOrderWithBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_FLOW_CHECKORDER_PATH;
+    
+    NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
+                                     @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                                     @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                                     }}];
+    
+    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

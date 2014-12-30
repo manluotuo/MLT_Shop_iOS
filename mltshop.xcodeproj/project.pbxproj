@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E24B71A31CB3700DA06A2 /* CategoryModel.m */; };
+		263386491A52EC7E00C94D8F /* FlowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 263386481A52EC7E00C94D8F /* FlowModel.m */; };
 		263D3E3C1A4E6BEA004D8181 /* MultiTablesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263D3E391A4E6BEA004D8181 /* MultiTablesView.m */; };
 		263D3E3D1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 263D3E3B1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m */; };
 		263D3E401A4E6C5A004D8181 /* AreaPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263D3E3E1A4E6C5A004D8181 /* AreaPickerViewController.m */; };
@@ -135,6 +136,8 @@
 /* Begin PBXFileReference section */
 		261E24B61A31CB3700DA06A2 /* CategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
 		261E24B71A31CB3700DA06A2 /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
+		263386471A52EC7E00C94D8F /* FlowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowModel.h; sourceTree = "<group>"; };
+		263386481A52EC7E00C94D8F /* FlowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowModel.m; sourceTree = "<group>"; };
 		263D3E381A4E6BEA004D8181 /* MultiTablesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiTablesView.h; sourceTree = "<group>"; };
 		263D3E391A4E6BEA004D8181 /* MultiTablesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiTablesView.m; sourceTree = "<group>"; };
 		263D3E3A1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FixedTableHeaderView.h"; sourceTree = "<group>"; };
@@ -721,6 +724,8 @@
 				26FF358B1A429AE80014A38F /* SpecModel.m */,
 				26B1C2541A46876E00295D32 /* AddressModel.h */,
 				26B1C2551A46876E00295D32 /* AddressModel.m */,
+				263386471A52EC7E00C94D8F /* FlowModel.h */,
+				263386481A52EC7E00C94D8F /* FlowModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1093,6 +1098,7 @@
 				267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */,
 				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
+				263386491A52EC7E00C94D8F /* FlowModel.m in Sources */,
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
 				26B1C2561A46876E00295D32 /* AddressModel.m in Sources */,
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,

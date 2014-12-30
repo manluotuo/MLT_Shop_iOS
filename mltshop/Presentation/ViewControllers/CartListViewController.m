@@ -10,12 +10,14 @@
 #import "AppRequestManager.h"
 #import "SGActionView.h"
 #import "UIViewController+ImageBackButton.h"
+#import "KKFlatButton.h"
 
 @interface CartListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
 @property(nonatomic, strong)NSMutableArray *dataArray;
 @property(nonatomic, strong)NSMutableDictionary *totalInfo;
 @property(nonatomic, strong)UIView *footerView;
+@property(nonatomic, strong)KKFlatButton *flowButton;
 
 @end
 
@@ -25,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = T(@"地址管理");
+    self.title = T(@"购物车");
     self.commonListDelegate = self;
     self.dataSourceType = ListDataSourceCart;
     
@@ -46,39 +48,55 @@
 
 - (void)initFooterView:(NSDictionary *)total
 {
-    self.footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_100)];
+    self.footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_150)];
     self.footerView.backgroundColor = WHITECOLOR;
     
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 1)];
     lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
 
-    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_40, H_20, H_200, H_20)];
+    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20, H_200, H_24)];
     totalShopPrice.textColor = REDCOLOR;
-    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_40, H_40, H_200, H_20)];
+    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20+H_24, H_200, H_24)];
     totalMarketPrice.textColor = GRAYLIGHTCOLOR;
-    UILabel *savingPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_40, H_60, H_200, H_20)];
+    UILabel *savingPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20+H_24*2, H_200, H_24)];
     savingPrice.textColor = GREENCOLOR;
     
+    
     totalShopPrice.font = CUSTOMFONT;
-    totalMarketPrice.font = LITTLECUSTOMFONT;
-    savingPrice.font = LITTLECUSTOMFONT;
+    totalMarketPrice.font = CUSTOMFONT;
+    savingPrice.font = CUSTOMFONT;
 
     NSNumber *t1 = total[@"total_shop_price"];
     NSNumber *t2 = total[@"total_market_price"];
     NSNumber *t3 = total[@"saving"];
     totalShopPrice.text = [NSString stringWithFormat:@"总计: %.2f元", [t1 floatValue]];
     totalMarketPrice.text = [NSString stringWithFormat:@"市场总价: %.2f", [t2 floatValue]];
-    savingPrice.text = [NSString stringWithFormat:@"共节省: %.2f元 %@", [t3 floatValue], total[@"save_rate"]];
+    savingPrice.text = [NSString stringWithFormat:@"共节省: %.2f元 (%@)", [t3 floatValue], total[@"save_rate"]];
+    
+    self.flowButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [self.flowButton setFrame:CGRectMake(H_60, H_20+H_24*3, H_200, H_50)];
+    [self.flowButton setTitle:T(@"结算") forState:UIControlStateNormal];
+    [self.flowButton addTarget:self action:@selector(checkOrderAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self.footerView addSubview:totalShopPrice];
     [self.footerView addSubview:totalMarketPrice];
     [self.footerView addSubview:savingPrice];
     [self.footerView addSubview:lineView1];
+    [self.footerView addSubview:self.flowButton];
     
     self.tableView.tableFooterView = self.footerView;
 
 }
 
+
+- (void)checkOrderAction
+{
+    [[AppRequestManager sharedManager]flowCheckOrderWithBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            NSLog(@"%@",responseObject);
+        }
+    }];
+}
 
 
 /**
