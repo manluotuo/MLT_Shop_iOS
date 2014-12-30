@@ -78,7 +78,9 @@
     nameLabel.text = self.data.goodsName;
     if (StringHasValue(self.data.goodsAttr)) {
         attrLabel.text = self.data.goodsAttr;
+        priceLabel.y = H_14+H_20+H_20;
     }else{
+        attrLabel.text = @"";
         priceLabel.y = H_14+H_24;
     }
     

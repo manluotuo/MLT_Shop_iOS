@@ -54,11 +54,11 @@
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 1)];
     lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
 
-    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20, H_200, H_24)];
+    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10, H_200, H_24)];
     totalShopPrice.textColor = REDCOLOR;
-    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20+H_24, H_200, H_24)];
+    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10+H_24, H_200, H_24)];
     totalMarketPrice.textColor = GRAYLIGHTCOLOR;
-    UILabel *savingPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20+H_24*2, H_200, H_24)];
+    UILabel *savingPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10+H_24*2, H_200, H_24)];
     savingPrice.textColor = GREENCOLOR;
     
     

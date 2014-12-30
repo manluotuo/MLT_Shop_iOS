@@ -17,6 +17,11 @@
 #import "NSString+FontAwesome.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+
+#define SERVICE_TAB_TAG 101
+#define CART_TAB_TAG    102
+#define BUY_TAB_TAG     103
+
 @interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate>
 {
     CGFloat fixedHeight;
@@ -74,6 +79,24 @@
     [self buildFixedView];
 }
 
+- (void)tabbarAction:(UIButton *)sender
+{
+    if (sender.tag == CART_TAB_TAG) {
+        CartModel *newCartItem = [[CartModel alloc]init];
+        newCartItem.goodsId = self.theGoods.goodsId;
+        newCartItem.goodsCount = INT(1);
+        newCartItem.goodsAttrId = @"";
+        
+        
+        [[AppRequestManager sharedManager]operateCartWithAddress:newCartItem operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
+            //
+            if (responseObject != nil) {
+                [DataTrans showWariningTitle:T(@"加入购物车") andCheatsheet:ICON_CHECK];
+            }
+        }];
+    }
+}
+
 /**
  *  init views
  */
@@ -94,9 +117,6 @@
 
 }
 
-#define SERVICE_TAB_TAG 101
-#define CART_TAB_TAG    102
-#define BUY_TAB_TAG     103
 - (void)initTabbarButton
 {
     self.tabbarView = [[UIView alloc]initWithFrame:CGRectMake(0, TOTAL_HEIGHT-H_50, TOTAL_WIDTH, H_50)];
@@ -140,6 +160,8 @@
     [self.view addSubview:self.tabbarView];
     
 }
+
+
 
 -(void)initButtons
 {
@@ -314,6 +336,7 @@
 
 - (void)setGoodsData:(GoodsModel *)_goods
 {
+    self.theGoods = _goods;
     [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];

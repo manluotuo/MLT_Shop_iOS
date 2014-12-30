@@ -25,7 +25,8 @@
 //#import "AccountListViewController.h"
 #import "ProfileViewController.h"
 #import "SearchCategoryViewController.h"
-//#import "WebHelpViewController.h"
+#import "WebHelpViewController.h"
+#import "WebViewController.h"
 //#import "HistoryListViewController.h"
 //#import "MoreViewController.h"
 //#import "ProfileTableViewCell.h"
@@ -476,6 +477,20 @@
             [self.mm_drawerController setCenterViewController:nav];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
 
+        }
+            break;
+        case LeftMenuService:
+        {
+            NSString *urlString = @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a";
+            WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
+            VC.titleString = T(@"帮助/客服");
+            VC.urlString = urlString;
+            [VC setupLeftMMButton];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+
+            [self.mm_drawerController setCenterViewController:nav];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+            
         }
             break;
         case LeftMenuProfile:
