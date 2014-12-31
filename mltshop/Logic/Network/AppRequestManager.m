@@ -413,7 +413,7 @@ static dispatch_once_t onceToken;
  *  @param operation <#operation description#>
  *  @param block     <#block description#>
  */
-- (void)operateCartWithAddress:(CartModel *)theCart
+- (void)operateCartWithCartModel:(CartModel *)theCart
                      operation:(NSUInteger)operation
                       andBlock:(void (^)(id responseObject, NSError *error))block
 {

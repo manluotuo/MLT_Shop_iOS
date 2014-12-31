@@ -67,6 +67,12 @@
         [self setTitleColor:color forState:UIControlStateNormal];
         [self setTitleColor:color forState:UIControlStateHighlighted];
         self.backgroundColor = GRAYLIGHTCOLOR;
+    }else if (style == KKFlatButtonStyleBordered){
+        [self setTitleColor:color forState:UIControlStateNormal];
+        [self setTitleColor:color forState:UIControlStateHighlighted];
+        self.backgroundColor = WHITECOLOR;
+        self.layer.borderColor = color.CGColor;
+        self.layer.borderWidth = 1.0f;
     }else{
         [self setTitleColor:color forState:UIControlStateNormal];
         [self setTitleColor:color forState:UIControlStateHighlighted];

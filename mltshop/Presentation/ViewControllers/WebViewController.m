@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "UIViewController+ImageBackButton.h"
 #import <NJKWebViewProgress/NJKWebViewProgressView.h>
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
 
@@ -35,6 +36,11 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)setUpDownButton:(NSInteger)position
+{
+    [self setUpImageDownButton:0];
 }
 
 - (void)viewDidLoad

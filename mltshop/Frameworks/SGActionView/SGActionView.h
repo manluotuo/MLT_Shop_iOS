@@ -31,6 +31,7 @@ typedef void(^SGMultiMenuActionHandler)(NSMutableArray* selectedItems);
  *  获取单例
  */
 + (SGActionView *)sharedActionView;
++ (void)resetSGActionViewInstance:(SGActionView *)instance;
 
 /**
  *	提示框弹出层（单按钮）

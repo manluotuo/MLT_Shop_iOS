@@ -54,33 +54,33 @@
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 1)];
     lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
 
-    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10, H_200, H_24)];
+    UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20, H_200, H_24)];
     totalShopPrice.textColor = REDCOLOR;
-    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10+H_24, H_200, H_24)];
+    UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20+H_22, H_200, H_50)];
     totalMarketPrice.textColor = GRAYLIGHTCOLOR;
-    UILabel *savingPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10+H_24*2, H_200, H_24)];
-    savingPrice.textColor = GREENCOLOR;
+    totalMarketPrice.numberOfLines = 0;
     
     
     totalShopPrice.font = CUSTOMFONT;
-    totalMarketPrice.font = CUSTOMFONT;
-    savingPrice.font = CUSTOMFONT;
+    totalMarketPrice.font = LITTLECUSTOMFONT;
 
     NSNumber *t1 = total[@"total_shop_price"];
     NSNumber *t2 = total[@"total_market_price"];
     NSNumber *t3 = total[@"saving"];
     totalShopPrice.text = [NSString stringWithFormat:@"总计: %.2f元", [t1 floatValue]];
-    totalMarketPrice.text = [NSString stringWithFormat:@"市场总价: %.2f", [t2 floatValue]];
-    savingPrice.text = [NSString stringWithFormat:@"共节省: %.2f元 (%@)", [t3 floatValue], total[@"save_rate"]];
+    NSString *t2String = [NSString stringWithFormat:@"市场价: %.2f元\n", [t2 floatValue]];
+    NSString *t3String = [NSString stringWithFormat:@"共节省: %.2f元 (%@)", [t3 floatValue], total[@"save_rate"]];
+    
+    totalMarketPrice.text = [t2String stringByAppendingString:t3String];
     
     self.flowButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [self.flowButton setFrame:CGRectMake(H_60, H_20+H_24*3, H_200, H_50)];
-    [self.flowButton setTitle:T(@"结算") forState:UIControlStateNormal];
+    [self.flowButton setFrame:CGRectMake(H_60, H_24+H_24*3, H_200, H_40)];
+    [self.flowButton setTitle:T(@"去结算") forState:UIControlStateNormal];
+    [self.flowButton setTitleColor:GREENCOLOR andStyle:KKFlatButtonStyleBordered];
     [self.flowButton addTarget:self action:@selector(checkOrderAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self.footerView addSubview:totalShopPrice];
     [self.footerView addSubview:totalMarketPrice];
-    [self.footerView addSubview:savingPrice];
     [self.footerView addSubview:lineView1];
     [self.footerView addSubview:self.flowButton];
     
@@ -106,7 +106,7 @@
     self.start = 0;
     self.dataArray = [[NSMutableArray alloc]init];
     self.totalInfo = [[NSMutableDictionary alloc]init];
-    [[AppRequestManager sharedManager]operateCartWithAddress:nil operation:CartOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateCartWithCartModel:nil operation:CartOpsList andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSArray *goodsList = responseObject[@"goods_list"];
@@ -155,12 +155,12 @@
         NSArray *titles = @[@"删除", @"1", @"2", @"3", @"4", @"5", @"6", @"7"];
         [SGActionView showGridMenuWithTitle:T(@"选择数量") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
             if (index ==0) {
-                [[AppRequestManager sharedManager]operateCartWithAddress:theCart operation:CartOpsDelete andBlock:^(id responseObject, NSError *error) {
+                [[AppRequestManager sharedManager]operateCartWithCartModel:theCart operation:CartOpsDelete andBlock:^(id responseObject, NSError *error) {
                     [self setupDataSource];
                 }];
             }else{
                 theCart.goodsCount = INT(index);
-                [[AppRequestManager sharedManager]operateCartWithAddress:theCart operation:CartOpsUpdate andBlock:^(id responseObject, NSError *error) {
+                [[AppRequestManager sharedManager]operateCartWithCartModel:theCart operation:CartOpsUpdate andBlock:^(id responseObject, NSError *error) {
                     if (responseObject != nil) {
                         [self setupDataSource];
                     }

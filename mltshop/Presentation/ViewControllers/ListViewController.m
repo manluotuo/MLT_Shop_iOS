@@ -158,6 +158,8 @@
         GoodsDetailViewController *vc = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
         vc.passDelegate = self;
         [vc setGoodsData:theOne];
+
+
         [self.navigationController presentViewController:vc animated:YES completion:nil];
     }
 }

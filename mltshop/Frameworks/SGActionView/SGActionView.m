@@ -27,16 +27,22 @@
 
 @implementation SGActionView
 
+static SGActionView *_actionView = nil;
+static dispatch_once_t onceAGToken;
+
 + (SGActionView *)sharedActionView
 {
-    static SGActionView *actionView = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    dispatch_once(&onceAGToken, ^{
         CGRect rect = [[UIScreen mainScreen] bounds];
-        actionView = [[SGActionView alloc] initWithFrame:rect];
+        _actionView = [[SGActionView alloc] initWithFrame:rect];
     });
     
-    return actionView;
+    return _actionView;
+}
+
++ (void)resetSGActionViewInstance:(SGActionView *)instance {
+    if (instance == nil) onceAGToken = 0;
+    _actionView = instance;
 }
 
 - (id)initWithFrame:(CGRect)frame

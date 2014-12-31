@@ -14,4 +14,6 @@
 @property(strong, nonatomic)NSString *titleString;
 @property(strong, nonatomic)NSString *webType;
 
+- (void)setUpDownButton:(NSInteger)position;
+
 @end

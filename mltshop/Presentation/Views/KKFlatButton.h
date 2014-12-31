@@ -12,7 +12,8 @@ typedef NS_ENUM(NSUInteger,KKFlatButtonStyle)
 {
     KKFlatButtonStyleLight      = 0,
     KKFlatButtonStyleColored    = 1,
-    KKFlatButtonStyleGray       = 2
+    KKFlatButtonStyleGray       = 2,
+    KKFlatButtonStyleBordered       = 3
 };
 
 @interface KKFlatButton : UIButton

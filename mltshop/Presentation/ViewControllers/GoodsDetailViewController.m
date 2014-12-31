@@ -16,7 +16,7 @@
 #import "SGActionView.h"
 #import "NSString+FontAwesome.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "WebViewController.h"
 
 #define SERVICE_TAB_TAG 101
 #define CART_TAB_TAG    102
@@ -79,22 +79,73 @@
     [self buildFixedView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
 - (void)tabbarAction:(UIButton *)sender
 {
     if (sender.tag == CART_TAB_TAG) {
-        CartModel *newCartItem = [[CartModel alloc]init];
-        newCartItem.goodsId = self.theGoods.goodsId;
-        newCartItem.goodsCount = INT(1);
-        newCartItem.goodsAttrId = @"";
         
+        NSMutableArray *titleArray = [[NSMutableArray alloc]init];
         
-        [[AppRequestManager sharedManager]operateCartWithAddress:newCartItem operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
-            //
-            if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"加入购物车") andCheatsheet:ICON_CHECK];
+        /**
+         *  如果只有一个 那么默认选第一个
+         */
+        if ([self.theGoods.spec.values count] == 1) {
+            SpecItemModel *item = [self.theGoods.spec.values firstObject];
+            CartModel *newCartItem = [[CartModel alloc]init];
+            newCartItem.goodsId = self.theGoods.goodsId;
+            newCartItem.goodsCount = INT(1);
+            newCartItem.goodsAttrId = item.itemId;
+            
+            [self addToCart:newCartItem];
+        }else if ([self.theGoods.spec.values count] > 1){
+            
+            
+            for (SpecItemModel *item in self.theGoods.spec.values) {
+                [titleArray addObject:item.label];
             }
-        }];
+            
+            [SGActionView showSheetWithTitle:T(@"选择尺码/颜色分类")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
+                
+                SpecItemModel *specItem = [self.theGoods.spec.values objectAtIndex:index];
+                CartModel *newCartItem = [[CartModel alloc]init];
+                newCartItem.goodsId = self.theGoods.goodsId;
+                newCartItem.goodsCount = INT(1);
+                newCartItem.goodsAttrId = specItem.itemId;
+                
+                
+                [self addToCart:newCartItem];
+
+            }];
+        }
+    }else if (sender.tag == SERVICE_TAB_TAG){
+        NSString *urlString = @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a";
+        WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
+        VC.titleString = T(@"帮助/客服");
+        VC.urlString = urlString;
+        [VC setUpDownButton:0];
+        ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+        [self presentViewController:nav animated:YES completion:nil];
     }
+}
+
+- (void)addToCart:(CartModel *)cartModel
+{
+    [SGActionView resetSGActionViewInstance:nil];
+    NSArray *titles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7"];
+    [SGActionView showGridMenuWithTitle:T(@"选择数量") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
+            cartModel.goodsCount = INT(index+1);
+            [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
+                if (responseObject != nil) {
+                    [DataTrans showWariningTitle:T(@"成功加入购物车") andCheatsheet:ICON_CHECK];
+                }
+            }];
+    }];
+    
 }
 
 /**
@@ -232,11 +283,11 @@
     [self.marketPriceLabel setTextColor:GRAYCOLOR];
     [self.marketPriceLabel setTextAlignment:NSTextAlignmentCenter];
 
-    UILabel *inventoryTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_200, H_90+H_15, H_50, H_24)];
+    UILabel *inventoryTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_220, H_90+H_15, H_50, H_24)];
     inventoryTitle.text = T(@"库存");
     inventoryTitle.font = FONT_14;
 
-    self.inventoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_200+H_50, H_90+H_15, H_70, H_24)];
+    self.inventoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_220+H_50, H_90+H_15, H_70, H_24)];
     [self.inventoryLabel setFont:FONT_14];
     [self.inventoryLabel setTextColor:GRAYCOLOR];
     [self.priceLabel setTextAlignment:NSTextAlignmentCenter];

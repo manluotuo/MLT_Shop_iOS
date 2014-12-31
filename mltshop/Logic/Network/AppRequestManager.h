@@ -137,7 +137,7 @@
                         andBlock:(void (^)(id responseObject, NSError *error))block;
 
 // CART function
-- (void)operateCartWithAddress:(CartModel *)theCart
+- (void)operateCartWithCartModel:(CartModel *)theCart
                      operation:(NSUInteger)operation
                       andBlock:(void (^)(id responseObject, NSError *error))block;
 
