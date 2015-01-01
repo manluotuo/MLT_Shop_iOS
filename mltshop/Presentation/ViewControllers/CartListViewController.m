@@ -11,6 +11,7 @@
 #import "SGActionView.h"
 #import "UIViewController+ImageBackButton.h"
 #import "KKFlatButton.h"
+#import "CheckOrderViewController.h"
 
 @interface CartListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
@@ -91,11 +92,9 @@
 
 - (void)checkOrderAction
 {
-    [[AppRequestManager sharedManager]flowCheckOrderWithBlock:^(id responseObject, NSError *error) {
-        if (responseObject != nil) {
-            NSLog(@"%@",responseObject);
-        }
-    }];
+    CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
+    [VC setupDataSource];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 

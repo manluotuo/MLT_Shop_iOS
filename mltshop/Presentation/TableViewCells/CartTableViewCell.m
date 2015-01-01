@@ -16,13 +16,13 @@
     UILabel *attrLabel;
     UILabel *priceLabel;
     UILabel *numberLabel;
-    KKFlatButton *changeCountBtn;
 }
 
 @property(nonatomic, strong)CartModel *data;
 @end
 
 @implementation CartTableViewCell
+@synthesize changeCountBtn;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

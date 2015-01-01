@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "PassValueDelegate.h"
+#import "KKFlatButton.h"
 
 @interface CartTableViewCell : UITableViewCell
 
+
 - (void)setNewData:(CartModel *)_newData;
 @property (nonatomic, weak) id<PassValueDelegate> passDelegate;
+@property (nonatomic, strong)KKFlatButton *changeCountBtn;
+
 
 @end

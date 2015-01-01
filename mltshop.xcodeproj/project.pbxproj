@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E24B71A31CB3700DA06A2 /* CategoryModel.m */; };
+		262E1E651A54F92400C29059 /* CheckOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E641A54F92400C29059 /* CheckOrderViewController.m */; };
 		263386491A52EC7E00C94D8F /* FlowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 263386481A52EC7E00C94D8F /* FlowModel.m */; };
 		2633865F1A52FFEA00C94D8F /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633864C1A52FFEA00C94D8F /* SVModalWebViewController.m */; };
 		263386601A52FFEA00C94D8F /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2633864D1A52FFEA00C94D8F /* SVWebViewController.bundle */; };
@@ -150,6 +151,8 @@
 /* Begin PBXFileReference section */
 		261E24B61A31CB3700DA06A2 /* CategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
 		261E24B71A31CB3700DA06A2 /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
+		262E1E631A54F92400C29059 /* CheckOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderViewController.h; sourceTree = "<group>"; };
+		262E1E641A54F92400C29059 /* CheckOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderViewController.m; sourceTree = "<group>"; };
 		263386471A52EC7E00C94D8F /* FlowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowModel.h; sourceTree = "<group>"; };
 		263386481A52EC7E00C94D8F /* FlowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowModel.m; sourceTree = "<group>"; };
 		2633864B1A52FFEA00C94D8F /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
@@ -975,6 +978,8 @@
 				26B1C25B1A46890300295D32 /* AddressInfoViewController.m */,
 				26875B561A4FDFC300FA5335 /* CartListViewController.h */,
 				26875B571A4FDFC300FA5335 /* CartListViewController.m */,
+				262E1E631A54F92400C29059 /* CheckOrderViewController.h */,
+				262E1E641A54F92400C29059 /* CheckOrderViewController.m */,
 			);
 			name = FunctionVC;
 			sourceTree = "<group>";
@@ -1184,6 +1189,7 @@
 				26BE3A8E1A170421009F37B4 /* NSData+Conversion.m in Sources */,
 				26BE3AA71A170421009F37B4 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				26BE3AEE1A197936009F37B4 /* RightMenuViewController.m in Sources */,
+				262E1E651A54F92400C29059 /* CheckOrderViewController.m in Sources */,
 				26BE3AF51A197AE0009F37B4 /* LMViewController.m in Sources */,
 				26BE3AA11A170421009F37B4 /* SGAlertMenu.m in Sources */,
 				26BE3AC61A173739009F37B4 /* KKIconButton.m in Sources */,
