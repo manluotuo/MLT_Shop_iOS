@@ -78,9 +78,8 @@
 		26875B551A4FAA2900FA5335 /* CartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26875B541A4FAA2900FA5335 /* CartModel.m */; };
 		26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26875B571A4FDFC300FA5335 /* CartListViewController.m */; };
 		26875B5B1A4FE4ED00FA5335 /* CartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */; };
-		26986B4D1A584C0B006354E6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26986B4B1A584C0B006354E6 /* libcrypto.a */; };
-		26986B4E1A584C0B006354E6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26986B4C1A584C0B006354E6 /* libssl.a */; };
-		26986B4F1A584C17006354E6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 262E1EF41A5844C200C29059 /* libxml2.dylib */; };
+		26986B521A585832006354E6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26986B501A585832006354E6 /* libcrypto.a */; };
+		26986B531A585832006354E6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26986B511A585832006354E6 /* libssl.a */; };
 		269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD8681A351B6600BF19B5 /* GoodsModel.m */; };
 		269FD86C1A3522CA00BF19B5 /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 269FD86B1A3522CA00BF19B5 /* PhotoModel.m */; };
 		26B1C2561A46876E00295D32 /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C2551A46876E00295D32 /* AddressModel.m */; };
@@ -370,8 +369,8 @@
 		26875B571A4FDFC300FA5335 /* CartListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartListViewController.m; sourceTree = "<group>"; };
 		26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartTableViewCell.m; sourceTree = "<group>"; };
 		26875B5A1A4FE4ED00FA5335 /* CartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTableViewCell.h; sourceTree = "<group>"; };
-		26986B4B1A584C0B006354E6 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		26986B4C1A584C0B006354E6 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		26986B501A585832006354E6 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		26986B511A585832006354E6 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		269FD8671A351B6600BF19B5 /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
 		269FD8681A351B6600BF19B5 /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
 		269FD86A1A3522CA00BF19B5 /* PhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoModel.h; sourceTree = "<group>"; };
@@ -517,11 +516,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26986B4F1A584C17006354E6 /* libxml2.dylib in Frameworks */,
+				26986B531A585832006354E6 /* libssl.a in Frameworks */,
 				262E1E7E1A58352300C29059 /* AlipaySDK.framework in Frameworks */,
-				26986B4D1A584C0B006354E6 /* libcrypto.a in Frameworks */,
-				26986B4E1A584C0B006354E6 /* libssl.a in Frameworks */,
 				262E1E801A5835EC00C29059 /* SystemConfiguration.framework in Frameworks */,
+				26986B521A585832006354E6 /* libcrypto.a in Frameworks */,
 				C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,6 +537,8 @@
 		262E1E7A1A58352300C29059 /* Alipay */ = {
 			isa = PBXGroup;
 			children = (
+				26986B501A585832006354E6 /* libcrypto.a */,
+				26986B511A585832006354E6 /* libssl.a */,
 				262E1EE71A5839A900C29059 /* Order.h */,
 				262E1EE81A5839A900C29059 /* Order.m */,
 				262E1E811A5836A100C29059 /* Util */,
@@ -1262,8 +1262,6 @@
 		E781564BAD464C1A94F8A622 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				26986B4B1A584C0B006354E6 /* libcrypto.a */,
-				26986B4C1A584C0B006354E6 /* libssl.a */,
 				262E1EF41A5844C200C29059 /* libxml2.dylib */,
 				262E1EEE1A583FD500C29059 /* libz.dylib */,
 				262E1E7C1A58352300C29059 /* AlipaySDK.framework */,
@@ -1699,12 +1697,15 @@
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/StyledPageControl\"",
 					"\"${PODS_ROOT}/Headers/Public/TSMessages\"",
-					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(SRCROOT)/mltshop/Frameworks/Alipay",
 				);
 				INFOPLIST_FILE = mltshop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/mltshop/Frameworks/Alipay",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-AFNetworking\"",
@@ -1759,7 +1760,6 @@
 					"\"SystemConfiguration\"",
 					"-framework",
 					"\"UIKit\"",
-					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7a982e23-7de7-4bbb-a7f6-5dc759f04c30";
@@ -1800,12 +1800,15 @@
 					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
 					"\"${PODS_ROOT}/Headers/Public/StyledPageControl\"",
 					"\"${PODS_ROOT}/Headers/Public/TSMessages\"",
-					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(SRCROOT)/mltshop/Frameworks/Alipay",
 				);
 				INFOPLIST_FILE = mltshop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/mltshop/Frameworks/Alipay",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-AFNetworking\"",
@@ -1860,7 +1863,6 @@
 					"\"SystemConfiguration\"",
 					"-framework",
 					"\"UIKit\"",
-					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7a982e23-7de7-4bbb-a7f6-5dc759f04c30";
