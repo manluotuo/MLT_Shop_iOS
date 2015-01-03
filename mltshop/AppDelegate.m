@@ -16,6 +16,7 @@
 #import "AppRequestManager.h"
 #import "KKDrawerViewController.h"
 #import "ModelHelper.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 
 //#import "LoginViewController.h"
@@ -220,6 +221,23 @@
     [self.window setRootViewController:self.loginViewController];
     [self.window addSubview:self.loginViewController.view];
     [self.window makeKeyAndVisible];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    //跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService]
+         processOrderWithPaymentResult:url
+         standbyCallback:^(NSDictionary *resultDic) {
+             NSLog(@"result = %@", resultDic);
+         }];
+    }
+    
+    return YES;
 }
 
 

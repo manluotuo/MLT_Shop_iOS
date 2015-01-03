@@ -121,7 +121,16 @@
                 [self addToCart:newCartItem];
 
             }];
+        }else{
+            // 没有spec 的
+            CartModel *newCartItem = [[CartModel alloc]init];
+            newCartItem.goodsId = self.theGoods.goodsId;
+            newCartItem.goodsCount = INT(1);
+            newCartItem.goodsAttrId = @"";
+            
+            [self addToCart:newCartItem];
         }
+        
     }else if (sender.tag == SERVICE_TAB_TAG){
         NSString *urlString = @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a";
         WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];

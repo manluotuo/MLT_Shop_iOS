@@ -526,6 +526,45 @@ static dispatch_once_t onceToken;
 }
 
 
+- (void)flowDoneWithFlowDoneModel:(FlowDoneModel *)flowModel andBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_FLOW_DONE_PATH;
+    
+    NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
+                                     @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                                     @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                                     }}];
+    
+    
+    baseDict[@"pay_id"] = [DataTrans noNullStringObj:flowModel.payId];
+    baseDict[@"shipping_id"] = [DataTrans noNullStringObj:flowModel.shippingId];
+    baseDict[@"bonus"] = [DataTrans noNullStringObj:flowModel.bounsId];
+    baseDict[@"integral"] = [DataTrans noNullStringObj:[flowModel.usedIntegral stringValue]];
+    baseDict[@"inv_type"] = @"0";
+    baseDict[@"inv_content"] = @"";
+    baseDict[@"inv_payee"] = @"";
+    
+    
+    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+}
+
+
+
 
 
 

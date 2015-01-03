@@ -8,6 +8,18 @@
 
 #import "FlowModel.h"
 
+@implementation FlowDoneModel
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    if (DictionaryHasValue(dict)) {
+        
+    }
+    
+    return self;
+}
+@end
+
 @implementation FlowModel
 
 - (id)initWithDict:(NSDictionary *)dict

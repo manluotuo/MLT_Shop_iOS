@@ -14,6 +14,11 @@
 #import "BonusTableViewCell.h"
 #import "AppRequestManager.h"
 
+#import <AlipaySDK/AlipaySDK.h>
+#import "Order.h"
+#import "DataSigner.h"
+
+
 #define CART_TAG        0
 #define CONSIGNEE_TAG   1
 #define SHIPPING_TAG    2
@@ -23,6 +28,7 @@
 @interface CheckOrderViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate>
 {
     NSArray *sectionTitles;
+    UILabel *goodsInfoLabel;
     UILabel *integralLabel;
     UILabel *summaryLabel;
     UILabel *bonusLabel;
@@ -31,6 +37,7 @@
 
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)FlowModel *dataSource;
+@property (nonatomic, strong)FlowDoneModel *flowDoneData;
 @property (nonatomic, strong)UIView *infoView;
 
 
@@ -45,6 +52,7 @@
     sectionTitles = @[@"商品列表",@"收货人", @"快递方式", @"支付方式",@"红包列表"];
     
     self.dataSource = [[FlowModel alloc]init];
+    self.flowDoneData = [[FlowDoneModel alloc]init];
     self.view.backgroundColor = BGCOLOR;
     self.editing = NO;
     self.infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_200)];
@@ -73,12 +81,112 @@
         if(responseObject != nil){
             self.dataSource =  [[FlowModel alloc]initWithDict:responseObject];
             
+            // 如果支付和快递  默认选第一个
+            if ([self.dataSource.shippingList count] >= 1) {
+                ShippingModel *item = [self.dataSource.shippingList firstObject];
+                item.selected = YES;
+                self.flowDoneData.shippingId = item.shippingId;
+            }
+            
+            if ([self.dataSource.paymentList count] >=  1) {
+                PayModel *item = [self.dataSource.paymentList firstObject];
+                item.selected = YES;
+                self.flowDoneData.payId = item.payId;
+            }
+            
             [self.tableView reloadData];
+
             [self refreshInfoView];
         }
     }];
 }
 
+- (void)doAlipayAction:(OrderModel *)theOrder
+{
+    /*
+     *商户的唯一的parnter和seller。
+     *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
+     */
+    
+    /*============================================================================*/
+    /*=======================需要填写商户app申请的===================================*/
+    /*============================================================================*/
+    NSString *partner = @"2088211543184953";
+    NSString *seller = @"manluotuodianzi@sina.com";
+    NSString *privateKey = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"pkcs8" ofType:@"txt"]];
+    NSLog(@"privateKey %@",privateKey);
+    /*============================================================================*/
+    /*============================================================================*/
+    /*============================================================================*/
+    
+    //partner和seller获取失败,提示
+    if ([partner length] == 0 || [seller length] == 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"缺少partner或者seller。"
+                                                       delegate:self
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    /*
+     *生成订单信息及签名
+     */
+    //将商品信息赋予AlixPayOrder的成员变量
+    Order *order = [[Order alloc] init];
+    order.partner = partner;
+    order.seller = seller;
+    order.tradeNO = theOrder.orderSn; //订单ID（由商家自行制定）
+    order.productName = theOrder.subject; //商品标题
+    order.productDescription = theOrder.desc; //商品描述
+//    order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
+    order.amount = [NSString stringWithFormat:@"%.2f",0.18f]; //商品价格
+    order.notifyURL =  @"http://www.manluotuo.com"; //回调URL
+    
+    order.service = @"mobile.securitypay.pay";
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    order.itBPay = @"30m";
+    order.showUrl = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    NSString *appScheme = @"mltshop";
+    
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+        
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            NSLog(@"reslut = %@",resultDic);
+        }];
+        
+    }
+}
+
+
+- (void)doneAction
+{
+    [[AppRequestManager sharedManager]flowDoneWithFlowDoneModel:self.flowDoneData andBlock:^(id responseObject, NSError *error) {
+        //
+        if (responseObject != nil) {
+            OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
+            [DataTrans showWariningTitle:T(@"即将跳转到支付宝...") andCheatsheet:ICON_CHECK];
+            [self doAlipayAction:theOrder];
+        }
+    }];
+}
 
 - (void)refreshInfoView
 {
@@ -89,6 +197,8 @@
         payAmount += cart.subtotal.floatValue;
     }
     
+    goodsInfoLabel.text = [NSString stringWithFormat:@"商品总计: %@元",STR_NUM2(payAmount)];
+    
     // 快递费
     for (ShippingModel *ship in self.dataSource.shippingList) {
         if (ship.selected) {
@@ -98,45 +208,158 @@
     }
     
     // 红白
-    for (BonusModel * bonus in self.dataSource.shippingList) {
+    for (BonusModel * bonus in self.dataSource.bonusList) {
         if (bonus.selected) {
-            bonusLabel.text = bonus.bonusName;
+            bonusLabel.text = [NSString stringWithFormat:@"%@, -%@ 元",
+                               bonus.bonusName,
+                               STR_NUM2([bonus.bonusMoney floatValue])];
             payAmount -= bonus.bonusMoney.floatValue;
             break;
         }
     }
     
-    self.dataSource.payAmount = FLOAT(payAmount);
+    CGFloat canUseIntegral  = 0.0f;
+    if (self.dataSource.yourIntegral < self.dataSource.orderMaxIntegral) {
+        canUseIntegral = self.dataSource.yourIntegral.floatValue;
+    }else{
+        canUseIntegral = self.dataSource.orderMaxIntegral.floatValue;
+    }
+    
+    self.flowDoneData.usedIntegral = FLOAT(canUseIntegral);
+
+    
+    NSString *integralString = [NSString stringWithFormat:@"我的积分: %@ , 最大可用积分:%@",
+                                STR_INT([self.dataSource.yourIntegral integerValue]),
+                                STR_INT([self.dataSource.orderMaxIntegral integerValue])];
+    integralString = [NSString stringWithFormat:@"%@\n积分抵扣: -%.2f元",integralString,canUseIntegral/100];
+    integralLabel.text = integralString;
+
+    self.dataSource.payAmount = FLOAT(payAmount - canUseIntegral/100);
     summaryLabel.text = [NSString stringWithFormat:@"合计: %@",
                          STR_NUM2([self.dataSource.payAmount floatValue])];
+    
     
 }
 
 - (void)initInfoView
 {
-    self.infoView.backgroundColor = GRAYEXLIGHTCOLOR;
-    integralLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING, H_280, H_20)];
-    integralLabel.font = FONT_12;
+    self.infoView.backgroundColor = WHITECOLOR;
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_30)];
+    titleLabel.text = @"     汇总信息";
+    titleLabel.font = FONT_13;
+    titleLabel.textColor = GRAYCOLOR;
+    titleLabel.backgroundColor = GRAYEXLIGHTCOLOR;
+    
+    [self.infoView addSubview:titleLabel];
+
+    
+    goodsInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40, H_280, H_40)];
+    goodsInfoLabel.font = FONT_13;
+    goodsInfoLabel.textColor = GRAYCOLOR;
+
+    integralLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*2, H_280, H_40)];
+    integralLabel.font = FONT_13;
+    integralLabel.textColor = GRAYCOLOR;
+    integralLabel.numberOfLines = 0;
     NSString *integralString = [NSString stringWithFormat:@"我的积分: %@ , 最大可用积分:%@",
                                 STR_INT([self.dataSource.yourIntegral integerValue]),
                                 STR_INT([self.dataSource.orderMaxIntegral integerValue])];
     integralLabel.text = integralString;
     
-    bonusLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING+H_30, H_200, H_30)];
     
-    summaryLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING+H_30*2, H_100, H_40)];
+    bonusLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*3, H_200, H_30)];
+    bonusLabel.font = FONT_13;
+    bonusLabel.textColor = GRAYCOLOR;
+
+    
+    summaryLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*4, H_160, H_40)];
     summaryLabel.textColor = REDCOLOR;
     
     doneButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [doneButton setFrame:CGRectMake(H_160, TOP_PADDING+H_30*2, H_100, H_40)];
+    [doneButton setFrame:CGRectMake(H_180, H_40*4, H_100, H_40)];
     [doneButton setTitle:T(@"确认") forState:UIControlStateNormal];
+    [doneButton addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
     
 
+    [self.infoView addSubview:goodsInfoLabel];
     [self.infoView addSubview:integralLabel];
     [self.infoView addSubview:bonusLabel];
     [self.infoView addSubview:summaryLabel];
     [self.infoView addSubview:doneButton];
 }
+
+#pragma mark -
+#pragma mark UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger rows = [self.tableView numberOfRowsInSection:indexPath.section];
+    NSMutableArray *indexPathsOfSection = [[NSMutableArray alloc]init];
+    for (int i = 0; i<rows; i++) {
+        [indexPathsOfSection addObject:
+         [NSIndexPath indexPathForRow:i inSection:indexPath.section]];
+    }
+
+    if (indexPath.section == SHIPPING_TAG) {
+        // refresh all
+        for (ShippingModel *ship in self.dataSource.shippingList) {
+            ship.selected = NO;
+        }
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:indexPathsOfSection
+                              withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+
+        // 更新一条
+        ShippingModel *theShip = self.dataSource.shippingList[indexPath.row];
+        ShippingTableViewCell *cell = (ShippingTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        theShip.selected = YES;
+        [cell setNewData:theShip];
+        self.flowDoneData.shippingId = theShip.shippingId;
+        
+    }
+    
+    if (indexPath.section == PAYMENT_TAG) {
+        // refresh all
+        for (PayModel *ship in self.dataSource.paymentList) {
+            ship.selected = NO;
+        }
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:indexPathsOfSection
+                              withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        // 更新一条
+        PayModel *theShip = self.dataSource.paymentList[indexPath.row];
+        PaymentTableViewCell *cell = (PaymentTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        theShip.selected = YES;
+        [cell setNewData:theShip];
+        self.flowDoneData.payId = theShip.payId;
+        
+    }
+    
+    if (indexPath.section == BONUS_TAG) {
+        // refresh all
+        for (BonusModel *ship in self.dataSource.bonusList) {
+            ship.selected = NO;
+        }
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:indexPathsOfSection
+                              withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        
+        // 更新一条
+        BonusModel *theShip = self.dataSource.bonusList[indexPath.row];
+        BonusTableViewCell *cell = (BonusTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        theShip.selected = YES;
+        [cell setNewData:theShip];
+        self.flowDoneData.bounsId = theShip.bonusId;
+
+    }
+    
+    [self refreshInfoView];
+}
+
 
 #pragma mark -
 #pragma mark UITableViewDataSource

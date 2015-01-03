@@ -150,7 +150,7 @@
 - (void)flowCheckOrderWithBlock:(void (^)(id responseObject, NSError *error))block;
 
 // flow done
-- (void)flowDoneWithFlowModel:(FlowModel *)flowModel andBlock:(void (^)(id responseObject, NSError *error))block;
+- (void)flowDoneWithFlowDoneModel:(FlowDoneModel *)flowModel andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 

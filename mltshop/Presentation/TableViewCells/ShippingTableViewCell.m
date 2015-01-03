@@ -39,7 +39,7 @@
     statusLabel.textColor = GRAYCOLOR;
     statusLabel.font = FONT_AWESOME_20;
     
-    nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10, H_220, H_20)];
+    nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_10, H_220, H_40)];
     nameLabel.font = FONT_14;
     nameLabel.textColor = GRAYCOLOR;
     nameLabel.numberOfLines = 0;

@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@interface FlowDoneModel : NSObject
+
+@property(nonatomic, strong)NSString *payId;
+@property(nonatomic, strong)NSString *shippingId;
+@property(nonatomic, strong)NSString *bounsId;
+@property(nonatomic, strong)NSNumber *usedIntegral;
+
+- (id)initWithDict:(NSDictionary *)dict;
+
+@end
+
 @interface FlowModel : NSObject
 
 @property(nonatomic, strong)NSMutableArray *paymentList;
