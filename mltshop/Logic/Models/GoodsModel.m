@@ -24,7 +24,11 @@
         _goodsBrief = [dict objectForKey:@"goods_brief"];
         _goodsDesc = [dict objectForKey:@"goods_desc"];
         _marketPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];
-        _shopPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"shop_price"]];
+        if ([dict objectForKey:@"shop_price"] != nil) {
+            _shopPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"shop_price"]];
+        }else{
+            _shopPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"goods_price"]];
+        }
         _promotePrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];
         
         _cover = [[PhotoModel alloc]initWithDict:[dict objectForKey:@"img"]];

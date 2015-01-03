@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E24B71A31CB3700DA06A2 /* CategoryModel.m */; };
 		262E1E651A54F92400C29059 /* CheckOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E641A54F92400C29059 /* CheckOrderViewController.m */; };
+		262E1E6B1A55517000C29059 /* PaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E6A1A55517000C29059 /* PaymentTableViewCell.m */; };
+		262E1E6E1A555B2A00C29059 /* alipay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 262E1E6D1A555B2A00C29059 /* alipay@2x.png */; };
+		262E1E711A5796B100C29059 /* ShippingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E701A5796B100C29059 /* ShippingTableViewCell.m */; };
+		262E1E741A579BC100C29059 /* BonusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E731A579BC100C29059 /* BonusTableViewCell.m */; };
 		263386491A52EC7E00C94D8F /* FlowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 263386481A52EC7E00C94D8F /* FlowModel.m */; };
 		2633865F1A52FFEA00C94D8F /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633864C1A52FFEA00C94D8F /* SVModalWebViewController.m */; };
 		263386601A52FFEA00C94D8F /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2633864D1A52FFEA00C94D8F /* SVWebViewController.bundle */; };
@@ -153,6 +157,13 @@
 		261E24B71A31CB3700DA06A2 /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
 		262E1E631A54F92400C29059 /* CheckOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderViewController.h; sourceTree = "<group>"; };
 		262E1E641A54F92400C29059 /* CheckOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderViewController.m; sourceTree = "<group>"; };
+		262E1E6A1A55517000C29059 /* PaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentTableViewCell.m; sourceTree = "<group>"; };
+		262E1E6C1A55519000C29059 /* PaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentTableViewCell.h; sourceTree = "<group>"; };
+		262E1E6D1A555B2A00C29059 /* alipay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alipay@2x.png"; sourceTree = "<group>"; };
+		262E1E6F1A5796B100C29059 /* ShippingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShippingTableViewCell.h; sourceTree = "<group>"; };
+		262E1E701A5796B100C29059 /* ShippingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShippingTableViewCell.m; sourceTree = "<group>"; };
+		262E1E721A579BC100C29059 /* BonusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTableViewCell.h; sourceTree = "<group>"; };
+		262E1E731A579BC100C29059 /* BonusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTableViewCell.m; sourceTree = "<group>"; };
 		263386471A52EC7E00C94D8F /* FlowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowModel.h; sourceTree = "<group>"; };
 		263386481A52EC7E00C94D8F /* FlowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowModel.m; sourceTree = "<group>"; };
 		2633864B1A52FFEA00C94D8F /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
@@ -599,6 +610,7 @@
 		26BE39E31A170421009F37B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				262E1E6D1A555B2A00C29059 /* alipay@2x.png */,
 				26DE7FD01A2AFEC6007F4B16 /* blurImg.png */,
 				26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */,
 				26435ACD1A20CA7900E117A0 /* Default@2x.png */,
@@ -841,6 +853,8 @@
 			children = (
 				26875B5A1A4FE4ED00FA5335 /* CartTableViewCell.h */,
 				26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */,
+				262E1E6C1A55519000C29059 /* PaymentTableViewCell.h */,
+				262E1E6A1A55517000C29059 /* PaymentTableViewCell.m */,
 				266B7E171A3D67D20001835F /* GoodsTwoTableViewCell.h */,
 				266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */,
 				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
@@ -849,6 +863,10 @@
 				2658A8FD1A3D24D500D9C011 /* GoodsOneTableViewCell.m */,
 				26B1C25D1A46BAC400295D32 /* AddressTableViewCell.h */,
 				26B1C25E1A46BAC400295D32 /* AddressTableViewCell.m */,
+				262E1E6F1A5796B100C29059 /* ShippingTableViewCell.h */,
+				262E1E701A5796B100C29059 /* ShippingTableViewCell.m */,
+				262E1E721A579BC100C29059 /* BonusTableViewCell.h */,
+				262E1E731A579BC100C29059 /* BonusTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1083,6 +1101,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262E1E6E1A555B2A00C29059 /* alipay@2x.png in Resources */,
 				26435AD01A20CA7900E117A0 /* Default-568h@2x.png in Resources */,
 				263386691A52FFEA00C94D8F /* SVWebViewControllerActivitySafari@2x.png in Resources */,
 				26BE3A871A170421009F37B4 /* weibo@2x.png in Resources */,
@@ -1214,6 +1233,8 @@
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
 				26BE3A921A170421009F37B4 /* NSObject+JSONWriting.m in Sources */,
+				262E1E711A5796B100C29059 /* ShippingTableViewCell.m in Sources */,
+				262E1E6B1A55517000C29059 /* PaymentTableViewCell.m in Sources */,
 				267B85EE1A360C170084DDEA /* ADBrandView.m in Sources */,
 				26BE3AA81A170421009F37B4 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				26BE3AE61A197865009F37B4 /* MMNavigationController.m in Sources */,
@@ -1222,6 +1243,7 @@
 				263386611A52FFEA00C94D8F /* SVWebViewController.m in Sources */,
 				26BE3A971A170421009F37B4 /* UIViewController+ImageBackButton.m in Sources */,
 				26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */,
+				262E1E741A579BC100C29059 /* BonusTableViewCell.m in Sources */,
 				26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */,
 				265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */,
 				266B7E1B1A3DD25C0001835F /* GoodsDetailViewController.m in Sources */,

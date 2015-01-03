@@ -102,6 +102,7 @@
 - (void)setRounded
 {
     [self.layer setCornerRadius:self.frame.size.height/2];
+    [self setContentEdgeInsets:UIEdgeInsetsMake(self.frame.size.height/10, 0, 0, 0)];
 }
 
 

@@ -91,7 +91,7 @@
     [super viewWillAppear:animated];
     [self navigationGreenStyle];
     
-    [self disableScroll];
+//    [self disableScroll];
 
 }
 

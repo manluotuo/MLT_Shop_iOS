@@ -101,6 +101,8 @@
     [self.drawerController setMaximumRightDrawerWidth:MAX_LEFT_DRAWER_WIDTH];
     [self.drawerController setShowsShadow:YES];
     [self.drawerController setDrawerVisualStateBlock:[MMDrawerVisualState slideAndScaleVisualStateBlock]];
+    
+    // 打开侧边栏 关闭侧边栏
     [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     

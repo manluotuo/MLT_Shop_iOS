@@ -33,6 +33,7 @@
 
 #define API_FLOW_CHECKORDER_PATH    @"/ecmobile/?url=/flow/checkOrder"
 #define API_FLOW_DONE_PATH          @"/ecmobile/?url=/flow/done"
+#define API_VALIDATE_BONUS_PATH     @"/ecmobile/?url=/validate/bonus"
 
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
