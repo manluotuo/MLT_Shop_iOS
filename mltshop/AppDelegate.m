@@ -16,6 +16,7 @@
 #import "AppRequestManager.h"
 #import "KKDrawerViewController.h"
 #import "ModelHelper.h"
+#import "ProfileViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 
 
@@ -234,6 +235,14 @@
          processOrderWithPaymentResult:url
          standbyCallback:^(NSDictionary *resultDic) {
              NSLog(@"result = %@", resultDic);
+             
+             // 付款成功查看订单
+             if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
+                 
+                 ProfileViewController *VC = [[ProfileViewController alloc]init];
+                 [self.drawerController setCenterViewController:VC];
+             }
+
          }];
     }
     

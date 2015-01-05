@@ -13,12 +13,12 @@
 - (id)initWithDict:(NSDictionary *)dict
 {
     if (DictionaryHasValue(dict)) {
-        _orderId = dict[@"order_id"];
-        _orderSn = dict[@"order_sn"];
-        _orderAmount = dict[@"order_amount"];
-        _payCode = dict[@"pay_code"];
-        _subject = dict[@"subject"];
-        _desc = dict[@"desc"];
+        _orderId = [DataTrans noNullStringObj:dict[@"order_id"]];
+        _orderSn = [DataTrans noNullStringObj:dict[@"order_sn"]];
+        _orderAmount = [DataTrans noNullNumberObj:dict[@"order_amount"]] ;
+        _payCode = [DataTrans noNullStringObj:dict[@"pay_code"]];
+        _subject = [DataTrans noNullStringObj:dict[@"order_info"][@"subject"]];
+        _desc = [DataTrans noNullStringObj:dict[@"order_info"][@"desc"]];
     }
     
     return self;

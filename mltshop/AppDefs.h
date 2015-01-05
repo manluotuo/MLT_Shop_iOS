@@ -24,8 +24,8 @@
 #else
 //#define NSLog(...) LogMessageF( __FILE__,__LINE__,__FUNCTION__, NULL, 0, __VA_ARGS__)
 
-#define BASE_API        @"http://appdemo.manluotuo.com"
-
+//#define BASE_API        @"http://appdemo.manluotuo.com"
+#define BASE_API        @"http://www.manluotuo.com"
 #endif
 
 

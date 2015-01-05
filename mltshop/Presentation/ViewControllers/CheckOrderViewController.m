@@ -142,7 +142,7 @@
     order.productName = theOrder.subject; //商品标题
     order.productDescription = theOrder.desc; //商品描述
 //    order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
-    order.amount = [NSString stringWithFormat:@"%.2f",0.18f]; //商品价格
+    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/100.0f]; //商品价格 0.99-0.01
     order.notifyURL =  @"http://www.manluotuo.com"; //回调URL
     
     order.service = @"mobile.securitypay.pay";
@@ -170,6 +170,9 @@
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
+            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }];
         
     }
@@ -182,9 +185,13 @@
         //
         if (responseObject != nil) {
             OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
-            [DataTrans showWariningTitle:T(@"即将跳转到支付宝...") andCheatsheet:ICON_CHECK];
+            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
             [self doAlipayAction:theOrder];
         }
+        if (error != nil) {
+            [DataTrans showWariningTitle:T(@"订单生成失败") andCheatsheet:ICON_TIMES];
+        }
+        
     }];
 }
 

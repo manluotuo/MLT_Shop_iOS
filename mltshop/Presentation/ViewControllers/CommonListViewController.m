@@ -100,9 +100,9 @@
     }];
     
 //    //setup infinite scrolling
-//    [self.tableView addInfiniteScrollingWithActionHandler:^{
-//        [weakSelf getMoreData];
-//    }];
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf getMoreData];
+    }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleNextStep:)
