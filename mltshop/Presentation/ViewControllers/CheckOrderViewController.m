@@ -55,7 +55,7 @@
     self.flowDoneData = [[FlowDoneModel alloc]init];
     self.view.backgroundColor = BGCOLOR;
     self.editing = NO;
-    self.infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_200)];
+    self.infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_240)];
     [self initInfoView];
     
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];

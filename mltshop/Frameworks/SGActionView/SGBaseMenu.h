@@ -14,6 +14,7 @@
 #define BaseMenuActionTextColor(style)  ([UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0])
 #define TOP_ROUND_CORNER 0.0f
 @interface SGButton : UIButton
+
 @end
 
 @interface SGBaseMenu : UIView{

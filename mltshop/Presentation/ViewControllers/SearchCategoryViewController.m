@@ -11,9 +11,11 @@
 #import "CategoryModel.h"
 #import "GoodsModel.h"
 #import "CategoryItemViewCell.h"
+#import "ListViewController.h"
 #import <HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SGActionView.h"
 
 typedef NS_ENUM(NSInteger,recommendListType) {
     recommendContactList = 1,
@@ -24,7 +26,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 #define APP_ICON_TAG 100
 #define APP_NAME_TAG 101
 
-@interface SearchCategoryViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface SearchCategoryViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,PassValueDelegate>
 {
     NSInteger searchStart;
     NSInteger recommendType;
@@ -128,6 +130,16 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     [self setupDataSource];
 }
 
+- (void)passSignalValue:(NSString *)value andData:(id)data
+{
+    if ([value isEqualToString:SIGNAL_SEARCH_CATEGORY_BUTTON_CLICKED]) {
+        SearchModel *theSearch = data;
+        ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+        VC.search = theSearch;
+        [self.navigationController pushViewController:VC animated:YES];
+    }
+}
+
 //////////////////////////////////////////////////
 #pragma mark -- UISearchBar delegate
 //////////////////////////////////////////////////
@@ -165,6 +177,8 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (void)setupDataSource
 {
+    self.cateDataSource = [[NSMutableArray alloc]init];
+
     [[AppRequestManager sharedManager]getCategoryAllWithBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             for (int i = 0 ; i < [responseObject count]; i++) {
@@ -251,7 +265,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == pickedSection) {
-        return CGSizeMake(H_200, H_150);
+        return CGSizeMake(TOTAL_WIDTH, H_200);
     }else{
         return CGSizeMake(0, 0);
     }
@@ -297,7 +311,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     if (cell == nil) {
         //        cell = [[CategoryItemViewCell alloc]initWithFrame:CGRectMake(0, 0, CELL_WIDTH,CELL_HEIGHT)];
     }
-    
+    cell.passDelegate = self;
     [cell setRowData:cellData];
     
     return cell;
@@ -312,20 +326,41 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         return;
     }
     
-    // open subcategory
-    for (int i = 0; i<[self.cateDataSource count]; i++) {
-        CategoryModel *cellData = self.cateDataSource[i];
-        if (i == index) {
-            cellData.isPicked = YES;
-        }else{
-            cellData.isPicked = NO;
-        }
+    CategoryModel *cellData = self.cateDataSource[index];
+    NSMutableArray *titles = [[NSMutableArray alloc]init];
+    NSMutableArray *ids = [[NSMutableArray alloc]init];
+    for (BrandModel *brand in cellData.subBrands) {
+        [titles addObject:brand.brandName];
+        [ids addObject:brand.brandId];
     }
-
     
-    pickedSection = indexPath.section;
-
-    [self.cateView reloadData];
+    [SGActionView showGridMenuWithTitle:T(@"子品牌") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
+        
+        SearchModel *theSearch = [[SearchModel alloc]init];
+        theSearch.brandId = ids[index];
+        theSearch.catId = cellData.catId;
+        ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+        VC.search = theSearch;
+        VC.shouldChangeTableContentInset = YES;
+        [self.navigationController pushViewController:VC animated:YES];
+        //
+    }];
+    
+//
+//    // open subcategory
+//    for (int i = 0; i<[self.cateDataSource count]; i++) {
+//        CategoryModel *cellData = self.cateDataSource[i];
+//        if (i == index) {
+//            cellData.isPicked = YES;
+//        }else{
+//            cellData.isPicked = NO;
+//        }
+//    }
+//
+//    
+//    pickedSection = indexPath.section;
+//
+//    [self.cateView reloadData];
 }
 
 

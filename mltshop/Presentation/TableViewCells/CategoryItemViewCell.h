@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CategoryModel.h"
-
+#import "PassValueDelegate.h"
 @interface CategoryItemViewCell : UICollectionViewCell
 
-
 - (void)setRowData:(CategoryModel *)_rowData;
+
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 @end

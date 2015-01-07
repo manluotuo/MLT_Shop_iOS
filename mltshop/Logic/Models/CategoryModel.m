@@ -15,9 +15,34 @@
     if (DictionaryHasValue(dict)) {
         _catId = [dict objectForKey:@"catId"];
         _catName = [dict objectForKey:@"catName"];
-        _subBrands = dict[@"subBrands"];
+        _subBrands = [[NSMutableArray alloc]init];
+        if ([[dict objectForKey:@"subBrands"] isKindOfClass:[NSArray class]]) {
+            BrandModel *allBrand = [[BrandModel alloc]init];
+            allBrand.brandId = @"";
+            allBrand.brandName = @"全部";
+            [_subBrands addObject:allBrand];
+            for (NSDictionary *item in [dict objectForKey:@"subBrands"]) {
+                [_subBrands addObject:[[BrandModel alloc]initWithDict:item]];
+            }
+        }
         _isPicked = NO;
         _indexPath = [[NSIndexPath alloc]init];
+    }
+    
+    return self;
+}
+
+@end
+
+
+@implementation BrandModel
+
+- (id)initWithDict:(NSDictionary *)dict
+{
+    if (DictionaryHasValue(dict)) {
+        _brandId = [dict objectForKey:@"brandId"];
+        _brandName = [dict objectForKey:@"brandName"];
+        _brandLogo = [dict objectForKey:@"brandLogo"];
     }
     
     return self;

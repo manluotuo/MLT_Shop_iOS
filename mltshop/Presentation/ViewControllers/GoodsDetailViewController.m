@@ -17,10 +17,11 @@
 #import "NSString+FontAwesome.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WebViewController.h"
+#import "CartListViewController.h"
 
-#define SERVICE_TAB_TAG 101
-#define CART_TAB_TAG    102
-#define BUY_TAB_TAG     103
+#define SERVICE_TAB_TAG     101
+#define ADD_CART_TAB_TAG    102
+#define CART_TAB_TAG        103
 
 @interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate>
 {
@@ -44,6 +45,7 @@
 @property(nonatomic, strong)UIWebView *htmlView;
 
 @property(nonatomic, strong)UIScrollView *fixedView;
+@property(nonatomic, strong)UIView *topNavView;
 
 // 底部tabbar
 @property(nonatomic, strong)UIView *tabbarView;
@@ -87,7 +89,7 @@
 
 - (void)tabbarAction:(UIButton *)sender
 {
-    if (sender.tag == CART_TAB_TAG) {
+    if (sender.tag == ADD_CART_TAB_TAG) {
         
         NSMutableArray *titleArray = [[NSMutableArray alloc]init];
         
@@ -139,6 +141,11 @@
         [VC setUpDownButton:0];
         ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
         [self presentViewController:nav animated:YES completion:nil];
+    }else if (sender.tag == CART_TAB_TAG){
+        CartListViewController *VC = [[CartListViewController alloc]init];
+        [VC setUpDownButton:0];
+        ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 
@@ -168,12 +175,13 @@
     [self initGalleryView];
     [self initInfoView];
     [self initHtmlView];
-    [self initButtons];
     
     [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
     [self.view addSubview:self.fixedView];
     
     [self initTabbarButton];
+
+    [self initButtons];
 
 }
 
@@ -193,23 +201,23 @@
     [self.serviceTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.cartTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, 0, TOTAL_WIDTH/3, H_50)];
-    [self.cartTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FAShoppingCart]];
+    [self.cartTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FAPlusCircle]];
     [self.cartTabButton setTitle:T(@"加购物车") forState:UIControlStateNormal];
     [self.cartTabButton setTitleColor:DARKCOLOR];
     [self.cartTabButton setIconColor:ORANGECOLOR];
     [self.cartTabButton changeLightStyle];
-    self.cartTabButton.tag = CART_TAB_TAG;
+    self.cartTabButton.tag = ADD_CART_TAB_TAG;
     self.cartTabButton.titleLabel.font = FONT_14;
     [self.cartTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
 
     
     self.buyTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2, 0, TOTAL_WIDTH/3, H_50)];
-    [self.buyTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FACreditCard]];
-    [self.buyTabButton setTitle:T(@"直接购买") forState:UIControlStateNormal];
+    [self.buyTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FAShoppingCart]];
+    [self.buyTabButton setTitle:T(@"购物车") forState:UIControlStateNormal];
     [self.buyTabButton setTitleColor:DARKCOLOR];
     [self.buyTabButton setIconColor:ORANGECOLOR];
     [self.buyTabButton changeLightStyle];
-    self.buyTabButton.tag = BUY_TAB_TAG;
+    self.buyTabButton.tag = CART_TAB_TAG;
     self.buyTabButton.titleLabel.font = FONT_14;
     [self.buyTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -225,22 +233,27 @@
 
 -(void)initButtons
 {
-    self.backButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(H_20, H_20, H_40, H_40)];
+    self.topNavView = [[UIView alloc]initWithFrame:CGRectMake(0, H_20, TOTAL_WIDTH, H_40)];
+    
+    self.backButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(H_20, 0, H_40, H_40)];
     [self.backButton setIconString:[NSString fontAwesomeIconStringForEnum:FAChevronLeft]];
     [self.backButton setBackgroundColor:BlACKALPHACOLOR];
     [self.backButton setRounded];
     [self.backButton setIconFont:FONT_AWESOME_20];
     [self.backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.fixedView addSubview:self.backButton];
+    [self.topNavView addSubview:self.backButton];
     
     
-    self.favButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_60, TOTAL_WIDTH-H_60, H_40, H_40)];
-    [self.favButton setIconString:[NSString fontAwesomeIconStringForEnum:FAHeart]];
-    [self.favButton setBackgroundColor:BlACKALPHACOLOR];
-    [self.favButton setRounded];
-    [self.favButton setIconFont:FONT_AWESOME_20];
-    [self.favButton addTarget:self action:@selector(favAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.fixedView addSubview:self.favButton];
+    self.shareButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_60, 0, H_40, H_40)];
+    [self.shareButton setIconString:[NSString fontAwesomeIconStringForEnum:FAshareAlt]];
+    [self.shareButton setBackgroundColor:BlACKALPHACOLOR];
+    [self.shareButton setRounded];
+    [self.shareButton setIconFont:FONT_AWESOME_20];
+    [self.shareButton addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.topNavView addSubview:self.shareButton];
+    
+    [self.view addSubview:self.topNavView];
+
     
 }
 
@@ -251,9 +264,9 @@
     }];
 }
 
--(void)favAction
+-(void)shareAction
 {
-    
+    [DataTrans showWariningTitle:T(@"功能暂未实现") andCheatsheet:ICON_INFO];
 }
 
 

@@ -14,8 +14,8 @@
 @interface CategoryItemViewCell()
 @property(nonatomic, strong)UILabel *nameLabel;
 @property(nonatomic, strong)UIImageView *iconView;
-@property(nonatomic, strong)UIImageView *typeView;
-@property(nonatomic, strong)NSDictionary *cellData;
+@property(nonatomic, strong)UIImageView *bgView;
+@property(nonatomic, strong)CategoryModel *cellData;
 @property(nonatomic, strong)UIView *subView;
 
 
@@ -30,7 +30,7 @@
 
 @synthesize nameLabel;
 @synthesize iconView;
-@synthesize typeView;
+@synthesize bgView;
 @synthesize cellData;
 @synthesize subView;
 
@@ -55,42 +55,40 @@
     [self.nameLabel setFont:FONT_12];
     [self.nameLabel setBackgroundColor:[UIColor clearColor]];
     
-    self.iconView = [[UIImageView alloc]initWithFrame:CGRectMake(AVA_X, AVA_Y, AVA_W, AVA_H)];
-    [self.iconView setContentMode:UIViewContentModeScaleAspectFill];
-    [self.iconView.layer setCornerRadius:5.0f];
-    [self.iconView.layer setMasksToBounds:YES];
+    self.bgView = [[UIImageView alloc]initWithFrame:self.bounds];
+    [self.bgView.layer setBorderWidth:0.5f];
+    [self.bgView.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
     
-    self.typeView = [[UIImageView alloc]initWithFrame:CGRectMake(LEFT_PADDING/2, TOP_PADDING, AVA_X, AVA_X)];
-    [self.typeView setHidden:YES];
-    [self.layer setBorderWidth:0.5f];
-    [self.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
-    
-    self.subView = [[UIView alloc]initWithFrame:CGRectMake(0, CELL_HEIGHT, TOTAL_WIDTH, H_150)];
+    self.subView = [[UIView alloc]initWithFrame:CGRectMake(0, CELL_HEIGHT, TOTAL_WIDTH, H_200)];
     self.subView.backgroundColor = DARKCOLOR;
     [self.subView setHidden:YES];
     
+    [self addSubview:self.bgView];
     [self addSubview:self.nameLabel];
-    [self addSubview:self.iconView];
-    [self addSubview:self.typeView];
-    [self addSubview:self.subView];
+//    [self addSubview:self.subView];
     
 }
 
 - (void)setRowData:(CategoryModel *)_rowData
 {
-    
-    [self setBackgroundColor:WHITECOLOR];
+    self.cellData = _rowData;
 
     self.nameLabel.text = _rowData.catName;
     if (_rowData.isPicked) {
-        self.backgroundColor = GREENLIGHTCOLOR2;
-        [self.layer setBorderWidth:0.0f];
-        [self showSubBrand:_rowData];
+        self.bgView.backgroundColor = GREENLIGHTCOLOR2;
+        [self.bgView.layer setBorderWidth:0.0f];
+//        [self showSubBrand:_rowData];
+        self.layer.borderColor = REDCOLOR.CGColor;
+        self.layer.borderWidth = 1.0f;
+
     }else{
-        [self.subView setHidden:YES];
-        self.backgroundColor = [UIColor clearColor];
-        [self.layer setBorderWidth:0.5f];
-        [self.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
+        self.layer.borderColor = REDCOLOR.CGColor;
+        self.layer.borderWidth = 0.0f;
+
+//        [self.subView setHidden:YES];
+        self.bgView.backgroundColor = [UIColor clearColor];
+        [self.bgView.layer setBorderWidth:0.5f];
+        [self.bgView.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
     }
     
     /**
@@ -99,16 +97,26 @@
     [self.iconView setImage:nil];
 
     if (!StringHasValue(_rowData.catName)) {
-        [self.layer setBorderWidth:0.0f];
-        [self.layer setBorderColor:WHITECOLOR.CGColor];
+        [self.bgView.layer setBorderWidth:0.0f];
+        [self.bgView.layer setBorderColor:WHITECOLOR.CGColor];
     }else{
-        [self.layer setBorderWidth:0.5f];
-        [self.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
+        [self.bgView.layer setBorderWidth:0.5f];
+        [self.bgView.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
     }
     
-
     // 一开始置空
     [self setNeedsDisplay];
+    
+}
+
+- (void)brandAction:(UIButton *)sender
+{
+    SearchModel *search = [[SearchModel alloc]init];
+    search.brandId = STR_INT(sender.tag);
+    search.catId = self.cellData.catId;
+    
+    [self.passDelegate passSignalValue:SIGNAL_SEARCH_CATEGORY_BUTTON_CLICKED
+                               andData:search];
     
 }
 
@@ -131,18 +139,23 @@
         [view removeFromSuperview];
     }
     [self.subView setHidden:NO];
-
+    self.height = CELL_HEIGHT + H_200;
+    self.width = TOTAL_WIDTH;
     
     for (int i = 0; i< [catData.subBrands count]; i++) {
-        NSDictionary *brand = catData.subBrands[i];
+        BrandModel *brand = catData.subBrands[i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.titleLabel.font = FONT_12;
-        [button setTitle:brand[@"brandName"] forState:UIControlStateNormal];
+        [button setTitle:brand.brandName forState:UIControlStateNormal];
         [button setFrame:[self calcRect:i preLine:ITEM_PER_LINE]];
         [self.subView addSubview:button];
+        button.tag = [brand.brandId integerValue];
+        [button addTarget:self action:@selector(brandAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     
 }
+
+
 
 
 

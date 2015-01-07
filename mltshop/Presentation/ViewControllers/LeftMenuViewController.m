@@ -495,9 +495,14 @@
             break;
         case LeftMenuProfile:
         {
-            ProfileViewController *VC = [[ProfileViewController alloc]init];
-            [self.mm_drawerController setCenterViewController:VC];
-            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+            if (StringHasValue(XAppDelegate.me.sessionId)) {
+                ProfileViewController *VC = [[ProfileViewController alloc]init];
+                [self.mm_drawerController setCenterViewController:VC];
+                [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+            }else{
+                [DataTrans showWariningTitle:T(@"请先登录") andCheatsheet:ICON_INFO];
+            }
+
 
         }
             break;

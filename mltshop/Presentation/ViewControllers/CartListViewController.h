@@ -10,4 +10,6 @@
 
 @interface CartListViewController : CommonListViewController
 
+- (void)setUpDownButton:(NSInteger)position;
+
 @end

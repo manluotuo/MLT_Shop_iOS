@@ -42,6 +42,11 @@
 //    [self setUpImageDownButton:0];
 }
 
+- (void)setUpDownButton:(NSInteger)position
+{
+    [self setUpImageDownButton:0];
+}
+
 - (void)initDataSource
 {
     [super initDataSource];

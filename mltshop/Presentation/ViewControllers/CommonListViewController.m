@@ -45,6 +45,20 @@
     return self;
 }
 
+- (void)changeTableContentInset
+{
+    UIEdgeInsets currentInset = self.tableView.contentInset;
+    
+    // Manully set contentInset.
+    if (OSVersionIsAtLeastiOS7()) {
+        currentInset.top = IOS7_CONTENT_OFFSET_Y;
+        self.automaticallyAdjustsScrollViewInsets = YES;
+        // On iOS7, you need plus the height of status bar.
+        self.tableView.height = TOTAL_HEIGHT;
+    }
+    self.tableView.contentInset = currentInset;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -70,7 +84,7 @@
     // Manully set contentInset.
     if (OSVersionIsAtLeastiOS7()) {
         currentInset.top = self.navigationController.navigationBar.bounds.size.height;
-        self.automaticallyAdjustsScrollViewInsets = NO;
+        self.automaticallyAdjustsScrollViewInsets = YES;
         // On iOS7, you need plus the height of status bar.
         currentInset.top = 0;
 //        currentInset.bottom += IOS7_CONTENT_OFFSET_Y ;
@@ -175,6 +189,9 @@
     [super viewDidAppear:animated];
     
     //    [self.tableView triggerPullToRefresh];
+    if (self.shouldChangeTableContentInset) {
+        [self changeTableContentInset];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
