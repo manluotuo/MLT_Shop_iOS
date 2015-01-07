@@ -10,4 +10,7 @@
 #import "MMViewController.h"
 @interface ProfileViewController : MMViewController
 
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
+
+
 @end

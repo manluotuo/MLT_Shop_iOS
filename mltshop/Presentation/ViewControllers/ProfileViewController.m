@@ -15,12 +15,17 @@
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import <NYXImagesKit/NYXImagesKit.h>
 #import "AddressListViewController.h"
+#import "WebViewController.h"
+#import "NSString+FontAwesome.h"
+#import "SGActionView.h"
+#import "ModelHelper.h"
 
 @interface ProfileViewController ()<UIScrollViewDelegate>
 
 @property(nonatomic, strong)UIView *avatarView;
 @property(nonatomic, strong)UIScrollView *scrollView;
 @property(nonatomic, strong)UIView *orderView;
+@property(nonatomic, strong)RoundedAvatarButton *avatarButton;
 
 @end
 
@@ -59,14 +64,19 @@
     
     self.avatarView = [[UIView alloc]initWithFrame:CGRectMake(H_30, AVATAR_Y_OFFSET, H_260, H_90)];
 
+    UILabel *editIcon = [[UILabel alloc]initWithFrame:CGRectMake(H_70, 0, H_30, H_30)];
+    editIcon.font = FONT_AWESOME_24;
+    editIcon.text = [NSString fontAwesomeIconStringForEnum:FAPencil];
+    editIcon.textColor = WHITECOLOR;
+
+    
     // 头像
-    RoundedAvatarButton *avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
+    self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
+    [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
     
-    [avatarButton.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-                                       placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
-    [avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.avatarView addSubview:avatarButton];
+    [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.avatarButton addSubview:editIcon];
+    [self.avatarView addSubview:self.avatarButton];
 
     // 左右按钮
     KKFlatButton *leftButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
@@ -170,7 +180,27 @@
 
 - (void)avatarAction
 {
-    NSLog(@"avatarAction");
+    NSArray *imgs = @[@"F001",@"F002",@"F003",@"F004",@"F005",@"F006",@"F007",@"F008",@"F009",
+                      @"F010",@"F011",@"F012",@"M001",@"M002",@"M003",@"M004",@"M005",@"M006",
+                      @"M007",@"M008",@"M009",@"M010",@"M011",@"M012",@"avatarIronMan"];
+    
+    NSMutableArray *images = [[NSMutableArray alloc]init];
+    
+    for (NSString *img in imgs) {
+        [images addObject:[UIImage imageNamed:img]];
+    }
+    
+    
+    [SGActionView showGridMenuWithTitle:T(@"选择头像") itemTitles:imgs images:images selectedHandle:^(NSInteger index) {
+        Me *theMe = [[ModelHelper sharedHelper]findOnlyMe];
+        theMe.avatarURL =  imgs[index];
+        MRSave();
+        XAppDelegate.me = theMe;
+
+        [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+        [self.passDelegate passSignalValue:SIGNAL_AVATAR_UPLOAD_DONE andData:nil];
+    }];
+    
 }
 
 - (void)addressAction
@@ -187,6 +217,13 @@
 
 - (void)callcenterAction
 {
+    NSString *urlString = CUSTOMER_SERVICE_URL;
+    WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
+    VC.titleString = T(@"帮助/客服");
+    VC.urlString = urlString;
+    [VC setUpDownButton:0];
+    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+    [self presentViewController:nav animated:YES completion:nil];
     
 }
 

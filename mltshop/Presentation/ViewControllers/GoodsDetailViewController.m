@@ -134,7 +134,7 @@
         }
         
     }else if (sender.tag == SERVICE_TAB_TAG){
-        NSString *urlString = @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a";
+        NSString *urlString = CUSTOMER_SERVICE_URL;
         WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
         VC.titleString = T(@"帮助/客服");
         VC.urlString = urlString;

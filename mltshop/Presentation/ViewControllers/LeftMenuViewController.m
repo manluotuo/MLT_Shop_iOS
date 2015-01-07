@@ -214,8 +214,10 @@
     
     self.avatarView = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(35, avatarFrame.origin.y+H_24, 50, 50)];
 
-    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-                                    placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
+    [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+
+//    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
+//                                    placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
     [self.avatarView addTarget:self action:@selector(viewProfileAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -228,8 +230,9 @@
 - (void)refreshAvatarContainerView
 {
     self.nicknameLabel.text = XAppDelegate.me.username;
-    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-                                       placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
+    [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+//    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
+//                                       placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
 
 }
 
@@ -313,13 +316,12 @@
 
 }
 
-- (void)passStringValue:(NSString *)value andIndex:(NSUInteger)index
+- (void)passSignalValue:(NSString *)value andData:(id)data
 {
-    if ([value isEqualToString:SIGNAL_LEFT_MENU]) {
-        NSLog(@"LEFT_MENU_FUNCTION %@",INT(index));
+    if ([value isEqualToString:SIGNAL_AVATAR_UPLOAD_DONE]) {
+        [self refreshAvatarContainerView];
     }
 }
-
 #pragma mark - thrid party login
 
 
@@ -481,7 +483,7 @@
             break;
         case LeftMenuService:
         {
-            NSString *urlString = @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a";
+            NSString *urlString = CUSTOMER_SERVICE_URL;
             WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
             VC.titleString = T(@"帮助/客服");
             VC.urlString = urlString;
@@ -497,6 +499,7 @@
         {
             if (StringHasValue(XAppDelegate.me.sessionId)) {
                 ProfileViewController *VC = [[ProfileViewController alloc]init];
+                VC.passDelegate = self;
                 [self.mm_drawerController setCenterViewController:VC];
                 [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
             }else{

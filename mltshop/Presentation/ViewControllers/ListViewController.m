@@ -68,7 +68,7 @@
                                                   cateId:self.search.catId
                                                  brandId:self.search.brandId
                                                     page:self.start
-                                                    size:20
+                                                    size:DEFAULT_PAGE_SIZE
                                                 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
@@ -114,7 +114,7 @@
                                                   cateId:self.search.catId
                                                  brandId:self.search.brandId
                                                     page:self.start
-                                                    size:20
+                                                    size:DEFAULT_PAGE_SIZE
                                                 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据

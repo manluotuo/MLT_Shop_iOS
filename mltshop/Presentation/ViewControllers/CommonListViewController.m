@@ -218,7 +218,7 @@
     self.dataSource = responseObject;
     
     // TODO: 多于10条的时候才有加载更多的动画
-    if ([self.dataSource count] > 10) {
+    if ([self.dataSource count] > DEFAULT_PAGE_SIZE) {
         //setup infinite scrolling
         __weak CommonListViewController *weakSelf = self;
         [self.tableView addInfiniteScrollingWithActionHandler:^{

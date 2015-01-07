@@ -12,10 +12,12 @@
 #import "GoodsModel.h"
 #import "CategoryItemViewCell.h"
 #import "ListViewController.h"
+#import "GoodsDetailViewController.h"
 #import <HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SGActionView.h"
+#import "GoodsOneTableViewCell.h"
 
 typedef NS_ENUM(NSInteger,recommendListType) {
     recommendContactList = 1,
@@ -107,11 +109,11 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 {
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.backgroundColor = BGCOLOR;
-    self.tableView.separatorStyle = UITableViewCellSelectionStyleGray;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.separatorColor = SEPCOLOR;
     
     self.tableView.y = IOS7_CONTENT_OFFSET_Y+H_40;
-    self.tableView.height = self.tableView.frame.size.height - IOS7_CONTENT_OFFSET_Y+H_40;
+    self.tableView.height = self.tableView.frame.size.height - IOS7_CONTENT_OFFSET_Y-H_40;
     
     self.tableView.delegate = self;
     self.tableView.dataSource  = self;
@@ -137,6 +139,17 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
         VC.search = theSearch;
         [self.navigationController pushViewController:VC animated:YES];
+    }
+    
+    if ([value isEqualToString:SIGNAL_TAP_VEHICLE]) {
+        GoodsModel *theOne = data;
+        NSLog(@"%@", theOne);
+        
+        GoodsDetailViewController *vc = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+        vc.passDelegate = self;
+        [vc setGoodsData:theOne];
+        
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
     }
 }
 
@@ -236,28 +249,36 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CELL_HEIGHT;
+    return GOODS_CELL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"SearchTableView";
+    static NSString *identifier = @"SearchTableView";
     GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GoodsOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[GoodsOneTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.passDelegate = self;
     }
+    [cell setNewData:cellData];
     
-    cell.textLabel.text = cellData.goodsName;
-    cell.textLabel.font = FONT_12;
-    [cell.imageView setFrame:CGRectMake(0, 0, CELL_HEIGHT, CELL_HEIGHT)];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cellData.cover.thumb]
-                            placeholderImage:nil];
+
     return cell;
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+    
+    GoodsDetailViewController *vc = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+    [vc setGoodsData:cellData];
+    
+    [self.navigationController presentViewController:vc animated:YES completion:nil];
+}
 
 ///////////////////////////////////////////////
 #pragma mark - collectionDataSource

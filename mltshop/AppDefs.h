@@ -28,6 +28,8 @@
 #define BASE_API        @"http://www.manluotuo.com"
 #endif
 
+#define CUSTOMER_SERVICE_URL    @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a"
+
 
 //////////////////////////////////////
 // rect line //
