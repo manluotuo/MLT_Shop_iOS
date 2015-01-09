@@ -141,9 +141,8 @@
     order.tradeNO = theOrder.orderSn; //订单ID（由商家自行制定）
     order.productName = theOrder.subject; //商品标题
     order.productDescription = theOrder.desc; //商品描述
-//    order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
-    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/100.0f]; //商品价格 0.99-0.01
-    order.notifyURL =  @"http://www.manluotuo.com"; //回调URL
+    order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
+    order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
     
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";

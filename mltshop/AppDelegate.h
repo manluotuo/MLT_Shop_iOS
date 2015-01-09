@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) Me *me;
+@property (strong, nonatomic) NSMutableArray *allCategory;
 @property(nonatomic, assign)NSObject<PassValueDelegate> *passDelegate;
 @property(nonatomic, strong)HostViewController *centerViewController;
 

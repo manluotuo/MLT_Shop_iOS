@@ -10,5 +10,5 @@
 
 @interface HostViewController : ViewPagerController
 
-@property(nonatomic, strong)NSArray *tabArray;
+@property(nonatomic, strong)NSMutableArray *tabArray;
 @end

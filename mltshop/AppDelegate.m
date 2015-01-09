@@ -139,6 +139,7 @@
 
 - (void)skipIntroView
 {
+    [self getAllCategory];
     // 用户第一次打开
     NSNumber *result = GET_DEFAULT(@"HELPSEEN_INTRO");
     
@@ -222,6 +223,19 @@
     [self.window setRootViewController:self.loginViewController];
     [self.window addSubview:self.loginViewController.view];
     [self.window makeKeyAndVisible];
+}
+
+- (void)getAllCategory
+{
+    self.allCategory = [[NSMutableArray alloc]init];
+    [[AppRequestManager sharedManager]getCategoryAllWithBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            for (int i = 0 ; i < [responseObject count]; i++) {
+                CategoryModel *model = [[CategoryModel alloc]initWithDict:responseObject[i]];
+                [self.allCategory addObject:model];
+            }
+        }
+    }];
 }
 
 - (BOOL)application:(UIApplication *)application

@@ -58,15 +58,25 @@
     self.delegate = self;
     
     // last is empty for add button
+    self.tabArray = [[NSMutableArray alloc]init];
+    if (ArrayHasValue(XAppDelegate.allCategory)) {
+        NSLog(@"%@",XAppDelegate.allCategory);
+        for (CategoryModel *item in XAppDelegate.allCategory) {
+            [self.tabArray addObject:@{@"name": item.catName, @"catId": item.catId}];
+        }
+    }else{
+        self.tabArray = [[NSMutableArray alloc]initWithArray:
+                        @[@{@"name": @"首页", @"catId":INT(0)},
+                          @{@"name": @"服饰鞋帽", @"catId":INT(4)},
+                          @{@"name": @"毛绒玩具", @"catId":INT(7)},
+                          @{@"name": @"模型雕塑", @"catId":INT(3)},
+                          @{@"name": @"精品挂饰", @"catId":INT(6)},
+                          @{@"name": @"卡通箱包", @"catId":INT(9)},
+                          @{@"name": @"生活娱乐", @"catId":INT(2)}]
+                         ];
+    }
     
-    self.tabArray = @[@{@"name": @"首页", @"catId":INT(0)},
-                      @{@"name": @"服饰鞋帽", @"catId":INT(4)},
-                      @{@"name": @"毛绒玩具", @"catId":INT(7)},
-                      @{@"name": @"模型雕塑", @"catId":INT(3)},
-                      @{@"name": @"精品挂饰", @"catId":INT(6)},
-                      @{@"name": @"卡通箱包", @"catId":INT(9)},
-                      @{@"name": @"生活娱乐", @"catId":INT(2)},
-                      @{@"name": @"图书音像", @"catId":INT(5)}];
+
     
 //    NSLog(@"Host view tabarray: %@",self.tabArray);
     
@@ -90,9 +100,7 @@
 {
     [super viewWillAppear:animated];
     [self navigationGreenStyle];
-    
 //    [self disableScroll];
-
 }
 
 - (void)didReceiveMemoryWarning
