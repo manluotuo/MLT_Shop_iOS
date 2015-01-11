@@ -10,6 +10,7 @@
 #import "AppRequestManager.h"
 #import "SGActionView.h"
 #import "GoodsDetailViewController.h"
+#import "UIViewController+ImageBackButton.h"
 
 @interface ListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
@@ -24,6 +25,11 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)setUpDownButton:(NSInteger)position
+{
+    [self setUpImageDownButton:0];
 }
 
 - (void)viewDidLoad

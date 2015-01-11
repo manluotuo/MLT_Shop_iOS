@@ -48,7 +48,9 @@
         if ([parsed isKindOfClass:[SearchModel class]]) {
             ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
             VC.search = parsed;
+            VC.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
             VC.shouldChangeTableContentInset = YES;
+            [VC setUpDownButton:0];
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [self.navigationController presentViewController:nav animated:YES completion:nil];
         }else{
@@ -169,6 +171,9 @@
             ADBrandView *brandView = [[ADBrandView alloc]initWithFrame:rect];
             [brandView initWithData:listData];
             [self.fixedView addSubview:brandView];
+            
+            brandView.passDelegate = self;
+
             fixedHeight += brandHeight;
             
         }
@@ -184,6 +189,8 @@
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
                 [areaView initWithData:oneArea];
                 [self.fixedView addSubview:areaView];
+                
+                areaView.passDelegate = self;
                 /**
                  *  高度-1 为了 获得一个像素的感觉
                  */

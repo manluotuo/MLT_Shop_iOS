@@ -15,4 +15,6 @@
 
 
 
+- (void)setUpDownButton:(NSInteger)position;
+
 @end

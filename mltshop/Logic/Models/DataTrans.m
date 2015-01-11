@@ -71,6 +71,11 @@
     
     SearchModel *theModel = [[SearchModel alloc]init];
     
+    // 不支持 http://www.manluotuo.com/brand.php?id=10 传参
+    if ([url rangeOfString:@"php"].location != NSNotFound) {
+        return @{@"type":@"url", @"id": url};
+    }
+    
     if([url rangeOfString:@"category"].location != NSNotFound){
         
         NSRegularExpression *regex = [NSRegularExpression
@@ -103,7 +108,7 @@
         NSArray *matches = [regex matchesInString:url options:0 range:NSMakeRange(0, url.length)];
         NSTextCheckingResult *match = [matches objectAtIndex:0];
         
-        NSString *goodsId= [url substringWithRange:[match rangeAtIndex:2]];
+        NSString *goodsId= [url substringWithRange:[match rangeAtIndex:1]];
         return @{@"type":@"goods", @"id": goodsId};
     }else{
         return @{@"type":@"url", @"id": url};
