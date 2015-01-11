@@ -150,7 +150,7 @@
 
         if (!StringHasValue(self.me.userId)) {
             NSLog(@"会记住登录信息,用户还没有登录");
-            [self showRegisterView];
+            [self showLoginView];
         }else{
             [self loginWithSavedUserInfo];
 //            NSLog(@"用户已经登录");
@@ -253,6 +253,7 @@
              // 付款成功查看订单
              if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
                  
+                 // FIXME: 清掉所有的app  如果在 详情页点过去 profile页面会显示不出来
                  ProfileViewController *VC = [[ProfileViewController alloc]init];
                  [self.drawerController setCenterViewController:VC];
              }

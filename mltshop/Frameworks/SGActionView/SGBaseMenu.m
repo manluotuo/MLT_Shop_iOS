@@ -18,7 +18,7 @@
     if (self) {
         // Initialization code
         [self.layer setCornerRadius:20.0f];
-        self.backgroundColor = GRAYEXLIGHTCOLOR;
+        self.backgroundColor = GRAYLELIGHTCOLOR;
     }
     return self;
 }

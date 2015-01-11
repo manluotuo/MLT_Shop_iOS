@@ -13,8 +13,11 @@
 #import "ADBrandView.h"
 #import "YWDictionary.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ListViewController.h"
+#import "WebViewController.h"
+#import "GoodsDetailViewController.h"
 
-@interface ListMainViewController ()<UIScrollViewDelegate>
+@interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate>
 @property(nonatomic, strong)YWDictionary *fixedData;
 @property(nonatomic, strong)UIScrollView *fixedView;
 
@@ -26,6 +29,56 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupDataSource];
+}
+
+- (void)handleImageTap:(UIGestureRecognizer *)tap
+{
+    NSArray *items = [self.fixedData objectForKey:@"player"];
+    NSInteger tagag = tap.view.tag;
+    NSDictionary *item = items[tap.view.tag];
+    [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
+    
+}
+
+
+-(void)passSignalValue:(NSString *)value andData:(id)data
+{
+    if([value isEqualToString:SIGNAL_MAIN_PAGE_TAPPED] && data != nil){
+        id parsed = [DataTrans parseDataFromURL:data];
+        if ([parsed isKindOfClass:[SearchModel class]]) {
+            ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+            VC.search = parsed;
+            VC.shouldChangeTableContentInset = YES;
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+        }else{
+            if (DictionaryHasValue(parsed)) {
+                if ([parsed[@"type"] isEqualToString:@"url"]) {
+                    NSString *urlString = parsed[@"id"];
+                    WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
+                    VC.titleString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                    VC.urlString = urlString;
+                    [VC setUpDownButton:0];
+                    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+                    [self.navigationController presentViewController:nav animated:YES completion:nil];
+                }else if ([parsed[@"type"] isEqualToString:@"goods"]){
+                    GoodsDetailViewController *VC = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+                    VC.passDelegate = self;
+                    GoodsModel *theGoods = [[GoodsModel alloc]init];
+                    theGoods.goodsId = parsed[@"id"];
+                    [VC setGoodsData:theGoods];
+                    
+                    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+
+                    [self.navigationController presentViewController:nav animated:YES completion:nil];
+                }
+            }
+            
+            
+
+        }
+    }
+
 }
 
 - (void)setupDataSource
@@ -90,6 +143,15 @@
                                      initWithFrame:scrollFrame];
                 [page setContentMode:UIViewContentModeScaleAspectFill];
                 
+                // 点击事件
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageTap:)];
+                tap.cancelsTouchesInView = YES;
+                tap.numberOfTapsRequired = 1;
+                page.userInteractionEnabled = YES;
+                page.tag = i;
+                [page addGestureRecognizer:tap];
+
+                
                 [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
                 [pagedScrollView addContentSubview:page];
             }
@@ -113,14 +175,19 @@
         //区域信息
         else if([key isEqualToString:@"area"]){
             for (NSDictionary *oneArea in listData) {
-                CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT*2, TOTAL_WIDTH, AREA_FIX_HEIGHT);
+                CGFloat height = AREA_FIX_HEIGHT;
+                if (StringHasValue(oneArea[@"title"])) {
+                    height += H_30;
+                }
+                
+                CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT*2, TOTAL_WIDTH, height);
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
                 [areaView initWithData:oneArea];
                 [self.fixedView addSubview:areaView];
                 /**
                  *  高度-1 为了 获得一个像素的感觉
                  */
-                fixedHeight += AREA_FIX_HEIGHT-1;
+                fixedHeight += height-1;
             }
             
         }else{

@@ -403,6 +403,7 @@
 #define SIGNAL_SEARCH_CATEGORY_BUTTON_CLICKED           @"50199"
 
 #define SIGNAL_ONLINE_VEHICLE_FAIL          @"50098"
+#define SIGNAL_MAIN_PAGE_TAPPED          @"50400"
 
 
 #define NOTIFICATION_VEHICLE_EDIT_DONE      @"50300"
@@ -479,6 +480,7 @@ alpha:(a)]
 #define REDCOLOR [UIColor colorWithRed:225.0f/255.0f green:78.0f/255.0f blue:0.0f/255.0f alpha:1]
 #define GRAYCOLOR [UIColor colorWithRed:158.0f/255.0f green:158.0f/255.0f blue:158.0f/255.0f alpha:1]
 #define GRAYLIGHTCOLOR [UIColor colorWithRed:190.0f/255.0f green:190.0f/255.0f blue:190.0f/255.0f alpha:1]
+#define GRAYLELIGHTCOLOR [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1]
 #define GRAYEXLIGHTCOLOR [UIColor colorWithRed:236.0f/255.0f green:236.0f/255.0f blue:236.0f/255.0f alpha:1]
 
 

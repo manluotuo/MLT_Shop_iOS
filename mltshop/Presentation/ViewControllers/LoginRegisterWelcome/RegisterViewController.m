@@ -16,6 +16,7 @@
 #import "UIViewController+ImageBackButton.h"
 #import "Me.h"
 #import "ModelHelper.h"
+#import "FAHoverButton.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
@@ -27,8 +28,7 @@
 @property(nonatomic, strong)KKTextField *passTextView;
 @property(nonatomic, strong)KKTextField *emailTextView;
 @property(nonatomic, strong)KKFlatButton *verifyButton;
-@property(nonatomic, strong)KKFlatButton *signinButton;
-@property(nonatomic, strong)KKFlatButton *tourButton;
+@property(nonatomic, strong)FAHoverButton *closeButton;
 @property(nonatomic, assign)NSInteger nowEditing;
 
 // 编辑完成按钮
@@ -55,8 +55,6 @@
 @synthesize verifyButton;
 @synthesize editAssistView, doneButton;
 @synthesize inviteMobile;
-@synthesize signinButton;
-@synthesize tourButton;
 @synthesize logoView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -143,27 +141,19 @@
     [self.loginPanel addSubview:self.verifyButton];
     
     
-    self.signinButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [self.signinButton setTitle:T(@"登录") forState:UIControlStateNormal];
-    [self.signinButton setFrame:CGRectMake(0, TOTAL_HEIGHT-H_60*2, TOTAL_WIDTH , H_60)];
-    [self.signinButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.signinButton setBackgroundColor:GREENCOLOR];
-    self.signinButton = (KKFlatButton *)[DataTrans roundCornersOnView:self.signinButton onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     
+    // closeButton
     
-    self.tourButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [self.tourButton setTitle:T(@"随便看看") forState:UIControlStateNormal];
-    [self.tourButton setFrame:CGRectMake(0, TOTAL_HEIGHT-H_60, TOTAL_WIDTH , H_60)];
-    [self.tourButton addTarget:self action:@selector(tourAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.tourButton setBackgroundColor:GREENLIGHTCOLOR];
-    self.tourButton = (KKFlatButton *)[DataTrans roundCornersOnView:self.tourButton onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
-    
+    self.closeButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(H_30, H_30, H_30, H_30)];
+    [self.closeButton setTitle:[NSString fontAwesomeIconStringForEnum:FATimesCircle] forState:UIControlStateNormal];
+    [self.closeButton.titleLabel setFont:FONT_AWESOME_30];
+    [self.closeButton setTitleColor:WHITECOLOR forState:UIControlStateNormal];
+    [self.closeButton addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
     [bgView setImageToBlur:[UIImage imageNamed:@"train_bg"] completionBlock:^{
         [self.view addSubview:self.loginPanel];
-        [self.view addSubview:self.signinButton];
-        [self.view addSubview:self.tourButton];
+        [self.view addSubview:self.closeButton];
 
     }];
     [self.view addSubview:bgView];
@@ -177,17 +167,12 @@
     [super viewDidAppear:animated];
 }
 
-
-- (void)loginAction
+- (void)closeAction
 {
-    LoginViewController *vc = [[LoginViewController alloc]initWithNibName:nil bundle:nil];
-    [self presentViewController:vc animated:YES completion:^{}];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
-- (void)tourAction
-{
-    [XAppDelegate showDrawerView];
-}
+
 
 
 - (void)registerAction

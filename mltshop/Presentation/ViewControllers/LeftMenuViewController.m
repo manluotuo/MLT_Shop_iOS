@@ -27,6 +27,7 @@
 #import "SearchCategoryViewController.h"
 #import "WebHelpViewController.h"
 #import "WebViewController.h"
+#import "SGActionView.h"
 //#import "HistoryListViewController.h"
 //#import "MoreViewController.h"
 //#import "ProfileTableViewCell.h"
@@ -127,7 +128,7 @@
     nowVersion = [NSString stringWithFormat:@"V_%@#%@", nowVersion, nowBuild];
     
     // init left side menu
-    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictE, dictF, dictG, dictH,nil];
+    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictE, dictF,nil];
 
     // transform bg view
     self.bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
@@ -169,12 +170,16 @@
 
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     
-//    if (XAppDelegate.me.group > UserGroupGuest) {
-//        [self.loginContainerView setHidden:YES];
-//    }else{
-//        [self.avatarContainerView setHidden:YES];
-//    }
-    
+    // 已经登录了才有退出
+    if (StringHasValue(XAppDelegate.me.sessionId)) {
+        NSDictionary *dictH = [[NSDictionary alloc]initWithObjectsAndKeys:
+                               T(@"退出"), @"title",
+                               [NSString fontAwesomeIconStringForEnum:FASignOut], @"icon",
+                               INT(LeftMenuLogout), @"function",
+                               nil];
+        [self.dataSource addObject:dictH];
+    }
+    [self.tableView reloadData];
     //  重新获取昵称和头像
     [self refreshAvatarContainerView];
     
@@ -217,7 +222,7 @@
     [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
 
 //    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-//                                    placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
+//                                    placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
     [self.avatarView addTarget:self action:@selector(viewProfileAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -232,7 +237,7 @@
     self.nicknameLabel.text = XAppDelegate.me.username;
     [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
 //    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-//                                       placeholderImage:[UIImage imageNamed:@"avatarIronMan"]];
+//                                       placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
 
 }
 
@@ -448,8 +453,9 @@
         case LeftMenuLogout:
         {
             [[ModelHelper sharedHelper]meLogoutWithBlock:^(BOOL exeStatus) {
+                [self.dataSource removeObject:self.dataSource.lastObject];
                 [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
-                    [XAppDelegate showRegisterView];
+                    [XAppDelegate showLoginView];
                 }];
             }];
         }
@@ -503,7 +509,14 @@
                 [self.mm_drawerController setCenterViewController:VC];
                 [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
             }else{
-                [DataTrans showWariningTitle:T(@"请先登录") andCheatsheet:ICON_INFO];
+                [SGActionView showAlertWithTitle:T(@"请先登录") message:T(@"查看个人中心需要登录") leftButtonTitle:T(@"取消") rightButtonTitle:T(@"去登录") selectedHandle:^(NSInteger index) {
+                    if (index == 1) {
+                        [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+                            [XAppDelegate showLoginView];
+                        }];
+                    }
+                }];
+                
             }
 
 

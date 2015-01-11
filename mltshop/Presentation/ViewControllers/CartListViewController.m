@@ -131,6 +131,7 @@
                 [DataTrans showWariningTitle:T(@"购物车空空如也")
                                andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle]
                                  andDuration:1.0f];
+                [self showSetupDataSource:self.dataArray andError:nil];
             }
             
         }

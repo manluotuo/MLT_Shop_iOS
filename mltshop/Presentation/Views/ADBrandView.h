@@ -12,5 +12,6 @@
 
 
 - (void)initWithData:(NSArray *)listData;
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 @end

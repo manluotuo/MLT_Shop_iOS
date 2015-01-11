@@ -58,7 +58,7 @@
             onlyMe.password = json[@"password"];
         }
         if (!StringHasValue(onlyMe.avatarURL)) {
-            onlyMe.avatarURL = @"avatarIronMan";
+            onlyMe.avatarURL = @"logo_luotuo";
         }
         onlyMe.userId = [DataTrans noNullStringObj:user[@"id"]];
         onlyMe.username = [DataTrans noNullStringObj:user[@"name"]];

@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) NSUInteger page; //Zero based number of page
 @property (nonatomic, readonly) NSMutableArray* views;
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 - (id)initWithFrame:(CGRect)frame andPageControl:(BOOL)showPageControl;
 

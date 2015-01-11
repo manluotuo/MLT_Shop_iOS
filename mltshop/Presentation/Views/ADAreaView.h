@@ -11,6 +11,7 @@
 @interface ADAreaView : UIView
 
 - (void)initWithData:(NSDictionary *)oneArea;
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 @end
 

@@ -61,6 +61,7 @@
     self.tabArray = [[NSMutableArray alloc]init];
     if (ArrayHasValue(XAppDelegate.allCategory)) {
         NSLog(@"%@",XAppDelegate.allCategory);
+        [self.tabArray addObject:@{@"name": @"首页", @"catId":INT(0)}];
         for (CategoryModel *item in XAppDelegate.allCategory) {
             [self.tabArray addObject:@{@"name": item.catName, @"catId": item.catId}];
         }

@@ -54,22 +54,57 @@
 /////////////////////////////////////////////////////////
 #pragma mark - goods delegate
 /////////////////////////////////////////////////////////
+//  category-([^-]+)-b([^.|-]+)  => 43,11
+//  http://www.manluotuo.com/category-43-b11-min0-max0-attr0.html
+//
+//  brand-([^-]+)-c([^.|-]+) => 12,0
+//  http://www.manluotuo.com/brand-12-c0.html
+//
+//  goods-([^.|-]+) => 372
+//  http://www.manluotuo.com/goods-372.html
 
-+ (NSDictionary *)parseDataFromURL:(NSString *)url
++ (id)parseDataFromURL:(NSString *)url
 {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"id=([^&]+)" options:NSRegularExpressionCaseInsensitive error:nil];
-    NSArray *matches = [regex matchesInString:url options:0 range:NSMakeRange(0, url.length)];
-    NSTextCheckingResult *match = [matches objectAtIndex:0];
-    NSRange range = [match rangeAtIndex:1];
-    NSString *idString = [url substringWithRange:range];
-
+    NSString *cateRegex = @"category-([^-]+)-b([^.|-]+)";
+    NSString *brandRegex = @"brand-([^-]+)-c([^.|-]+)";
+    NSString *goodsRegex = @"goods-([^.|-]+)";
     
-    if ([url rangeOfString:@"brand"].location != NSNotFound) {
-        return @{@"type":@"brand", @"id": idString};
-    }else if([url rangeOfString:@"category"].location != NSNotFound){
-        return @{@"type":@"category", @"id": idString};
-    }else if([url rangeOfString:@"article"].location != NSNotFound){
-        return @{@"type":@"article", @"id": idString};
+    SearchModel *theModel = [[SearchModel alloc]init];
+    
+    if([url rangeOfString:@"category"].location != NSNotFound){
+        
+        NSRegularExpression *regex = [NSRegularExpression
+                                      regularExpressionWithPattern:cateRegex
+                                      options:NSRegularExpressionCaseInsensitive
+                                      error:nil];
+        NSArray *matches = [regex matchesInString:url options:0 range:NSMakeRange(0, url.length)];
+        NSTextCheckingResult *match = [matches objectAtIndex:0];
+        
+        theModel.catId = [url substringWithRange:[match rangeAtIndex:1]];
+        theModel.brandId = [url substringWithRange:[match rangeAtIndex:2]];
+        return theModel;
+    }else if([url rangeOfString:@"brand"].location != NSNotFound) {
+        NSRegularExpression *regex = [NSRegularExpression
+                                      regularExpressionWithPattern:brandRegex
+                                      options:NSRegularExpressionCaseInsensitive
+                                      error:nil];
+        NSArray *matches = [regex matchesInString:url options:0 range:NSMakeRange(0, url.length)];
+        NSTextCheckingResult *match = [matches objectAtIndex:0];
+        
+        theModel.brandId = [url substringWithRange:[match rangeAtIndex:1]];
+        theModel.catId = [url substringWithRange:[match rangeAtIndex:2]];
+        return theModel;
+
+    }else if([url rangeOfString:@"goods"].location != NSNotFound) {
+        NSRegularExpression *regex = [NSRegularExpression
+                                      regularExpressionWithPattern:goodsRegex
+                                      options:NSRegularExpressionCaseInsensitive
+                                      error:nil];
+        NSArray *matches = [regex matchesInString:url options:0 range:NSMakeRange(0, url.length)];
+        NSTextCheckingResult *match = [matches objectAtIndex:0];
+        
+        NSString *goodsId= [url substringWithRange:[match rangeAtIndex:2]];
+        return @{@"type":@"goods", @"id": goodsId};
     }else{
         return @{@"type":@"url", @"id": url};
     }
@@ -83,6 +118,20 @@
     CGFloat y = rect.origin.y * (floor(index / preLine) * 2 + 1) + rect.size.height * floor(index / preLine);
     return CGRectMake( x, y, rect.size.width, rect.size.height);
 }
+
++ (NSString *)getSepString:(NSString *)inputString
+{
+    NSArray *temp = [[NSArray alloc]init];
+    if (([inputString rangeOfString:@"+"].location != NSNotFound)) {
+        temp = [inputString componentsSeparatedByString:@"+"];
+    }
+    if (([inputString rangeOfString:@"-"].location != NSNotFound)) {
+        temp = [inputString componentsSeparatedByString:@"-"];
+    }
+    
+    return [temp firstObject];
+}
+
 
 
 

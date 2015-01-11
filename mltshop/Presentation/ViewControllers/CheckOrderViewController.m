@@ -17,6 +17,8 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
 #import "DataSigner.h"
+#import <HTProgressHUD/HTProgressHUD.h>
+#import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 
 
 #define CART_TAG        0
@@ -141,8 +143,10 @@
     order.tradeNO = theOrder.orderSn; //订单ID（由商家自行制定）
     order.productName = theOrder.subject; //商品标题
     order.productDescription = theOrder.desc; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
+//    order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
+    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
+
     
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
@@ -180,11 +184,18 @@
 
 - (void)doneAction
 {
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+    HUD.text = T(@"登录中...");
+    [HUD showInView:self.view];
+    
     [[AppRequestManager sharedManager]flowDoneWithFlowDoneModel:self.flowDoneData andBlock:^(id responseObject, NSError *error) {
         //
+        [HUD removeFromSuperview];
+
         if (responseObject != nil) {
             OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
-            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
+//            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
             [self doAlipayAction:theOrder];
         }
         if (error != nil) {

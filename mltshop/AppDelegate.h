@@ -25,6 +25,8 @@
 - (void)showRegisterView;
 // 随便看看
 - (void)showDrawerView;
+// 登陆页面
+- (void)showLoginView;
 
 
 
