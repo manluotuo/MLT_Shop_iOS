@@ -46,13 +46,19 @@
     if([value isEqualToString:SIGNAL_MAIN_PAGE_TAPPED] && data != nil){
         id parsed = [DataTrans parseDataFromURL:data];
         if ([parsed isKindOfClass:[SearchModel class]]) {
-            ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
-            VC.search = parsed;
-            VC.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-            VC.shouldChangeTableContentInset = YES;
-            [VC setUpDownButton:0];
-            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
-            [self.navigationController presentViewController:nav animated:YES completion:nil];
+            if ([[(SearchModel*)parsed brandId] isEqualToString:@"all"]) {
+                // FIXME: goto 品牌街
+                
+            }else{
+                ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+                VC.search = parsed;
+                VC.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                VC.shouldChangeTableContentInset = YES;
+                [VC setUpDownButton:0];
+                ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+                [self.navigationController presentViewController:nav animated:YES completion:nil];
+            }
+            
         }else{
             if (DictionaryHasValue(parsed)) {
                 if ([parsed[@"type"] isEqualToString:@"url"]) {

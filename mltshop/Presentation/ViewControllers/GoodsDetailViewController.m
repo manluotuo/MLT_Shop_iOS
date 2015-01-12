@@ -384,6 +384,15 @@
     self.htmlView.delegate = self;
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        return NO;
+    }else{
+        return YES;  
+    }
+}
+
 -(void)initGalleryView
 {
     // gallery view

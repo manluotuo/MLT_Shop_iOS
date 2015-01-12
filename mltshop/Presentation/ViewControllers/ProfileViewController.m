@@ -86,7 +86,7 @@
     [leftButton.titleLabel setFont:FONT_12];
     [leftButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [leftButton setBackgroundColor:WHITEALPHACOLOR2];
-    [self.avatarView addSubview:leftButton];
+//    [self.avatarView addSubview:leftButton];
     
     KKFlatButton *rightButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:T(@"在线客服") forState:UIControlStateNormal];

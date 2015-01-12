@@ -37,7 +37,7 @@
         self.title = oneArea[@"title"];
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_15, 0, H_280, H_30)];
         titleLabel.text = oneArea[@"title"];
-        titleLabel.font = FONT_14;
+        titleLabel.font = FONT_12;
         titleLabel.textColor = DARKCOLOR;
         offsetY = H_30;
         
@@ -106,7 +106,7 @@
         
 
         ADAreaOneHeightView *rightView = [[ADAreaOneHeightView alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, offsetY, TOTAL_WIDTH/2, AREA_FIX_HEIGHT)];
-        [rightView initWithItemData:self.items[0]];
+        [rightView initWithItemData:self.items[1]];
 
         
         UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, offsetY, 1, AREA_FIX_HEIGHT)];
@@ -153,8 +153,8 @@
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_130, TOTAL_WIDTH/2, H_20)];
     [titleLabel setText:[DataTrans getSepString:item[@"name"]]];
-    [titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
-    [titleLabel setTextColor:GRAYCOLOR];
+    [titleLabel setFont:FONT_12];
+    [titleLabel setTextColor:DARKCOLOR];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
 
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_130+H_20, TOTAL_WIDTH/2, H_14)];
@@ -194,19 +194,19 @@
     UIImageView *goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(H_8, H_8, H_60, H_60)];
     [goodsImg sd_setImageWithURL:[NSURL URLWithString:item[@"img"]] placeholderImage:PLACEHOLDERIMAGE];
     
-    CGSize titleSize = [[DataTrans getSepString:item[@"name"]] sizeWithWidth:H_70 andFont:FONT_11];
+    CGSize titleSize = [[DataTrans getSepString:item[@"name"]] sizeWithWidth:H_70 andFont:FONT_12];
 
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_80, H_16, H_80, titleSize.height)];
     [titleLabel setText:[DataTrans getSepString:item[@"name"]]];
-    [titleLabel setFont:[UIFont boldSystemFontOfSize:11]];
-    [titleLabel setTextColor:GRAYCOLOR];
+    [titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [titleLabel setTextColor:DARKCOLOR];
     [titleLabel setTextAlignment:NSTextAlignmentLeft];
     titleLabel.numberOfLines = 0;
     
     
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_80, H_16+titleSize.height, TOTAL_WIDTH/2, H_14)];
     [priceLabel setText:[item[@"price"] stringByAppendingString:@"元"]];
-    [priceLabel setFont:TINYCUSTOMFONT];
+    [priceLabel setFont:LITTLECUSTOMFONT];
     [priceLabel setTextColor:GRAYLIGHTCOLOR];
     [priceLabel setTextAlignment:NSTextAlignmentLeft];
     

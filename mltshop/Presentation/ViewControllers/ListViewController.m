@@ -78,14 +78,23 @@
                                                 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
+            NSInteger step = 2;
             NSMutableArray *goodsArray = [[NSMutableArray alloc]init];
-            double countDouble = ceil([responseObject count]/2);
+            double countDouble = ceil([responseObject count]/ (float)step );
             NSUInteger count = [[NSNumber numberWithDouble:countDouble] integerValue];
             for (int i = 0 ; i < count; i++) {
-                NSDictionary *oneDict = @{@"left":[[GoodsModel alloc]initWithDict:responseObject[i]],
-                                          @"right":[[GoodsModel alloc]initWithDict:responseObject[i+1]]
-                                          };
-                [goodsArray addObject:oneDict];
+                if ( i*step+1 <  [responseObject count]) {
+                    NSDictionary *oneDict = @{@"left":[[GoodsModel alloc]initWithDict:responseObject[i*step]],
+                                              @"right":[[GoodsModel alloc]initWithDict:responseObject[i*step+1]]
+                                              };
+                    [goodsArray addObject:oneDict];
+                }else{
+                    NSDictionary *oneDict = @{@"left":[[GoodsModel alloc]initWithDict:responseObject[i*step]],
+                                              @"right":[[GoodsModel alloc]init]
+                                              };
+                    [goodsArray addObject:oneDict];
+
+                }
             }
             NSLog(@"Online setupDataSource ======== ");
             [self showSetupDataSource:goodsArray andError:nil];
