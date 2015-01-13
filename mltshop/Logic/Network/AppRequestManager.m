@@ -465,6 +465,66 @@ static dispatch_once_t onceToken;
     }];
 }
 
+/**
+ *  购物车操作
+ *
+ *  @param theCart   <#theCart description#>
+ *  @param operation <#operation description#>
+ *  @param block     <#block description#>
+ */
+- (void)operateOrderWithCartModel:(OrderModel *)theOrder
+                        operation:(NSUInteger)operation
+                         andBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = @"";
+    NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
+                                     @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                                     @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                                     }}];
+    
+    
+    switch (operation) {
+        case OrderOpsList:
+            postURL = API_ORDER_LIST_PATH;
+            baseDict[@"pagination"]= @{@"page":@"1", @"count":@"100"};
+            baseDict[@"type"] = @"";
+            break;
+        case OrderOpsCancel:
+            postURL = API_ORDER_CANCEL_PATH;
+            baseDict[@"order_id"] = theOrder.orderId;
+            break;
+        case OrderOpsPay:
+            postURL = API_ORDER_PAY_PATH;
+            baseDict[@"order_id"] = theOrder.orderId;
+            break;
+        case OrderOpsAffirmReceived:
+            postURL = API_ORDER_AFFIRM_RECEIVED_PATH;
+            baseDict[@"order_id"] = theOrder.orderId;
+            break;
+        default:
+            break;
+    }
+    
+    
+    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    
+    [[AppRequestManager nodejsManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject[@"data"] , nil);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+    }];
+}
+
+
+
 
 /**
  *  根据parentId 获取区域

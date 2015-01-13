@@ -390,6 +390,7 @@
 #define SIGNAL_CLONE_VEHICLE        @"50200"
 #define SIGNAL_ADDRESS_OPERATE_DONE         @"50188"
 #define SIGNAL_CHANGE_CART_GOODS_COUNT      @"50189"
+#define SIGNAL_ORDER_ACTION                 @"50191"
 
 #define SIGNAL_CHOOSE_MODLE_PICKER          @"50090" //重新选择步骤
 #define SIGNAL_UPLOAD_GALLERY_PROGRESS      @"50091"

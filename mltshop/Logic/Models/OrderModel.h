@@ -8,15 +8,33 @@
 
 #import <Foundation/Foundation.h>
 
-@interface OrderModel : NSObject
+typedef NS_ENUM(NSUInteger,OrderOps)
+{
+    OrderOpsList             = 0,
+    OrderOpsCancel           = 1,
+    OrderOpsPay              = 2,
+    OrderOpsAffirmReceived   = 3
+};
 
+@interface OrderModel : NSObject
 
 @property(nonatomic, strong)NSString *orderSn;
 @property(nonatomic, strong)NSString *orderId;
+@property(nonatomic, strong)NSDate *orderTime;
 @property(nonatomic, strong)NSString *payCode;
 @property(nonatomic, strong)NSString *subject;
 @property(nonatomic, strong)NSString *desc;
 @property(nonatomic, strong)NSNumber *orderAmount;
+@property(nonatomic, strong)NSNumber *totalFee;
+@property(nonatomic, strong)NSMutableArray *cartList;
+@property(nonatomic, strong)NSIndexPath *indexPath;
+
+@property(nonatomic, strong)NSNumber *integralMoney;
+@property(nonatomic, strong)NSNumber *bonus;
+@property(nonatomic, strong)NSNumber *shippingFee;
+
+
+
 
 - (id)initWithDict:(NSDictionary *)dict;
 

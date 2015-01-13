@@ -173,6 +173,8 @@
         return;
     }
     
+    [self showDrawerView];
+
     [[AppRequestManager sharedManager] signInWithUsername:self.me.username password:self.me.password andBlock:^(id responseObject, NSError *error) {
         
 //        [HUD removeFromSuperview];
@@ -182,7 +184,6 @@
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             // 显示主页面
-            [self showDrawerView];
         }
         
         if(error != nil)

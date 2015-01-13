@@ -19,6 +19,7 @@
 #import "NSString+FontAwesome.h"
 #import "SGActionView.h"
 #import "ModelHelper.h"
+#import "OrderListViewController.h"
 
 @interface ProfileViewController ()<UIScrollViewDelegate>
 
@@ -42,6 +43,14 @@
     [self initOrderView];
 }
 
+
+- (void)historyOrderAction
+{
+    OrderListViewController *VC = [[OrderListViewController alloc]initWithNibName:nil bundle:nil];
+    [VC setUpDownButton:0];
+    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+    [self presentViewController:nav animated:YES completion:nil];
+}
 
 - (void)initBgView
 {

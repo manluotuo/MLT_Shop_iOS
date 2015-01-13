@@ -35,6 +35,12 @@
 #define API_FLOW_DONE_PATH          @"/ecmobile/?url=/flow/done"
 #define API_VALIDATE_BONUS_PATH     @"/ecmobile/?url=/validate/bonus"
 
+#define API_ORDER_LIST_PATH         @"/ecmobile/?url=/order/list"
+#define API_ORDER_CANCEL_PATH       @"/ecmobile/?url=/order/cancel"
+#define API_ORDER_PAY_PATH          @"/ecmobile/?url=/order/pay"
+#define API_ORDER_AFFIRM_RECEIVED_PATH  @"/ecmobile/?url=/order/affirmReceived"
+
+
 #define API_UPLOAD_PICTURE          @"/upload/picture"
 #define API_CREATE_VEHICLE_GALLERY  @"/gallery/create"
 #define API_UPDATE_VEHICLE_GALLERY  @"/gallery/update"
@@ -141,6 +147,12 @@
 - (void)operateCartWithCartModel:(CartModel *)theCart
                      operation:(NSUInteger)operation
                       andBlock:(void (^)(id responseObject, NSError *error))block;
+
+
+// ORDER function
+- (void)operateOrderWithCartModel:(OrderModel *)theOrder
+                        operation:(NSUInteger)operation
+                         andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // API/REGION
