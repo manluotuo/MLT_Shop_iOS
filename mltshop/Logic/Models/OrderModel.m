@@ -1,4 +1,4 @@
-//
+    //
 //  OrderModel.m
 //  mltshop
 //
@@ -15,7 +15,8 @@
     if (DictionaryHasValue(dict)) {
         _orderId = [DataTrans noNullStringObj:dict[@"order_id"]];
         _orderSn = [DataTrans noNullStringObj:dict[@"order_sn"]];
-        _orderTime = [DataTrans dateFromISO8601:dict[@"order_time"]];
+        _orderTime = [DataTrans dateFromNSDatetimeStr:dict[@"order_time"]];
+        NSLog(@"_orderTime %@",_orderTime);
         _totalFee = [DataTrans noNullNumberObj:dict[@"total_fee"]];
         
         if (DictionaryHasValue(dict[@"order_info"])) {
@@ -29,8 +30,9 @@
         _bonus = [DataTrans noNullNumberObj:dict[@"formated_bonus"]];
         _shippingFee = [DataTrans noNullNumberObj:dict[@"formated_shipping_fee"]];
         
+        _cartList = [[NSMutableArray alloc]init];
         if (ArrayHasValue( dict[@"goods_list"])) {
-            for (NSDictionary *item in [dict objectForKey:@"goods_list"]) {
+            for (NSDictionary *item in dict[@"goods_list"]) {
                 [_cartList addObject:[[CartModel alloc]initWithDict:item]];
             }
         }

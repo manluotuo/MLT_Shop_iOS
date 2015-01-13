@@ -103,7 +103,7 @@
 #define SBUTTON_TAG     10
 #define DEFAULT_PAGE_SIZE  20
 
-#define DATETIME_FORMATE    @"yyyy-MM-dd HH:mm:ss "  //@"yyyy-MM-dd hh:mm:ss"
+#define DATETIME_FORMATE    @"yyyy/MM/dd HH:mm:ss +0800"  //@"yyyy-MM-dd hh:mm:ss"
 #define DATE_FORMATE        @"yyyy-MM"
 #define DATE_YMD_FORMATE    @"yyyy-MM-dd"
 

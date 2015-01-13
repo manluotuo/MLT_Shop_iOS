@@ -448,19 +448,19 @@
         
         return cell;
     }
-    else if(self.dataSourceType == ListDataSourceOrder){
-        OrderModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
-        cellData.indexPath = indexPath;
-        OrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        
-        if (cell == nil) {
-            cell = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            cell.passDelegate = self;
-        }
-        [cell setNewData:cellData];
-        
-        return cell;
-    }
+//    else if(self.dataSourceType == ListDataSourceOrder){
+//        OrderModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+//        cellData.indexPath = indexPath;
+//        OrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//        
+//        if (cell == nil) {
+//            cell = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//            cell.passDelegate = self;
+//        }
+//        [cell setNewData:cellData];
+//        
+//        return cell;
+//    }
     else{
         GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
         cellData.indexPath = INT(indexPath.row);

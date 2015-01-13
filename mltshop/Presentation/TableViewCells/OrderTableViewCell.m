@@ -33,24 +33,28 @@
 
 - (void)initCellView
 {
-    timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_100, H_14, H_200, H_20)];
-    timeLabel.font = FONT_14;
-    timeLabel.textColor = GREENCOLOR;
+
     
-    idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_100, H_14+H_20, H_280, H_20)];
+    idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_100, H_20)];
     idLabel.numberOfLines = 0;
     idLabel.font = FONT_12;
     
-    amountLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_100, H_14+H_20+H_20, H_120, H_20)];
+    amountLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_90, H_5, H_100, H_20)];
     amountLabel.textColor = GRAYCOLOR;
-    amountLabel.font = LITTLECUSTOMFONT;
+    amountLabel.font = FONT_12;
+    
+    timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_25, H_150, H_20)];
+    timeLabel.font = FONT_12;
+    timeLabel.textColor = GREENCOLOR;
     
     actionBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     actionBtn.titleLabel.font = FONT_12;
-    [actionBtn setTitle:T(@"修改数量") forState:UIControlStateNormal];
-    [actionBtn setFrame:CGRectMake(H_220, H_40, H_80, H_40)];
+    [actionBtn setTitle:T(@"操作订单") forState:UIControlStateNormal];
+    [actionBtn setFrame:CGRectMake(H_220, H_10, H_80, H_30)];
     [actionBtn addTarget:self action:@selector(opsAction) forControlEvents:UIControlEventTouchUpInside];
     [actionBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
+    
+    self.backgroundColor = BGCOLOR;
     
     [self addSubview:timeLabel];
     [self addSubview:idLabel];
@@ -62,9 +66,12 @@
 {
     self.data = _newData;
     
+    idLabel.text = [NSString stringWithFormat:@"ID: %@",self.data.orderId];
+    amountLabel.text = [NSString stringWithFormat:@"总计: %@元",
+                        STR_NUM2([self.data.orderAmount floatValue])];
+    
     timeLabel.text = [DataTrans dateStringFromDate:self.data.orderTime];
-    idLabel.text = self.data.orderId;
-    amountLabel.text = STR_NUM2(self.data.orderAmount);
+
 }
 
 - (void)opsAction

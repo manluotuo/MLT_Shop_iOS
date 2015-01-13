@@ -11,6 +11,8 @@
 #import "SGActionView.h"
 #import "UIViewController+ImageBackButton.h"
 #import "KKFlatButton.h"
+#import "CartTableViewCell.h"
+#import "OrderTableViewCell.h"
 
 @interface OrderListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
@@ -100,6 +102,56 @@
     //    [self setupDataSource];
 }
 
+
+
+#pragma mark -
+#pragma mark UITableViewDataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return H_50;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CELL_HEIGHT +H_20;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    OrderTableViewCell *cellview = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    [cellview setFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_40)];
+    [cellview setNewData:self.dataArray[section]];
+
+    return cellview;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.dataArray count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    OrderModel *theOrder = self.dataArray[section];
+    NSLog(@"count %@",theOrder.cartList);
+    return [theOrder.cartList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identifier = @"ListCell";
+    OrderModel *theOrder = self.dataArray[indexPath.section];
+    CartModel *cellData = [theOrder.cartList objectAtIndex:indexPath.row];
+    cellData.indexPath = indexPath;
+    
+    CartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    [cell.changeCountBtn setHidden:YES];
+    if (cell == nil) {
+        cell = [[CartTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.passDelegate = self;
+    }
+    [cell setNewData:cellData];
+    
+    return cell;
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -728,7 +728,7 @@
 + (NSString *)dateStringFromDate:(NSDate *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:DATE_FORMATE];
+    [formatter setDateFormat:DATE_YMD_FORMATE];
     if (date != nil) {
         if ([date isEqualToDate:[NSDate dateWithTimeIntervalSince1970:0]]) {
             return @"";
