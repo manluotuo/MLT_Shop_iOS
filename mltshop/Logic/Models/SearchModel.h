@@ -13,6 +13,7 @@
 @property(nonatomic, strong)NSString *catId;
 @property(nonatomic, strong)NSString *brandId;
 @property(nonatomic, strong)NSString *keywords;
+@property(nonatomic, strong)NSString *intro;
 
 - (id)initWithDict:(NSDictionary *)dict;
 

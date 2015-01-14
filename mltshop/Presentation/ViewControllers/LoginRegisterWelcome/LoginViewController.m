@@ -203,7 +203,8 @@
  *  验证邀请码
  */
 - (void)verifyPasswordAction
-{    
+{
+    self.editing = NO;
     [self.passTextView resignFirstResponder];
     [self.userTextView resignFirstResponder];
     

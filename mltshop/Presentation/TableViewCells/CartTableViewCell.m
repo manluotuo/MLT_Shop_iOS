@@ -59,7 +59,6 @@
     [changeCountBtn addTarget:self action:@selector(changeCountAction) forControlEvents:UIControlEventTouchUpInside];
     [changeCountBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
     
-    
     [self addSubview:coverImageView];
     [self addSubview:nameLabel];
     [self addSubview:priceLabel];

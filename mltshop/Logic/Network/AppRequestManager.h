@@ -129,6 +129,7 @@
 - (void)searchWithKeywords:(NSString *)keywords
                     cateId:(NSString *)cateId
                    brandId:(NSString *)brandId
+                     intro:(NSString *)intro
                       page:(NSInteger)page
                       size:(NSInteger)size
                   andBlock:(void (^)(id responseObject, NSError *error))block;

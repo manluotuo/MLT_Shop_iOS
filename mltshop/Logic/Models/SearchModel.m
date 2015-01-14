@@ -16,6 +16,7 @@
         _catId = [dict objectForKey:@"catId"];
         _brandId = [dict objectForKey:@"brandId"];
         _keywords = [dict objectForKey:@"keywords"];
+        _intro = [dict objectForKey:@"intro"];
     }
 
     return self;

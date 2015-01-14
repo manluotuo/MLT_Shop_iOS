@@ -220,6 +220,7 @@ static dispatch_once_t onceToken;
 - (void)searchWithKeywords:(NSString *)keywords
                     cateId:(NSString *)cateId
                    brandId:(NSString *)brandId
+                     intro:(NSString *)intro
                       page:(NSInteger)page
                       size:(NSInteger)size
                   andBlock:(void (^)(id responseObject, NSError *error))block
@@ -234,6 +235,7 @@ static dispatch_once_t onceToken;
     
     NSString *pageString = STR_INT(page);
     NSString *sizeString = @"20";
+    NSString *introString = [DataTrans noNullStringObj:intro];
     
     if (size > 0) {
         sizeString = STR_INT(size);
@@ -242,7 +244,8 @@ static dispatch_once_t onceToken;
     NSDictionary *pagination = @{@"page":pageString,@"count":sizeString};
 
     NSDictionary *postDict = @{@"filter" : filter,
-                               @"pagination": pagination};
+                               @"pagination": pagination,
+                               @"intro": introString};
     
     postDict = [DataTrans makePostDict:postDict];
     

@@ -143,9 +143,9 @@
     cellData.indexPath = indexPath;
     
     CartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    [cell.changeCountBtn setHidden:YES];
     if (cell == nil) {
         cell = [[CartTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        [cell.changeCountBtn setHidden:YES];
         cell.passDelegate = self;
     }
     [cell setNewData:cellData];

@@ -73,6 +73,7 @@
     [[AppRequestManager sharedManager]searchWithKeywords:self.search.keywords
                                                   cateId:self.search.catId
                                                  brandId:self.search.brandId
+                                                   intro:self.search.intro
                                                     page:self.start
                                                     size:DEFAULT_PAGE_SIZE
                                                 andBlock:^(id responseObject, NSError *error) {
@@ -128,6 +129,7 @@
     [[AppRequestManager sharedManager]searchWithKeywords:self.search.keywords
                                                   cateId:self.search.catId
                                                  brandId:self.search.brandId
+                                                   intro:self.search.intro
                                                     page:self.start
                                                     size:DEFAULT_PAGE_SIZE
                                                 andBlock:^(id responseObject, NSError *error) {

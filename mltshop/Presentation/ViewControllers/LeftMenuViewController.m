@@ -19,7 +19,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIViewController+ImageBackButton.h"
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
-
+#import "ListViewController.h"
 #import "CartListViewController.h"
 
 //#import "AccountListViewController.h"
@@ -47,7 +47,7 @@
 
 @end
 
-#define LOGIN_AREA_HEIGHT 120.0
+#define LOGIN_AREA_HEIGHT 100.0
 
 
 @implementation LeftMenuViewController
@@ -77,58 +77,13 @@
 //    self.title = T(@"用户菜单");
     self.view.backgroundColor = BlACKCOLOR;
     
-
-    NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"首页"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FAslack], @"icon",
-                           INT(LeftMenuMain), @"function",
-                           nil];
-
-    NSDictionary *dictC = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"个人中心"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FAUser], @"icon",
-                           INT(LeftMenuProfile), @"function",
-                           nil];
-    
-    NSDictionary *dictD = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"分类搜索"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FASearch], @"icon",
-                           INT(LeftMenuSearch), @"function",
-                           nil];
-
-    NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"购物车"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FAShoppingCart], @"icon",
-                           INT(LeftMenuCart), @"function",
-                           nil];
-    
-    NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"帮助/客服"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FAPhone], @"icon",
-                           INT(LeftMenuService), @"function",
-                           nil];
-    
-    NSDictionary *dictG = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"设置"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FACog], @"icon",
-                           INT(LeftMenuSetting), @"function",
-                           nil];
-    
-    NSDictionary *dictH = [[NSDictionary alloc]initWithObjectsAndKeys:
-                           T(@"退出"), @"title",
-                           [NSString fontAwesomeIconStringForEnum:FASignOut], @"icon",
-                           INT(LeftMenuLogout), @"function",
-                           nil];
-
-    
-
+    [self initLeftMenu];
     
     NSString *nowVersion = NOWVERSION;
     NSString *nowBuild = NOWBUILD;
     nowVersion = [NSString stringWithFormat:@"V_%@#%@", nowVersion, nowBuild];
     
     // init left side menu
-    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictE, dictF,nil];
 
     // transform bg view
     self.bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
@@ -163,12 +118,80 @@
     [ModelHelper sharedHelper].modelHelperDelegateForLeftMenuVC = self;
 }
 
+- (void)initLeftMenu
+{
+    NSDictionary *dictB = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"首页"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAHome], @"icon",
+                           INT(LeftMenuMain), @"function",
+                           nil];
+    
+    NSDictionary *dictC = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"个人中心"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAUser], @"icon",
+                           INT(LeftMenuProfile), @"function",
+                           nil];
+    
+    NSDictionary *dictD = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"分类搜索"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FASearch], @"icon",
+                           INT(LeftMenuSearch), @"function",
+                           nil];
+    NSDictionary *dictD1 = [[NSDictionary alloc]initWithObjectsAndKeys:
+                            T(@"品牌街"), @"title",
+                            [NSString fontAwesomeIconStringForEnum:FATh], @"icon",
+                            INT(LeftMenuBrandStreet), @"function",
+                            nil];
+    
+    NSDictionary *dictD2 = [[NSDictionary alloc]initWithObjectsAndKeys:
+                            T(@"限时特价"), @"title",
+                            [NSString fontAwesomeIconStringForEnum:FAClockO], @"icon",
+                            INT(LeftMenuPromotion), @"function",
+                            nil];
+    
+    NSDictionary *dictD3 = [[NSDictionary alloc]initWithObjectsAndKeys:
+                            T(@"品牌预售"), @"title",
+                            [NSString fontAwesomeIconStringForEnum:FACalendar], @"icon",
+                            INT(LeftMenuPresell), @"function",
+                            nil];
+    
+    
+    
+    NSDictionary *dictE = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"购物车"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAShoppingCart], @"icon",
+                           INT(LeftMenuCart), @"function",
+                           nil];
+    
+    NSDictionary *dictF = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"帮助/客服"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FAPhone], @"icon",
+                           INT(LeftMenuService), @"function",
+                           nil];
+    
+    NSDictionary *dictG = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"设置"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FACog], @"icon",
+                           INT(LeftMenuSetting), @"function",
+                           nil];
+    
+    NSDictionary *dictH = [[NSDictionary alloc]initWithObjectsAndKeys:
+                           T(@"退出"), @"title",
+                           [NSString fontAwesomeIconStringForEnum:FASignOut], @"icon",
+                           INT(LeftMenuLogout), @"function",
+                           nil];
+    
+    self.dataSource = [[NSMutableArray alloc]initWithObjects:dictB,dictC,dictD,dictD1,dictD2,dictD3,dictE, dictF,nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
 
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
+    
+    [self initLeftMenu];
     
     // 已经登录了才有退出
     if (StringHasValue(XAppDelegate.me.sessionId)) {
@@ -177,7 +200,19 @@
                                [NSString fontAwesomeIconStringForEnum:FASignOut], @"icon",
                                INT(LeftMenuLogout), @"function",
                                nil];
-        [self.dataSource addObject:dictH];
+        if(![self.dataSource containsObject:dictH]){
+            [self.dataSource addObject:dictH];
+        }
+    }else{
+        NSDictionary *dictI = [[NSDictionary alloc]initWithObjectsAndKeys:
+                               T(@"登录"), @"title",
+                               [NSString fontAwesomeIconStringForEnum:FASignIn], @"icon",
+                               INT(LeftMenuLogin), @"function",
+                               nil];
+        if(![self.dataSource containsObject:dictI]){
+            [self.dataSource addObject:dictI];
+        }
+
     }
     [self.tableView reloadData];
     //  重新获取昵称和头像
@@ -217,7 +252,7 @@
     
     NSLog(@"XAppDelegate.me.avatarURL: %@",XAppDelegate.me.avatarURL);
     
-    self.avatarView = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(35, avatarFrame.origin.y+H_24, 50, 50)];
+    self.avatarView = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(35, avatarFrame.origin.y+H_24, 40, 40)];
 
     [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
 
@@ -460,6 +495,53 @@
             }];
         }
         break;
+        case LeftMenuLogin:
+        {
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+                [XAppDelegate showLoginView];
+            }];
+        }
+            // 品牌街
+        case LeftMenuBrandStreet:
+        {
+            CartListViewController *VC = [[CartListViewController alloc]init];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [VC setupLeftMMButton];
+            [self.mm_drawerController setCenterViewController:nav];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+
+        }
+        break;
+            //限时特价
+        case LeftMenuPromotion:
+        {
+            ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+            VC.search = [[SearchModel alloc]init];
+            VC.search.intro= @"promotion";
+            VC.title = T(@"限时特价");
+            VC.shouldChangeTableContentInset = YES;
+            [VC setupLeftMMButton];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [self.mm_drawerController setCenterViewController:nav];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+
+        }
+            break;
+            //预售
+        case LeftMenuPresell:
+        {
+            ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+            VC.search = [[SearchModel alloc]init];
+            VC.search.catId = @"27";
+            VC.title = T(@"品牌预售");
+            VC.shouldChangeTableContentInset = YES;
+            [VC setupLeftMMButton];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [self.mm_drawerController setCenterViewController:nav];
+            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+
+        }
+            break;
             
         case LeftMenuMain:
         {

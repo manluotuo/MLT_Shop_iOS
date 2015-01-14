@@ -649,7 +649,11 @@ typedef NS_ENUM(NSInteger, LeftMenuRow){
     LeftMenuFeedback    = 8,
     LeftMenuUpdate      = 9,
     LeftMenuLogout      = 10,
-    LeftMenuMore        = 11
+    LeftMenuLogin       = 11,
+    LeftMenuMore        = 12,
+    LeftMenuBrandStreet = 13,
+    LeftMenuPromotion   = 14,
+    LeftMenuPresell     = 15,
 };
 
 typedef NS_ENUM(NSInteger, RightMenuRow){

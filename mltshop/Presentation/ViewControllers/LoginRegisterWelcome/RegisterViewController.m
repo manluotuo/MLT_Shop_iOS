@@ -177,6 +177,7 @@
 
 - (void)registerAction
 {
+    [self resetPosition];
     if ([self checkAllTextField]) {
         [[AppRequestManager sharedManager]signUpWithMobile:self.userTextView.text password:self.passTextView.text email:self.emailTextView.text andBlock:^(id responseObject, NSError *error) {
             //
@@ -331,15 +332,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.userTextView resignFirstResponder];
-    [self.passTextView resignFirstResponder];
-    [self.emailTextView resignFirstResponder];
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.loginPanel setY:0];
-    }];
-    
-
+    [self resetPosition];
     
     if (self.passTextView.text.length == 0) {
         [self.passTextView setPlaceholder:T(@"密码")];
@@ -348,6 +341,11 @@
 }
 
 - (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+{
+    [self resetPosition];
+}
+
+- (void)resetPosition
 {
     [self.userTextView resignFirstResponder];
     [self.passTextView resignFirstResponder];

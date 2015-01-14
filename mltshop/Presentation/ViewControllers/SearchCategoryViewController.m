@@ -208,7 +208,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (void)searchAndRefreshTableView{
     searchStart = 1;
-    [[AppRequestManager sharedManager]searchWithKeywords:self.searchBar.text cateId:nil brandId:nil page:searchStart size:100 andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]searchWithKeywords:self.searchBar.text cateId:nil brandId:nil intro:nil page:searchStart size:100 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             self.dataSource = [[NSMutableArray alloc]init];
             for (int i = 0 ; i < [responseObject count]; i++) {
