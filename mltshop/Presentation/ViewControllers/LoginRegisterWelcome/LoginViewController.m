@@ -195,7 +195,6 @@
     [UIView animateWithDuration:0.5f animations:^{
         [self.loginPanel setY:0];
     }];
-
 }
 
 

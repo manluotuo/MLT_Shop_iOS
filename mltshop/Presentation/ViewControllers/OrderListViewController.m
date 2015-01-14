@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = T(@"购物车");
+    self.title = T(@"我的历史订单");
     self.commonListDelegate = self;
     self.dataSourceType = ListDataSourceOrder;
     

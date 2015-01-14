@@ -159,9 +159,6 @@
             }];
 
         }
-        
-
-
     }
 }
 
@@ -288,6 +285,7 @@
 
     self.loginPanel = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
     [self.loginPanel setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT)];
+    self.loginPanel.delegate = self;
     
     [self.loginPanel addSubview:self.consigneeTextView];
     [self.loginPanel addSubview:self.telTextView];
@@ -339,6 +337,20 @@
     [backButton addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    self.editing = NO;
+    [self.consigneeTextView resignFirstResponder];
+    [self.telTextView resignFirstResponder];
+    [self.emailTextView resignFirstResponder];
+    [self.zipcodeTextView resignFirstResponder];
+    [self.locationTextView resignFirstResponder];
+    [self.addressTextView resignFirstResponder];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.loginPanel setY:0];
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
