@@ -171,6 +171,7 @@
 {
     fixedHeight = 0.0f;
     self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, self.view.frame.size.height)];
+    self.fixedView.delegate = self;
     
     [self initGalleryView];
     [self initInfoView];
@@ -182,7 +183,31 @@
     [self initTabbarButton];
 
     [self initButtons];
+    
+    // 左滑退出
+    UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(backAction)];
+    [gestureRec setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.fixedView addGestureRecognizer:gestureRec];
 
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.galleryView]) {
+        NSLog(@"galleryView %f",self.galleryView.contentOffset.x);
+        if (self.galleryView.contentOffset.x < -H_80) {
+            [self backAction];
+        }
+    }
+    
+    if ([scrollView isEqual:self.fixedView]) {
+        NSLog(@"fixedview %f",self.fixedView.contentOffset.y);
+
+        if (self.fixedView.contentOffset.y < -H_80) {
+            [self backAction];
+        }
+    }
 }
 
 - (void)initTabbarButton
@@ -484,6 +509,14 @@
     }];
 }
 
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
+#endif
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

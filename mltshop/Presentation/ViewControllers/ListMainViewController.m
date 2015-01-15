@@ -76,9 +76,7 @@
                     theGoods.goodsId = parsed[@"id"];
                     [VC setGoodsData:theGoods];
                     
-                    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
-
-                    [self.navigationController presentViewController:nav animated:YES completion:nil];
+                    [self.navigationController presentViewController:VC animated:YES completion:nil];
                 }
             }
             

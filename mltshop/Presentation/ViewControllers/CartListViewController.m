@@ -12,6 +12,7 @@
 #import "UIViewController+ImageBackButton.h"
 #import "KKFlatButton.h"
 #import "CheckOrderViewController.h"
+#import "AppDelegate.h"
 
 @interface CartListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
@@ -97,9 +98,14 @@
 
 - (void)checkOrderAction
 {
-    CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
-    [VC setupDataSource];
-    [self.navigationController pushViewController:VC animated:YES];
+    if ([self.dataArray count] > 0) {
+        CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
+        [VC setupDataSource];
+        [self.navigationController pushViewController:VC animated:YES];
+    }else{
+        // 去首页逛逛
+        [XAppDelegate showDrawerView];
+    }
 }
 
 
@@ -127,11 +133,16 @@
                 [self showSetupDataSource:self.dataArray andError:nil];
                 self.start = self.start + 1;
                 NSLog(@"start %ld",(long)self.start);
+                
+                [self.flowButton setTitle:T(@"去首页逛逛") forState:UIControlStateNormal];
+
             }else{
                 [DataTrans showWariningTitle:T(@"购物车空空如也")
                                andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle]
                                  andDuration:1.0f];
                 [self showSetupDataSource:self.dataArray andError:nil];
+                [self.flowButton setTitle:T(@"去首页逛逛") forState:UIControlStateNormal];
+
             }
             
         }
