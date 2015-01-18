@@ -44,7 +44,7 @@ const CGFloat GCPagedScrollViewPageControlHeight = 24.0;
             [self.pageControl setFrame:CGRectMake(20,(self.frame.size.height-20)/2,self.frame.size.width-40,20)];
             //        [aPageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
             [self.pageControl setPageControlStyle:PageControlStyleDefault];
-            [self.pageControl setCoreNormalColor:WHITEALPHACOLOR];
+            [self.pageControl setCoreNormalColor:GRAYLIGHTCOLOR];
             [self.pageControl setStrokeSelectedColor:WHITEALPHACOLOR2];
             [self.pageControl setCoreSelectedColor:WHITEALPHACOLOR2];
             [self.pageControl setStrokeNormalColor:WHITEALPHACOLOR2];

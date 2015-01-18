@@ -490,7 +490,7 @@ static dispatch_once_t onceToken;
         case OrderOpsList:
             postURL = API_ORDER_LIST_PATH;
             baseDict[@"pagination"]= @{@"page":@"1", @"count":@"100"};
-            baseDict[@"type"] = @"";
+            baseDict[@"type"] = theOrder.type;
             break;
         case OrderOpsCancel:
             postURL = API_ORDER_CANCEL_PATH;

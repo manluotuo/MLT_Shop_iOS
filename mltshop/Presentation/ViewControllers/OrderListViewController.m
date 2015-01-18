@@ -19,6 +19,7 @@
 @property(nonatomic, strong)NSMutableArray *dataArray;
 @property(nonatomic, strong)UIView *footerView;
 @property(nonatomic, strong)KKFlatButton *flowButton;
+@property(nonatomic, strong)OrderModel *theOrder;
 
 @end
 
@@ -27,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = T(@"我的历史订单");
     self.commonListDelegate = self;
     self.dataSourceType = ListDataSourceOrder;
     
@@ -37,8 +37,15 @@
     
     self.dataArray = [[NSMutableArray alloc]init];
     
-    [self initDataSource];
+//    [self initDataSource];
     //    [self setUpImageDownButton:0];
+}
+
+- (void)setOrderType:(NSString *)type
+{
+    self.theOrder = [[OrderModel alloc]init];
+    self.theOrder.type = [DataTrans noNullStringObj:type];
+    [self setupDataSource];
 }
 
 - (void)setUpDownButton:(NSInteger)position
@@ -54,7 +61,14 @@
 
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
-    
+    if([value isEqualToString:SIGNAL_ORDER_ACTION]){
+        [SGActionView showSheetWithTitle:T(@"操作订单") itemTitles:@[@"买买买"] selectedIndex:100 selectedHandle:^(NSInteger index) {
+            if (index == 0) {
+//                订单付款
+                
+            }
+        }];
+    }
 }
 /**
  *  初始化文章 two goods one line
@@ -62,7 +76,7 @@
 - (void)setupDataSource {
     self.start = 0;
     self.dataArray = [[NSMutableArray alloc]init];
-    [[AppRequestManager sharedManager]operateOrderWithCartModel:nil operation:CartOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithCartModel:self.theOrder operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         
         if (responseObject != nil) {
             // 集中处理所有的数据
@@ -121,7 +135,7 @@
     OrderTableViewCell *cellview = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cellview setFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_40)];
     [cellview setNewData:self.dataArray[section]];
-
+    cellview.passDelegate = self;
     return cellview;
 }
 

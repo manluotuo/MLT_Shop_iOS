@@ -128,8 +128,6 @@
 
 -(void)handleNextStep:(NSNotification *)notification
 {
-//    NSDictionary *theData = [notification userInfo];
-//    NSLog(@"theData %@",theData);
     [self initDataSource];
 }
 

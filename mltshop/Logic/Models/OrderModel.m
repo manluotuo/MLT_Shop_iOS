@@ -15,6 +15,8 @@
     if (DictionaryHasValue(dict)) {
         _orderId = [DataTrans noNullStringObj:dict[@"order_id"]];
         _orderSn = [DataTrans noNullStringObj:dict[@"order_sn"]];
+        _type = [DataTrans noNullStringObj:dict[@"type"]];
+        _paymentType = [DataTrans noNullStringObj:dict[@"payment_type"]];
         _orderTime = [DataTrans dateFromNSDatetimeStr:dict[@"order_time"]];
         NSLog(@"_orderTime %@",_orderTime);
         _totalFee = [DataTrans noNullNumberObj:dict[@"total_fee"]];

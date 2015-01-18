@@ -195,14 +195,12 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isEqual:self.galleryView]) {
-        NSLog(@"galleryView %f",self.galleryView.contentOffset.x);
         if (self.galleryView.contentOffset.x < -H_80) {
             [self backAction];
         }
     }
     
     if ([scrollView isEqual:self.fixedView]) {
-        NSLog(@"fixedview %f",self.fixedView.contentOffset.y);
 
         if (self.fixedView.contentOffset.y < -H_80) {
             [self backAction];

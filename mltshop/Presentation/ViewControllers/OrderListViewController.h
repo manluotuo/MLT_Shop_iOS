@@ -11,5 +11,6 @@
 @interface OrderListViewController : CommonListViewController
 
 - (void)setUpDownButton:(NSInteger)position;
+- (void)setOrderType:(NSString *)type;
 
 @end

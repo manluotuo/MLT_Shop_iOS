@@ -33,7 +33,6 @@
 
 - (void)initCellView
 {
-
     
     idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_100, H_20)];
     idLabel.numberOfLines = 0;

@@ -24,6 +24,8 @@ typedef NS_ENUM(NSUInteger,OrderOps)
 @property(nonatomic, strong)NSString *payCode;
 @property(nonatomic, strong)NSString *subject;
 @property(nonatomic, strong)NSString *desc;
+@property(nonatomic, strong)NSString *type;
+@property(nonatomic, strong)NSString *paymentType;
 @property(nonatomic, strong)NSNumber *orderAmount;
 @property(nonatomic, strong)NSNumber *totalFee;
 @property(nonatomic, strong)NSMutableArray *cartList;

@@ -33,6 +33,11 @@
 #define AVATAR_Y_OFFSET 40.0f
 #define LINE_W          0.5f
 
+#define AWAIT_PAY_TAG       201
+#define AWAIT_SHIPPING_TAG  202
+#define SHIPPED_TAG         203
+#define ALL_ORDER_TAG       204
+
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
@@ -44,12 +49,31 @@
 }
 
 
-- (void)historyOrderAction
+- (void)historyOrderAction:(UIButton *)sender
 {
-    OrderListViewController *VC = [[OrderListViewController alloc]initWithNibName:nil bundle:nil];
+    OrderListViewController *VC = [[OrderListViewController alloc]initWithNibName:nil
+                                                                           bundle:nil];
     [VC setUpDownButton:0];
+    
+    if (sender.tag == AWAIT_SHIPPING_TAG) {
+        [VC setOrderType:@"await_ship"];
+        VC.title = T(@"待发货订单");
+    }else if(sender.tag == AWAIT_PAY_TAG){
+        [VC setOrderType:@"await_pay"];
+        VC.title = T(@"待付款订单");
+    }else if(sender.tag == SHIPPED_TAG){
+        [VC setOrderType:@"shipped"];
+        VC.title = T(@"待收货订单");
+    }else{
+        [VC setOrderType:@""];
+        VC.title = T(@"全部订单");
+    }
+    
     ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:nil];
+
+    
+
 }
 
 - (void)initBgView
@@ -84,18 +108,18 @@
     [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
     
     [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.avatarButton addSubview:editIcon];
+//    [self.avatarButton addSubview:editIcon];
     [self.avatarView addSubview:self.avatarButton];
 
     // 左右按钮
     KKFlatButton *leftButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setTitle:T(@"我的收藏") forState:UIControlStateNormal];
+    [leftButton setTitle:T(@"修改头像") forState:UIControlStateNormal];
     [leftButton setFrame:CGRectMake(0, H_90/2-H_24/2, H_56, H_24)];
-    [leftButton addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
     [leftButton.titleLabel setFont:FONT_12];
     [leftButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [leftButton setBackgroundColor:WHITEALPHACOLOR2];
-//    [self.avatarView addSubview:leftButton];
+    [self.avatarView addSubview:leftButton];
     
     KKFlatButton *rightButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [rightButton setTitle:T(@"在线客服") forState:UIControlStateNormal];
@@ -122,13 +146,13 @@
     orderLabel.text  = T(@"我的订单");
     [orderLabel setTextColor:DARKCOLOR];
     
-    
     FAHoverButton *buttonA = [[FAHoverButton alloc]initWithFrame:CGRectMake(-LINE_W, H_45, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonA setIconFont:FONT_16];
     [buttonA setIconString:T(@"待付款")];
-    [buttonA setBubbleString:@"3"];
+//    [buttonA setBubbleString:@"3"];
     [buttonA setIconColor:DARKCOLOR];
     [buttonA setBorder];
+    buttonA.tag = AWAIT_PAY_TAG;
     
     FAHoverButton *buttonB = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, H_45, TOTAL_WIDTH/3, H_60)];
     [buttonB setIconFont:FONT_16];
@@ -136,28 +160,36 @@
 //    [buttonB setBubbleString:@"3"];
     [buttonB setIconColor:DARKCOLOR];
     [buttonB setBorder];
+    buttonB.tag = AWAIT_SHIPPING_TAG;
+
     
     
     FAHoverButton *buttonC = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2-LINE_W, H_45, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonC setIconFont:FONT_16];
     [buttonC setIconString:T(@"待收货")];
-    [buttonC setBubbleString:@"2"];
+//    [buttonC setBubbleString:@"2"];
     [buttonC setIconColor:DARKCOLOR];
     [buttonC setBorder];
+    buttonC.tag = SHIPPED_TAG;
+
 
     [self.orderView addSubview:orderLabel];
+    [buttonA addTarget:self action:@selector(historyOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonB addTarget:self action:@selector(historyOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonC addTarget:self action:@selector(historyOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.orderView addSubview:buttonA];
     [self.orderView addSubview:buttonB];
     [self.orderView addSubview:buttonC];
     
     
     KKFlatButton *buttonBigA = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [buttonBigA setTitle:T(@"历史订单") forState:UIControlStateNormal];
+    [buttonBigA setTitle:T(@"全部订单") forState:UIControlStateNormal];
     [buttonBigA setFrame:CGRectMake(H_40, H_140, H_240, H_50)];
     [buttonBigA.titleLabel setFont:FONT_14];
     [buttonBigA setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [buttonBigA setBackgroundColor:GREENLIGHTCOLOR2];
-    [buttonBigA addTarget:self action:@selector(historyOrderAction) forControlEvents:UIControlEventTouchUpInside];
+    [buttonBigA addTarget:self action:@selector(historyOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+    buttonBigA.tag = ALL_ORDER_TAG;
     
     KKFlatButton *buttonBigB = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [buttonBigB setTitle:T(@"地址管理") forState:UIControlStateNormal];
@@ -178,7 +210,7 @@
     
     [self.orderView addSubview:buttonBigA];
     [self.orderView addSubview:buttonBigB];
-    [self.orderView addSubview:buttonBigC];
+//    [self.orderView addSubview:buttonBigC];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
