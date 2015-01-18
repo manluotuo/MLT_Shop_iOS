@@ -30,9 +30,13 @@
 //#import "ProfileFormViewController.h"
 //#import "AccountListViewController.h"
 
-//#import "ShareHelper.h"
-//#import "WXApi.h"
-//#import "WeiboSDK.h"
+#import "ShareHelper.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/TencentApiInterface.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <SDWebImage/SDImageCache.h>
 #define MR_LOGGING_ENABLED 0
 @interface AppDelegate ()
 @property(nonatomic, strong)KKDrawerViewController * drawerController;
@@ -56,9 +60,11 @@
 //    NSString *nowVersion = NOWVERSION;
 //    NSString *nowBuild = NOWBUILD;
 //    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
-//    
-//    [WXApi registerApp:WXAPI_APP_ID];
-//    [WeiboSDK registerApp:WEIBO_APP_KEY];
+
+    [WXApi registerApp:WXAPI_APP_ID];
+    [WeiboSDK registerApp:WEIBO_APP_KEY];
+    TencentOAuth *tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_API_ID andDelegate:self];
+    tencentOAuth.redirectURI = @"";
     
     
     // TODO: 先初始化 用来none insert vehicle
@@ -253,18 +259,59 @@
              
              // 付款成功查看订单
              if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
-                 
+
+                 [self showDrawerView];
                  // FIXME: 清掉所有的app  如果在 详情页点过去 profile页面会显示不出来
                  ProfileViewController *VC = [[ProfileViewController alloc]init];
                  [self.drawerController setCenterViewController:VC];
              }
+             
+             if([resultDic[@"resultStatus"] isEqualToString:@"6001"]){
+                 [DataTrans showWariningTitle:T(@"您取消了支付") andCheatsheet:ICON_TIMES];
+             }
+             
 
          }];
+    }
+    
+    // url wb668969160://response?id=69B2FF58-682E-408C-83A2-DCAECE8781C3&sdkversion=2.4
+    // url wxd930ea5d5a258f4f://platformId=wechat
+    // url tencent101019374://qzapp/mqzone/0?generalpastboard=1
+    
+#if __QQAPI_ENABLE__
+    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[ShareHelper sharedHelper]];
+#endif
+    if (YES == [TencentOAuth CanHandleOpenURL:url])
+    {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    
+    if ([[url absoluteString] hasPrefix:WEIBO_APP_ID]) {
+        return [WeiboSDK handleOpenURL:url delegate:[ShareHelper sharedHelper]];
+    }else if([[url absoluteString]hasPrefix:WXAPI_APP_ID]){
+        return [WXApi handleOpenURL:url delegate:[ShareHelper sharedHelper]];
     }
     
     return YES;
 }
 
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+#if __QQAPI_ENABLE__
+    [QQApiInterface handleOpenURL:url delegate:(id<QQApiInterfaceDelegate>)[ShareHelper sharedHelper]];
+#endif
+    if (YES == [TencentOAuth CanHandleOpenURL:url])
+    {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+    if([[url absoluteString]hasPrefix:WXAPI_APP_ID]){
+        return [WXApi handleOpenURL:url delegate:[ShareHelper sharedHelper]];
+    }else if ([[url absoluteString]hasPrefix:WEIBO_APP_ID]){
+        return [WeiboSDK handleOpenURL:url delegate:[ShareHelper sharedHelper]];
+    }
+    return YES;
+}
 
 
 

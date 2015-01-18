@@ -13,6 +13,7 @@
 #import "ShippingTableViewCell.h"
 #import "BonusTableViewCell.h"
 #import "AppRequestManager.h"
+#import "SGActionView.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
@@ -186,7 +187,7 @@
 {
     HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
     HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
-    HUD.text = T(@"登录中...");
+    HUD.text = T(@"订单生成中...");
     [HUD showInView:self.view];
     
     [[AppRequestManager sharedManager]flowDoneWithFlowDoneModel:self.flowDoneData andBlock:^(id responseObject, NSError *error) {
@@ -196,7 +197,13 @@
         if (responseObject != nil) {
             OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
 //            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
-            [self doAlipayAction:theOrder];
+            [DataTrans showWariningTitle:T(@"订单已生成") andCheatsheet:ICON_CHECK];
+            
+            [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[@"支付宝付款.买买买!!!", @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
+                if(index == 0){
+                    [self doAlipayAction:theOrder];
+                }
+            }];
         }
         if (error != nil) {
             [DataTrans showWariningTitle:T(@"订单生成失败") andCheatsheet:ICON_TIMES];

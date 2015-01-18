@@ -18,6 +18,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WebViewController.h"
 #import "CartListViewController.h"
+#import "ShareHelper.h"
 
 #define SERVICE_TAB_TAG     101
 #define ADD_CART_TAB_TAG    102
@@ -289,7 +290,9 @@
 
 -(void)shareAction
 {
-    [DataTrans showWariningTitle:T(@"功能暂未实现") andCheatsheet:ICON_INFO];
+    [ShareHelper sharedHelper].baseViewController = self.navigationController;
+    [[ShareHelper sharedHelper]showShareView:self.theGoods];
+
 }
 
 

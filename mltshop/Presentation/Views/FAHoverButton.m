@@ -43,7 +43,7 @@
         self.bubbleLabel = [[UILabel alloc]initWithFrame:CGRectMake(40 , frame.size.height/2-BUBBLE_H/2, BUBBLE_W, BUBBLE_H)];
         [self.bubbleLabel setBackgroundColor:GREENLIGHTCOLOR];
         [self.bubbleLabel setTextColor:WHITECOLOR];
-        [self.bubbleLabel setFont:LITTLECUSTOMFONT];
+        [self.bubbleLabel setFont:CUSTOMFONT_12];
         [self.bubbleLabel setTextAlignment:NSTextAlignmentCenter];
         [self.bubbleLabel.layer setCornerRadius:BUBBLE_H/2];
         [self.bubbleLabel.layer setMasksToBounds:YES];

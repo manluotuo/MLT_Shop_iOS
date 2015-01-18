@@ -14,7 +14,6 @@
 #define ERROR_NEED_LOGIN            @"20003"
 #define COPYRIGHT                   @"\u00a9"
 
-#define CONTACT_TEL                 @"010-57732367"
 
 
 //测试地址e
@@ -61,22 +60,20 @@
 
 #pragma mark - API KEYS
 
-#define WEIBO_APP_KEY       @"1633195387"
-#define WEIBO_APP_ID        @"wb1633195387"
-#define WEIBO_APP_SECRET    @"8cbc3735b3f9a43d2f24f3a1a0a460c7"
+#define WEIBO_APP_KEY       @"829661249"
+#define WEIBO_APP_ID        @"wb829661249"
+#define WEIBO_APP_SECRET    @"6a5991b5a4950416ca9491eb863c19be"
 #define WEIBO_REDIRECT_URI  @"https://api.weibo.com/oauth2/default.html"
-#define ALIYUN_IMAGE        @"http://kkche.oss-cn-qingdao.aliyuncs.com/"
 
 //#define WXAPI_APP_ID        @"wxfad0032de4fc339a"
 
-#define WXAPI_APP_ID        @"wxdaf16282e12c3350"
+#define WXAPI_APP_ID        @"wx18098a9221270776"
 
-#define QQ_API_URL_ID       @"tencent1102352264"
-#define QQ_API_ID           @"1102352264"
+#define QQ_API_URL_ID       @"tencent1104058323"
+#define QQ_API_ID           @"1104058323"
 
 #define UMENG_APPKEY        @""
 
-#define YXAPI_APP_ID        @"yx7c36bf998216415482e82be16083074b"
 
 #ifndef __QQAPI_ENABLE__
 #define __QQAPI_ENABLE__ 1
@@ -147,6 +144,7 @@
 // font
 #define CUSTOMFONT [UIFont fontWithName:@"Museo" size:16.0f]
 #define LITTLECUSTOMFONT [UIFont fontWithName:@"Museo" size:13.0f]
+#define CUSTOMFONT_12 [UIFont fontWithName:@"Museo" size:12.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
 #define FONT_DIN_14 [UIFont fontWithName:@"DIN Alternate" size:14.0f]
@@ -303,6 +301,8 @@
 #define H_260  260.0f
 #define H_280  280.0f
 #define H_290  290.0f
+#define H_300  300.0f
+#define H_310  310.0f
 
 
 #define BUTTON_OFFSET           10.0f
@@ -677,13 +677,11 @@ typedef NS_ENUM(NSUInteger,ShareType)
 {
     ShareTypeWechat         = 0,
     ShareTypeWechatFriend   = 1,
-    ShareTypeYiXin          = 2,
-    ShareTypeYiXinFriend    = 3,
-    ShareTypeQQFriend       = 4,
-    ShareTypeQQZone         = 5,
-    ShareTypeEmail          = 6,
-    ShareTypeLink           = 7,
-    ShareTypeWeibo          = 8
+    ShareTypeWeibo          = 2,
+    ShareTypeQQFriend       = 3,
+    ShareTypeQQZone         = 4,
+    ShareTypeEmail          = 5,
+    ShareTypeLink           = 6,
 };
 
 

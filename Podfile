@@ -16,4 +16,3 @@ pod 'LBBlurredImage',	'0.2.0'
 pod 'BlocksKit',	'2.2.5'
 pod 'AVOSCloud',	'~>2.6.7'
 pod 'FXBlurView',	'1.6.3'
-

@@ -20,6 +20,7 @@
 #import "SGActionView.h"
 #import "ModelHelper.h"
 #import "OrderListViewController.h"
+#import "AppRequestManager.h"
 
 @interface ProfileViewController ()<UIScrollViewDelegate>
 
@@ -47,6 +48,55 @@
     [self initScrollView];
     [self initOrderView];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refreshCount];
+}
+
+
+- (void)refreshCount
+{
+    OrderModel *theOrder1 = [[OrderModel alloc]init];
+    theOrder1.type = @"await_pay";
+
+    [[AppRequestManager sharedManager]operateOrderWithCartModel:theOrder1 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            // 集中处理所有的数据
+            NSUInteger count = [responseObject count];
+            FAHoverButton *button = (FAHoverButton *)[self.orderView viewWithTag:AWAIT_PAY_TAG];
+            [button setBubbleString:STR_INT(count)];
+        }
+    }];
+    
+    OrderModel *theOrder2 = [[OrderModel alloc]init];
+    theOrder2.type = @"await_ship";
+    
+    [[AppRequestManager sharedManager]operateOrderWithCartModel:theOrder2 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            // 集中处理所有的数据
+            NSUInteger count = [responseObject count];
+            FAHoverButton *button = (FAHoverButton *)[self.orderView viewWithTag:AWAIT_SHIPPING_TAG];
+            [button setBubbleString:STR_INT(count)];
+        }
+    }];
+    
+    
+    OrderModel *theOrder3 = [[OrderModel alloc]init];
+    theOrder3.type = @"shipped";
+    
+    [[AppRequestManager sharedManager]operateOrderWithCartModel:theOrder3 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            // 集中处理所有的数据
+            NSUInteger count = [responseObject count];
+            FAHoverButton *button = (FAHoverButton *)[self.orderView viewWithTag:SHIPPED_TAG];
+            [button setBubbleString:STR_INT(count)];
+        }
+    }];
+
+    
+    
+}
 
 
 - (void)historyOrderAction:(UIButton *)sender
@@ -71,9 +121,6 @@
     
     ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
     [self presentViewController:nav animated:YES completion:nil];
-
-    
-
 }
 
 - (void)initBgView
@@ -146,7 +193,7 @@
     orderLabel.text  = T(@"我的订单");
     [orderLabel setTextColor:DARKCOLOR];
     
-    FAHoverButton *buttonA = [[FAHoverButton alloc]initWithFrame:CGRectMake(-LINE_W, H_45, TOTAL_WIDTH/3+LINE_W*2, H_60)];
+    FAHoverButton *buttonA = [[FAHoverButton alloc]initWithFrame:CGRectMake(-LINE_W, H_50, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonA setIconFont:FONT_16];
     [buttonA setIconString:T(@"待付款")];
 //    [buttonA setBubbleString:@"3"];
@@ -154,7 +201,7 @@
     [buttonA setBorder];
     buttonA.tag = AWAIT_PAY_TAG;
     
-    FAHoverButton *buttonB = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, H_45, TOTAL_WIDTH/3, H_60)];
+    FAHoverButton *buttonB = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, H_50, TOTAL_WIDTH/3, H_60)];
     [buttonB setIconFont:FONT_16];
     [buttonB setIconString:T(@"待发货")];
 //    [buttonB setBubbleString:@"3"];
@@ -164,7 +211,7 @@
 
     
     
-    FAHoverButton *buttonC = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2-LINE_W, H_45, TOTAL_WIDTH/3+LINE_W*2, H_60)];
+    FAHoverButton *buttonC = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2-LINE_W, H_50, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonC setIconFont:FONT_16];
     [buttonC setIconString:T(@"待收货")];
 //    [buttonC setBubbleString:@"2"];

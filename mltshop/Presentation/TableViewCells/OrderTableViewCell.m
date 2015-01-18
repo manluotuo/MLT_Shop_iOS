@@ -36,10 +36,10 @@
     
     idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_100, H_20)];
     idLabel.numberOfLines = 0;
+    idLabel.textColor = GRAYCOLOR;
     idLabel.font = FONT_12;
     
-    amountLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_90, H_5, H_100, H_20)];
-    amountLabel.textColor = GRAYCOLOR;
+    amountLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_110, H_25, H_100, H_20)];
     amountLabel.font = FONT_12;
     
     timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_25, H_150, H_20)];
@@ -65,7 +65,7 @@
 {
     self.data = _newData;
     
-    idLabel.text = [NSString stringWithFormat:@"ID: %@",self.data.orderId];
+    idLabel.text = [NSString stringWithFormat:@"编号: %@",self.data.orderSn];
     amountLabel.text = [NSString stringWithFormat:@"总计: %@元",
                         STR_NUM2([self.data.orderAmount floatValue])];
     

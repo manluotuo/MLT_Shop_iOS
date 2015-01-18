@@ -18,6 +18,9 @@
 #import "UIViewController+ImageBackButton.h"
 #import "NSString+Size.h"
 #import "FAHoverButton.h"
+#import "ZBarScanViewController.h"
+#import "WebViewController.h"
+#import "GoodsDetailViewController.h"
 
 
 @interface HostViewController ()<ViewPagerDataSource, ViewPagerDelegate, PassValueDelegate>
@@ -145,6 +148,13 @@
 {
     // TODO: 打开扫描界面
     NSLog(@"rightDrawerButtonPress");
+    
+    ZBarScanViewController *viewController = [[ZBarScanViewController alloc]initWithNibName:nil bundle:nil];
+    viewController.passDelegate = self;
+    ColorNavigationController *popNavController = [[ColorNavigationController alloc]initWithRootViewController:viewController];
+    
+    [self.navigationController presentViewController:popNavController animated:YES completion:^{}];
+
 }
 
 /////////////////////////////////////////////////////
@@ -190,7 +200,49 @@
 
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
-    
+    if ([value isEqualToString:SIGNAL_BARCODE_SCAN_SUCCESS]) {
+        NSLog(@"data %@",data);
+        
+        id parsed = [DataTrans parseDataFromURL:data];
+        if ([parsed isKindOfClass:[SearchModel class]]) {
+            if ([[(SearchModel*)parsed brandId] isEqualToString:@"all"]) {
+                // FIXME: goto 品牌街
+                
+            }else{
+                ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+                VC.search = parsed;
+                VC.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                VC.shouldChangeTableContentInset = YES;
+                [VC setUpDownButton:0];
+                ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+                [self.navigationController presentViewController:nav animated:YES completion:nil];
+            }
+            
+        }else{
+            if (DictionaryHasValue(parsed)) {
+                if ([parsed[@"type"] isEqualToString:@"url"]) {
+                    NSString *urlString = parsed[@"id"];
+                    WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
+                    VC.titleString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                    VC.urlString = urlString;
+                    [VC setUpDownButton:0];
+                    ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+                    [self.navigationController presentViewController:nav animated:YES completion:nil];
+                }else if ([parsed[@"type"] isEqualToString:@"goods"]){
+                    GoodsDetailViewController *VC = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+                    VC.passDelegate = self;
+                    GoodsModel *theGoods = [[GoodsModel alloc]init];
+                    theGoods.goodsId = parsed[@"id"];
+                    [VC setGoodsData:theGoods];
+                    
+                    [self.navigationController presentViewController:VC animated:YES completion:nil];
+                }
+            }
+            
+            
+            
+        }
+    }
 }
 
 ////////////////////////////////////////
