@@ -39,7 +39,7 @@
     // Do any additional setup after loading the view.
     
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    [bgView setImage:[UIImage imageNamed:@"intro_bg"]];
+    [bgView setImage:[UIImage imageNamed:@"Default-568h"]];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_50, TOTAL_WIDTH, H_30)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -79,7 +79,7 @@
     for (int i = 0 ; i < [self.scrollInfoArray count]; i++) {
         // last one
         UIView *page = [[UIImageView alloc]
-                             initWithFrame:CGRectMake(H_30, H_20, H_260, 350.0f)];
+                             initWithFrame:CGRectMake(H_30, H_90, H_260, 330.0f)];
         page.backgroundColor = GRAYEXLIGHTCOLOR;
         [page.layer setCornerRadius:H_5];
         
@@ -118,6 +118,7 @@
     
     self.checkButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [checkButton setTitle:T(@"立即体验") forState:UIControlStateNormal];
+    [self.checkButton setBackgroundColor:ORANGECOLOR];
     [checkButton setFrame:CGRectMake(H_30, TOTAL_HEIGHT-H_80, H_260, H_50)];
     [checkButton addTarget:self action:@selector(skipAction) forControlEvents:UIControlEventTouchUpInside];
     [checkButton.titleLabel setFont:FONT_20];

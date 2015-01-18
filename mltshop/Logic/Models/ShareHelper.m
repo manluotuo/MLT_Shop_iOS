@@ -261,10 +261,10 @@
 
 - (void)shareActionClickWithIndex:(NSUInteger)index andImage:(UIImage *)messageImage
 {
-    UIImage *cropImage = [messageImage scaleToCoverSize:CGSizeMake(messageImage.size.width/10, messageImage.size.height/10)];
+    UIImage *cropImage = [messageImage scaleToCoverSize:CGSizeMake(messageImage.size.width/8, messageImage.size.height/8)];
     NSLog(@"cropImage %f %f",cropImage.size.width, cropImage.size.height);
     
-    NSString *wechatMessageTitle = [NSString stringWithFormat:@"%@-%.2f-%@",
+    NSString *wechatMessageTitle = [NSString stringWithFormat:@"%@-%.2f-%@-漫骆驼-中国最大的正品电影动漫周边商城",
                                     self.theGoods.goodsName,
                                     self.theGoods.shopPrice.floatValue,
                                     self.theGoods.brandName];

@@ -23,6 +23,7 @@
         _goodsSN = [dict objectForKey:@"goods_sn"];
         _goodsBrief = [dict objectForKey:@"goods_brief"];
         _goodsDesc = [dict objectForKey:@"goods_desc"];
+        _goodsInvertory = [DataTrans noNullNumberObj:dict[@"goods_number"]];
         _marketPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];
         if ([dict objectForKey:@"shop_price"] != nil) {
             _shopPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"shop_price"]];

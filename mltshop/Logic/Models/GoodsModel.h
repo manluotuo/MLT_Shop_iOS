@@ -18,6 +18,7 @@
 @property(nonatomic, strong)NSString *catId;
 
 @property(nonatomic, strong)NSString *goodsName;
+@property(nonatomic, strong)NSNumber *goodsInvertory;
 @property(nonatomic, strong)NSString *goodsSN;
 @property(nonatomic, strong)NSString *goodsBrief;
 @property(nonatomic, strong)NSNumber *marketPrice;

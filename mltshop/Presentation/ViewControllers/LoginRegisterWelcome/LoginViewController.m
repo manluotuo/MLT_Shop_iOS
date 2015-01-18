@@ -128,7 +128,7 @@
     
     
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    [bgView setImageToBlur:[UIImage imageNamed:@"Default-568h"] completionBlock:^{
+    [bgView setImageToBlur:[UIImage imageNamed:@"train_bg"] completionBlock:^{
         [self.view addSubview:self.loginPanel];
         [self.view addSubview:self.signinButton];
         [self.view addSubview:self.tourButton];

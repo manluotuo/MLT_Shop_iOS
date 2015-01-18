@@ -70,16 +70,8 @@
         OrderModel *theOrder = data;
         NSMutableArray *titles = [[NSMutableArray alloc]init];
         if ([theOrder.paymentType isEqualToString:@"UNPAYED"]) {
-            [titles addObject:@"支付宝付款.买买买!!!"];
-        }else{
-            [titles addObject:@"暂无操作"];
+            [self doAlipayAction:theOrder];
         }
-        [SGActionView showSheetWithTitle:T(@"操作订单") itemTitles:titles selectedIndex:100 selectedHandle:^(NSInteger index) {
-            if (index == 0) {
-                // 调取支付宝接口
-                [self doAlipayAction:theOrder];
-            }
-        }];
     }
 }
 

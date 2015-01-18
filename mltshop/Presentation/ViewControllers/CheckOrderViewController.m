@@ -199,7 +199,7 @@
 //            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
             [DataTrans showWariningTitle:T(@"订单已生成") andCheatsheet:ICON_CHECK];
             
-            [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[@"支付宝付款.买买买!!!", @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
+            [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[@"支付宝付款", @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
                 if(index == 0){
                     [self doAlipayAction:theOrder];
                 }

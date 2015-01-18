@@ -34,7 +34,7 @@
 - (void)initCellView
 {
     
-    idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_100, H_20)];
+    idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_240, H_20)];
     idLabel.numberOfLines = 0;
     idLabel.textColor = GRAYCOLOR;
     idLabel.font = FONT_12;
@@ -48,7 +48,7 @@
     
     actionBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     actionBtn.titleLabel.font = FONT_12;
-    [actionBtn setTitle:T(@"操作订单") forState:UIControlStateNormal];
+    [actionBtn setTitle:T(@"支付宝付款") forState:UIControlStateNormal];
     [actionBtn setFrame:CGRectMake(H_220, H_10, H_80, H_30)];
     [actionBtn addTarget:self action:@selector(opsAction) forControlEvents:UIControlEventTouchUpInside];
     [actionBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
@@ -70,6 +70,11 @@
                         STR_NUM2([self.data.orderAmount floatValue])];
     
     timeLabel.text = [DataTrans dateStringFromDate:self.data.orderTime];
+    if ([self.data.paymentType isEqualToString:@"UNPAYED"]) {
+        [actionBtn setHidden:NO];
+    }else{
+        [actionBtn setHidden:YES];
+    }
 
 }
 

@@ -126,7 +126,7 @@
 - (void)initBgView
 {
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
-    UIImage *cropImage = [[UIImage imageNamed:@"Default-568h"] cropToSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT) usingMode:NYXCropModeCenter];
+    UIImage *cropImage = [[UIImage imageNamed:@"train_bg"] cropToSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT) usingMode:NYXCropModeCenter];
     
     [bgView setImageToBlur:cropImage blurRadius:5.0f completionBlock:^{
     }];

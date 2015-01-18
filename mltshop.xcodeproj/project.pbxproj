@@ -72,7 +72,6 @@
 		26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AAE1A1EBDB600E117A0 /* FirstHelpViewController.m */; };
 		26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB01A1EBDB600E117A0 /* LoginViewController.m */; };
 		26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435AB61A1EC07E00E117A0 /* RegisterViewController.m */; };
-		26435ABA1A1EC1B200E117A0 /* intro_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */; };
 		26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26435ABB1A2032C400E117A0 /* ColorNavigationController.m */; };
 		26435ABF1A20700D00E117A0 /* train_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435ABE1A20700D00E117A0 /* train_bg@2x.png */; };
 		26435AC11A208F9200E117A0 /* logo_luotuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26435AC01A208F9200E117A0 /* logo_luotuo@2x.png */; };
@@ -200,7 +199,6 @@
 		26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FC81A29D5E6007F4B16 /* Me.m */; };
 		26DE7FCB1A2A12B8007F4B16 /* avatarIronMan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */; };
 		26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */; };
-		26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 26DE7FD01A2AFEC6007F4B16 /* blurImg.png */; };
 		26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */; };
 		26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */; };
 		26EC862E1A65434400307120 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EC862D1A65434400307120 /* OrderListViewController.m */; };
@@ -392,7 +390,6 @@
 		26435AB01A1EBDB600E117A0 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		26435AB61A1EC07E00E117A0 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		26435AB71A1EC07E00E117A0 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro_bg@2x.png"; sourceTree = "<group>"; };
 		26435ABB1A2032C400E117A0 /* ColorNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorNavigationController.m; sourceTree = "<group>"; };
 		26435ABC1A2032C400E117A0 /* ColorNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorNavigationController.h; sourceTree = "<group>"; };
 		26435ABE1A20700D00E117A0 /* train_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "train_bg@2x.png"; sourceTree = "<group>"; };
@@ -626,7 +623,6 @@
 		26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatarIronMan@2x.png"; sourceTree = "<group>"; };
 		26DE7FCD1A2AE857007F4B16 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		26DE7FCE1A2AE857007F4B16 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		26DE7FD01A2AFEC6007F4B16 /* blurImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurImg.png; sourceTree = "<group>"; };
 		26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCategoryViewController.h; sourceTree = "<group>"; };
 		26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCategoryViewController.m; sourceTree = "<group>"; };
 		26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItemViewCell.m; sourceTree = "<group>"; };
@@ -1127,7 +1123,6 @@
 			children = (
 				262CD4511A5DB4A600A712BA /* Avatars */,
 				262E1E6D1A555B2A00C29059 /* alipay@2x.png */,
-				26DE7FD01A2AFEC6007F4B16 /* blurImg.png */,
 				26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */,
 				26435ACD1A20CA7900E117A0 /* Default@2x.png */,
 				26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */,
@@ -1143,7 +1138,6 @@
 			isa = PBXGroup;
 			children = (
 				26435ABE1A20700D00E117A0 /* train_bg@2x.png */,
-				26435AB91A1EC1B200E117A0 /* intro_bg@2x.png */,
 			);
 			path = intro;
 			sourceTree = "<group>";
@@ -1661,7 +1655,6 @@
 				26BB7D611A6BA9F9002F4030 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				26435ACC1A20C55000E117A0 /* MLTLogo-60@3x.png in Resources */,
 				262CD4751A5DB4A600A712BA /* F012.png in Resources */,
-				26DE7FD11A2AFEC6007F4B16 /* blurImg.png in Resources */,
 				26BE3A851A170421009F37B4 /* shoucang_btn_pressed.png in Resources */,
 				262CD47D1A5DB4A600A712BA /* M008.png in Resources */,
 				262CD4791A5DB4A600A712BA /* M004.png in Resources */,
@@ -1682,7 +1675,6 @@
 				263386661A52FFEA00C94D8F /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				26BE3A9B1A170421009F37B4 /* FontAwesome.ttf in Resources */,
 				262CD4811A5DB4A600A712BA /* M011.png in Resources */,
-				26435ABA1A1EC1B200E117A0 /* intro_bg@2x.png in Resources */,
 				263386671A52FFEA00C94D8F /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				26BE3A831A170421009F37B4 /* qqkongjian_share_ico.png in Resources */,
 				262CD4781A5DB4A600A712BA /* M003.png in Resources */,

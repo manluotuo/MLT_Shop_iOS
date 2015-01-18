@@ -53,6 +53,7 @@
 @property(nonatomic, strong)FAIconButton *serviceTabButton;
 @property(nonatomic, strong)FAIconButton *cartTabButton;
 @property(nonatomic, strong)FAIconButton *buyTabButton;
+@property(nonatomic, strong)UILabel *cartCountLabel;
 
 
 // 3个按钮
@@ -159,6 +160,7 @@
             [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
                 if (responseObject != nil) {
                     [DataTrans showWariningTitle:T(@"成功加入购物车") andCheatsheet:ICON_CHECK];
+                    [self refreshCartCount];
                 }
             }];
     }];
@@ -244,6 +246,15 @@
     self.buyTabButton.tag = CART_TAB_TAG;
     self.buyTabButton.titleLabel.font = FONT_14;
     [self.buyTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.cartCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_80, H_10, H_16, H_16)];
+    [self.cartCountLabel.layer setCornerRadius:H_8];
+    [self.cartCountLabel.layer setMasksToBounds:YES];
+    self.cartCountLabel.textAlignment = NSTextAlignmentCenter;
+    self.cartCountLabel.backgroundColor = REDCOLOR;
+    self.cartCountLabel.font = CUSTOMFONT_12;
+    self.cartCountLabel.textColor = WHITECOLOR;
+    [self.buyTabButton addSubview:self.cartCountLabel];
 
     [self.tabbarView addSubview:self.serviceTabButton];
     [self.tabbarView addSubview:self.cartTabButton];
@@ -350,7 +361,7 @@
     [self.brandButton setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
     self.brandButton.titleLabel.font = FONT_14;
     self.brandButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.brandButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.brandButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.specificationButton = [[FAIconButton alloc]initWithFrame:CGRectMake(H_20, H_90+H_100, H_280, H_50)];
     [self.specificationButton setIconString:[NSString fontAwesomeIconStringForEnum:FAAngleRight]];
@@ -451,6 +462,30 @@
             [self refreshViewWithData];
         }
     }];
+    
+    [self refreshCartCount];
+}
+
+- (void)refreshCartCount
+{
+    [[AppRequestManager sharedManager]operateCartWithCartModel:nil operation:CartOpsList andBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            NSArray *goodsList = responseObject[@"goods_list"];
+            [UIView animateWithDuration:0.3
+                  delay:0
+                options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+             animations:^{
+                 //Move frame or transform view
+                 self.cartCountLabel.y = H_15;
+                 self.cartCountLabel.text = STR_INT([goodsList count]);
+             } completion:^(BOOL finished) {
+                 [UIView animateWithDuration:0.3 animations:^{
+                     self.cartCountLabel.y = H_10;
+
+                 }];
+             }];
+        }
+    }];
 }
 
 - (void)refreshViewWithData
@@ -481,7 +516,7 @@
     
     self.marketPriceLabel.attributedText = marketPriceString;
     
-    self.inventoryLabel.text = self.theGoods.catId;
+    self.inventoryLabel.text = STR_INT([self.theGoods.goodsInvertory integerValue]);
     [self.brandButton setTitle:self.theGoods.brandName forState:UIControlStateNormal];
     
     [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
