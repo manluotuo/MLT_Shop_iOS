@@ -134,7 +134,7 @@
                 self.start = self.start + 1;
                 NSLog(@"start %ld",(long)self.start);
                 
-                [self.flowButton setTitle:T(@"去首页逛逛") forState:UIControlStateNormal];
+                [self.flowButton setTitle:T(@"去结算") forState:UIControlStateNormal];
 
             }else{
                 [DataTrans showWariningTitle:T(@"购物车空空如也")
