@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger,ListDataSourceType)
     ListDataSourceAddress       = 3,    // 一行一辆车
     ListDataSourceCart          = 4,    // 一行一辆车
     ListDataSourceOrder         = 5,    // 一行一辆车
+    ListDataSourceBrand         = 6,    // 一行一辆车
 };
 
 

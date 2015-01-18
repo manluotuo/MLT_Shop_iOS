@@ -17,6 +17,7 @@
 #define API_HOME_DATA_PATH          @"/ecmobile/?url=/home/data"
 #define API_GOODS_DETAILS_PATH      @"/ecmobile/?url=/goods"
 #define API_REGION_PATH             @"/ecmobile/?url=/region"
+#define API_BRAND_PATH              @"/ecmobile/?url=/brand"
 
 
 #define API_ADDRESS_LIST_PATH       @"/ecmobile/?url=/address/list"
@@ -118,6 +119,9 @@
 
 // API/sign_up
 - (void)signUpWithMobile:(NSString *)mobile password:(NSString *)password email:(NSString *)email andBlock:(void (^)(id responseObject, NSError *error))block;
+
+// API/brand
+- (void)getBrandAllWithBlock:(void (^)(id responseObject, NSError *error))block;
 
 // API/category
 - (void)getCategoryAllWithBlock:(void (^)(id responseObject, NSError *error))block;

@@ -110,6 +110,8 @@
 		26B1C2591A4688D700295D32 /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C2581A4688D700295D32 /* AddressListViewController.m */; };
 		26B1C25C1A46890300295D32 /* AddressInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C25B1A46890300295D32 /* AddressInfoViewController.m */; };
 		26B1C25F1A46BAC400295D32 /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B1C25E1A46BAC400295D32 /* AddressTableViewCell.m */; };
+		26BB7D321A6B5797002F4030 /* BrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BB7D311A6B5797002F4030 /* BrandListViewController.m */; };
+		26BB7D351A6B5B61002F4030 /* BrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BB7D341A6B5B61002F4030 /* BrandTableViewCell.m */; };
 		26BE3A611A170421009F37B4 /* Museo500-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 26BE39E21A170421009F37B4 /* Museo500-Regular.otf */; };
 		26BE3A7E1A170421009F37B4 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE3A031A170421009F37B4 /* email@2x.png */; };
 		26BE3A7F1A170421009F37B4 /* email_share_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 26BE3A041A170421009F37B4 /* email_share_ico.png */; };
@@ -433,6 +435,10 @@
 		26B1C25B1A46890300295D32 /* AddressInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoViewController.m; sourceTree = "<group>"; };
 		26B1C25D1A46BAC400295D32 /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
 		26B1C25E1A46BAC400295D32 /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		26BB7D301A6B5797002F4030 /* BrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandListViewController.h; sourceTree = "<group>"; };
+		26BB7D311A6B5797002F4030 /* BrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandListViewController.m; sourceTree = "<group>"; };
+		26BB7D331A6B5B61002F4030 /* BrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandTableViewCell.h; sourceTree = "<group>"; };
+		26BB7D341A6B5B61002F4030 /* BrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandTableViewCell.m; sourceTree = "<group>"; };
 		26BE39E21A170421009F37B4 /* Museo500-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Museo500-Regular.otf"; sourceTree = "<group>"; };
 		26BE3A031A170421009F37B4 /* email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email@2x.png"; sourceTree = "<group>"; };
 		26BE3A041A170421009F37B4 /* email_share_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_share_ico.png; sourceTree = "<group>"; };
@@ -1203,6 +1209,8 @@
 				262E1E701A5796B100C29059 /* ShippingTableViewCell.m */,
 				262E1E721A579BC100C29059 /* BonusTableViewCell.h */,
 				262E1E731A579BC100C29059 /* BonusTableViewCell.m */,
+				26BB7D331A6B5B61002F4030 /* BrandTableViewCell.h */,
+				26BB7D341A6B5B61002F4030 /* BrandTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1336,6 +1344,8 @@
 				262E1E641A54F92400C29059 /* CheckOrderViewController.m */,
 				26EC862C1A65434400307120 /* OrderListViewController.h */,
 				26EC862D1A65434400307120 /* OrderListViewController.m */,
+				26BB7D301A6B5797002F4030 /* BrandListViewController.h */,
+				26BB7D311A6B5797002F4030 /* BrandListViewController.m */,
 			);
 			name = FunctionVC;
 			sourceTree = "<group>";
@@ -1601,6 +1611,7 @@
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
 				261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */,
+				26BB7D351A6B5B61002F4030 /* BrandTableViewCell.m in Sources */,
 				265BB8881A1CE8D90040ACC0 /* ListViewController.m in Sources */,
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
@@ -1660,6 +1671,7 @@
 				265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */,
 				26875B551A4FAA2900FA5335 /* CartModel.m in Sources */,
 				263386701A5304D600C94D8F /* WebViewController.m in Sources */,
+				26BB7D321A6B5797002F4030 /* BrandListViewController.m in Sources */,
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,

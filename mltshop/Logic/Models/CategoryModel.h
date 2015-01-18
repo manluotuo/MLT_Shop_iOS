@@ -23,7 +23,10 @@
 @interface BrandModel : NSObject
 @property(nonatomic, strong)NSString *brandId;
 @property(nonatomic, strong)NSString *brandName;
+@property(nonatomic, strong)NSString *brandDesc;
 @property(nonatomic, strong)NSString *brandLogo;
+@property(nonatomic, strong)NSIndexPath *indexPath;
+
 
 - (id)initWithDict:(NSDictionary *)dict;
 

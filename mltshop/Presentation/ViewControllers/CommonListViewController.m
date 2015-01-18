@@ -12,6 +12,7 @@
 #import "AddressTableViewCell.h"
 #import "OrderTableViewCell.h"
 #import "CartTableViewCell.h"
+#import "BrandTableViewCell.h"
 #import "SVPullToRefresh.h"
 #import "AppRequestManager.h"
 #import <MMDrawerController/MMDrawerBarButtonItem.h>
@@ -378,6 +379,10 @@
         return GOODS_CELL_HEIGHT;
     }else if(self.dataSourceType == ListDataSourceCart){
         return CELL_HEIGHT+H_20;
+    }else if(self.dataSourceType == ListDataSourceBrand){
+        BrandModel *theBrand = [self.dataSource objectAtIndex:indexPath.row];
+        CGSize descSize = [theBrand.brandDesc sizeWithWidth:H_200 andFont:FONT_12];
+        return CELL_HEIGHT+descSize.height-H_10;
     }else{
         return CELL_HEIGHT;
     }
@@ -442,6 +447,19 @@
         
         if (cell == nil) {
             cell = [[CartTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.passDelegate = self;
+        }
+        [cell setNewData:cellData];
+        
+        return cell;
+    }
+    else if(self.dataSourceType == ListDataSourceBrand){
+        BrandModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+        cellData.indexPath = indexPath;
+        BrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if (cell == nil) {
+            cell = [[BrandTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             cell.passDelegate = self;
         }
         [cell setNewData:cellData];

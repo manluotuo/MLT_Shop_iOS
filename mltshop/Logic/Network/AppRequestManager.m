@@ -735,6 +735,26 @@ static dispatch_once_t onceToken;
 }
 
 
+- (void)getBrandAllWithBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_BRAND_PATH;
+    
+    NSDictionary* postDict = @{@"category_id":@"0"};
+    
+    postDict = [DataTrans makePostDict:postDict];
+
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            block(responseObject[@"data"] , nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block) {
+            block(nil , error);
+        }
+    }];
+
+}
+
 
 - (void)getCategoryAllWithBlock:(void (^)(id responseObject, NSError *error))block
 {
@@ -742,8 +762,8 @@ static dispatch_once_t onceToken;
     
     NSDictionary* postDict = nil;
     
-    [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
             block(responseObject[@"data"] , nil);
         }
 

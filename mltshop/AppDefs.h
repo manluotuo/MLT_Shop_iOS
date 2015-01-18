@@ -405,6 +405,7 @@
 
 #define SIGNAL_ONLINE_VEHICLE_FAIL          @"50098"
 #define SIGNAL_MAIN_PAGE_TAPPED          @"50400"
+#define SIGNAL_TAP_CELL                 @"50136"
 
 
 #define NOTIFICATION_VEHICLE_EDIT_DONE      @"50300"

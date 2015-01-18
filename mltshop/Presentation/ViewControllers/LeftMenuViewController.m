@@ -21,7 +21,7 @@
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "ListViewController.h"
 #import "CartListViewController.h"
-
+#import "BrandListViewController.h"
 //#import "AccountListViewController.h"
 #import "ProfileViewController.h"
 #import "SearchCategoryViewController.h"
@@ -369,7 +369,7 @@
 {
     self.nicknameLabel.text = XAppDelegate.me.username;
     [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-                                    placeholderImage:[UIImage imageNamed:@"placeHolderSmall.png"]];
+                                       placeholderImage:[UIImage imageNamed:@"placeHolderSmall.png"]];
 }
 
 
@@ -504,7 +504,7 @@
             // 品牌街
         case LeftMenuBrandStreet:
         {
-            CartListViewController *VC = [[CartListViewController alloc]init];
+            BrandListViewController *VC = [[BrandListViewController alloc]init];
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [VC setupLeftMMButton];
             [self.mm_drawerController setCenterViewController:nav];
