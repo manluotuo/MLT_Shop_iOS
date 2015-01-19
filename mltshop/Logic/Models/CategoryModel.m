@@ -40,7 +40,7 @@
 - (id)initWithDict:(NSDictionary *)dict
 {
     if (DictionaryHasValue(dict)) {
-        _brandId = [dict objectForKey:@"brand_id"];
+        _brandId = [DataTrans noNullStringObj:dict[@"brand_id"]];
         _brandName = [DataTrans noNullStringObj:dict[@"brand_name"]];
         _brandDesc = [DataTrans noNullStringObj:dict[@"brand_desc"]];
         _brandLogo = [NSString stringWithFormat:@"%@/%@",BASE_API,[dict objectForKey:@"url"]];
