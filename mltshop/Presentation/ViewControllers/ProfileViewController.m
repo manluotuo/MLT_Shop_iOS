@@ -60,7 +60,7 @@
     OrderModel *theOrder1 = [[OrderModel alloc]init];
     theOrder1.type = @"await_pay";
 
-    [[AppRequestManager sharedManager]operateOrderWithCartModel:theOrder1 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder1 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSUInteger count = [responseObject count];
@@ -72,7 +72,7 @@
     OrderModel *theOrder2 = [[OrderModel alloc]init];
     theOrder2.type = @"await_ship";
     
-    [[AppRequestManager sharedManager]operateOrderWithCartModel:theOrder2 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder2 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSUInteger count = [responseObject count];
@@ -85,7 +85,7 @@
     OrderModel *theOrder3 = [[OrderModel alloc]init];
     theOrder3.type = @"shipped";
     
-    [[AppRequestManager sharedManager]operateOrderWithCartModel:theOrder3 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder3 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSUInteger count = [responseObject count];
@@ -262,7 +262,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrollView %.2f",scrollView.contentOffset.y);
+//    NSLog(@"scrollView %.2f",scrollView.contentOffset.y);
     self.avatarView.y = AVATAR_Y_OFFSET + scrollView.contentOffset.y/2;
 }
 

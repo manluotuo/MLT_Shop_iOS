@@ -475,7 +475,7 @@ static dispatch_once_t onceToken;
  *  @param operation <#operation description#>
  *  @param block     <#block description#>
  */
-- (void)operateOrderWithCartModel:(OrderModel *)theOrder
+- (void)operateOrderWithOrderModel:(OrderModel *)theOrder
                         operation:(NSUInteger)operation
                          andBlock:(void (^)(id responseObject, NSError *error))block
 {
@@ -577,6 +577,9 @@ static dispatch_once_t onceToken;
             if (block) {
                 block(responseObject[@"data"] , nil);
             }
+        }else{
+            NSError *error = [NSError errorWithDomain:@"" code:500 userInfo:responseObject[@"status"]];
+            block(nil, error);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"%@ %@",postURL, error);

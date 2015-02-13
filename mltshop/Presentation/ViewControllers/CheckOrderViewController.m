@@ -101,6 +101,18 @@
 
             [self refreshInfoView];
         }
+        if (error != nil) {
+            if ([error.userInfo[@"error_code"] isEqualToNumber:INT(10001)]) {
+                [self.navigationController popViewControllerAnimated:YES];
+                [DataTrans showWariningTitle:T(@"请在\"个人中心->地址管理\"中 新增地址")
+                               andCheatsheet:ICON_TIMES
+                                 andDuration:2.0f];
+
+            }
+            
+            
+            
+        }
     }];
 }
 
@@ -172,12 +184,19 @@
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
         
+
+        [self dismissViewControllerAnimated:YES completion:nil];
+
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
-            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
-                [self.navigationController popViewControllerAnimated:YES];
-            }
+
+//            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }
+            
         }];
+        
+        
         
     }
 }

@@ -155,7 +155,7 @@
 
 
 // ORDER function
-- (void)operateOrderWithCartModel:(OrderModel *)theOrder
+- (void)operateOrderWithOrderModel:(OrderModel *)theOrder
                         operation:(NSUInteger)operation
                          andBlock:(void (^)(id responseObject, NSError *error))block;
 

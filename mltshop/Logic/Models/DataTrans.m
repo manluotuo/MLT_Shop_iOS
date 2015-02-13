@@ -536,7 +536,11 @@
     if (jsonData == nil){
         return @"";
     }else{
-        return jsonData;
+        if ([jsonData isKindOfClass:[NSString class]]) {
+            return jsonData;
+        }else{
+            return @"";
+        }
     }
 }
 

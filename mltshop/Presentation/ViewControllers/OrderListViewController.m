@@ -159,7 +159,7 @@
 - (void)setupDataSource {
     self.start = 0;
     self.dataArray = [[NSMutableArray alloc]init];
-    [[AppRequestManager sharedManager]operateOrderWithCartModel:self.theOrder operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:self.theOrder operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         
         if (responseObject != nil) {
             // 集中处理所有的数据
