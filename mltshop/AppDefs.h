@@ -678,10 +678,11 @@ typedef NS_ENUM(NSUInteger,ShareType)
     ShareTypeWechat         = 0,
     ShareTypeWechatFriend   = 1,
     ShareTypeWeibo          = 2,
-    ShareTypeQQFriend       = 3,
-    ShareTypeQQZone         = 4,
-    ShareTypeEmail          = 5,
-    ShareTypeLink           = 6,
+    ShareTypeEmail          = 3,
+    ShareTypeLink           = 4,
+    ShareTypeQQFriend       = 5,
+    ShareTypeQQZone         = 6,
+
 };
 
 

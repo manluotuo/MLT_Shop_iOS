@@ -228,12 +228,10 @@
     self.theGoods = _goods;
     [[SGActionView sharedActionView]setStyle:SGActionViewStyleLight];
     [SGActionView showGridMenuWithTitle:T(@"")
-                             itemTitles:@[T(@"微信好友"),T(@"微信朋友圈"),T(@"微博"),T(@"QQ好友"),T(@"QQ空间"),T(@"邮件"),T(@"复制链接")]
+                             itemTitles:@[T(@"微信好友"),T(@"微信朋友圈"),T(@"微博"),T(@"邮件"),T(@"复制链接")]
                                  images:@[[UIImage imageNamed:@"weixin_share_ico"],
                                           [UIImage imageNamed:@"weixinpengyou_share_ico"],
                                           [UIImage imageNamed:@"weibo"],
-                                          [UIImage imageNamed:@"qq_share_ico"],
-                                          [UIImage imageNamed:@"qqkongjian_share_ico"],
                                           [UIImage imageNamed:@"email_share_ico"],
                                           [UIImage imageNamed:@"link"]
                                           ]
