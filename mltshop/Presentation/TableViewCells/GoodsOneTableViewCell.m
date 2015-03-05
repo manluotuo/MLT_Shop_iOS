@@ -92,7 +92,12 @@
     [goodsImg sd_setImageWithURL:[NSURL URLWithString:theGoods.cover.thumb] placeholderImage:PLACEHOLDERIMAGE];
     [titleLabel setText:theGoods.goodsName];
     [briefLabel setText:theGoods.goodsBrief];
-    [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@"元"]];
+    
+    if (theGoods.promotePrice.integerValue > 0) {
+        [priceLabel setText:[[theGoods.promotePrice stringValue] stringByAppendingString:@"元"]];
+    }else{
+        [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@"元"]];
+    }
     
 }
 

@@ -37,6 +37,7 @@
 @property(nonatomic, strong)UILabel *titleLabel;
 @property(nonatomic, strong)UILabel *briefLabel;
 @property(nonatomic, strong)UILabel *priceLabel;
+@property(nonatomic, strong)UILabel *priceTitle;
 @property(nonatomic, strong)UILabel *marketPriceLabel;
 @property(nonatomic, strong)UILabel *inventoryLabel;
 @property(nonatomic, strong)FAIconButton *specificationButton;
@@ -325,9 +326,9 @@
     [self.briefLabel setTextAlignment:NSTextAlignmentLeft];
     self.briefLabel.numberOfLines = 0;
     
-    UILabel *priceTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_90+H_15, H_60, H_24)];
-    priceTitle.text = T(@"本店价");
-    priceTitle.font = FONT_14;
+    self.priceTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_90+H_15, H_60, H_24)];
+    self.priceTitle.text = T(@"本店价");
+    self.priceTitle.font = FONT_14;
     
     self.priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_18+H_60, H_90+H_15, H_60, H_24)];
     [self.priceLabel setFont:FONT_14];
@@ -382,7 +383,7 @@
 
     [self.infoView addSubview:self.titleLabel];
     [self.infoView addSubview:self.briefLabel];
-    [self.infoView addSubview:priceTitle];
+    [self.infoView addSubview:self.priceTitle];
     [self.infoView addSubview:self.priceLabel];
     [self.infoView addSubview:self.marketPriceLabel];
     [self.infoView addSubview:inventoryTitle];
@@ -508,7 +509,13 @@
     self.briefLabel.text = self.theGoods.goodsBrief;
     
     // 售价
-    self.priceLabel.text = STR_NUM2([self.theGoods.shopPrice floatValue]);
+    if (self.theGoods.promotePrice.integerValue > 0) {
+        self.priceTitle.text = @"促销价";
+        self.priceLabel.text = STR_NUM2([self.theGoods.promotePrice floatValue]);
+    }else{
+        self.priceTitle.text = @"本店价";
+        self.priceLabel.text = STR_NUM2([self.theGoods.shopPrice floatValue]);
+    }
     // 市场价
     NSAttributedString * marketPriceString =
     [[NSAttributedString alloc] initWithString: STR_NUM2([self.theGoods.marketPrice floatValue])

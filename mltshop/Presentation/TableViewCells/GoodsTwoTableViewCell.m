@@ -134,7 +134,14 @@
     
     [goodsImg sd_setImageWithURL:[NSURL URLWithString:theGoods.cover.thumb] placeholderImage:PLACEHOLDERIMAGE];
     [titleLabel setText:theGoods.goodsName];
-    [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@"元"]];
+    
+//    显示特价
+    if (theGoods.promotePrice.integerValue > 0) {
+        [priceLabel setText:[[theGoods.promotePrice stringValue] stringByAppendingString:@"元"]];
+    }else{
+        [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@"元"]];
+    }
+
     
 }
 

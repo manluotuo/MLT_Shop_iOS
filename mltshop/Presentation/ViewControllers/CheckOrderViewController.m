@@ -106,7 +106,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
                 [DataTrans showWariningTitle:T(@"请在\"个人中心->地址管理\"中 新增地址")
                                andCheatsheet:ICON_TIMES
-                                 andDuration:2.0f];
+                                 andDuration:4.0f];
 
             }
             

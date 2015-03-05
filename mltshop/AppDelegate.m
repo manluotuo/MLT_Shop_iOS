@@ -126,7 +126,6 @@
     
     [self skipIntroView];
     
-    
     return YES;
 }
 
@@ -145,7 +144,6 @@
 
 - (void)skipIntroView
 {
-    [self getAllCategory];
     // 用户第一次打开
     NSNumber *result = GET_DEFAULT(@"HELPSEEN_INTRO");
     
@@ -179,7 +177,12 @@
         return;
     }
     
-    [self showDrawerView];
+    [self getAllCategoryWithBlock:^(BOOL success) {
+        if(success){
+            [self showDrawerView];
+        }
+    }];
+    
 
     [[AppRequestManager sharedManager] signInWithUsername:self.me.username password:self.me.password andBlock:^(id responseObject, NSError *error) {
         
@@ -232,7 +235,7 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)getAllCategory
+- (void)getAllCategoryWithBlock:(void (^)(BOOL success))block
 {
     self.allCategory = [[NSMutableArray alloc]init];
     [[AppRequestManager sharedManager]getCategoryAllWithBlock:^(id responseObject, NSError *error) {
@@ -241,6 +244,9 @@
                 CategoryModel *model = [[CategoryModel alloc]initWithDict:responseObject[i]];
                 [self.allCategory addObject:model];
             }
+            block(YES);
+        }else{
+            [DataTrans showWariningTitle:T(@"分类获取失败") andCheatsheet:ICON_TIMES];
         }
     }];
 }

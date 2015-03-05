@@ -24,6 +24,7 @@
 @property(nonatomic, strong)NSNumber *marketPrice;
 @property(nonatomic, strong)NSNumber *shopPrice;
 @property(nonatomic, strong)NSNumber *promotePrice;
+@property(nonatomic, strong)NSDate *promoteStartDate;
 @property(nonatomic, strong)PhotoModel *cover;
 @property(nonatomic, strong)NSMutableArray *gallery;
 @property(nonatomic, strong)SpecModel * spec;

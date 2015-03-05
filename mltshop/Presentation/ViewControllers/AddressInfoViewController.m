@@ -79,7 +79,7 @@
     theAddress.address = self.addressTextView.text;
     theAddress.tel = self.telTextView.text;
     theAddress.email = self.emailTextView.text;
-    theAddress.zipcode = self.zipcodeTextView.text;
+//    theAddress.zipcode = self.zipcodeTextView.text;
 }
 
 - (void)setNewData:(AddressModel *)address;
@@ -91,7 +91,7 @@
     self.telTextView.text = theAddress.tel;
     self.emailTextView.text = theAddress.email;
     self.addressTextView.text = theAddress.address;
-    self.zipcodeTextView.text = theAddress.zipcode;
+//    self.zipcodeTextView.text = theAddress.zipcode;
     if (StringHasValue(theAddress.provinceCode) &&
         StringHasValue(theAddress.cityCode) &&
         StringHasValue(theAddress.districtCode)) {
@@ -260,17 +260,17 @@
     self.addressTextView.tag = ADDRESS_TAG;
     
     // zipcodeTextView
-    self.zipcodeTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*5, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
-    self.zipcodeTextView.delegate = self;
-    [self.zipcodeTextView setPlaceholder:T(@"邮编")];
-    self.zipcodeTextView.returnKeyType = UIReturnKeyNext;
-    self.zipcodeTextView.tag = ZIPCODE_TAG;
+//    self.zipcodeTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*5, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
+//    self.zipcodeTextView.delegate = self;
+//    [self.zipcodeTextView setPlaceholder:T(@"邮编")];
+//    self.zipcodeTextView.returnKeyType = UIReturnKeyNext;
+//    self.zipcodeTextView.tag = ZIPCODE_TAG;
     
     
     self.consigneeTextView.textIndent = TEXT_INDENT;
     self.telTextView.textIndent = TEXT_INDENT;
     self.emailTextView.textIndent = TEXT_INDENT;
-    self.zipcodeTextView.textIndent = TEXT_INDENT;
+//    self.zipcodeTextView.textIndent = TEXT_INDENT;
     self.locationTextView.textIndent = TEXT_INDENT;
     self.addressTextView.textIndent = TEXT_INDENT;
 
@@ -280,8 +280,8 @@
     self.telTextView = (KKTextField *)[DataTrans roundCornersOnView:self.telTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     self.emailTextView = (KKTextField *)[DataTrans roundCornersOnView:self.emailTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     self.locationTextView = (KKTextField *)[DataTrans roundCornersOnView:self.locationTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
-    self.addressTextView = (KKTextField *)[DataTrans roundCornersOnView:self.addressTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
-    self.zipcodeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.zipcodeTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
+    self.addressTextView = (KKTextField *)[DataTrans roundCornersOnView:self.addressTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
+//    self.zipcodeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.zipcodeTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
 
     self.loginPanel = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
     [self.loginPanel setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT)];
@@ -290,7 +290,7 @@
     [self.loginPanel addSubview:self.consigneeTextView];
     [self.loginPanel addSubview:self.telTextView];
     [self.loginPanel addSubview:self.emailTextView];
-    [self.loginPanel addSubview:self.zipcodeTextView];
+//    [self.loginPanel addSubview:self.zipcodeTextView];
     [self.loginPanel addSubview:self.locationTextView];
     [self.loginPanel addSubview:self.addressTextView];
     
@@ -343,7 +343,7 @@
     [self.consigneeTextView resignFirstResponder];
     [self.telTextView resignFirstResponder];
     [self.emailTextView resignFirstResponder];
-    [self.zipcodeTextView resignFirstResponder];
+//    [self.zipcodeTextView resignFirstResponder];
     [self.locationTextView resignFirstResponder];
     [self.addressTextView resignFirstResponder];
     

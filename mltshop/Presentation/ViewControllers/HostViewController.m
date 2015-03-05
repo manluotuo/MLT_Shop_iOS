@@ -64,19 +64,19 @@
     self.tabArray = [[NSMutableArray alloc]init];
     if (ArrayHasValue(XAppDelegate.allCategory)) {
         NSLog(@"%@",XAppDelegate.allCategory);
-        [self.tabArray addObject:@{@"name": @"首页", @"catId":INT(0)}];
+        [self.tabArray addObject:@{@"name": @"首页", @"catId":STR_INT(0)}];
         for (CategoryModel *item in XAppDelegate.allCategory) {
             [self.tabArray addObject:@{@"name": item.catName, @"catId": item.catId}];
         }
     }else{
         self.tabArray = [[NSMutableArray alloc]initWithArray:
-                        @[@{@"name": @"首页", @"catId":INT(0)},
-                          @{@"name": @"服饰鞋帽", @"catId":INT(4)},
-                          @{@"name": @"毛绒玩具", @"catId":INT(7)},
-                          @{@"name": @"模型雕塑", @"catId":INT(3)},
-                          @{@"name": @"精品挂饰", @"catId":INT(6)},
-                          @{@"name": @"卡通箱包", @"catId":INT(9)},
-                          @{@"name": @"生活娱乐", @"catId":INT(2)}]
+                        @[@{@"name": @"首页", @"catId":STR_INT(0)},
+                          @{@"name": @"服饰鞋帽", @"catId":STR_INT(4)},
+                          @{@"name": @"毛绒玩具", @"catId":STR_INT(7)},
+                          @{@"name": @"模型雕塑", @"catId":STR_INT(3)},
+                          @{@"name": @"精品挂饰", @"catId":STR_INT(6)},
+                          @{@"name": @"卡通箱包", @"catId":STR_INT(9)},
+                          @{@"name": @"生活娱乐", @"catId":STR_INT(2)}]
                          ];
     }
     

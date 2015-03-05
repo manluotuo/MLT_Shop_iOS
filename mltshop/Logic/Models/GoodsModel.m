@@ -30,7 +30,8 @@
         }else{
             _shopPrice = [DataTrans noNullNumberObj:[dict objectForKey:@"goods_price"]];
         }
-        _promotePrice = [DataTrans noNullNumberObj:[dict objectForKey:@"market_price"]];
+        _promotePrice = [DataTrans noNullNumberObj:[dict objectForKey:@"promote_price"]];
+        _promoteStartDate = [DataTrans dateFromNSDatetimeStr:[dict objectForKey:@"promote_start_date"]];
         
         _cover = [[PhotoModel alloc]initWithDict:[dict objectForKey:@"img"]];
         
