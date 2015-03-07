@@ -112,7 +112,7 @@
 
 -(void)gotoIndexAction
 {
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO_TO_INDEX_PAGE object:nil userInfo:nil];
     }];
     [XAppDelegate showDrawerView];
