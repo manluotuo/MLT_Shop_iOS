@@ -9,7 +9,6 @@
 #import "AFHTTPRequestOperationManager.h"
 #import <AFNetworking/AFHTTPSessionManager.h>
 
-#define API_SYSTEM_PATH             @"/mobile_app/system"
 #define API_SIGNIN_PATH             @"/ecmobile/?url=/user/signin"
 #define API_SIGNUP_PATH             @"/ecmobile/?url=/user/signup"
 #define API_SEARCH_PATH             @"/ecmobile/?url=search"

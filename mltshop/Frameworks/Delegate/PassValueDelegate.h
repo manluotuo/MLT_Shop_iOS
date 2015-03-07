@@ -16,13 +16,6 @@
 -(void)passSignalValue:(NSString *)value andDict:(NSDictionary *)dict;
 -(void)passSignalValue:(NSString *)value andData:(id)data;
 -(void)passSignalValue:(NSString *)value andDict:(NSDictionary *)dict andBlock:(void (^)(BOOL status))block;
--(void)passNumberValue:(NSNumber *)value andIndex:(NSUInteger )index;
--(void)passNSDateValue:(NSDate *)value andIndex:(NSUInteger)index;
--(void)passNSArrayValue:(NSArray *)value andSignal:(NSString *)signal;
 
--(void)addAvatar;
-
--(void)sendSMSWithIndex:(NSInteger)index;
--(void)callWithIndex:(NSInteger)index;
 
 @end

@@ -103,42 +103,6 @@ static dispatch_once_t onceToken;
 }
 
 /**
- *  API/system
- *
- *  @param block return {version, imgserver, apiserver}
- */
-- (void)getSystemNotificationWithBlock:(void (^)(id responseObject, NSError *error))block
-{
-    NSString *postURL = API_SYSTEM_PATH;
-    NSString *nowVersion = NOWVERSION;
-    
-    NSDictionary *postParamDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"ios", @"device",
-//                                   [[UIDevice currentDevice] systemVersion], @"device_version",
-                                   nowVersion, @"version",
-                                   nil];
-    
-    NSDictionary *postDict = [DataTrans makePostDict:postParamDict];
-    
-    [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        if(responseObject != nil && block != nil) {
-            block(responseObject , nil);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        //
-        NSLog(@"%@ %@",postURL, error);
-        
-        if (error.code == -1004) {
-            [DataTrans showWariningTitle:T(@"网络错误") andCheatsheet:ICON_TIMES];
-        }
-        if (block) {
-            block(nil , error);
-        }
-
-    }];
-}
-
-/**
  *  API/guest/register
  *  用户打开是只请求一次
  *  @param block return {token, uid}
