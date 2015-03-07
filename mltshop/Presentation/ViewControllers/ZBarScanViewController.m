@@ -13,6 +13,7 @@
 @property(nonatomic, strong)ScanOverlayView *overlayView;
 @property(nonatomic, strong)FAHoverButton *cancelButton;
 @property(nonatomic, strong)UILabel *warningLabel;
+@property(nonatomic, strong)NSString *scanData;
 @end
 
 @implementation ZBarScanViewController
@@ -20,6 +21,7 @@
 @synthesize overlayView;
 @synthesize cancelButton;
 @synthesize warningLabel;
+@synthesize scanData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +39,7 @@
     // Do any additional setup after loading the view.
     [self init_camera];
     [self initOverlayView];
+    self.scanData = @"";
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
@@ -92,7 +95,9 @@
 
 - (void)cancelAction
 {
-    [self dismissViewControllerAnimated:YES completion:^{}];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.passDelegate passSignalValue:SIGNAL_BARCODE_SCAN_SUCCESS andData:self.scanData];
+    }];
 }
 
 - (void)readerView:(ZBarReaderView *)readerView didReadSymbols: (ZBarSymbolSet *)symbols fromImage:(UIImage *)image
@@ -101,7 +106,8 @@
     for (s in symbols)
     {
         [self cancelAction];
-        [self.passDelegate passSignalValue:SIGNAL_BARCODE_SCAN_SUCCESS andData:s.data];
+        self.scanData = s.data;
+//        [self.passDelegate passSignalValue:SIGNAL_BARCODE_SCAN_SUCCESS andData:s.data];
         //        text.text = s.data;
         //        image_view.image = image;
     }

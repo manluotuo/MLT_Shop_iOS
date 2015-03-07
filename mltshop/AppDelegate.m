@@ -136,10 +136,16 @@
     UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
     [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
 
-    [self.drawerController setCenterViewController:navigationController];
-    [self.window setRootViewController:self.drawerController];
-    [self.window addSubview:self.drawerController.view];
-    [self.window makeKeyAndVisible];
+    [self getAllCategoryWithBlock:^(BOOL success) {
+        if(success){
+            [self.drawerController setCenterViewController:navigationController];
+            [self.window setRootViewController:self.drawerController];
+            [self.window addSubview:self.drawerController.view];
+            [self.window makeKeyAndVisible];
+        }
+    }];
+    
+    
 }
 
 - (void)skipIntroView
@@ -177,11 +183,9 @@
         return;
     }
     
-    [self getAllCategoryWithBlock:^(BOOL success) {
-        if(success){
-            [self showDrawerView];
-        }
-    }];
+    
+    [self showDrawerView];
+
     
 
     [[AppRequestManager sharedManager] signInWithUsername:self.me.username password:self.me.password andBlock:^(id responseObject, NSError *error) {
