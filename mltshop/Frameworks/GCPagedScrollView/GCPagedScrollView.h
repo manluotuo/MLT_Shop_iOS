@@ -27,4 +27,13 @@
 - (void) removeContentSubviewAtIndex:(NSUInteger) index;
 - (void) removeAllContentSubviews;
 
+/** 关闭定时器 */
+- (void) stopTimer;
+/** 开启定时器 */
+- (void) starTimer;
+/** 销毁定时器 */
+- (void)disMissTimer;
+/** 创建定时器 */
+- (void)createTimer;
+
 @end

@@ -15,6 +15,7 @@ const CGFloat GCPagedScrollViewPageControlHeight = 24.0;
 
 @interface GCPagedScrollView ()
 
+@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) StyledPageControl *pageControl;
 
 - (void) updateViewPositionAndPageControl;
@@ -23,7 +24,10 @@ const CGFloat GCPagedScrollViewPageControlHeight = 24.0;
 
 @end
 
-@implementation GCPagedScrollView
+@implementation GCPagedScrollView {
+    CGPoint _offSet;
+}
+
 
 @synthesize views;
 @synthesize pageControl;
@@ -176,6 +180,58 @@ const CGFloat GCPagedScrollViewPageControlHeight = 24.0;
 
 - (void) setPage:(NSUInteger)page animated:(BOOL) animated {
     [self setContentOffset:CGPointMake(page * self.frame.size.width, - self.scrollIndicatorInsets.top) animated:animated];
+}
+
+#pragma mark - Timer
+/** 关闭定时器 */
+- (void)stopTimer {
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+/** 创建定时器 */
+- (void)createTimer {
+    if (self.timer == nil) {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
+    } else {
+        return;
+    }
+}
+
+/** 开启定时器 */
+- (void) starTimer {
+    if (self.timer != nil) {
+        [self.timer setFireDate:[NSDate distantPast]];
+    } else {
+        return;
+    }
+}
+
+/** 定时器触发 */
+- (void)timerClick {
+    
+    _offSet = CGPointMake(self.contentOffset.x + WIDTH, self.contentOffset.y);
+    if (self.contentOffset.x == 1280 ) {
+        _offSet = CGPointMake(0, 0);
+        [UIView animateWithDuration:0.15 animations:^{
+            
+            self.contentOffset = _offSet;
+            
+        } completion:^(BOOL finished) {
+        }];
+    } else {
+        [UIView animateWithDuration:0.3 animations:^{
+            
+            self.contentOffset = _offSet;
+            
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
+
+/** 销毁定时器 */
+- (void)disMissTimer {
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 

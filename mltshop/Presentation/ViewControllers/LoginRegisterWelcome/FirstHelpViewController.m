@@ -17,6 +17,7 @@
 @property(strong, nonatomic)NSArray *scrollInfoArray;
 @property(strong, nonatomic)KKFlatButton *checkButton;
 
+
 @end
 
 @implementation FirstHelpViewController

@@ -20,6 +20,7 @@
 @interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate>
 @property(nonatomic, strong)YWDictionary *fixedData;
 @property(nonatomic, strong)UIScrollView *fixedView;
+@property (nonatomic, strong) GCPagedScrollView *pagedScrollView;
 
 @end
 
@@ -130,17 +131,17 @@
         if ([key isEqualToString:@"player"]) {
             CGFloat playerY = fixedHeight;
             CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
-            GCPagedScrollView *pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
+            self.pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
             
-            pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-            pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
-            pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
-            pagedScrollView.maximumZoomScale = 3.0; //最大到3倍
-            pagedScrollView.clipsToBounds = YES;
-            pagedScrollView.scrollEnabled = YES;
-            pagedScrollView.pagingEnabled = YES;
-            pagedScrollView.delegate = self;
-            [pagedScrollView removeAllContentSubviews];
+            self.pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+            self.pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
+            self.pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
+            self.pagedScrollView.maximumZoomScale = 3.0; //最大到3倍
+            self.pagedScrollView.clipsToBounds = YES;
+            self.pagedScrollView.scrollEnabled = YES;
+            self.pagedScrollView.pagingEnabled = YES;
+            self.pagedScrollView.delegate = self;
+            [self.pagedScrollView removeAllContentSubviews];
             
             CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
             for (int i = 0 ; i < [listData count]; i++) {
@@ -159,12 +160,15 @@
 
                 
                 [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
-                [pagedScrollView addContentSubview:page];
+                [self.pagedScrollView addContentSubview:page];
             }
             
 
             // list data foreach add page
-            [self.fixedView addSubview:pagedScrollView];
+            [self.fixedView addSubview:self.pagedScrollView];
+            /** 创建定时器 */
+            [self.pagedScrollView createTimer];
+            
             fixedHeight += SLIDE_FIX_HEIGHT;
         }
         //品牌分类
@@ -215,6 +219,24 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self.pagedScrollView starTimer];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [self.pagedScrollView stopTimer];
+    
+}
+
+- (void)dealloc {
+    [self.pagedScrollView disMissTimer];
+    NSLog(@"释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！");
 }
 
 /*

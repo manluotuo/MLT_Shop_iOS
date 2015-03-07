@@ -21,6 +21,8 @@
 #import "ModelHelper.h"
 #import "OrderListViewController.h"
 #import "AppRequestManager.h"
+#import "CExpandHeader.h"
+
 
 @interface ProfileViewController ()<UIScrollViewDelegate>
 
@@ -28,10 +30,14 @@
 @property(nonatomic, strong)UIScrollView *scrollView;
 @property(nonatomic, strong)UIView *orderView;
 @property(nonatomic, strong)RoundedAvatarButton *avatarButton;
+@property(nonatomic, strong)CExpandHeader *header;
+@property(nonatomic, strong)UIView *customView;
+
 
 @end
 
-#define AVATAR_Y_OFFSET 40.0f
+#define AVATAR_Y_OFFSET -20.0f
+//#define AVATAR_Y_OFFSET 40.0f
 #define LINE_W          0.5f
 
 #define AWAIT_PAY_TAG       201
@@ -125,6 +131,21 @@
 
 - (void)initBgView
 {
+    
+    self.customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, VIEW_HEIGHT)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, VIEW_HEIGHT)];
+    [imageView setImage:[UIImage imageNamed:@"image"]];
+    
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleWidth;
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.customView addSubview:imageView];
+    [self initOtherView];
+    
+    self.header = [CExpandHeader expandWithScrollView:self.scrollView expandView:self.customView];
+    
+    
+    /*
     UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
     UIImage *cropImage = [[UIImage imageNamed:@"train_bg"] cropToSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT) usingMode:NYXCropModeCenter];
     
@@ -132,13 +153,46 @@
     }];
     
     [self.view addSubview:bgView];
+     */
 }
+
+- (void)initOtherView {
+    // 头像
+    self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
+    [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+    
+    [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.avatarButton addSubview:editIcon];
+    [self.avatarView addSubview:self.avatarButton];
+    
+    // 左右按钮
+    KKFlatButton *leftButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setTitle:T(@"修改头像") forState:UIControlStateNormal];
+    [leftButton setFrame:CGRectMake(0, H_90/2-H_24/2, H_56, H_24)];
+    [leftButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton.titleLabel setFont:FONT_12];
+    [leftButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+    [leftButton setBackgroundColor:WHITEALPHACOLOR2];
+    [self.avatarView addSubview:leftButton];
+    
+    KKFlatButton *rightButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setTitle:T(@"在线客服") forState:UIControlStateNormal];
+    [rightButton setFrame:CGRectMake(self.avatarView.width-H_56, H_90/2-H_24/2, H_56, H_24)];
+    [rightButton addTarget:self action:@selector(callcenterAction) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton.titleLabel setFont:FONT_12];
+    [rightButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+    [rightButton setBackgroundColor:WHITEALPHACOLOR2];
+    [self.avatarView addSubview:rightButton];
+    
+}
+
 
 
 - (void)initScrollView
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
-    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT+100)];
+//    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT+100)];
+    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, self.scrollView.frame.size.height-VIEW_HEIGHT+30)];
     [self.view addSubview:self.scrollView];
     
     
@@ -149,7 +203,7 @@
     editIcon.text = [NSString fontAwesomeIconStringForEnum:FAPencil];
     editIcon.textColor = WHITECOLOR;
 
-    
+    /*
     // 头像
     self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
     [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
@@ -176,7 +230,7 @@
     [rightButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [rightButton setBackgroundColor:WHITEALPHACOLOR2];
     [self.avatarView addSubview:rightButton];
-
+*/
     
     [self.scrollView addSubview:self.avatarView];
     self.scrollView.delegate = self;

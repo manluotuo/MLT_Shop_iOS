@@ -92,6 +92,8 @@
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 #define TOTAL_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define WIDTH [UIScreen mainScreen].bounds.size.width
+
 
 #define API_ADDRESS @"http://api.bitjin.net"
 #define APITEST_ADDRESS @"http://apitest.bitjin.net"
@@ -303,7 +305,7 @@
 #define H_290  290.0f
 #define H_300  300.0f
 #define H_310  310.0f
-
+#define H_160_180 160.0f-180.0f
 
 #define BUTTON_OFFSET           10.0f
 #define LEFT_PADDING            8.0f
@@ -847,3 +849,5 @@ NS_INLINE BOOL ArrayHasValue(id array)
 
 
 #pragma mark -- trans logo
+#pragma mark - R
+#define VIEW_HEIGHT 250
