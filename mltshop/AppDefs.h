@@ -414,6 +414,7 @@
 #define NOTIFICATION_QUICK_ADD_STEP         @"50301"
 
 #define SIGNAL_UPLOADING_PROGRESS           @"51000"
+#define SIGNAL_GO_TO_INDEX_PAGE             @"60000"
 
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];

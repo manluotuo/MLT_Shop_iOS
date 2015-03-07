@@ -189,9 +189,6 @@
     [super viewDidAppear:animated];
     
     //    [self.tableView triggerPullToRefresh];
-    if (self.shouldChangeTableContentInset) {
-        [self changeTableContentInset];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -242,7 +239,7 @@
         [self.noDataView setHidden:YES];
 
 //        [self makeMaxAndMinID];
-        NSLog(@"setupDataSource %d 条", [self.dataSource count]);
+        NSLog(@"setupDataSource %ld 条", [self.dataSource count]);
     }
     
     if (error != nil) {
@@ -262,7 +259,7 @@
 
     NSMutableArray *data = [DataTrans getDataArrayWithExtendData:responseObject];
 
-    NSLog(@"new data : %d",[data count]);
+    NSLog(@"new data : %ld",[data count]);
     // 大于20条清空列表
 //    if ([data count] >= 20) {
 //        self.dataSource = [[NSMutableArray alloc]init];
@@ -356,7 +353,13 @@
 }
 
 - (void)getMoreData {
+    
     __weak CommonListViewController *weakSelf = self;
+    
+    // FIXME: 如果正在进行动画 那么不响应
+//    if (weakSelf.tableView.infiniteScrollingView.state == SVInfiniteScrollingStateStopped) {
+//        
+//    }
     
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);

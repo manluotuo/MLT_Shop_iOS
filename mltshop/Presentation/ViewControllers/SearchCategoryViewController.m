@@ -362,7 +362,6 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         theSearch.catId = cellData.catId;
         ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
         VC.search = theSearch;
-        VC.shouldChangeTableContentInset = YES;
         [self.navigationController pushViewController:VC animated:YES];
         //
     }];

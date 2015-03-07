@@ -35,7 +35,6 @@ typedef NS_ENUM(NSInteger,ListDataSourceType)
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *dataSource;
 @property (nonatomic, assign)NSInteger dataSourceType;
-@property (nonatomic, assign)BOOL shouldChangeTableContentInset;
 
 - (void)disableRefreshTable:(BOOL)disable;
 - (void)resetInfiniteScrollingViewTitles;

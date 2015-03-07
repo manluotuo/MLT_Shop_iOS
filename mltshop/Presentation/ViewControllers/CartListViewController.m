@@ -104,9 +104,20 @@
         [self.navigationController pushViewController:VC animated:YES];
     }else{
         // 去首页逛逛
-        [XAppDelegate showDrawerView];
+        // 发通知
+        [self gotoIndexAction];
+        
     }
 }
+
+-(void)gotoIndexAction
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO_TO_INDEX_PAGE object:nil userInfo:nil];
+    }];
+    [XAppDelegate showDrawerView];
+}
+
 
 
 /**

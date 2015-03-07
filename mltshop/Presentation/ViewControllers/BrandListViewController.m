@@ -56,7 +56,6 @@
         VC.search = [[SearchModel alloc]init];
         VC.search.brandId= theBrand.brandId;
         VC.title = theBrand.brandName;
-        VC.shouldChangeTableContentInset = YES;
         [VC setUpDownButton:0];
         ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
         [self.navigationController presentViewController:nav animated:nil completion:nil];

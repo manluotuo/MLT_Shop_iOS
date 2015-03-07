@@ -40,7 +40,7 @@
     _scrollView.contentInset = UIEdgeInsetsMake(_expandHeight, 0, 0, 0);
     [_scrollView insertSubview:expandView atIndex:0];
     [_scrollView addObserver:self forKeyPath:CExpandContentOffset options:NSKeyValueObservingOptionNew context:nil];
-    [_scrollView setContentOffset:CGPointMake(0, -180)];
+    [_scrollView setContentOffset:CGPointMake(0, -250)];
 
     _expandView = expandView;
     

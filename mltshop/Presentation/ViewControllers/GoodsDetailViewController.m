@@ -82,6 +82,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self buildFixedView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO_INDEX_PAGE object:nil];
+
+}
+
+- (void)gotoIndexAction
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

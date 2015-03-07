@@ -23,6 +23,7 @@
 #import "AppRequestManager.h"
 #import "CExpandHeader.h"
 
+/** 个人中心 */
 
 @interface ProfileViewController ()<UIScrollViewDelegate>
 
@@ -33,11 +34,9 @@
 @property(nonatomic, strong)CExpandHeader *header;
 @property(nonatomic, strong)UIView *customView;
 
-
 @end
 
 #define AVATAR_Y_OFFSET -20.0f
-//#define AVATAR_Y_OFFSET 40.0f
 #define LINE_W          0.5f
 
 #define AWAIT_PAY_TAG       201
@@ -50,8 +49,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self initBgView];
+    
     [self initScrollView];
+    
+    [self initBgView];
+    
     [self initOrderView];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -65,7 +67,7 @@
 {
     OrderModel *theOrder1 = [[OrderModel alloc]init];
     theOrder1.type = @"await_pay";
-
+    
     [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder1 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
@@ -99,7 +101,7 @@
             [button setBubbleString:STR_INT(count)];
         }
     }];
-
+    
     
     
 }
@@ -131,7 +133,6 @@
 
 - (void)initBgView
 {
-    
     self.customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, VIEW_HEIGHT)];
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, VIEW_HEIGHT)];
     [imageView setImage:[UIImage imageNamed:@"image"]];
@@ -141,20 +142,17 @@
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.customView addSubview:imageView];
     [self initOtherView];
-    
     self.header = [CExpandHeader expandWithScrollView:self.scrollView expandView:self.customView];
-    
-    
     /*
-    UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
-    UIImage *cropImage = [[UIImage imageNamed:@"train_bg"] cropToSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT) usingMode:NYXCropModeCenter];
-    
-    [bgView setImageToBlur:cropImage blurRadius:5.0f completionBlock:^{
-    }];
-    
-    [self.view addSubview:bgView];
-     */
+     UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
+     UIImage *cropImage = [[UIImage imageNamed:@"train_bg"] cropToSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT) usingMode:NYXCropModeCenter];
+     
+     [bgView setImageToBlur:cropImage blurRadius:5.0f completionBlock:^{
+     }];
+     
+     [self.view addSubview:bgView];*/
 }
+
 
 - (void)initOtherView {
     // 头像
@@ -186,51 +184,48 @@
     
 }
 
-
-
 - (void)initScrollView
 {
-    self.scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];
-//    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT+100)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, TOTAL_HEIGHT)];
     [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, self.scrollView.frame.size.height-VIEW_HEIGHT+30)];
     [self.view addSubview:self.scrollView];
     
     
     self.avatarView = [[UIView alloc]initWithFrame:CGRectMake(H_30, AVATAR_Y_OFFSET, H_260, H_90)];
-
+    
     UILabel *editIcon = [[UILabel alloc]initWithFrame:CGRectMake(H_70, 0, H_30, H_30)];
     editIcon.font = FONT_AWESOME_24;
     editIcon.text = [NSString fontAwesomeIconStringForEnum:FAPencil];
     editIcon.textColor = WHITECOLOR;
-
+    
     /*
-    // 头像
-    self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
-    [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+     // 头像
+     self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
+     [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+     
+     [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+     //    [self.avatarButton addSubview:editIcon];
+     [self.avatarView addSubview:self.avatarButton];
+     
+     // 左右按钮
+     KKFlatButton *leftButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+     [leftButton setTitle:T(@"修改头像") forState:UIControlStateNormal];
+     [leftButton setFrame:CGRectMake(0, H_90/2-H_24/2, H_56, H_24)];
+     [leftButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+     [leftButton.titleLabel setFont:FONT_12];
+     [leftButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+     [leftButton setBackgroundColor:WHITEALPHACOLOR2];
+     [self.avatarView addSubview:leftButton];
+     
+     KKFlatButton *rightButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+     [rightButton setTitle:T(@"在线客服") forState:UIControlStateNormal];
+     [rightButton setFrame:CGRectMake(self.avatarView.width-H_56, H_90/2-H_24/2, H_56, H_24)];
+     [rightButton addTarget:self action:@selector(callcenterAction) forControlEvents:UIControlEventTouchUpInside];
+     [rightButton.titleLabel setFont:FONT_12];
+     [rightButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+     [rightButton setBackgroundColor:WHITEALPHACOLOR2];
+     [self.avatarView addSubview:rightButton];*/
     
-    [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.avatarButton addSubview:editIcon];
-    [self.avatarView addSubview:self.avatarButton];
-
-    // 左右按钮
-    KKFlatButton *leftButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setTitle:T(@"修改头像") forState:UIControlStateNormal];
-    [leftButton setFrame:CGRectMake(0, H_90/2-H_24/2, H_56, H_24)];
-    [leftButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-    [leftButton.titleLabel setFont:FONT_12];
-    [leftButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
-    [leftButton setBackgroundColor:WHITEALPHACOLOR2];
-    [self.avatarView addSubview:leftButton];
-    
-    KKFlatButton *rightButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setTitle:T(@"在线客服") forState:UIControlStateNormal];
-    [rightButton setFrame:CGRectMake(self.avatarView.width-H_56, H_90/2-H_24/2, H_56, H_24)];
-    [rightButton addTarget:self action:@selector(callcenterAction) forControlEvents:UIControlEventTouchUpInside];
-    [rightButton.titleLabel setFont:FONT_12];
-    [rightButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
-    [rightButton setBackgroundColor:WHITEALPHACOLOR2];
-    [self.avatarView addSubview:rightButton];
-*/
     
     [self.scrollView addSubview:self.avatarView];
     self.scrollView.delegate = self;
@@ -238,7 +233,7 @@
 
 - (void)initOrderView
 {
-    self.orderView  = [[UIView alloc]initWithFrame:CGRectMake(0, H_160, TOTAL_WIDTH, TOTAL_HEIGHT)];
+    self.orderView  = [[UIView alloc]initWithFrame:CGRectMake(0, H_160_180, TOTAL_WIDTH, TOTAL_HEIGHT)];
     [self.orderView setBackgroundColor:WHITECOLOR];
     
     [self.scrollView addSubview:self.orderView];
@@ -250,7 +245,7 @@
     FAHoverButton *buttonA = [[FAHoverButton alloc]initWithFrame:CGRectMake(-LINE_W, H_50, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonA setIconFont:FONT_16];
     [buttonA setIconString:T(@"待付款")];
-//    [buttonA setBubbleString:@"3"];
+    //    [buttonA setBubbleString:@"3"];
     [buttonA setIconColor:DARKCOLOR];
     [buttonA setBorder];
     buttonA.tag = AWAIT_PAY_TAG;
@@ -258,22 +253,22 @@
     FAHoverButton *buttonB = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3, H_50, TOTAL_WIDTH/3, H_60)];
     [buttonB setIconFont:FONT_16];
     [buttonB setIconString:T(@"待发货")];
-//    [buttonB setBubbleString:@"3"];
+    //    [buttonB setBubbleString:@"3"];
     [buttonB setIconColor:DARKCOLOR];
     [buttonB setBorder];
     buttonB.tag = AWAIT_SHIPPING_TAG;
-
+    
     
     
     FAHoverButton *buttonC = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2-LINE_W, H_50, TOTAL_WIDTH/3+LINE_W*2, H_60)];
     [buttonC setIconFont:FONT_16];
     [buttonC setIconString:T(@"待收货")];
-//    [buttonC setBubbleString:@"2"];
+    //    [buttonC setBubbleString:@"2"];
     [buttonC setIconColor:DARKCOLOR];
     [buttonC setBorder];
     buttonC.tag = SHIPPED_TAG;
-
-
+    
+    
     [self.orderView addSubview:orderLabel];
     [buttonA addTarget:self action:@selector(historyOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [buttonB addTarget:self action:@selector(historyOrderAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -307,16 +302,16 @@
     [buttonBigC setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [buttonBigC setBackgroundColor:GREENLIGHTCOLOR2];
     [buttonBigC addTarget:self action:@selector(collectionAction) forControlEvents:UIControlEventTouchUpInside];
-
+    
     
     [self.orderView addSubview:buttonBigA];
     [self.orderView addSubview:buttonBigB];
-//    [self.orderView addSubview:buttonBigC];
+    //    [self.orderView addSubview:buttonBigC];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    NSLog(@"scrollView %.2f",scrollView.contentOffset.y);
+    //    NSLog(@"scrollView %.2f",scrollView.contentOffset.y);
     self.avatarView.y = AVATAR_Y_OFFSET + scrollView.contentOffset.y/2;
 }
 
@@ -338,7 +333,7 @@
         theMe.avatarURL =  imgs[index];
         MRSave();
         XAppDelegate.me = theMe;
-
+        
         [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
         [self.passDelegate passSignalValue:SIGNAL_AVATAR_UPLOAD_DONE andData:nil];
     }];
@@ -375,13 +370,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

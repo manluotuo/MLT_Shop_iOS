@@ -519,7 +519,6 @@
             VC.search = [[SearchModel alloc]init];
             VC.search.intro= @"promotion";
             VC.title = T(@"限时特价");
-            VC.shouldChangeTableContentInset = YES;
             [VC setupLeftMMButton];
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [self.mm_drawerController setCenterViewController:nav];
@@ -534,7 +533,6 @@
             VC.search = [[SearchModel alloc]init];
             VC.search.catId = @"27";
             VC.title = T(@"品牌预售");
-            VC.shouldChangeTableContentInset = YES;
             [VC setupLeftMMButton];
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [self.mm_drawerController setCenterViewController:nav];

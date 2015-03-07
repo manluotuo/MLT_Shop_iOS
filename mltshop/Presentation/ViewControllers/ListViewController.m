@@ -38,6 +38,10 @@
     // Do any additional setup after loading the view.
     self.commonListDelegate = self;
     self.dataSourceType = ListDataSourceTwoInLine;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
+    self.tableView.y = IOS7_CONTENT_OFFSET_Y;
 
     [self initDataSource];
     

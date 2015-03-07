@@ -103,10 +103,11 @@
         }
         if (error != nil) {
             if ([error.userInfo[@"error_code"] isEqualToNumber:INT(10001)]) {
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
                 [DataTrans showWariningTitle:T(@"请在\"个人中心->地址管理\"中 新增地址")
                                andCheatsheet:ICON_TIMES
-                                 andDuration:4.0f];
+                                 andDuration:3.0f];
 
             }
             

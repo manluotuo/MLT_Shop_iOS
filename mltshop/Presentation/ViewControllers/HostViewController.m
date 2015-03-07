@@ -8,6 +8,7 @@
 
 #import "HostViewController.h"
 #import "ListMainViewController.h"
+#import "HostListViewController.h"
 #import "ListViewController.h"
 #import "ColorNavigationController.h"
 #import "AppRequestManager.h"
@@ -190,7 +191,7 @@
         ListMainViewController *listVC = [[ListMainViewController alloc]initWithNibName:nil bundle:nil];
         return listVC;
     }else{
-        ListViewController *listOnlineVC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
+        HostListViewController *listOnlineVC = [[HostListViewController alloc]initWithNibName:nil bundle:nil];
         listOnlineVC.search = [[SearchModel alloc]initWithDict:@{@"catId":rowData[@"catId"]}];
         listOnlineVC.delegateForHostView = self;
         return listOnlineVC;
@@ -217,7 +218,6 @@
                 ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
                 VC.search = parsed;
                 VC.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-                VC.shouldChangeTableContentInset = YES;
                 [VC setUpDownButton:0];
                 ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
                 [self.navigationController presentViewController:nav animated:YES completion:nil];

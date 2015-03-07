@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26166E181AAB0E5300820948 /* HostListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26166E171AAB0E5300820948 /* HostListViewController.m */; };
 		261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261E24B71A31CB3700DA06A2 /* CategoryModel.m */; };
 		262CD46A1A5DB4A600A712BA /* F001.png in Resources */ = {isa = PBXBuildFile; fileRef = 262CD4521A5DB4A600A712BA /* F001.png */; };
 		262CD46B1A5DB4A600A712BA /* F002.png in Resources */ = {isa = PBXBuildFile; fileRef = 262CD4531A5DB4A600A712BA /* F002.png */; };
@@ -220,6 +221,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26166E161AAB0E5300820948 /* HostListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostListViewController.h; sourceTree = "<group>"; };
+		26166E171AAB0E5300820948 /* HostListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostListViewController.m; sourceTree = "<group>"; };
 		261E24B61A31CB3700DA06A2 /* CategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryModel.h; sourceTree = "<group>"; };
 		261E24B71A31CB3700DA06A2 /* CategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryModel.m; sourceTree = "<group>"; };
 		262CD4521A5DB4A600A712BA /* F001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = F001.png; sourceTree = "<group>"; };
@@ -922,6 +925,8 @@
 				265BB8841A1CE8020040ACC0 /* CommonListViewController.m */,
 				265BB8891A1CE96B0040ACC0 /* ListMainViewController.h */,
 				265BB88A1A1CE96B0040ACC0 /* ListMainViewController.m */,
+				26166E161AAB0E5300820948 /* HostListViewController.h */,
+				26166E171AAB0E5300820948 /* HostListViewController.m */,
 			);
 			name = ListVC;
 			sourceTree = "<group>";
@@ -1900,6 +1905,7 @@
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
 				26B1C2591A4688D700295D32 /* AddressListViewController.m in Sources */,
 				26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */,
+				26166E181AAB0E5300820948 /* HostListViewController.m in Sources */,
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,
 				26BE3A9C1A170421009F37B4 /* UIFont+FontAwesome.m in Sources */,

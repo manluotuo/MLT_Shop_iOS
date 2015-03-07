@@ -54,7 +54,6 @@
                 ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
                 VC.search = parsed;
                 VC.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-                VC.shouldChangeTableContentInset = YES;
                 [VC setUpDownButton:0];
                 ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
                 [self.navigationController presentViewController:nav animated:YES completion:nil];
@@ -235,8 +234,8 @@
 }
 
 - (void)dealloc {
+    // 关闭自动滑屏定时器
     [self.pagedScrollView disMissTimer];
-    NSLog(@"释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！释放！");
 }
 
 /*
