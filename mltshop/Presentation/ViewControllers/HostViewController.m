@@ -203,6 +203,11 @@
     if ([value isEqualToString:SIGNAL_BARCODE_SCAN_SUCCESS]) {
         NSLog(@"data %@",data);
         
+//        HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+//        HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+//        HUD.text = T(@"正在为你打开页面");
+//        [HUD showInView:self.view];
+        
         id parsed = [DataTrans parseDataFromURL:data];
         if ([parsed isKindOfClass:[SearchModel class]]) {
             if ([[(SearchModel*)parsed brandId] isEqualToString:@"all"]) {
@@ -235,7 +240,9 @@
                     theGoods.goodsId = parsed[@"id"];
                     [VC setGoodsData:theGoods];
                     
-                    [self.navigationController presentViewController:VC animated:YES completion:nil];
+                    [self.navigationController presentViewController:VC animated:YES completion:^{
+//                        [HUD removeFromSuperview];
+                    }];
                 }
             }
             
