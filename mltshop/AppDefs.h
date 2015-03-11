@@ -12,6 +12,7 @@
 #define ERROR_PARAM                 @"10008"
 #define ERROR_REPEAT                @"20017"
 #define ERROR_NEED_LOGIN            @"20003"
+//#define COPYRIGHT                   @"\u00a9"
 #define COPYRIGHT                   @"\u00a9"
 
 
