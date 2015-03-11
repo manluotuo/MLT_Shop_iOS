@@ -46,6 +46,7 @@
 #import "CartModel.h"
 #import "FlowModel.h"
 #import "OrderModel.h"
+#import "CommentModel.h"
 
 #endif
 

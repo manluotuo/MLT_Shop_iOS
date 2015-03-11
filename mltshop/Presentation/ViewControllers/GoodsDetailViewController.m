@@ -20,14 +20,19 @@
 #import "CartListViewController.h"
 #import "ShareHelper.h"
 
+#import "CommentTableViewCell.h"
+
 #define SERVICE_TAB_TAG     101
 #define ADD_CART_TAB_TAG    102
 #define CART_TAB_TAG        103
 
-@interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate>
+@interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     CGFloat fixedHeight;
     CGFloat htmlHeight;
+    CGFloat commentHeight;
+    CGFloat cellHeight;
+    CGSize fixedSize;
 }
 // view
 @property(nonatomic, strong)GoodsModel *theGoods;
@@ -42,12 +47,15 @@
 @property(nonatomic, strong)UILabel *inventoryLabel;
 @property(nonatomic, strong)FAIconButton *specificationButton;
 @property(nonatomic, strong)UIButton *brandButton;
-
+@property(nonatomic, strong)UIButton *htmlBtn; /** 商品详情 */
+@property(nonatomic, strong)UIButton *commentBtn; /** 用户评价 */
 
 @property(nonatomic, strong)UIWebView *htmlView;
+@property(nonatomic, strong)UITableView *commentView;
 
 @property(nonatomic, strong)UIScrollView *fixedView;
 @property(nonatomic, strong)UIView *topNavView;
+@property(nonatomic, strong)UIView *lableView;
 
 // 底部tabbar
 @property(nonatomic, strong)UIView *tabbarView;
@@ -63,7 +71,7 @@
 @property(nonatomic, strong)FAHoverButton *favButton;
 
 
-
+@property(nonatomic, strong)NSMutableArray *commentData;
 
 @end
 
@@ -82,9 +90,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self buildFixedView];
-    
+    self.commentData = [[NSMutableArray alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO_INDEX_PAGE object:nil];
-
+    
 }
 
 - (void)gotoIndexAction
@@ -132,7 +140,7 @@
                 
                 
                 [self addToCart:newCartItem];
-
+                
             }];
         }else{
             // 没有spec 的
@@ -165,13 +173,13 @@
     [SGActionView resetSGActionViewInstance:nil];
     NSArray *titles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7"];
     [SGActionView showGridMenuWithTitle:T(@"选择数量") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
-            cartModel.goodsCount = INT(index+1);
-            [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
-                if (responseObject != nil) {
-                    [DataTrans showWariningTitle:T(@"成功加入购物车") andCheatsheet:ICON_CHECK];
-                    [self refreshCartCount];
-                }
-            }];
+        cartModel.goodsCount = INT(index+1);
+        [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
+            if (responseObject != nil) {
+                [DataTrans showWariningTitle:T(@"成功加入购物车") andCheatsheet:ICON_CHECK];
+                [self refreshCartCount];
+            }
+        }];
     }];
     
 }
@@ -193,7 +201,7 @@
     [self.view addSubview:self.fixedView];
     
     [self initTabbarButton];
-
+    
     [self initButtons];
     
     // 左滑退出
@@ -201,7 +209,7 @@
                                                                                      action:@selector(backAction)];
     [gestureRec setDirection:UISwipeGestureRecognizerDirectionRight];
     [self.fixedView addGestureRecognizer:gestureRec];
-
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -213,7 +221,7 @@
     }
     
     if ([scrollView isEqual:self.fixedView]) {
-
+        
         if (self.fixedView.contentOffset.y < -H_80) {
             [self backAction];
         }
@@ -244,7 +252,7 @@
     self.cartTabButton.tag = ADD_CART_TAB_TAG;
     self.cartTabButton.titleLabel.font = FONT_14;
     [self.cartTabButton addTarget:self action:@selector(tabbarAction:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     
     self.buyTabButton = [[FAIconButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/3*2, 0, TOTAL_WIDTH/3, H_50)];
     [self.buyTabButton setIconString:[NSString fontAwesomeIconStringForEnum:FAShoppingCart]];
@@ -264,7 +272,7 @@
     self.cartCountLabel.font = CUSTOMFONT_12;
     self.cartCountLabel.textColor = WHITECOLOR;
     [self.buyTabButton addSubview:self.cartCountLabel];
-
+    
     [self.tabbarView addSubview:self.serviceTabButton];
     [self.tabbarView addSubview:self.cartTabButton];
     [self.tabbarView addSubview:self.buyTabButton];
@@ -297,7 +305,7 @@
     [self.topNavView addSubview:self.shareButton];
     
     [self.view addSubview:self.topNavView];
-
+    
     
 }
 
@@ -312,16 +320,16 @@
 {
     [ShareHelper sharedHelper].baseViewController = self.navigationController;
     [[ShareHelper sharedHelper]showShareView:self.theGoods];
-
+    
 }
 
 
 -(void)initInfoView
 {
-    CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, H_90 + H_150 + H_40);
+    CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, H_90 + H_100 + H_40);
     self.infoView = [[UIView alloc]initWithFrame:rect];
     self.infoView.backgroundColor = WHITECOLOR;
-
+    
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_15, H_260, H_20)];
     [self.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [self.titleLabel setTextColor:DARKCOLOR];
@@ -345,16 +353,16 @@
     [self.priceLabel.layer setCornerRadius:H_5];
     [self.priceLabel.layer setMasksToBounds:YES];
     [self.priceLabel setTextAlignment:NSTextAlignmentCenter];
-
+    
     self.marketPriceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_18+H_60*2, H_90+H_15, H_60, H_24)];
     [self.marketPriceLabel setFont:FONT_12];
     [self.marketPriceLabel setTextColor:GRAYCOLOR];
     [self.marketPriceLabel setTextAlignment:NSTextAlignmentCenter];
-
+    
     UILabel *inventoryTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_220, H_90+H_15, H_50, H_24)];
     inventoryTitle.text = T(@"库存");
     inventoryTitle.font = FONT_14;
-
+    
     self.inventoryLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_220+H_50, H_90+H_15, H_70, H_24)];
     [self.inventoryLabel setFont:FONT_14];
     [self.inventoryLabel setTextColor:GRAYCOLOR];
@@ -370,25 +378,75 @@
     [self.brandButton setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
     self.brandButton.titleLabel.font = FONT_14;
     self.brandButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    [self.brandButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.brandButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
     
-    self.specificationButton = [[FAIconButton alloc]initWithFrame:CGRectMake(H_20, H_90+H_100, H_280, H_50)];
-    [self.specificationButton setIconString:[NSString fontAwesomeIconStringForEnum:FAAngleRight]];
-    [self.specificationButton setTitle:T(@"选择尺码/颜色分类") forState:UIControlStateNormal];
-    [self.specificationButton changeRightIcon];
-    [self.specificationButton setTitleColor:GREENLIGHTCOLOR];
-    [self.specificationButton setIconColor:GREENCOLOR];
-    [self.specificationButton changeLightStyle];
-    [self.specificationButton.iconLabel setFont:FONT_AWESOME_30];
-    [self.specificationButton addTarget:self action:@selector(chooseSpecAction) forControlEvents:UIControlEventTouchUpInside];
-
-
-    UILabel *htmlTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, H_90+H_150, TOTAL_WIDTH, H_40)];
-    htmlTitle.text = T(@"图文详情");
-    htmlTitle.font = FONT_12;
-    htmlTitle.textAlignment = NSTextAlignmentCenter;
-    htmlTitle.backgroundColor = GRAYEXLIGHTCOLOR;
-
+    
+    /** 去除选择尺码/颜色分类 */
+    //    self.specificationButton = [[FAIconButton alloc]initWithFrame:CGRectMake(H_20, H_90+H_100, H_280, H_50)];
+    //    [self.specificationButton setIconString:[NSString fontAwesomeIconStringForEnum:FAAngleRight]];
+    //    [self.specificationButton setTitle:T(@"选择尺码/颜色分类") forState:UIControlStateNormal];
+    //    [self.specificationButton changeRightIcon];
+    //    [self.specificationButton setTitleColor:GREENLIGHTCOLOR];
+    //    [self.specificationButton setIconColor:GREENCOLOR];
+    //    [self.specificationButton changeLightStyle];
+    //    [self.specificationButton.iconLabel setFont:FONT_AWESOME_30];
+    //    [self.specificationButton addTarget:self action:@selector(chooseSpecAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    /** 图文详情与用户评价 */
+    self.lableView = [[UIView alloc] initWithFrame:CGRectMake(0, H_90+H_100, TOTAL_WIDTH, H_40)];
+    //    self.lableView.backgroundColor = [UIColor redColor];
+    
+    
+    self.htmlBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.htmlBtn.titleLabel.font = FONT_14;
+    [self.htmlBtn setTitle:T(@"图文详情") forState:UIControlStateNormal];
+    [self.htmlBtn setFrame:CGRectMake(0, 0, TOTAL_WIDTH/2, H_40)];
+    [self.htmlBtn setTitleColor:BlACKCOLOR forState:UIControlStateNormal];
+    [self.htmlBtn setTitleColor:ORANGECOLOR forState:UIControlStateSelected];
+    [self.htmlBtn setBackgroundColor:GRAYEXLIGHTCOLOR];
+    [self.htmlBtn setSelected:YES];
+    [self.htmlBtn addTarget:self action:@selector(onHtmlBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.lableView addSubview:self.htmlBtn];
+    
+    self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.commentBtn.titleLabel.font = FONT_14;
+    [self.commentBtn setFrame:CGRectMake(TOTAL_WIDTH/2, 0, TOTAL_WIDTH/2, H_40)];
+    [self.commentBtn setTitle:T(@"用户评论") forState:UIControlStateNormal];
+    [self.commentBtn setTitleColor:BlACKCOLOR forState:UIControlStateNormal];
+    [self.commentBtn setTitleColor:ORANGECOLOR forState:UIControlStateSelected];
+    [self.commentBtn setBackgroundColor:GRAYEXLIGHTCOLOR];
+    [self.commentBtn setSelected:NO];
+    [self.commentBtn addTarget:self action:@selector(onCommentBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.lableView addSubview:self.commentBtn];
+    
+    //    UILabel *htmlTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/2, H_40)];
+    //    htmlTitle.text = T(@"图文详情");
+    //    htmlTitle.font = FONT_12;
+    //    htmlTitle.textAlignment = NSTextAlignmentCenter;
+    //    htmlTitle.backgroundColor = GRAYEXLIGHTCOLOR;
+    //    [self.lableView addSubview:htmlTitle];
+    
+    
+    //    [self.infoView addSubview:self.titleLabel];
+    //    [self.infoView addSubview:self.briefLabel];
+    //    [self.infoView addSubview:self.priceTitle];
+    //    [self.infoView addSubview:self.priceLabel];
+    //    [self.infoView addSubview:self.marketPriceLabel];
+    //    [self.infoView addSubview:inventoryTitle];
+    //    [self.infoView addSubview:self.inventoryLabel];
+    //    [self.infoView addSubview:brandTitle];
+    //    [self.infoView addSubview:self.brandButton];
+    //    [self.infoView addSubview:self.specificationButton];
+    //    [self.infoView addSubview:htmlTitle];
+    
+    
+    //    UILabel *commentTitle = [[UILabel alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, TOTAL_WIDTH/2, H_40)];
+    //    commentTitle.text = T(@"用户评论");
+    //    commentTitle.font = FONT_12;
+    //    commentTitle.textAlignment = NSTextAlignmentCenter;
+    //    commentTitle.backgroundColor = GRAYEXLIGHTCOLOR;
+    //    [self.lableView addSubview:commentTitle];
+    
     [self.infoView addSubview:self.titleLabel];
     [self.infoView addSubview:self.briefLabel];
     [self.infoView addSubview:self.priceTitle];
@@ -398,8 +456,12 @@
     [self.infoView addSubview:self.inventoryLabel];
     [self.infoView addSubview:brandTitle];
     [self.infoView addSubview:self.brandButton];
-    [self.infoView addSubview:self.specificationButton];
-    [self.infoView addSubview:htmlTitle];
+    //    [self.infoView addSubview:self.specificationButton];
+    //    [self.infoView addSubview:htmlTitle];
+    [self.infoView addSubview:self.lableView];
+    
+    
+    
     
     
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, H_90, TOTAL_WIDTH, 1)];
@@ -410,6 +472,10 @@
     lineView3.backgroundColor = GRAYEXLIGHTCOLOR;
     UIView *lineView4 = [[UIView alloc]initWithFrame:CGRectMake(H_200, H_90, 1, H_50)];
     lineView4.backgroundColor = GRAYEXLIGHTCOLOR;
+    UIView *lineView5 = [[UIView alloc] initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, 1, 40)];
+    lineView5.backgroundColor = [UIColor whiteColor];
+    
+    [self.lableView addSubview:lineView5];
     [self.infoView addSubview:lineView1];
     [self.infoView addSubview:lineView2];
     [self.infoView addSubview:lineView3];
@@ -430,12 +496,23 @@
     self.htmlView.delegate = self;
 }
 
+- (void)initCommentView {
+    
+    commentHeight = 0.1;
+    self.commentView = [[UITableView alloc] initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, commentHeight)];
+    self.commentView.delegate = self;
+    self.commentView.dataSource = self;
+    [self.fixedView addSubview:self.commentView];
+    //    self.fixedView.contentOffset = CGPointMake(0, 0);
+}
+
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         return NO;
     }else{
-        return YES;  
+        return YES;
     }
 }
 
@@ -459,12 +536,13 @@
     [self.fixedView addSubview:self.galleryView];
     
     fixedHeight += TOTAL_WIDTH;
-
+    
 }
 
 - (void)setGoodsData:(GoodsModel *)_goods
 {
     self.theGoods = _goods;
+    
     [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];
@@ -481,18 +559,18 @@
         if (responseObject != nil) {
             NSArray *goodsList = responseObject[@"goods_list"];
             [UIView animateWithDuration:0.3
-                  delay:0
-                options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
-             animations:^{
-                 //Move frame or transform view
-                 self.cartCountLabel.y = H_15;
-                 self.cartCountLabel.text = STR_INT([goodsList count]);
-             } completion:^(BOOL finished) {
-                 [UIView animateWithDuration:0.3 animations:^{
-                     self.cartCountLabel.y = H_10;
-
-                 }];
-             }];
+                                  delay:0
+                                options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+                             animations:^{
+                                 //Move frame or transform view
+                                 self.cartCountLabel.y = H_15;
+                                 self.cartCountLabel.text = STR_INT([goodsList count]);
+                             } completion:^(BOOL finished) {
+                                 [UIView animateWithDuration:0.3 animations:^{
+                                     self.cartCountLabel.y = H_10;
+                                     
+                                 }];
+                             }];
         }
     }];
 }
@@ -561,6 +639,38 @@
 }
 
 
+#pragma mark - UITableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    NSLog(@"%d", self.commentData.count);
+    return self.commentData.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentId"];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"CommentTableViewCell" owner:self options:nil] lastObject];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    CommentModel *model = self.commentData[indexPath.row];
+    [cell setCellData:model];
+    cellHeight = [cell setCellHeight];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.commentView.height += cellHeight;
+    NSLog(@"%f", self.commentView.height);
+    self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
+    fixedSize = self.fixedView.contentSize;
+    return cellHeight;
+}
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -574,14 +684,75 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - ButtonClick
+/** 商品详情点击事件 */
+- (void)onHtmlBtnClick {
+    
+    self.fixedView.contentOffset = CGPointMake(0, 0);
+    if (self.htmlBtn.selected == YES) {
+        return;
+    }
+    fixedHeight = H_550;
+    if (self.commentView != nil) {
+        [self.commentView setHidden:YES];
+    }
+    [self initHtmlView];
+    [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
+    self.htmlBtn.selected = YES;
+    self.commentBtn.selected = NO;
+    NSLog(@"onHtmlBtnClick");
 }
-*/
+
+/** 用户评论点击事件 */
+- (void)onCommentBtnClick {
+    
+    self.fixedView.contentOffset = CGPointMake(0, 0);
+    if (self.commentBtn.selected == YES) {
+        return;
+    }
+    fixedHeight = H_550;
+    if (self.htmlView != nil) {
+        [self.htmlView removeFromSuperview];
+        self.htmlView = nil;
+    }
+    if (self.commentData.count < 1) {
+        [[AppRequestManager sharedManager] getCommentWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
+            for (NSDictionary *dict in responseObject[@"data"]) {
+                CommentModel *model = [[CommentModel alloc] init];
+                [model setValuesForKeysWithDictionary:dict];
+                
+                [self.commentData addObject:model];
+            }
+            
+            [self.commentView reloadData];
+        }];
+    }
+    
+    if (self.commentView == nil) {
+        [self initCommentView];
+        
+    } else {
+        [self.commentView setHidden:NO];
+        self.fixedView.contentSize = fixedSize;
+    }
+    
+    self.htmlBtn.selected = NO;
+    self.commentBtn.selected = YES;
+    NSLog(@"onCommentClick");
+    
+}
+
+
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

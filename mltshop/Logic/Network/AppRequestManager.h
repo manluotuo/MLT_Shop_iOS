@@ -18,6 +18,7 @@
 #define API_REGION_PATH             @"/ecmobile/?url=/region"
 #define API_BRAND_PATH              @"/ecmobile/?url=/brand"
 
+#define API_COMMENT_PATH            @"/ecmobile/?url=/comments"
 
 #define API_ADDRESS_LIST_PATH       @"/ecmobile/?url=/address/list"
 #define API_ADDRESS_CREATE_PATH     @"/ecmobile/?url=/address/add"
@@ -109,6 +110,10 @@
 + (AppRequestManager *)sharedManager;
 + (AppRequestManager *)sharedWeiboManager;
 + (void) updateSharedInstance;
+
+/** API/Comment */
+- (void)getCommentWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block;
+
 //  API/System
 - (void)getSystemNotificationWithBlock:(void (^)(id responseObject, NSError *error))block;
 

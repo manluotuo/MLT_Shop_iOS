@@ -217,7 +217,10 @@
 {
     OrderTableViewCell *cellview = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cellview setFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_40)];
+    NSLog(@"%d", self.dataArray.count);
+    if(self.dataArray.count > 0) {
     [cellview setNewData:self.dataArray[section]];
+    }
     cellview.passDelegate = self;
     return cellview;
 }

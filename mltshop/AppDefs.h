@@ -12,7 +12,6 @@
 #define ERROR_PARAM                 @"10008"
 #define ERROR_REPEAT                @"20017"
 #define ERROR_NEED_LOGIN            @"20003"
-//#define COPYRIGHT                   @"\u00a9"
 #define COPYRIGHT                   @"\u00a9"
 
 
@@ -307,6 +306,7 @@
 #define H_300  300.0f
 #define H_310  310.0f
 #define H_160_180 160.0f-180.0f
+#define H_550  550.0f
 
 #define BUTTON_OFFSET           10.0f
 #define LEFT_PADDING            8.0f
@@ -489,6 +489,7 @@ alpha:(a)]
 #define GRAYLELIGHTCOLOR [UIColor colorWithRed:210.0f/255.0f green:210.0f/255.0f blue:210.0f/255.0f alpha:1]
 #define GRAYEXLIGHTCOLOR [UIColor colorWithRed:236.0f/255.0f green:236.0f/255.0f blue:236.0f/255.0f alpha:1]
 
+#define BLACKCOLOR [UIColor blackColor]
 
 #define HANDLEBORDERCOLOR [UIColor colorWithRed:228.0f/255.0f green:228.0f/255.0f blue:228.0f/255.0f alpha:1].CGColor
 #define HANDLEBGCOLOR [UIColor colorWithRed:248.0f/255.0f green:248.0f/255.0f blue:248.0f/255.0f alpha:1]
@@ -816,8 +817,6 @@ NS_INLINE BOOL NumberHasValue(id str) {
 NS_INLINE BOOL BoolHasValue(id str) {
     return (str != nil) && (str != [NSNull null]);
 }
-
-
 
 
 NS_INLINE BOOL DictionaryHasValue(id dict)

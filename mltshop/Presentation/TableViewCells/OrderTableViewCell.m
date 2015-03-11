@@ -6,9 +6,8 @@
 //  Copyright (c) 2015 manluotuo. All rights reserved.
 //
 
-//#import "OrderTableViewCell.h"
-
 #import "OrderTableViewCell.h"
+
 @interface OrderTableViewCell()
 {
     UILabel *timeLabel;

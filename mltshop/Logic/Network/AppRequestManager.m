@@ -253,6 +253,39 @@ static dispatch_once_t onceToken;
 }
 
 
+- (void)getCommentWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block {
+    NSString *postUrl = API_COMMENT_PATH;
+    
+    NSDictionary *postDict = @{@"goods_id": goodsId,
+                               @"pagination": @{@"page": @"1",
+                                                @"count": @"1000"
+                                                }
+                               };
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([DataTrans isCorrectResponseObject:responseObject]) {
+            
+            if (block) {
+                block(responseObject, nil);
+            }
+            
+        } else {
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);        }
+//        NSLog(@"%@", responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+}
 
 - (void)getGoodsDetailWithGoodsId:(NSString *)goodsId andBlcok:(void (^)(id responseObject, NSError *error))block
 {
@@ -266,6 +299,7 @@ static dispatch_once_t onceToken;
     postDict = [DataTrans makePostDict:postDict];
     
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
             if (block) {
