@@ -49,6 +49,7 @@
 @property(nonatomic, strong)UIButton *brandButton;
 @property(nonatomic, strong)UIButton *htmlBtn; /** 商品详情 */
 @property(nonatomic, strong)UIButton *commentBtn; /** 用户评价 */
+@property(nonatomic, strong)UIButton *collectBtn; /** 收藏 */
 
 @property(nonatomic, strong)UIWebView *htmlView;
 @property(nonatomic, strong)UITableView *commentView;
@@ -91,16 +92,19 @@
     [super viewDidLoad];
     [self buildFixedView];
     self.commentData = [[NSMutableArray alloc] init];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO_INDEX_PAGE object:nil];
     
 }
 
 - (void)gotoIndexAction
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO_TO_INDEX object:nil userInfo:nil];
+    }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear: (BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -329,6 +333,7 @@
     CGRect rect = CGRectMake(0, fixedHeight, TOTAL_WIDTH, H_90 + H_100 + H_40);
     self.infoView = [[UIView alloc]initWithFrame:rect];
     self.infoView.backgroundColor = WHITECOLOR;
+    self.infoView.userInteractionEnabled = YES;
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_15, H_260, H_20)];
     [self.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
@@ -372,6 +377,17 @@
     UILabel *brandTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_140+H_15, H_50, H_24)];
     brandTitle.text = T(@"品牌");
     brandTitle.font = FONT_14;
+    
+    self.collectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.collectBtn setFrame:CGRectMake(H_200, H_140+H_15, H_80, H_24)];
+    [self.collectBtn setTitle:T(@"收藏") forState:UIControlStateNormal];
+    [self.collectBtn setTitleColor:BLACKCOLOR forState:UIControlStateNormal];
+    [self.collectBtn setTitle:T(@"已收藏") forState:UIControlStateSelected];
+    [self.collectBtn.titleLabel setFont:FONT_14];
+    [self.collectBtn setBackgroundColor:[UIColor grayColor]];
+    [self.collectBtn setSelected:NO];
+    [self.collectBtn addTarget:self action:@selector(onCollectBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
     
     self.brandButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.brandButton setFrame:CGRectMake(H_80, H_140+H_8, H_220, H_40)];
@@ -459,7 +475,7 @@
     //    [self.infoView addSubview:self.specificationButton];
     //    [self.infoView addSubview:htmlTitle];
     [self.infoView addSubview:self.lableView];
-    
+    [self.infoView addSubview:self.collectBtn];
     
     
     
@@ -552,6 +568,7 @@
     
     [self refreshCartCount];
 }
+
 
 - (void)refreshCartCount
 {
@@ -742,7 +759,28 @@
     
 }
 
-
+/** 收藏按钮点击事件 */
+- (void)onCollectBtnClick {
+    
+    if (self.collectBtn.selected == NO) {
+        [[AppRequestManager sharedManager]getCollectAddWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
+            NSLog(@"%@", responseObject[@"status"][@"succeed"]);
+            if (responseObject != nil) {
+                [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:@"" andDuration:1.0f];
+            }
+            /*if (error != nil) */ else {
+                NSDictionary *userDict = [error userInfo];
+                if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
+                    [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
+                }
+            }
+        }];
+    } else {
+        NSLog(@"已取消收藏");
+    }
+    
+    self.collectBtn.selected = !self.collectBtn.selected;
+}
 
 
 /*

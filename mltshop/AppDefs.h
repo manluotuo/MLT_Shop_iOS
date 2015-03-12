@@ -269,7 +269,9 @@
 #define H_15   15.0f
 #define H_16   16.0f
 #define H_18   18.0f
+#define H_19   19.0f
 #define H_20   20.0f
+#define H_21   21.0f
 #define H_22   22.0f
 #define H_24   24.0f
 #define H_25   25.0f
@@ -416,6 +418,7 @@
 
 #define SIGNAL_UPLOADING_PROGRESS           @"51000"
 #define SIGNAL_GO_TO_INDEX_PAGE             @"60000"
+#define SIGNAL_GO_TO_INDEX                  @"60001"
 
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
@@ -515,6 +518,7 @@ alpha:(a)]
 
 #define SEPCOLOR [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
 
+//#define WHITECOLOR [UIColor whiteColor];
 
 // ENUMs
 typedef enum _MultilineTextAlign{
@@ -852,3 +856,7 @@ NS_INLINE BOOL ArrayHasValue(id array)
 #pragma mark -- trans logo
 #pragma mark - R
 #define VIEW_HEIGHT 250
+#define RIGHT_IMAGE [UIImage imageNamed:@"right"]
+
+#define RIGHT_IMAGE_FRAME [[UIImageView alloc] initWithFrame:CGRectMake(270, 25, 10, 13)]
+#define TITLE_LABLE [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 20)]

@@ -17,6 +17,11 @@
 #define API_GOODS_DETAILS_PATH      @"/ecmobile/?url=/goods"
 #define API_REGION_PATH             @"/ecmobile/?url=/region"
 #define API_BRAND_PATH              @"/ecmobile/?url=/brand"
+/** 收藏列表 */
+#define API_COLLECT_PATH            @"/ecmobile/?url=/user/collect/list"
+/** 添加收藏 */
+#define API_COLLECT_ADD             @"/ecmobile/?url=/user/collect/create"
+
 
 #define API_COMMENT_PATH            @"/ecmobile/?url=/comments"
 
@@ -156,6 +161,11 @@
 - (void)operateCartWithCartModel:(CartModel *)theCart
                      operation:(NSUInteger)operation
                       andBlock:(void (^)(id responseObject, NSError *error))block;
+/** 我的收藏 */
+- (void)getCollectListWithBlock:(void (^)(id responseObject, NSError *error))block;
+
+/** 收藏 */
+- (void)getCollectAddWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block;
 
 
 // ORDER function
@@ -346,6 +356,7 @@
 #pragma mark 获取商家地区选择
 - (void)getUserCompanyAddressWithCityCode:(NSString *)cityCode
                                  andBlock:(void (^)(id responseObject, NSError *error))block;
+
 
 @end
 

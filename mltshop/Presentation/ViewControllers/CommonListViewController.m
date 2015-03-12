@@ -1,4 +1,4 @@
- //
+//
 //  CommonListViewController.m
 //  bitmedia
 //
@@ -64,7 +64,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
     
     self.view.backgroundColor = BGCOLOR;
     self.editing = NO;
@@ -89,10 +89,10 @@
         self.automaticallyAdjustsScrollViewInsets = YES;
         // On iOS7, you need plus the height of status bar.
         currentInset.top = 0;
-//        currentInset.bottom += IOS7_CONTENT_OFFSET_Y ;
+        //        currentInset.bottom += IOS7_CONTENT_OFFSET_Y ;
         self.tableView.height = self.tableView.height-IOS7_CONTENT_OFFSET_Y-TABS_VIEW_HEIGHT;
-
-
+        
+        
     }else{
         NSLog(@"ios 6");
         currentInset.bottom += TABBAR_HEIGHT+TABS_VIEW_HEIGHT;
@@ -102,29 +102,47 @@
     
     
     [self.view addSubview:self.tableView];
-
+    
     
     self.maxID = @"";
     self.minID = @"";
-
-    __weak CommonListViewController *weakSelf = self;
     
-    //    self.tableView
-    // setup pull-to-refresh
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refreshTable];
-    }];
-    
-//    //setup infinite scrolling
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf getMoreData];
-    }];
+    [self createRefresh];
+    [self createGetMoreData];
+    //    __weak CommonListViewController *weakSelf = self;
+    //
+    //    //    self.tableView
+    //    // setup pull-to-refresh
+    //    [self.tableView addPullToRefreshWithActionHandler:^{
+    //        [weakSelf refreshTable];
+    //    }];
+    //
+    ////    //setup infinite scrolling
+    //    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    //        [weakSelf getMoreData];
+    //    }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleNextStep:)
                                                  name:NOTIFICATION_VEHICLE_EDIT_DONE object:nil];
     // if no network set enable
 }
+
+- (void)createRefresh {
+    
+    __weak CommonListViewController *weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshTable];
+    }];
+}
+
+- (void)createGetMoreData {
+    __weak CommonListViewController *weakSelf = self;
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf getMoreData];
+    }];
+}
+
 
 -(void)handleNextStep:(NSNotification *)notification
 {
@@ -156,7 +174,7 @@
 - (void)initQuickAddTableViewBgView
 {
     self.noDataView = [[NoDataView alloc] initWithFrame:
-                              CGRectMake((TOTAL_WIDTH-NO_DATA_WIDTH)/2, (TOTAL_HEIGHT*0.8-NO_DATA_HEIGHT)/2, NO_DATA_WIDTH, NO_DATA_HEIGHT)];
+                       CGRectMake((TOTAL_WIDTH-NO_DATA_WIDTH)/2, (TOTAL_HEIGHT*0.8-NO_DATA_HEIGHT)/2, NO_DATA_WIDTH, NO_DATA_HEIGHT)];
     [self.noDataView setTitleString:T(@"暂无商品")];
     [self.noDataView addTarget:self.commonListDelegate action:@selector(triggerCreateVehicle:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.noDataView];
@@ -176,12 +194,12 @@
 
 - (void)triggerCreateVehicle:(id)sender
 {
-//    host triggerCreateVehicle
+    //    host triggerCreateVehicle
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_QUICK_ADD_STEP
                                                         object:self
                                                       userInfo:nil];
-
-//    [self.delegateForHostView passSignalValue:SIGNAL_CREATE_VEHICLE andData:sender];
+    
+    //    [self.delegateForHostView passSignalValue:SIGNAL_CREATE_VEHICLE andData:sender];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -209,9 +227,9 @@
 
 - (void)showSetupDataSource:(id)responseObject andError:(NSError *)error
 {
-
+    
     self.dataSource = [[NSMutableArray alloc] init];
-//    self.dataSource = [DataTrans getDataArrayWithExtendData:responseObject];
+    //    self.dataSource = [DataTrans getDataArrayWithExtendData:responseObject];
     self.dataSource = responseObject;
     
     // TODO: 多于10条的时候才有加载更多的动画
@@ -224,7 +242,7 @@
         
         [self resetInfiniteScrolling];
     }
-
+    
     
     
     if ([self.dataSource count] == 0) {
@@ -237,14 +255,14 @@
         self.tableView.backgroundView = nil;
         [self.tableView reloadData];
         [self.noDataView setHidden:YES];
-
-//        [self makeMaxAndMinID];
+        
+        //        [self makeMaxAndMinID];
         NSLog(@"setupDataSource %ld 条", [self.dataSource count]);
     }
     
     if (error != nil) {
-//        [self.noDataView setHidden:NO];
-//        [self.noDataView setSubTitleString:T(@"点击屏幕 重新加载")];
+        //        [self.noDataView setHidden:NO];
+        //        [self.noDataView setSubTitleString:T(@"点击屏幕 重新加载")];
     }
 }
 
@@ -256,15 +274,15 @@
         return ;
     }
     __weak CommonListViewController *weakSelf = self;
-
+    
     NSMutableArray *data = [DataTrans getDataArrayWithExtendData:responseObject];
-
+    
     NSLog(@"new data : %ld",[data count]);
     // 大于20条清空列表
-//    if ([data count] >= 20) {
-//        self.dataSource = [[NSMutableArray alloc]init];
-//    }
-
+    //    if ([data count] >= 20) {
+    //        self.dataSource = [[NSMutableArray alloc]init];
+    //    }
+    
     if ([data count] <= 0) {
         NSLog(@"no data");
         [TSMessage setDefaultViewController:self];
@@ -277,40 +295,40 @@
         [weakSelf.tableView beginUpdates];
         NSMutableArray *indexPaths = [[NSMutableArray alloc]init];
         NSInteger _count =  [data count]-1;
-
+        
         for (int idx = _count; idx >= 0; idx--) { //[data count]
-
+            
             NSDictionary *object = [data objectAtIndex:idx];
-
+            
             [weakSelf.dataSource insertObject:object atIndex:0];
-
+            
             [indexPaths addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
-
+            
         }
-
+        
         [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         [weakSelf.tableView endUpdates];
-
-
+        
+        
         NSString *message = [NSString stringWithFormat:T(@"为您推荐了%d辆车"),[data count]];
         [TSMessage setDefaultViewController:self];
         [TSMessage showNotificationWithTitle:message type:TSMessageNotificationTypeSuccess];
         
-//        [self makeMaxAndMinID];
-
+        //        [self makeMaxAndMinID];
+        
     }
-
+    
 }
 
 - (void)showRecomendOldItems:(id)responseObject andError:(NSError *)error
 {
     __weak CommonListViewController *weakSelf = self;
-
+    
     NSLog(@"old data : %d",[responseObject count]);
     if ([responseObject count] > 0) {
-
+        
         [weakSelf.tableView beginUpdates];
-
+        
         // TODO: little ugly because can't addObject
         weakSelf.dataSource = [[NSMutableArray alloc]initWithArray:weakSelf.dataSource];
         for (NSDictionary *object in responseObject) {
@@ -318,12 +336,12 @@
             [weakSelf.dataSource addObject:object];
             [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataSource.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
         }
-
+        
         [weakSelf.tableView endUpdates];
         
-//        [self makeMaxAndMinID];
-
-
+        //        [self makeMaxAndMinID];
+        
+        
     }else{
         if ([self.dataSource count] > 0 ) {
             [weakSelf.tableView.infiniteScrollingView setTitle:T(@"全部加载完成") forState:SVInfiniteScrollingStateStopped];
@@ -341,7 +359,7 @@
 - (void)refreshTable
 {
     __weak CommonListViewController *weakSelf = self;
-//    [weakSelf.tableView.pullToRefreshView setTitle:T(@">_< 努力加载中..") forState:SVPullToRefreshStateAll];
+    //    [weakSelf.tableView.pullToRefreshView setTitle:T(@">_< 努力加载中..") forState:SVPullToRefreshStateAll];
     
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -357,9 +375,9 @@
     __weak CommonListViewController *weakSelf = self;
     
     // FIXME: 如果正在进行动画 那么不响应
-//    if (weakSelf.tableView.infiniteScrollingView.state == SVInfiniteScrollingStateStopped) {
-//        
-//    }
+    //    if (weakSelf.tableView.infiniteScrollingView.state == SVInfiniteScrollingStateStopped) {
+    //
+    //    }
     
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -403,7 +421,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"ListCell";
-
+    
     if (self.dataSourceType == ListDataSourceTwoInLine) {
         NSDictionary *cellData = [self.dataSource objectAtIndex:indexPath.row];
         GoodsTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -467,19 +485,19 @@
         
         return cell;
     }
-//    else if(self.dataSourceType == ListDataSourceOrder){
-//        OrderModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
-//        cellData.indexPath = indexPath;
-//        OrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//        
-//        if (cell == nil) {
-//            cell = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//            cell.passDelegate = self;
-//        }
-//        [cell setNewData:cellData];
-//        
-//        return cell;
-//    }
+    //    else if(self.dataSourceType == ListDataSourceOrder){
+    //        OrderModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
+    //        cellData.indexPath = indexPath;
+    //        OrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    //
+    //        if (cell == nil) {
+    //            cell = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    //            cell.passDelegate = self;
+    //        }
+    //        [cell setNewData:cellData];
+    //
+    //        return cell;
+    //    }
     else{
         GoodsModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
         cellData.indexPath = INT(indexPath.row);
@@ -515,7 +533,7 @@
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     // TODO: TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification  in articleViewCell
-//    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:scrollView];
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:scrollView];
 }
 
 

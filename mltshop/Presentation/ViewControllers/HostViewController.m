@@ -233,11 +233,12 @@
                     [VC setUpDownButton:0];
                     ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
                     [self.navigationController presentViewController:nav animated:YES completion:nil];
-                }else if ([parsed[@"type"] isEqualToString:@"goods"]){
+                } else if ([parsed[@"type"] isEqualToString:@"goods"]){
                     GoodsDetailViewController *VC = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
                     VC.passDelegate = self;
                     GoodsModel *theGoods = [[GoodsModel alloc]init];
                     theGoods.goodsId = parsed[@"id"];
+                    NSLog(@"%@", parsed[@"id"]);
                     [VC setGoodsData:theGoods];
                     
                     [self.navigationController presentViewController:VC animated:YES completion:^{

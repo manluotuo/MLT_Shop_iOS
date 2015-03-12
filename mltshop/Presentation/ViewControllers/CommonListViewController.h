@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger,ListDataSourceType)
     ListDataSourceCart          = 4,    // 一行一辆车
     ListDataSourceOrder         = 5,    // 一行一辆车
     ListDataSourceBrand         = 6,    // 一行一辆车
+    CollectView                 = 7,
 };
 
 
@@ -45,6 +46,11 @@ typedef NS_ENUM(NSInteger,ListDataSourceType)
 
 - (void)initQuickAddTableViewBgView;
 - (void)initNoDataTableViewBgViewWithTitle:(NSString *)title subTitle:(NSString *)subTitle;
+
+/** 刷新 */
+- (void)createRefresh;
+/** 加载 */
+- (void)createGetMoreData;
 
 @end
 

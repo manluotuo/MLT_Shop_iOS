@@ -252,8 +252,38 @@ static dispatch_once_t onceToken;
     }];
 }
 
+/** 收藏列表 */
+- (void)getCollectListWithBlock:(void (^)(id responseObject, NSError *error))block {
+    
+    NSString *postURL = API_COLLECT_PATH;
+    NSDictionary *postDict = @{@"session": @{@"uid": [DataTrans
+                                                      noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             },
+                               @"pagination": @{@"page":@"1",
+                                                @"count":@"1000"
+                                                }};
+    postDict = [DataTrans makePostDict:postDict];
+    [[AppRequestManager sharedManager] POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([DataTrans isCorrectResponseObject:responseObject]) {
+            if (block) {
+                block(responseObject, nil);
+            }
+        } else {
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+
+}
 
 - (void)getCommentWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block {
+    
     NSString *postUrl = API_COMMENT_PATH;
     
     NSDictionary *postDict = @{@"goods_id": goodsId,
@@ -285,6 +315,34 @@ static dispatch_once_t onceToken;
         }
         
     }];
+}
+
+/** 收藏 */
+- (void)getCollectAddWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block {
+    
+   NSString *postURL = API_COLLECT_ADD;
+    NSDictionary *postDict = @{@"goods_id" :goodsId,
+                               @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             }};
+    
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if (block) {
+            block(responseObject, nil);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+
+    
 }
 
 - (void)getGoodsDetailWithGoodsId:(NSString *)goodsId andBlcok:(void (^)(id responseObject, NSError *error))block

@@ -19,6 +19,7 @@
 @implementation AddressListViewController
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = T(@"地址管理");
