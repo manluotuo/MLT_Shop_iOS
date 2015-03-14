@@ -2102,7 +2102,6 @@
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/AVOSCloud\"",
 					"\"${PODS_ROOT}/Headers/Public/BlocksKit\"",
 					"\"${PODS_ROOT}/Headers/Public/FXBlurView\"",
 					"\"${PODS_ROOT}/Headers/Public/HTProgressHUD\"",
@@ -2133,7 +2132,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-AFNetworking\"",
-					"-l\"Pods-AVOSCloud\"",
 					"-l\"Pods-BlocksKit\"",
 					"-l\"Pods-FXBlurView\"",
 					"-l\"Pods-HTProgressHUD\"",
@@ -2150,8 +2148,6 @@
 					"-l\"Pods-StyledPageControl\"",
 					"-l\"Pods-TSMessages\"",
 					"-l\"icucore\"",
-					"-framework",
-					"\"AVOSCloud\"",
 					"-framework",
 					"\"Accelerate\"",
 					"-framework",
@@ -2210,7 +2206,6 @@
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/AVOSCloud\"",
 					"\"${PODS_ROOT}/Headers/Public/BlocksKit\"",
 					"\"${PODS_ROOT}/Headers/Public/FXBlurView\"",
 					"\"${PODS_ROOT}/Headers/Public/HTProgressHUD\"",
@@ -2241,7 +2236,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-AFNetworking\"",
-					"-l\"Pods-AVOSCloud\"",
 					"-l\"Pods-BlocksKit\"",
 					"-l\"Pods-FXBlurView\"",
 					"-l\"Pods-HTProgressHUD\"",
@@ -2258,8 +2252,6 @@
 					"-l\"Pods-StyledPageControl\"",
 					"-l\"Pods-TSMessages\"",
 					"-l\"icucore\"",
-					"-framework",
-					"\"AVOSCloud\"",
 					"-framework",
 					"\"Accelerate\"",
 					"-framework",
