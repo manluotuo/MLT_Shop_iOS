@@ -282,6 +282,43 @@ static dispatch_once_t onceToken;
 
 }
 
+/** 订单详情 */
+- (void)getOrderDetailOrderId:(NSString *)orderId andBlock:(void (^)(id responseObject, NSError *error))block {
+    
+    NSString *postUrl = API_ORDER_INFO;
+    
+    NSDictionary *postDict = @{@"order_id": @"1078",
+                               @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             }};
+    
+    postDict = [DataTrans makePostDict:postDict];
+    
+    [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+//        NSLog(@"!!!!!!!!!!!\n%@", responseObject);
+        if ([DataTrans isCorrectResponseObject:responseObject]) {
+//            NSLog(@"################\n%@", responseObject);
+            if (block) {
+                block(responseObject, nil);
+            }
+            
+        } else {
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);        }
+
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        if (block) {
+            block(nil , error);
+        }
+        
+    }];
+}
+
 - (void)getCommentWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block {
     
     NSString *postUrl = API_COMMENT_PATH;
@@ -546,6 +583,7 @@ static dispatch_once_t onceToken;
         case OrderOpsList:
             postURL = API_ORDER_LIST_PATH;
             baseDict[@"pagination"]= @{@"page":@"1", @"count":@"100"};
+            NSLog(@"%@", theOrder.type);
             baseDict[@"type"] = theOrder.type;
             break;
         case OrderOpsCancel:

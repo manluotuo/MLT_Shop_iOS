@@ -399,9 +399,11 @@
     }else if(self.dataSourceType == ListDataSourceCart){
         return CELL_HEIGHT+H_20;
     }else if(self.dataSourceType == ListDataSourceBrand){
+        
         BrandModel *theBrand = [self.dataSource objectAtIndex:indexPath.row];
         CGSize descSize = [theBrand.brandDesc sizeWithWidth:H_200 andFont:FONT_12];
         return CELL_HEIGHT+descSize.height-H_10;
+        
     }else{
         return CELL_HEIGHT;
     }

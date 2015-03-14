@@ -18,6 +18,8 @@
 #import "Order.h"
 #import "DataSigner.h"
 
+#import "OrderDetailViewController.h"
+
 
 @interface OrderListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
@@ -251,6 +253,24 @@
     [cell setNewData:cellData];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    OrderDetailViewController *orderVC = [[OrderDetailViewController alloc] init];
+    OrderModel *theOrder = self.dataArray[indexPath.section];
+    orderVC.order_id = theOrder.orderId;
+    orderVC.goods_list = theOrder.goods_list;
+    
+    ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:orderVC];
+    [self presentViewController:nav animated:YES completion:nil];
+    
+    
+    
+//    NSLog(@"%@", theOrder.goods_list);
+    
+//    NSLog(@"%@", theOrder.orderId);
+//    NSLog(@"订单被点击");
 }
 
 

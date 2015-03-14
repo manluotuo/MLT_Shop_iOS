@@ -38,7 +38,6 @@
 		262E1E6E1A555B2A00C29059 /* alipay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 262E1E6D1A555B2A00C29059 /* alipay@2x.png */; };
 		262E1E711A5796B100C29059 /* ShippingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E701A5796B100C29059 /* ShippingTableViewCell.m */; };
 		262E1E741A579BC100C29059 /* BonusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E731A579BC100C29059 /* BonusTableViewCell.m */; };
-		262E1E771A57F45300C29059 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 262E1E761A57F45300C29059 /* OrderModel.m */; };
 		262E1E791A58348F00C29059 /* pkcs8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 262E1E781A58348F00C29059 /* pkcs8.txt */; };
 		262E1E7D1A58352300C29059 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 262E1E7B1A58352300C29059 /* AlipaySDK.bundle */; };
 		262E1E7E1A58352300C29059 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262E1E7C1A58352300C29059 /* AlipaySDK.framework */; };
@@ -213,6 +212,10 @@
 		331612311AB043BE00F47730 /* CollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612301AB043BE00F47730 /* CollectModel.m */; };
 		331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612331AB0503F00F47730 /* CollectTableViewCell.m */; };
 		336B62AC1AB16CD500476A93 /* BonusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336B62AB1AB16CD500476A93 /* BonusViewController.m */; };
+		336D045A1AB40E0A00A87137 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D04591AB40E0A00A87137 /* OrderDetailViewController.m */; };
+		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
+		336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045F1AB412CA00A87137 /* OrderDetailModel.m */; };
+		336D049E1AB4473400A87137 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336D049D1AB4473400A87137 /* 1.png */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
 		33CB64F51AAAF83500D0BE8D /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 33CB64F31AAAF83500D0BE8D /* image.png */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
@@ -266,8 +269,6 @@
 		262E1E701A5796B100C29059 /* ShippingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShippingTableViewCell.m; sourceTree = "<group>"; };
 		262E1E721A579BC100C29059 /* BonusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTableViewCell.h; sourceTree = "<group>"; };
 		262E1E731A579BC100C29059 /* BonusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTableViewCell.m; sourceTree = "<group>"; };
-		262E1E751A57F45300C29059 /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
-		262E1E761A57F45300C29059 /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		262E1E781A58348F00C29059 /* pkcs8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pkcs8.txt; path = Sounds/pkcs8.txt; sourceTree = "<group>"; };
 		262E1E7B1A58352300C29059 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		262E1E7C1A58352300C29059 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = mltshop/Frameworks/Alipay/AlipaySDK.framework; sourceTree = "<group>"; };
@@ -660,6 +661,13 @@
 		331612331AB0503F00F47730 /* CollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableViewCell.m; sourceTree = "<group>"; };
 		336B62AA1AB16CD500476A93 /* BonusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BonusViewController.h; path = BonusVC/BonusViewController.h; sourceTree = "<group>"; };
 		336B62AB1AB16CD500476A93 /* BonusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BonusViewController.m; path = BonusVC/BonusViewController.m; sourceTree = "<group>"; };
+		336D04581AB40E0A00A87137 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		336D04591AB40E0A00A87137 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		336D045B1AB411F800A87137 /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		336D045C1AB411F800A87137 /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
+		336D045E1AB412CA00A87137 /* OrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailModel.h; sourceTree = "<group>"; };
+		336D045F1AB412CA00A87137 /* OrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailModel.m; sourceTree = "<group>"; };
+		336D049D1AB4473400A87137 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		33CB64F11AAAF83500D0BE8D /* CExpandHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExpandHeader.h; sourceTree = "<group>"; };
 		33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CExpandHeader.m; sourceTree = "<group>"; };
 		33CB64F31AAAF83500D0BE8D /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
@@ -1157,6 +1165,7 @@
 				262CD4511A5DB4A600A712BA /* Avatars */,
 				262E1E6D1A555B2A00C29059 /* alipay@2x.png */,
 				26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */,
+				336D049D1AB4473400A87137 /* 1.png */,
 				26435ACD1A20CA7900E117A0 /* Default@2x.png */,
 				26435ACE1A20CA7900E117A0 /* Default-568h@2x.png */,
 				26435AC61A20C55000E117A0 /* Logos */,
@@ -1376,12 +1385,14 @@
 				26B1C2551A46876E00295D32 /* AddressModel.m */,
 				263386471A52EC7E00C94D8F /* FlowModel.h */,
 				263386481A52EC7E00C94D8F /* FlowModel.m */,
-				262E1E751A57F45300C29059 /* OrderModel.h */,
-				262E1E761A57F45300C29059 /* OrderModel.m */,
 				3316121E1AB02E4400F47730 /* CommentModel.h */,
 				3316121F1AB02E4400F47730 /* CommentModel.m */,
 				3316122F1AB043BE00F47730 /* CollectModel.h */,
 				331612301AB043BE00F47730 /* CollectModel.m */,
+				336D045B1AB411F800A87137 /* OrderModel.h */,
+				336D045C1AB411F800A87137 /* OrderModel.m */,
+				336D045E1AB412CA00A87137 /* OrderDetailModel.h */,
+				336D045F1AB412CA00A87137 /* OrderDetailModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1440,6 +1451,7 @@
 		26BE3A5F1A170421009F37B4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				336D04521AB40D9A00A87137 /* OrderDetail */,
 				336B62A91AB16C8B00476A93 /* BonusVC */,
 				3316122B1AB03E7A00F47730 /* CollectVC */,
 				26DE7FD21A2BFE17007F4B16 /* FunctionVC */,
@@ -1604,6 +1616,15 @@
 			name = BonusVC;
 			sourceTree = "<group>";
 		};
+		336D04521AB40D9A00A87137 /* OrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				336D04581AB40E0A00A87137 /* OrderDetailViewController.h */,
+				336D04591AB40E0A00A87137 /* OrderDetailViewController.m */,
+			);
+			name = OrderDetail;
+			sourceTree = "<group>";
+		};
 		33CB64F01AAAF83500D0BE8D /* CExpandHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -1735,6 +1756,7 @@
 				26435ACA1A20C55000E117A0 /* MLTLogo-60.png in Resources */,
 				262CD46F1A5DB4A600A712BA /* F006.png in Resources */,
 				26BB7D611A6BA9F9002F4030 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				336D049E1AB4473400A87137 /* 1.png in Resources */,
 				26435ACC1A20C55000E117A0 /* MLTLogo-60@3x.png in Resources */,
 				262CD4751A5DB4A600A712BA /* F012.png in Resources */,
 				26BE3A851A170421009F37B4 /* shoucang_btn_pressed.png in Resources */,
@@ -1884,6 +1906,7 @@
 				267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */,
 				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
+				336D045D1AB411F800A87137 /* OrderModel.m in Sources */,
 				263386491A52EC7E00C94D8F /* FlowModel.m in Sources */,
 				26BE3A931A170421009F37B4 /* NSString+Size.m in Sources */,
 				26B1C2561A46876E00295D32 /* AddressModel.m in Sources */,
@@ -1896,6 +1919,7 @@
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
+				336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */,
 				261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */,
 				26BB7D351A6B5B61002F4030 /* BrandTableViewCell.m in Sources */,
 				265BB8881A1CE8D90040ACC0 /* ListViewController.m in Sources */,
@@ -1944,7 +1968,6 @@
 				331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */,
 				26BE3AC11A173739009F37B4 /* FAIconButton.m in Sources */,
 				262E1EE61A5836A100C29059 /* RSADataVerifier.m in Sources */,
-				262E1E771A57F45300C29059 /* OrderModel.m in Sources */,
 				26BE3AA41A170421009F37B4 /* SGMultiMenu.m in Sources */,
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
 				263D3E3D1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m in Sources */,
@@ -1974,6 +1997,7 @@
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
 				26B1C2591A4688D700295D32 /* AddressListViewController.m in Sources */,
 				26DE7FD51A2BFE40007F4B16 /* SearchCategoryViewController.m in Sources */,
+				336D045A1AB40E0A00A87137 /* OrderDetailViewController.m in Sources */,
 				26166E181AAB0E5300820948 /* HostListViewController.m in Sources */,
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,

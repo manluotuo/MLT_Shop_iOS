@@ -262,6 +262,7 @@
 #define H_4     4.0f
 #define H_5     5.0f
 #define H_6     6.0f
+#define H_7     7.5f
 #define H_8     8.0f
 #define H_10    10.0f
 #define H_12   12.0f

@@ -1,4 +1,4 @@
-    //
+//
 //  OrderModel.m
 //  mltshop
 //
@@ -14,6 +14,7 @@
 {
     if (DictionaryHasValue(dict)) {
         _orderId = [DataTrans noNullStringObj:dict[@"order_id"]];
+        _goods_list = dict[@"goods_list"];
         _orderSn = [DataTrans noNullStringObj:dict[@"order_sn"]];
         _type = [DataTrans noNullStringObj:dict[@"type"]];
         _paymentType = [DataTrans noNullStringObj:dict[@"payment_type"]];
@@ -28,6 +29,7 @@
             _desc = [DataTrans noNullStringObj:dict[@"order_info"][@"desc"]];
         }
         
+        
         _integralMoney = [DataTrans noNullNumberObj:dict[@"formated_integral_money"]];
         _bonus = [DataTrans noNullNumberObj:dict[@"formated_bonus"]];
         _shippingFee = [DataTrans noNullNumberObj:dict[@"formated_shipping_fee"]];
@@ -38,7 +40,7 @@
                 [_cartList addObject:[[CartModel alloc]initWithDict:item]];
             }
         }
-
+        
     }
     
     return self;

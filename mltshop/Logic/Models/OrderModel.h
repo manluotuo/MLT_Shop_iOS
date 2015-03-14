@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger,OrderOps)
 @property(nonatomic, strong)NSNumber *bonus;
 @property(nonatomic, strong)NSNumber *shippingFee;
 
-
+@property (nonatomic, strong) NSMutableArray *goods_list;
 
 
 - (id)initWithDict:(NSDictionary *)dict;

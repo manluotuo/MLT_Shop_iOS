@@ -39,7 +39,6 @@
     
     CGSize contentSize = [model.content sizeWithWidth:H_260 andFont:FONT_12];
     self.content.height = contentSize.height;
-    NSLog(@"%f", self.content.height);
     self.content.text = model.content;
     self.content.numberOfLines = 0;
     [self.content setFont:FONT_12];

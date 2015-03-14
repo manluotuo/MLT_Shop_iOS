@@ -663,10 +663,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"%d", self.commentData.count);
+    NSLog(@"%ld", self.commentData.count);
     return self.commentData.count;
 }
 
+
+// 这有个BUG
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentId"];
     if (!cell) {
@@ -676,6 +678,9 @@
     CommentModel *model = self.commentData[indexPath.row];
     [cell setCellData:model];
     cellHeight = [cell setCellHeight];
+    
+
+    
     return cell;
 }
 
@@ -685,6 +690,8 @@
     NSLog(@"%f", self.commentView.height);
     self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
     fixedSize = self.fixedView.contentSize;
+    
+    NSLog(@"!!!!!!!%f", cellHeight);
     return cellHeight;
 }
 
