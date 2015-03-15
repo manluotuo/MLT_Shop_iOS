@@ -431,7 +431,8 @@
 - (void)onBonusClick {
     
     BonusViewController *bonusVC = [[BonusViewController alloc] init];
-    [self presentViewController:bonusVC animated:YES completion:nil];
+    ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:bonusVC];
+    [self presentViewController:nav animated:YES completion:nil];
     
 }
 

@@ -216,6 +216,7 @@
 		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
 		336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045F1AB412CA00A87137 /* OrderDetailModel.m */; };
 		336D049E1AB4473400A87137 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336D049D1AB4473400A87137 /* 1.png */; };
+		33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C666C71AB4EC26005ACDD5 /* BonusListModel.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
 		33CB64F51AAAF83500D0BE8D /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 33CB64F31AAAF83500D0BE8D /* image.png */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
@@ -668,6 +669,8 @@
 		336D045E1AB412CA00A87137 /* OrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailModel.h; sourceTree = "<group>"; };
 		336D045F1AB412CA00A87137 /* OrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailModel.m; sourceTree = "<group>"; };
 		336D049D1AB4473400A87137 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		33C666C61AB4EC26005ACDD5 /* BonusListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListModel.h; sourceTree = "<group>"; };
+		33C666C71AB4EC26005ACDD5 /* BonusListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusListModel.m; sourceTree = "<group>"; };
 		33CB64F11AAAF83500D0BE8D /* CExpandHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExpandHeader.h; sourceTree = "<group>"; };
 		33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CExpandHeader.m; sourceTree = "<group>"; };
 		33CB64F31AAAF83500D0BE8D /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
@@ -1393,6 +1396,8 @@
 				336D045C1AB411F800A87137 /* OrderModel.m */,
 				336D045E1AB412CA00A87137 /* OrderDetailModel.h */,
 				336D045F1AB412CA00A87137 /* OrderDetailModel.m */,
+				33C666C61AB4EC26005ACDD5 /* BonusListModel.h */,
+				33C666C71AB4EC26005ACDD5 /* BonusListModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1988,6 +1993,7 @@
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
 				266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */,
+				33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */,
 				262E1EE11A5836A100C29059 /* DataVerifier.m in Sources */,
 				26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,

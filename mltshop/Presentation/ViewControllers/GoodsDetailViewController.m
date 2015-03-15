@@ -663,7 +663,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"%ld", self.commentData.count);
+    NSLog(@"%d", self.commentData.count);
     return self.commentData.count;
 }
 
