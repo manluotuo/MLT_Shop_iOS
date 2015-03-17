@@ -382,6 +382,66 @@ static dispatch_once_t onceToken;
     
 }
 
+/** 红包 */
+- (void)getBonusListWithBlock:(void (^)(id responseObject, NSError *error))block {
+    
+    NSString *postURL = API_BONUS_LIST;
+    NSDictionary *postDict = @{@"session": @{@"uid": [DataTrans
+                                                      noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             }};
+    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                NSLog(@"%@", responseObject);
+                block(responseObject, nil);
+            }
+        }else{
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@ %@",postURL, error);
+        if (block) {
+            block(nil , error);
+        }
+    }];
+    
+}
+
+/** 取消收藏 */
+- (void)getDeleteCollectRecId:(NSString *)recId andBlcok:(void (^)(id responseObject, NSError *error))block {
+    
+    NSString *postURL = API_COLLECT_DELETE;
+    NSDictionary *postDict = @{@"session": @{@"uid": [DataTrans
+                                                      noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans
+                                                      noNullStringObj:XAppDelegate.me.sessionId]},
+                               @"rec_id": recId};
+    [[AppRequestManager sharedManager] POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            NSLog(@"%@", responseObject);
+            // 刷新本地数据 需要写入数据库
+            if (block) {
+                block(responseObject, nil);
+            }
+        }else{
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+}
 - (void)getGoodsDetailWithGoodsId:(NSString *)goodsId andBlcok:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = API_GOODS_DETAILS_PATH;

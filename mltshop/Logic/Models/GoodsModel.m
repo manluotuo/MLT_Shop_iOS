@@ -17,6 +17,7 @@
     if (DictionaryHasValue(dict)) {
         _goodsId = [dict objectForKey:@"goods_id"];
         _brandId = [dict objectForKey:@"brand_id"];
+        _collected = [dict objectForKey:@"collected"];
         _brandName = [dict objectForKey:@"brand_name"];
         _catId = [dict objectForKey:@"cat_id"];
         _goodsName = [dict objectForKey:@"goods_name"];

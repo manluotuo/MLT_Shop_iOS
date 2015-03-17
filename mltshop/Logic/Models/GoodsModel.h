@@ -30,6 +30,8 @@
 @property(nonatomic, strong)SpecModel * spec;
 @property(nonatomic, strong)NSString *goodsDesc;
 
+@property (nonatomic, strong) NSNumber *collected;
+
 @property(nonatomic, assign)BOOL isPicked;
 @property(nonatomic, strong)NSIndexPath *indexPath;
 

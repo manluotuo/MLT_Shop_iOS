@@ -217,6 +217,7 @@
 		336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045F1AB412CA00A87137 /* OrderDetailModel.m */; };
 		336D049E1AB4473400A87137 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336D049D1AB4473400A87137 /* 1.png */; };
 		33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C666C71AB4EC26005ACDD5 /* BonusListModel.m */; };
+		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
 		33CB64F51AAAF83500D0BE8D /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 33CB64F31AAAF83500D0BE8D /* image.png */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
@@ -671,6 +672,8 @@
 		336D049D1AB4473400A87137 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		33C666C61AB4EC26005ACDD5 /* BonusListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListModel.h; sourceTree = "<group>"; };
 		33C666C71AB4EC26005ACDD5 /* BonusListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusListModel.m; sourceTree = "<group>"; };
+		33C6673F1AB67476005ACDD5 /* BonusListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListTableViewCell.h; sourceTree = "<group>"; };
+		33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusListTableViewCell.m; sourceTree = "<group>"; };
 		33CB64F11AAAF83500D0BE8D /* CExpandHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExpandHeader.h; sourceTree = "<group>"; };
 		33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CExpandHeader.m; sourceTree = "<group>"; };
 		33CB64F31AAAF83500D0BE8D /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
@@ -1449,6 +1452,8 @@
 				331612231AB02E6900F47730 /* CommentTableViewCell.xib */,
 				331612321AB0503F00F47730 /* CollectTableViewCell.h */,
 				331612331AB0503F00F47730 /* CollectTableViewCell.m */,
+				33C6673F1AB67476005ACDD5 /* BonusListTableViewCell.h */,
+				33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1962,6 +1967,7 @@
 				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,
 				2633866A1A52FFEA00C94D8F /* SVWebViewControllerActivity.m in Sources */,
 				263386681A52FFEA00C94D8F /* SVWebViewControllerActivitySafari.m in Sources */,
+				33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */,
 				26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */,
 				266FA8001A134A72000C2AAE /* main.m in Sources */,
 				331612241AB02E6900F47730 /* CommentTableViewCell.m in Sources */,
@@ -2158,6 +2164,7 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/ZBarSDK",
 					"$(PROJECT_DIR)/mltshop/Frameworks/libWeiboSDK",
 					"$(PROJECT_DIR)/mltshop/Frameworks/WeChatSDK_64",
+					"$(PROJECT_DIR)/mltshop/Frameworks/umsdk_IOS_analytics_idfa_v3.4.6/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2262,6 +2269,7 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/ZBarSDK",
 					"$(PROJECT_DIR)/mltshop/Frameworks/libWeiboSDK",
 					"$(PROJECT_DIR)/mltshop/Frameworks/WeChatSDK_64",
+					"$(PROJECT_DIR)/mltshop/Frameworks/umsdk_IOS_analytics_idfa_v3.4.6/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

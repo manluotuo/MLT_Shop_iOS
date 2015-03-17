@@ -420,6 +420,7 @@
 #define SIGNAL_UPLOADING_PROGRESS           @"51000"
 #define SIGNAL_GO_TO_INDEX_PAGE             @"60000"
 #define SIGNAL_GO_TO_INDEX                  @"60001"
+#define SIGNAL_GO_TO                        @"60002"
 
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];

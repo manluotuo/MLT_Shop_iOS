@@ -28,6 +28,7 @@
 
 - (void)setCellData:(CommentModel *)model {
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     if (model.create != nil) {
         NSRange range = [model.create rangeOfString:@"+"];
         NSString *timeStr = [model.create substringToIndex:range.location];
@@ -35,7 +36,7 @@
         
     }
     self.author.text = model.author;
-    self.content = [[UILabel alloc] initWithFrame:CGRectMake(H_30, self.create.y+self.create.height+H_10, H_260, H_30)];
+    self.content = [[UILabel alloc] initWithFrame:CGRectMake(H_30, self.create.y+self.create.height+H_10, WIDTH-H_60, H_30)];
     
     CGSize contentSize = [model.content sizeWithWidth:H_260 andFont:FONT_12];
     self.content.height = contentSize.height;

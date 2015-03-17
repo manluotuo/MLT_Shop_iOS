@@ -22,6 +22,7 @@
 
 #import "CommentTableViewCell.h"
 
+
 #define SERVICE_TAB_TAG     101
 #define ADD_CART_TAB_TAG    102
 #define CART_TAB_TAG        103
@@ -94,6 +95,7 @@
     self.commentData = [[NSMutableArray alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO_INDEX_PAGE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO object:nil];
     
 }
 
@@ -630,6 +632,9 @@
     [self.brandButton setTitle:self.theGoods.brandName forState:UIControlStateNormal];
     
     [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
+    if ([self.theGoods.collected isEqualToNumber:INT(1)]) {
+        [self.collectBtn setSelected:YES];
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -679,8 +684,6 @@
     [cell setCellData:model];
     cellHeight = [cell setCellHeight];
     
-
-    
     return cell;
 }
 
@@ -692,7 +695,7 @@
     fixedSize = self.fixedView.contentSize;
     
     NSLog(@"!!!!!!!%f", cellHeight);
-    return cellHeight;
+    return 100;
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -773,7 +776,8 @@
         [[AppRequestManager sharedManager]getCollectAddWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
             NSLog(@"%@", responseObject[@"status"][@"succeed"]);
             if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:@"" andDuration:1.0f];
+                [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
+                self.collectBtn.selected = !self.collectBtn.selected;
             }
             /*if (error != nil) */ else {
                 NSDictionary *userDict = [error userInfo];
@@ -783,10 +787,19 @@
             }
         }];
     } else {
-        NSLog(@"已取消收藏");
+        [[AppRequestManager sharedManager]getDeleteCollectRecId:self.theGoods.goodsId andBlcok:^(id responseObject, NSError *error) {
+            if (responseObject != nil) {
+                [DataTrans showWariningTitle:T(@"已取消收藏") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
+                self.collectBtn.selected = !self.collectBtn.selected;
+            } else {
+                NSDictionary *userDict = [error userInfo];
+                if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
+                    [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
+                }
+            }
+        }];
     }
     
-    self.collectBtn.selected = !self.collectBtn.selected;
 }
 
 

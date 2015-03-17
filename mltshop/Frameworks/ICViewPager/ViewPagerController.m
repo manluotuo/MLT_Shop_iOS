@@ -326,6 +326,8 @@
     
     [self.tabsView scrollRectToVisible:frame animated:YES];
 }
+
+/** 1 */
 - (void)setActiveContentIndex:(NSUInteger)activeContentIndex {
     
     // Get the desired viewController
@@ -559,6 +561,8 @@
     // Call to setup again with the updated data
     [self defaultSetup];
 }
+
+
 - (void)selectTabAtIndex:(NSUInteger)index {
     
     // Set activeTabIndex
@@ -902,11 +906,19 @@
     [self selectTabAtIndex:index];
 }
 
+
+/** 左滑调用 */
 #pragma mark - UIScrollViewDelegate, Responding to Scrolling and Dragging
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     if ([self.actualDelegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
         [self.actualDelegate scrollViewDidScroll:scrollView];
+    }
+    
+    if (self.activeTabIndex == 0) {
+     NSLog(@"X = %f, Y = %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+        [self tabWidth];
+
     }
     
     if (![self isAnimatingToTab]) {
@@ -940,6 +952,7 @@
         [self.tabsView scrollRectToVisible:frame animated:NO];
     }
 }
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if ([self.actualDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
         [self.actualDelegate scrollViewWillBeginDragging:scrollView];

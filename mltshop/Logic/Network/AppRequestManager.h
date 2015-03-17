@@ -21,8 +21,12 @@
 #define API_COLLECT_PATH            @"/ecmobile/?url=/user/collect/list"
 /** 添加收藏 */
 #define API_COLLECT_ADD             @"/ecmobile/?url=/user/collect/create"
+/** 删除收藏 */
+#define API_COLLECT_DELETE          @"/ecmobile/?url=/user/collect/delete"
 /** 订单详情 */
 #define API_ORDER_INFO              @"/ecmobile/?url=/order/info"
+/** 红包列表 */
+#define API_BONUS_LIST              @"/ecmobile/?url=/user/bonus"
 
 #define API_COMMENT_PATH            @"/ecmobile/?url=/comments"
 
@@ -164,13 +168,15 @@
                       andBlock:(void (^)(id responseObject, NSError *error))block;
 /** 我的收藏 */
 - (void)getCollectListWithBlock:(void (^)(id responseObject, NSError *error))block;
-
+/** 删除收藏 */
+- (void)getDeleteCollectRecId:(NSString *)recId andBlcok:(void (^)(id responseObject, NSError *error))block;
 /** 收藏 */
 - (void)getCollectAddWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block;
 
 /** 订单详情 */
 - (void)getOrderDetailOrderId:(NSString *)orderId andBlock:(void (^)(id responseObject, NSError *error))block;
-
+/** 红包列表 */
+- (void)getBonusListWithBlock:(void (^)(id responseObject, NSError *error))block;
 
 // ORDER function
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder

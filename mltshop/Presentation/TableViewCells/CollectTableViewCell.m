@@ -39,9 +39,7 @@
     
     [image sd_setImageWithURL:[NSURL URLWithString:model.img[@"goods"]] placeholderImage:PLACEHOLDERIMAGE];
     
-    NSLog(@"wwwwwww");
     name.text = model.goods_name;
-    NSLog(@"ssssssss");
     CGSize contentSize = [model.goods_name sizeWithWidth:H_200 andFont:FONT_14];
     name.height = contentSize.height;
     NSLog(@"%f", name.height);

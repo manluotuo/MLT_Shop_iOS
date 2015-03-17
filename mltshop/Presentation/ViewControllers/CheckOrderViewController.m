@@ -14,6 +14,7 @@
 #import "BonusTableViewCell.h"
 #import "AppRequestManager.h"
 #import "SGActionView.h"
+#import "AppDelegate.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
@@ -222,6 +223,11 @@
             [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[@"支付宝付款", @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
                 if(index == 0){
                     [self doAlipayAction:theOrder];
+                } else {
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO_TO object:nil userInfo:nil];
+                    }];
+                    [XAppDelegate showDrawerView];
                 }
             }];
         }

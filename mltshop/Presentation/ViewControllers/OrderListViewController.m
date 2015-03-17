@@ -160,15 +160,15 @@
  */
 - (void)setupDataSource {
     self.start = 0;
-    self.dataArray = [[NSMutableArray alloc]init];
     [[AppRequestManager sharedManager]operateOrderWithOrderModel:self.theOrder operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         
+        self.dataArray = [[NSMutableArray alloc]init];
         if (responseObject != nil) {
             // 集中处理所有的数据
-            
             NSUInteger count = [responseObject count];
             if (ArrayHasValue(responseObject)) {
                 for (int i = 0 ; i < count; i++) {
+                    
                     OrderModel *oneOrder = [[OrderModel alloc]initWithDict:responseObject[i]];
                     [self.dataArray addObject:oneOrder];
                 }
@@ -240,6 +240,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"ListCell";
+    NSLog(@"%d", self.dataArray.count);
+    
+    
     OrderModel *theOrder = self.dataArray[indexPath.section];
     CartModel *cellData = [theOrder.cartList objectAtIndex:indexPath.row];
     cellData.indexPath = indexPath;

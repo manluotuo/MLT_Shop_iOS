@@ -7,8 +7,15 @@
 //
 
 #import "BonusListModel.h"
-
 @implementation BonusListModel
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    
+}
+
+@end
+
+@implementation BonusInfoModel
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     

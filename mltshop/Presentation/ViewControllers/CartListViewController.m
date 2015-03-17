@@ -39,8 +39,16 @@
     
     self.dataArray = [[NSMutableArray alloc]init];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndex) name:SIGNAL_GO_TO object:nil];
+    
     [self initDataSource];
 //    [self setUpImageDownButton:0];
+}
+
+- (void)gotoIndex {
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self gotoIndexAction];
+    }];
 }
 
 - (void)setUpDownButton:(NSInteger)position
@@ -221,7 +229,9 @@
     }
 }
 
-
+- (void)createGetMoreData {
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
