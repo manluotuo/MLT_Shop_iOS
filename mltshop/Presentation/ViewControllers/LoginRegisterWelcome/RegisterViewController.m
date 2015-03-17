@@ -182,6 +182,7 @@
         [[AppRequestManager sharedManager]signUpWithMobile:self.userTextView.text password:self.passTextView.text email:self.emailTextView.text andBlock:^(id responseObject, NSError *error) {
             //
             if (responseObject != nil) {
+                [MobClick event:UM_REGISTER];
                 [self verifyPasswordAction];
             }
             
@@ -218,7 +219,7 @@
             dict[@"password"] = self.passTextView.text;
             
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
-            
+            [MobClick event:UM_LOGIN];
             [XAppDelegate skipIntroView];
         }
         

@@ -29,14 +29,16 @@
 #define PAYMENT_TAG     3
 #define BONUS_TAG       4
 
-@interface CheckOrderViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate>
+@interface CheckOrderViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate, UITextFieldDelegate>
 {
     NSArray *sectionTitles;
     UILabel *goodsInfoLabel;
     UILabel *integralLabel;
     UILabel *summaryLabel;
     UILabel *bonusLabel;
+    UITextField *integralText;
     KKFlatButton *doneButton;
+    CGFloat payAmount;
 }
 
 @property (nonatomic, strong)UITableView *tableView;
@@ -51,6 +53,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillhide:) name:UIKeyboardWillHideNotification object:nil];
+    
     self.title = T(@"结算页面");
     // Do any additional setup after loading the view.
     sectionTitles = @[@"商品列表",@"收货人", @"快递方式", @"支付方式",@"红包列表"];
@@ -71,18 +78,25 @@
     self.tableView.dataSource  = self;
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+        
     }
-
+    
     self.tableView.tableFooterView = self.infoView;
     [self.view addSubview:self.tableView];
-
+    [self setupDataSource];
+    
 }
 
 - (void)setupDataSource
 {
+    
     [[AppRequestManager sharedManager]flowCheckOrderWithBlock:^(id responseObject, NSError *error) {
-        if(responseObject != nil){
+        
+        NSLog(@"!!!!!!!!!!!!!!!!%@", responseObject);
+        if(responseObject != nil) {
+            
             self.dataSource =  [[FlowModel alloc]initWithDict:responseObject];
             
             // 如果支付和快递  默认选第一个
@@ -99,17 +113,18 @@
             }
             
             [self.tableView reloadData];
-
+            
             [self refreshInfoView];
         }
         if (error != nil) {
+            
             if ([error.userInfo[@"error_code"] isEqualToNumber:INT(10001)]) {
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-
+                
                 [DataTrans showWariningTitle:T(@"请在\"个人中心->地址管理\"中 新增地址")
                                andCheatsheet:ICON_TIMES
                                  andDuration:3.0f];
-
+                
             }
             
             
@@ -159,9 +174,9 @@
     order.productName = theOrder.subject; //商品标题
     order.productDescription = theOrder.desc; //商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
-//    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
+    //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
-
+    
     
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
@@ -186,16 +201,16 @@
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
         
-
+        
         [self dismissViewControllerAnimated:YES completion:nil];
-
+        
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
-
-//            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }
             
+            NSLog(@"reslut = %@",resultDic);
+            [MobClick event:UM_PAY];
+            //            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
+            //                [self.navigationController popViewControllerAnimated:YES];
+            //            }
         }];
         
         
@@ -214,10 +229,10 @@
     [[AppRequestManager sharedManager]flowDoneWithFlowDoneModel:self.flowDoneData andBlock:^(id responseObject, NSError *error) {
         //
         [HUD removeFromSuperview];
-
+        
         if (responseObject != nil) {
             OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
-//            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
+            //            [DataTrans showWariningTitle:T(@"请在支付宝中完成交易") andCheatsheet:ICON_CHECK];
             [DataTrans showWariningTitle:T(@"订单已生成") andCheatsheet:ICON_CHECK];
             
             [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[@"支付宝付款", @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
@@ -240,8 +255,8 @@
 
 - (void)refreshInfoView
 {
-    CGFloat payAmount = 0.0f;
-
+    payAmount = 0.0f;
+    
     // 商品
     for (CartModel *cart in self.dataSource.goodsList) {
         payAmount += cart.subtotal.floatValue;
@@ -269,21 +284,21 @@
     }
     
     CGFloat canUseIntegral  = 0.0f;
-    if (self.dataSource.yourIntegral < self.dataSource.orderMaxIntegral) {
-        canUseIntegral = self.dataSource.yourIntegral.floatValue;
-    }else{
-        canUseIntegral = self.dataSource.orderMaxIntegral.floatValue;
-    }
+//    if (self.dataSource.yourIntegral < self.dataSource.orderMaxIntegral) {
+//        canUseIntegral = self.dataSource.yourIntegral.floatValue;
+//    }else{
+//        canUseIntegral = self.dataSource.orderMaxIntegral.floatValue;
+//    }
     
-    self.flowDoneData.usedIntegral = FLOAT(canUseIntegral);
-
+    self.flowDoneData.usedIntegral = FLOAT([integralText.text floatValue]);
+    canUseIntegral = integralText.text.floatValue;
     
     NSString *integralString = [NSString stringWithFormat:@"我的积分: %@ , 最大可用积分:%@",
                                 STR_INT([self.dataSource.yourIntegral integerValue]),
                                 STR_INT([self.dataSource.orderMaxIntegral integerValue])];
     integralString = [NSString stringWithFormat:@"%@\n积分抵扣: -%.2f元",integralString,canUseIntegral/100];
     integralLabel.text = integralString;
-
+    
     self.dataSource.payAmount = FLOAT(payAmount - canUseIntegral/100);
     summaryLabel.text = [NSString stringWithFormat:@"合计: %@",
                          STR_NUM2([self.dataSource.payAmount floatValue])];
@@ -301,12 +316,12 @@
     titleLabel.backgroundColor = GRAYEXLIGHTCOLOR;
     
     [self.infoView addSubview:titleLabel];
-
+    
     
     goodsInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40, H_280, H_40)];
     goodsInfoLabel.font = FONT_13;
     goodsInfoLabel.textColor = GRAYCOLOR;
-
+    
     integralLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*2, H_280, H_40)];
     integralLabel.font = FONT_13;
     integralLabel.textColor = GRAYCOLOR;
@@ -316,11 +331,28 @@
                                 STR_INT([self.dataSource.orderMaxIntegral integerValue])];
     integralLabel.text = integralString;
     
+    /** 使用积分 */
     
-    bonusLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*3, H_200, H_30)];
+//    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(H_20, H_40*3, H_100, H_20)];
+//    lable.text = T(@"使用积分");
+//    lable.font = FONT_13;
+//    [self.infoView addSubview:lable];
+    
+    integralText = [[UITextField alloc] initWithFrame:CGRectMake(H_20, H_40*3, H_100, H_20)];
+    integralText.borderStyle = UITextBorderStyleBezel;
+    integralText.placeholder = T(@"要使用的积分");
+    integralText.delegate = self;
+    integralText.font = FONT_13;
+    
+    [integralText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [integralText setKeyboardType:UIKeyboardTypeNumberPad];
+    
+    
+    
+    bonusLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*3+H_20, H_200, H_30)];
     bonusLabel.font = FONT_13;
     bonusLabel.textColor = GRAYCOLOR;
-
+    
     
     summaryLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_40*4, H_160, H_40)];
     summaryLabel.textColor = REDCOLOR;
@@ -330,12 +362,13 @@
     [doneButton setTitle:T(@"确认") forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
     
-
+    
     [self.infoView addSubview:goodsInfoLabel];
     [self.infoView addSubview:integralLabel];
     [self.infoView addSubview:bonusLabel];
     [self.infoView addSubview:summaryLabel];
     [self.infoView addSubview:doneButton];
+    [self.infoView addSubview:integralText];
 }
 
 #pragma mark -
@@ -349,7 +382,26 @@
         [indexPathsOfSection addObject:
          [NSIndexPath indexPathForRow:i inSection:indexPath.section]];
     }
-
+    
+    //    if (indexPath.section == CONSIGNEE_TAG) {
+    //        // refresh all
+    //        for (ShippingModel *ship in self.dataSource.consignee) {
+    //            ship.selected = NO;
+    //        }
+    //        [self.tableView beginUpdates];
+    //        [self.tableView reloadRowsAtIndexPaths:indexPathsOfSection
+    //                              withRowAnimation:UITableViewRowAnimationNone];
+    //        [self.tableView endUpdates];
+    //
+    //        // 更新一条
+    //        ShippingModel *theShip = self.dataSource.shippingList[indexPath.row];
+    //        ShippingTableViewCell *cell = (ShippingTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    //        theShip.selected = YES;
+    //        [cell setNewData:theShip];
+    //        self.flowDoneData.shippingId = theShip.shippingId;
+    //
+    //    }
+    
     if (indexPath.section == SHIPPING_TAG) {
         // refresh all
         for (ShippingModel *ship in self.dataSource.shippingList) {
@@ -359,7 +411,7 @@
         [self.tableView reloadRowsAtIndexPaths:indexPathsOfSection
                               withRowAnimation:UITableViewRowAnimationNone];
         [self.tableView endUpdates];
-
+        
         // 更新一条
         ShippingModel *theShip = self.dataSource.shippingList[indexPath.row];
         ShippingTableViewCell *cell = (ShippingTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -404,7 +456,7 @@
         theShip.selected = YES;
         [cell setNewData:theShip];
         self.flowDoneData.bounsId = theShip.bonusId;
-
+        
     }
     
     [self refreshInfoView];
@@ -434,6 +486,7 @@
             return [self.dataSource.shippingList count];
             break;
         case BONUS_TAG:
+            NSLog(@"%@", self.dataSource.bonusList);
             return [self.dataSource.bonusList count];
             break;
         default:
@@ -477,6 +530,7 @@
         [cell setNewData:cellData];
         return cell;
     }else if (indexPath.section == BONUS_TAG){
+        /** 红包 */
         BonusModel *cellData = self.dataSource.bonusList[indexPath.row];
         BonusTableViewCell *cell = [[BonusTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.passDelegate = self;
@@ -496,12 +550,12 @@
 {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_HEIGHT, H_30)];
     view.backgroundColor = GRAYEXLIGHTCOLOR;
-
+    
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(H_20, 0, H_200, H_30)];
     label.text = sectionTitles[section];
     label.font = FONT_13;
     label.textColor = GRAYCOLOR;
-
+    
     [view addSubview:label];
     return view;
 }
@@ -516,7 +570,7 @@
     if (indexPath.section == CART_TAG || indexPath.section == SHIPPING_TAG) {
         return CELL_HEIGHT+H_20;
     }else{
-        return CELL_HEIGHT;        
+        return CELL_HEIGHT;
     }
 }
 
@@ -531,14 +585,82 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    [integralText resignFirstResponder];
 }
-*/
+
+#pragma mark - textField
+//STR_INT([self.dataSource.yourIntegral integerValue]),
+//STR_INT([self.dataSource.orderMaxIntegral integerValue])];
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+    //获取键盘的高度
+    NSDictionary *userInfo = [notification userInfo];
+    
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardRect = [aValue CGRectValue];
+    
+    int height = keyboardRect.size.height;
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.tableView.y = self.tableView.y-height;
+    }];
+    
+}
+
+- (void)keyboardWillhide:(NSNotification *)notification {
+    
+    //获取键盘的高度
+    
+    NSDictionary *userInfo = [notification userInfo];
+    
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect keyboardRect = [aValue CGRectValue];
+    
+    int height = keyboardRect.size.height;
+    [UIView animateWithDuration:1 animations:^{
+        self.tableView.y = self.tableView.y+height;
+    }];
+    
+    NSString *integralString = [NSString stringWithFormat:@"我的积分: %@ , 最大可用积分:%@",
+                                STR_INT([self.dataSource.yourIntegral integerValue]),
+                                STR_INT([self.dataSource.orderMaxIntegral integerValue])];
+    integralString = [NSString stringWithFormat:@"%@\n积分抵扣: -%.2f元",integralString,[integralText.text floatValue]/100];
+    integralLabel.text = integralString;
+    
+    self.dataSource.payAmount = FLOAT(payAmount - [integralText.text floatValue]/100);
+    summaryLabel.text = [NSString stringWithFormat:@"合计: %@",
+                         STR_NUM2([self.dataSource.payAmount floatValue])];
+    if (integralText.text.length == 0) {
+    }
+    
+}
+
+
+- (void)textFieldDidChange:(UITextField *) textField {
+    
+    if ([self.dataSource.yourIntegral integerValue] < [self.dataSource.orderMaxIntegral integerValue]) {
+        if ([textField.text integerValue] > [self.dataSource.yourIntegral integerValue]) {
+            integralText.text = STR_INT([self.dataSource.yourIntegral integerValue]);
+        }
+    } else {
+        integralText.text = STR_INT([self.dataSource.orderMaxIntegral integerValue]);
+       
+    }
+}
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

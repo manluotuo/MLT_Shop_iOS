@@ -147,6 +147,7 @@
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
+            [MobClick event:UM_PAY];
             if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
                 [self.navigationController popViewControllerAnimated:YES];
             }

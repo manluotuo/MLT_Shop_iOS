@@ -21,6 +21,7 @@
 
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
+#import <MobClick.h>
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <HTProgressHUD/HTProgressHUD.h>
@@ -47,6 +48,7 @@
 #import "FlowModel.h"
 #import "OrderModel.h"
 #import "CommentModel.h"
+
 
 #endif
 

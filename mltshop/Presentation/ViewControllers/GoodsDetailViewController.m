@@ -109,7 +109,13 @@
 - (void)viewWillAppear: (BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"GoodsDetail"];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"GoodsDetail"];
 }
 
 - (void)tabbarAction:(UIButton *)sender
@@ -511,6 +517,7 @@
     htmlHeight = TOTAL_HEIGHT;
     self.htmlView = [[UIWebView alloc]initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, htmlHeight)];
     [self.fixedView addSubview:self.htmlView];
+    self.htmlView.userInteractionEnabled = NO;
     self.htmlView.delegate = self;
 }
 
@@ -776,7 +783,7 @@
         [[AppRequestManager sharedManager]getCollectAddWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
             NSLog(@"%@", responseObject[@"status"][@"succeed"]);
             if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
+                [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:ICON_CHECK andDuration:1.0f];
                 self.collectBtn.selected = !self.collectBtn.selected;
             }
             /*if (error != nil) */ else {
@@ -789,7 +796,7 @@
     } else {
         [[AppRequestManager sharedManager]getDeleteCollectRecId:self.theGoods.goodsId andBlcok:^(id responseObject, NSError *error) {
             if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"已取消收藏") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
+                [DataTrans showWariningTitle:T(@"已取消收藏") andCheatsheet:ICON_TIMES andDuration:1.0f];
                 self.collectBtn.selected = !self.collectBtn.selected;
             } else {
                 NSDictionary *userDict = [error userInfo];

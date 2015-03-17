@@ -106,6 +106,7 @@
     [super viewWillAppear:animated];
     [self navigationGreenStyle];
 //    [self disableScroll];
+    [MobClick beginLogPageView:@"PageOne"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -325,6 +326,10 @@
     }
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"PageOne"];
+}
 
 @end

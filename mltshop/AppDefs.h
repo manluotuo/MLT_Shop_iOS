@@ -6,6 +6,11 @@
 //  Copyright (c) 2013年 thinktube. All rights reserved.
 //
 
+#define UM_REGISTER @"Register"
+#define UM_LOGIN    @"Login"
+#define UM_START    @"Start"
+#define UM_PAY      @"SuccessPay"
+
 #define XAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define CODE_OK                     @"10000"
 #define ERROR_TOKEN_OVERDUE         @"21315"
@@ -72,7 +77,7 @@
 #define QQ_API_URL_ID       @"tencent1104058323"
 #define QQ_API_ID           @"1104058323"
 
-#define UMENG_APPKEY        @""
+#define UMENG_APPKEY        @"54fd6e07fd98c5b9ae000141"
 
 
 #ifndef __QQAPI_ENABLE__

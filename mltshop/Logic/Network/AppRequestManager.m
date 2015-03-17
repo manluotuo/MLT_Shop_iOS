@@ -287,7 +287,7 @@ static dispatch_once_t onceToken;
     
     NSString *postUrl = API_ORDER_INFO;
     
-    NSDictionary *postDict = @{@"order_id": @"1078",
+    NSDictionary *postDict = @{@"order_id": orderId,
                                @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
                                              @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
                                              }};
@@ -723,14 +723,16 @@ static dispatch_once_t onceToken;
                                                      @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
                                                      }}];
     
-    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
-    
-    [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+    NSLog(@"%@", baseDict);
+//    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    [[AppRequestManager sharedManager]POST:postURL parameters:baseDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
             if (block) {
                 block(responseObject[@"data"] , nil);
             }
+            
         }else{
             NSError *error = [NSError errorWithDomain:@"" code:500 userInfo:responseObject[@"status"]];
             block(nil, error);

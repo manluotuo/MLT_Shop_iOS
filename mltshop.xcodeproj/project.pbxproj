@@ -220,6 +220,7 @@
 		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
 		33CB64F51AAAF83500D0BE8D /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 33CB64F31AAAF83500D0BE8D /* image.png */; };
+		33E5173B1AB7C9A8005DC76F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -677,6 +678,9 @@
 		33CB64F11AAAF83500D0BE8D /* CExpandHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExpandHeader.h; sourceTree = "<group>"; };
 		33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CExpandHeader.m; sourceTree = "<group>"; };
 		33CB64F31AAAF83500D0BE8D /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		33E517391AB7C9A8005DC76F /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		33E5173A1AB7C9A8005DC76F /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -687,10 +691,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26BB7D781A6BAFDA002F4030 /* libz.dylib in Frameworks */,
 				26BB7D7E1A6BB070002F4030 /* libstdc++.dylib in Frameworks */,
 				26BB7D7C1A6BB009002F4030 /* libsqlite3.dylib in Frameworks */,
 				26BB7D7A1A6BAFEE002F4030 /* QuartzCore.framework in Frameworks */,
-				26BB7D781A6BAFDA002F4030 /* libz.dylib in Frameworks */,
 				262E1E801A5835EC00C29059 /* SystemConfiguration.framework in Frameworks */,
 				26BB7D771A6BAFBE002F4030 /* CoreMedia.framework in Frameworks */,
 				26BB7D751A6BAF98002F4030 /* AVFoundation.framework in Frameworks */,
@@ -706,6 +710,7 @@
 				26986B521A585832006354E6 /* libcrypto.a in Frameworks */,
 				26BB7D631A6BA9F9002F4030 /* libzbar.a in Frameworks */,
 				C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */,
+				33E5173B1AB7C9A8005DC76F /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1223,6 +1228,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33E517371AB7C9A8005DC76F /* UMAnalytics_Sdk_3.4.6 */,
 				33CB64F01AAAF83500D0BE8D /* CExpandHeader */,
 				26BB7D361A6BA9F9002F4030 /* QQSDK */,
 				26BB7D391A6BA9F9002F4030 /* ZBarSDK */,
@@ -1643,6 +1649,16 @@
 				33CB64F31AAAF83500D0BE8D /* image.png */,
 			);
 			path = CExpandHeader;
+			sourceTree = "<group>";
+		};
+		33E517371AB7C9A8005DC76F /* UMAnalytics_Sdk_3.4.6 */ = {
+			isa = PBXGroup;
+			children = (
+				33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */,
+				33E517391AB7C9A8005DC76F /* MobClick.h */,
+				33E5173A1AB7C9A8005DC76F /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.4.6;
 			sourceTree = "<group>";
 		};
 		80502A031C766084744D27D2 /* Pods */ = {
@@ -2165,6 +2181,7 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/libWeiboSDK",
 					"$(PROJECT_DIR)/mltshop/Frameworks/WeChatSDK_64",
 					"$(PROJECT_DIR)/mltshop/Frameworks/umsdk_IOS_analytics_idfa_v3.4.6/UMAnalytics_Sdk_3.4.6",
+					"$(PROJECT_DIR)/mltshop/Frameworks/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2270,6 +2287,7 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/libWeiboSDK",
 					"$(PROJECT_DIR)/mltshop/Frameworks/WeChatSDK_64",
 					"$(PROJECT_DIR)/mltshop/Frameworks/umsdk_IOS_analytics_idfa_v3.4.6/UMAnalytics_Sdk_3.4.6",
+					"$(PROJECT_DIR)/mltshop/Frameworks/UMAnalytics_Sdk_3.4.6",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

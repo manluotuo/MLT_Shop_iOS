@@ -149,6 +149,7 @@
 
 - (void)registerAction
 {
+    [MobClick event:@"Register"];
     RegisterViewController *vc = [[RegisterViewController alloc]initWithNibName:nil bundle:nil];
     [self presentViewController:vc animated:YES completion:^{}];
 }
@@ -230,10 +231,12 @@
 
         if (responseObject != nil) {
             
+            NSLog(@"%@", responseObject);
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             dict[@"password"] = self.passTextView.text;
 
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
+            [MobClick event:UM_LOGIN];
             [XAppDelegate skipIntroView];
 
         }

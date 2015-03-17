@@ -37,6 +37,7 @@
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SDWebImage/SDImageCache.h>
+
 #define MR_LOGGING_ENABLED 0
 @interface AppDelegate ()
 @property(nonatomic, strong)KKDrawerViewController * drawerController;
@@ -55,12 +56,26 @@
 @synthesize registerViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+//     Override point for customization after application launch.
 //    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
 //    NSString *nowVersion = NOWVERSION;
 //    NSString *nowBuild = NOWBUILD;
 //    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
 
+    
+    
+    /** 设置友盟 */
+    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH   channelId:@"nil"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+    [MobClick setLogEnabled:YES];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
+    
+    [MobClick event:UM_START];
+    
+    
     [WXApi registerApp:WXAPI_APP_ID];
     [WeiboSDK registerApp:WEIBO_APP_KEY];
     TencentOAuth *tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_API_ID andDelegate:self];
@@ -78,8 +93,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.me = [[ModelHelper sharedHelper]findOnlyMe];
-
     
+    
+
     
     
     /**
@@ -127,6 +143,11 @@
     [self skipIntroView];
     
     return YES;
+}
+
+- (void)onlineConfigCallBack:(NSNotification *)note {
+    
+    NSLog(@"online config has fininshed and note = %@", note.userInfo);
 }
 
 - (void)showDrawerView
@@ -194,6 +215,7 @@
         
         if (responseObject != nil) {
             
+            [MobClick endEvent:UM_LOGIN];
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             // 显示主页面
