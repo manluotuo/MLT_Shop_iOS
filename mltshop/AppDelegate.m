@@ -38,6 +38,8 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SDWebImage/SDImageCache.h>
 
+#import "HYBJPushHelper.h"
+
 #define MR_LOGGING_ENABLED 0
 @interface AppDelegate ()
 @property(nonatomic, strong)KKDrawerViewController * drawerController;
@@ -62,7 +64,7 @@
 //    NSString *nowBuild = NOWBUILD;
 //    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
 
-    
+    [HYBJPushHelper setupWithOptions:launchOptions];
     
     /** 设置友盟 */
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH   channelId:@"nil"];
@@ -345,7 +347,48 @@
     return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [HYBJPushHelper registerDeviceToken:deviceToken];
+    return;
+}
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [HYBJPushHelper handleRemoteNotification:userInfo completion:nil];
+    return;
+}
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [HYBJPushHelper showLocalNotificationAtFront:notification];
+    return;
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    NSLog(@"Error in registration. Error: %@", err);
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [application setApplicationIconBadgeNumber:0];
+    return;
+}
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
+// ios7.0以后才有此功能
+- (void)application:(UIApplication *)application didReceiveRemoteNotification
+                   :(NSDictionary *)userInfo fetchCompletionHandler
+                   :(void (^)(UIBackgroundFetchResult))completionHandler {
+    [HYBJPushHelper handleRemoteNotification:userInfo completion:completionHandler];
+    
+    // 应用正处理前台状态下，不会收到推送消息，因此在此处需要额外处理一下
+    if (application.applicationState == UIApplicationStateActive) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"收到推送消息"
+                                                        message:userInfo[@"aps"][@"alert"]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"取消"
+                                              otherButtonTitles:@"确定", nil];
+        [alert show];
+    }  
+    return;  
+}  
+#endif
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -361,9 +404,7 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

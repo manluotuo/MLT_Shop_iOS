@@ -220,6 +220,15 @@
 		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
 		33CB64F51AAAF83500D0BE8D /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 33CB64F31AAAF83500D0BE8D /* image.png */; };
+		33D92C101AB95EC8004C1FA2 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */; };
+		33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C111AB95F11004C1FA2 /* CFNetwork.framework */; };
+		33D92C141AB95F1C004C1FA2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C131AB95F1C004C1FA2 /* CoreFoundation.framework */; };
+		33D92C161AB95F27004C1FA2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C151AB95F27004C1FA2 /* CoreTelephony.framework */; };
+		33D92C181AB95F50004C1FA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C171AB95F50004C1FA2 /* Foundation.framework */; };
+		33D92C1A1AB95F58004C1FA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C191AB95F58004C1FA2 /* UIKit.framework */; };
+		33D92C1C1AB95F63004C1FA2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C1B1AB95F63004C1FA2 /* Security.framework */; };
+		33D92C1E1AB96089004C1FA2 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C1D1AB96089004C1FA2 /* PushConfig.plist */; };
+		33D92C211AB96712004C1FA2 /* HYBJPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */; };
 		33E5173B1AB7C9A8005DC76F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -678,6 +687,17 @@
 		33CB64F11AAAF83500D0BE8D /* CExpandHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExpandHeader.h; sourceTree = "<group>"; };
 		33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CExpandHeader.m; sourceTree = "<group>"; };
 		33CB64F31AAAF83500D0BE8D /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		33D92C0E1AB95EC8004C1FA2 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
+		33D92C111AB95F11004C1FA2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		33D92C131AB95F1C004C1FA2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		33D92C151AB95F27004C1FA2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		33D92C171AB95F50004C1FA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		33D92C191AB95F58004C1FA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		33D92C1B1AB95F63004C1FA2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		33D92C1D1AB96089004C1FA2 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		33D92C1F1AB96712004C1FA2 /* HYBJPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBJPushHelper.h; sourceTree = "<group>"; };
+		33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYBJPushHelper.m; sourceTree = "<group>"; };
 		33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		33E517391AB7C9A8005DC76F /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		33E5173A1AB7C9A8005DC76F /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -692,18 +712,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BB7D781A6BAFDA002F4030 /* libz.dylib in Frameworks */,
+				33D92C1C1AB95F63004C1FA2 /* Security.framework in Frameworks */,
+				33D92C1A1AB95F58004C1FA2 /* UIKit.framework in Frameworks */,
+				33D92C181AB95F50004C1FA2 /* Foundation.framework in Frameworks */,
+				26BB7D711A6BAF8E002F4030 /* CoreGraphics.framework in Frameworks */,
+				262E1E801A5835EC00C29059 /* SystemConfiguration.framework in Frameworks */,
+				33D92C161AB95F27004C1FA2 /* CoreTelephony.framework in Frameworks */,
+				33D92C141AB95F1C004C1FA2 /* CoreFoundation.framework in Frameworks */,
+				33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */,
 				26BB7D7E1A6BB070002F4030 /* libstdc++.dylib in Frameworks */,
 				26BB7D7C1A6BB009002F4030 /* libsqlite3.dylib in Frameworks */,
 				26BB7D7A1A6BAFEE002F4030 /* QuartzCore.framework in Frameworks */,
-				262E1E801A5835EC00C29059 /* SystemConfiguration.framework in Frameworks */,
 				26BB7D771A6BAFBE002F4030 /* CoreMedia.framework in Frameworks */,
 				26BB7D751A6BAF98002F4030 /* AVFoundation.framework in Frameworks */,
 				26BB7D731A6BAF93002F4030 /* CoreVideo.framework in Frameworks */,
-				26BB7D711A6BAF8E002F4030 /* CoreGraphics.framework in Frameworks */,
 				26BB7D6F1A6BAF66002F4030 /* libiconv.dylib in Frameworks */,
 				26986B531A585832006354E6 /* libssl.a in Frameworks */,
 				26BB7D601A6BA9F9002F4030 /* TencentOpenAPI.framework in Frameworks */,
 				262E1E7E1A58352300C29059 /* AlipaySDK.framework in Frameworks */,
+				33D92C101AB95EC8004C1FA2 /* libPushSDK-1.8.2.a in Frameworks */,
 				26BB7D6A1A6BA9F9002F4030 /* libWeChatSDK.a in Frameworks */,
 				26BB7D681A6BA9F9002F4030 /* libWeiboSDK.a in Frameworks */,
 				26BB7D621A6BA9F9002F4030 /* libzbar-sim.a in Frameworks */,
@@ -1024,6 +1051,7 @@
 				266FA7FE1A134A72000C2AAE /* Info.plist */,
 				266FA7FF1A134A72000C2AAE /* main.m */,
 				26435AC21A20B44F00E117A0 /* InfoPlist.strings */,
+				33D92C1D1AB96089004C1FA2 /* PushConfig.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1228,6 +1256,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33D92C0D1AB95EC8004C1FA2 /* lib */,
 				33E517371AB7C9A8005DC76F /* UMAnalytics_Sdk_3.4.6 */,
 				33CB64F01AAAF83500D0BE8D /* CExpandHeader */,
 				26BB7D361A6BA9F9002F4030 /* QQSDK */,
@@ -1651,6 +1680,17 @@
 			path = CExpandHeader;
 			sourceTree = "<group>";
 		};
+		33D92C0D1AB95EC8004C1FA2 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				33D92C0E1AB95EC8004C1FA2 /* APService.h */,
+				33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */,
+				33D92C1F1AB96712004C1FA2 /* HYBJPushHelper.h */,
+				33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		33E517371AB7C9A8005DC76F /* UMAnalytics_Sdk_3.4.6 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1673,6 +1713,12 @@
 		E781564BAD464C1A94F8A622 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33D92C1B1AB95F63004C1FA2 /* Security.framework */,
+				33D92C191AB95F58004C1FA2 /* UIKit.framework */,
+				33D92C171AB95F50004C1FA2 /* Foundation.framework */,
+				33D92C151AB95F27004C1FA2 /* CoreTelephony.framework */,
+				33D92C131AB95F1C004C1FA2 /* CoreFoundation.framework */,
+				33D92C111AB95F11004C1FA2 /* CFNetwork.framework */,
 				26BB7D7D1A6BB070002F4030 /* libstdc++.dylib */,
 				26BB7D7B1A6BB009002F4030 /* libsqlite3.dylib */,
 				26BB7D791A6BAFEE002F4030 /* QuartzCore.framework */,
@@ -1743,6 +1789,11 @@
 					266FA7F91A134A72000C2AAE = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 2H428L3T6B;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					266FA8151A134A72000C2AAE = {
 						CreatedOnToolsVersion = 6.1;
@@ -1776,6 +1827,7 @@
 				262CD4771A5DB4A600A712BA /* M002.png in Resources */,
 				262E1E6E1A555B2A00C29059 /* alipay@2x.png in Resources */,
 				26435AD01A20CA7900E117A0 /* Default-568h@2x.png in Resources */,
+				33D92C1E1AB96089004C1FA2 /* PushConfig.plist in Resources */,
 				263386691A52FFEA00C94D8F /* SVWebViewControllerActivitySafari@2x.png in Resources */,
 				262CD4741A5DB4A600A712BA /* F011.png in Resources */,
 				26BE3A871A170421009F37B4 /* weibo@2x.png in Resources */,
@@ -2019,6 +2071,7 @@
 				262E1EE11A5836A100C29059 /* DataVerifier.m in Sources */,
 				26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
+				33D92C211AB96712004C1FA2 /* HYBJPushHelper.m in Sources */,
 				336B62AC1AB16CD500476A93 /* BonusViewController.m in Sources */,
 				262E1EE31A5836A100C29059 /* NSDataEx.m in Sources */,
 				262E1EE51A5836A100C29059 /* RSADataSigner.m in Sources */,
@@ -2182,6 +2235,8 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/WeChatSDK_64",
 					"$(PROJECT_DIR)/mltshop/Frameworks/umsdk_IOS_analytics_idfa_v3.4.6/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/mltshop/Frameworks/UMAnalytics_Sdk_3.4.6",
+					"$(PROJECT_DIR)/mltshop/Frameworks/lib",
+					"$(SRCROOT)/mltshop/Frameworks/lib",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2238,7 +2293,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/mltshop/Frameworks/lib";
 			};
 			name = Debug;
 		};
@@ -2288,6 +2343,8 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/WeChatSDK_64",
 					"$(PROJECT_DIR)/mltshop/Frameworks/umsdk_IOS_analytics_idfa_v3.4.6/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/mltshop/Frameworks/UMAnalytics_Sdk_3.4.6",
+					"$(PROJECT_DIR)/mltshop/Frameworks/lib",
+					"$(SRCROOT)/mltshop/Frameworks/lib",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2344,7 +2401,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/mltshop/Frameworks/lib";
 			};
 			name = Release;
 		};
