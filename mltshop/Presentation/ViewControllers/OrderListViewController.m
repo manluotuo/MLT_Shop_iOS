@@ -71,6 +71,7 @@
     if([value isEqualToString:SIGNAL_ORDER_ACTION]){
         OrderModel *theOrder = data;
         NSMutableArray *titles = [[NSMutableArray alloc]init];
+        
         if ([theOrder.paymentType isEqualToString:@"UNPAYED"]) {
             [self doAlipayAction:theOrder];
         }
@@ -115,8 +116,12 @@
     order.partner = partner;
     order.seller = seller;
     order.tradeNO = theOrder.orderSn; //订单ID（由商家自行制定）
-    order.productName = theOrder.subject; //商品标题
+    order.productName = [NSString stringWithFormat:@"%@i",theOrder.subject]; //商品标题
     order.productDescription = theOrder.desc; //商品描述
+//    NSLog(@"!!!%@", theOrder.orderSn);
+//    NSLog(@"$$$%@", theOrder.subject);
+//    NSLog(@"^^^%@", theOrder.desc);
+//    NSLog(@"***%.2f", theOrder.orderAmount.floatValue);
     order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
     //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
@@ -149,7 +154,9 @@
             NSLog(@"reslut = %@",resultDic);
             [MobClick event:UM_PAY];
             if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
+                
                 [self.navigationController popViewControllerAnimated:YES];
+                
             }
         }];
         
@@ -160,6 +167,7 @@
  *  初始化文章 two goods one line
  */
 - (void)setupDataSource {
+    
     self.start = 0;
     [[AppRequestManager sharedManager]operateOrderWithOrderModel:self.theOrder operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
         
@@ -169,10 +177,10 @@
             NSUInteger count = [responseObject count];
             if (ArrayHasValue(responseObject)) {
                 for (int i = 0 ; i < count; i++) {
-                    
                     OrderModel *oneOrder = [[OrderModel alloc]initWithDict:responseObject[i]];
                     [self.dataArray addObject:oneOrder];
                 }
+                
                 NSLog(@"Online setupDataSource ======== ");
                 [self showSetupDataSource:self.dataArray andError:nil];
                 self.start = self.start + 1;

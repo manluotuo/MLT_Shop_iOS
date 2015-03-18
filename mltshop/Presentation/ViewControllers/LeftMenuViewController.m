@@ -489,6 +489,10 @@
         {
             [[ModelHelper sharedHelper]meLogoutWithBlock:^(BOOL exeStatus) {
                 [self.dataSource removeObject:self.dataSource.lastObject];
+                Me *me = [Me MR_createEntity];
+                [me MR_deleteEntity];
+                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+                NSLog(@"%@", me.userId);
                 [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
                     [XAppDelegate showLoginView];
                 }];
@@ -549,11 +553,30 @@
             break;
         case LeftMenuCart:
         {
-            CartListViewController *VC = [[CartListViewController alloc]init];
-            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
-            [VC setupLeftMMButton];
-            [self.mm_drawerController setCenterViewController:nav];
-            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+            
+            if (StringHasValue(XAppDelegate.me.sessionId)) {
+                CartListViewController *VC = [[CartListViewController alloc]init];
+                ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+                [VC setupLeftMMButton];
+                [self.mm_drawerController setCenterViewController:nav];
+                [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
+            }else{
+                [SGActionView showAlertWithTitle:T(@"请先登录") message:T(@"查看购物车需要登录") leftButtonTitle:T(@"取消") rightButtonTitle:T(@"去登录") selectedHandle:^(NSInteger index) {
+                    if (index == 1) {
+                        [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+                            [XAppDelegate showLoginView];
+                        }];
+                    }
+                }];
+                
+            }
+            
+            
+//            CartListViewController *VC = [[CartListViewController alloc]init];
+//            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+//            [VC setupLeftMMButton];
+//            [self.mm_drawerController setCenterViewController:nav];
+//            [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];
             
         }
             break;

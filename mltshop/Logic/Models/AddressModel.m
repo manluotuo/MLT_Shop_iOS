@@ -35,6 +35,7 @@
         _defaultAddress = dict[@"default_address"];
         
         _indexPath = [[NSIndexPath alloc]init];
+        NSLog(@"%@", _consignee);
     }
     
     // 默认中国

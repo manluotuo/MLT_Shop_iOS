@@ -21,7 +21,7 @@
 #import "ShareHelper.h"
 
 #import "CommentTableViewCell.h"
-
+#import "AppDelegate.h"
 
 #define SERVICE_TAB_TAG     101
 #define ADD_CART_TAB_TAG    102
@@ -123,48 +123,52 @@
     if (sender.tag == ADD_CART_TAB_TAG) {
         
         NSMutableArray *titleArray = [[NSMutableArray alloc]init];
-        
-        /**
-         *  如果只有一个 那么默认选第一个
-         */
-        if ([self.theGoods.spec.values count] == 1) {
-            SpecItemModel *item = [self.theGoods.spec.values firstObject];
-            CartModel *newCartItem = [[CartModel alloc]init];
-            newCartItem.goodsId = self.theGoods.goodsId;
-            newCartItem.goodsCount = INT(1);
-            newCartItem.goodsAttrId = item.itemId;
-            
-            [self addToCart:newCartItem];
-        }else if ([self.theGoods.spec.values count] > 1){
-            
-            
-            for (SpecItemModel *item in self.theGoods.spec.values) {
-                [titleArray addObject:item.label];
-            }
-            
-            [SGActionView showSheetWithTitle:T(@"选择尺码/颜色分类")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
-                
-                SpecItemModel *specItem = [self.theGoods.spec.values objectAtIndex:index];
+        if (XAppDelegate.me.userId) {
+            /**
+             *  如果只有一个 那么默认选第一个
+             */
+            if ([self.theGoods.spec.values count] == 1) {
+                SpecItemModel *item = [self.theGoods.spec.values firstObject];
                 CartModel *newCartItem = [[CartModel alloc]init];
                 newCartItem.goodsId = self.theGoods.goodsId;
                 newCartItem.goodsCount = INT(1);
-                newCartItem.goodsAttrId = specItem.itemId;
-                
+                newCartItem.goodsAttrId = item.itemId;
                 
                 [self addToCart:newCartItem];
+            }else if ([self.theGoods.spec.values count] > 1){
                 
-            }];
-        }else{
-            // 没有spec 的
-            CartModel *newCartItem = [[CartModel alloc]init];
-            newCartItem.goodsId = self.theGoods.goodsId;
-            newCartItem.goodsCount = INT(1);
-            newCartItem.goodsAttrId = @"";
-            
-            [self addToCart:newCartItem];
+                
+                for (SpecItemModel *item in self.theGoods.spec.values) {
+                    [titleArray addObject:item.label];
+                }
+                
+                [SGActionView showSheetWithTitle:T(@"选择尺码/颜色分类")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
+                    
+                    SpecItemModel *specItem = [self.theGoods.spec.values objectAtIndex:index];
+                    CartModel *newCartItem = [[CartModel alloc]init];
+                    newCartItem.goodsId = self.theGoods.goodsId;
+                    newCartItem.goodsCount = INT(1);
+                    newCartItem.goodsAttrId = specItem.itemId;
+                    
+                    
+                    [self addToCart:newCartItem];
+                    
+                }];
+            }else{
+                // 没有spec 的
+                CartModel *newCartItem = [[CartModel alloc]init];
+                newCartItem.goodsId = self.theGoods.goodsId;
+                newCartItem.goodsCount = INT(1);
+                newCartItem.goodsAttrId = @"";
+                
+                [self addToCart:newCartItem];
+            }
+        } else {
+            [DataTrans showWariningTitle:T(@"您还没有登陆，无法添加购物车") andCheatsheet:nil andDuration:1.0f];
         }
         
-    }else if (sender.tag == SERVICE_TAB_TAG){
+        
+    } else if (sender.tag == SERVICE_TAB_TAG){
         NSString *urlString = CUSTOMER_SERVICE_URL;
         WebViewController *VC = [[WebViewController alloc]initWithNibName:nil bundle:nil];
         VC.titleString = T(@"帮助/客服");
@@ -173,10 +177,14 @@
         ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
         [self presentViewController:nav animated:YES completion:nil];
     }else if (sender.tag == CART_TAB_TAG){
-        CartListViewController *VC = [[CartListViewController alloc]init];
-        [VC setUpDownButton:0];
-        ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
-        [self presentViewController:nav animated:YES completion:nil];
+        if (XAppDelegate.me.userId) {
+            CartListViewController *VC = [[CartListViewController alloc]init];
+            [VC setUpDownButton:0];
+            ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
+            [self presentViewController:nav animated:YES completion:nil];
+        } else {
+            [DataTrans showWariningTitle:T(@"您还没有登陆，无法查看购物车") andCheatsheet:nil andDuration:1.f];
+        }
     }
 }
 
@@ -192,6 +200,7 @@
                 [self refreshCartCount];
             }
         }];
+        
     }];
     
 }
@@ -570,6 +579,8 @@
     
     [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
+            
+            NSLog(@"%@", responseObject);
             self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];
             [self refreshViewWithData];
         }
@@ -581,24 +592,30 @@
 
 - (void)refreshCartCount
 {
-    [[AppRequestManager sharedManager]operateCartWithCartModel:nil operation:CartOpsList andBlock:^(id responseObject, NSError *error) {
-        if (responseObject != nil) {
-            NSArray *goodsList = responseObject[@"goods_list"];
-            [UIView animateWithDuration:0.3
-                                  delay:0
-                                options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
-                             animations:^{
-                                 //Move frame or transform view
-                                 self.cartCountLabel.y = H_15;
-                                 self.cartCountLabel.text = STR_INT([goodsList count]);
-                             } completion:^(BOOL finished) {
-                                 [UIView animateWithDuration:0.3 animations:^{
-                                     self.cartCountLabel.y = H_10;
-                                     
+    if (XAppDelegate.me.userId == nil) {
+        
+        self.cartCountLabel.text = @"0";
+        
+    } else {
+        [[AppRequestManager sharedManager]operateCartWithCartModel:nil operation:CartOpsList andBlock:^(id responseObject, NSError *error) {
+            if (responseObject != nil) {
+                NSArray *goodsList = responseObject[@"goods_list"];
+                [UIView animateWithDuration:0.3
+                                      delay:0
+                                    options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
+                                 animations:^{
+                                     //Move frame or transform view
+                                     self.cartCountLabel.y = H_15;
+                                     self.cartCountLabel.text = STR_INT([goodsList count]);
+                                 } completion:^(BOOL finished) {
+                                     [UIView animateWithDuration:0.3 animations:^{
+                                         self.cartCountLabel.y = H_10;
+                                         
+                                     }];
                                  }];
-                             }];
-        }
-    }];
+            }
+        }];
+    }
 }
 
 - (void)refreshViewWithData

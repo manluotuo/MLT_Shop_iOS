@@ -37,7 +37,7 @@
             }
         }
         
-        _consignee      = [[AddressModel alloc]initWithDict:dict[@"consignee"]];
+        _consignee = [[AddressModel alloc]initWithDict:dict[@"consignee"]];
         
         if (ArrayHasValue( dict[@"payment_list"])) {
             for (NSDictionary *item in [dict objectForKey:@"payment_list"]) {

@@ -101,9 +101,11 @@
             
             // 如果支付和快递  默认选第一个
             if ([self.dataSource.shippingList count] >= 1) {
+                
                 ShippingModel *item = [self.dataSource.shippingList firstObject];
                 item.selected = YES;
                 self.flowDoneData.shippingId = item.shippingId;
+                
             }
             
             if ([self.dataSource.paymentList count] >=  1) {
@@ -171,7 +173,7 @@
     order.partner = partner;
     order.seller = seller;
     order.tradeNO = theOrder.orderSn; //订单ID（由商家自行制定）
-    order.productName = theOrder.subject; //商品标题
+    order.productName = [NSString stringWithFormat:@"%@i", theOrder.subject]; //商品标题
     order.productDescription = theOrder.desc; //商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",theOrder.orderAmount.floatValue]; //商品价格
     //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1

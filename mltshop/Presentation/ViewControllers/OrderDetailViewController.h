@@ -10,6 +10,7 @@
 
 @interface OrderDetailViewController : UIViewController
 
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 /** order_id */
 @property (nonatomic, strong) NSString *order_id;
 
