@@ -229,6 +229,8 @@
 		33D92C1C1AB95F63004C1FA2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C1B1AB95F63004C1FA2 /* Security.framework */; };
 		33D92C1E1AB96089004C1FA2 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C1D1AB96089004C1FA2 /* PushConfig.plist */; };
 		33D92C211AB96712004C1FA2 /* HYBJPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */; };
+		33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C221AB98373004C1FA2 /* collect_sel.png */; };
+		33D92C251AB98373004C1FA2 /* collect_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C231AB98373004C1FA2 /* collect_no.png */; };
 		33E5173B1AB7C9A8005DC76F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -698,6 +700,8 @@
 		33D92C1D1AB96089004C1FA2 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		33D92C1F1AB96712004C1FA2 /* HYBJPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBJPushHelper.h; sourceTree = "<group>"; };
 		33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYBJPushHelper.m; sourceTree = "<group>"; };
+		33D92C221AB98373004C1FA2 /* collect_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect_sel.png; sourceTree = "<group>"; };
+		33D92C231AB98373004C1FA2 /* collect_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect_no.png; sourceTree = "<group>"; };
 		33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		33E517391AB7C9A8005DC76F /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		33E5173A1AB7C9A8005DC76F /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -1181,6 +1185,8 @@
 		26BE39E01A170421009F37B4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				33D92C221AB98373004C1FA2 /* collect_sel.png */,
+				33D92C231AB98373004C1FA2 /* collect_no.png */,
 				262E1E781A58348F00C29059 /* pkcs8.txt */,
 				26BE39E11A170421009F37B4 /* Fonts */,
 				26BE39E31A170421009F37B4 /* Images */,
@@ -1844,6 +1850,7 @@
 				262CD46C1A5DB4A600A712BA /* F003.png in Resources */,
 				26BE3A8D1A170421009F37B4 /* ding.wav in Resources */,
 				26BB7D661A6BA9F9002F4030 /* zbar-helpicons.png in Resources */,
+				33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */,
 				262CD47B1A5DB4A600A712BA /* M006.png in Resources */,
 				262CD4731A5DB4A600A712BA /* F010.png in Resources */,
 				26BB7D651A6BA9F9002F4030 /* zbar-help.html in Resources */,
@@ -1874,6 +1881,7 @@
 				262CD46A1A5DB4A600A712BA /* F001.png in Resources */,
 				26435ABF1A20700D00E117A0 /* train_bg@2x.png in Resources */,
 				26BB7D671A6BA9F9002F4030 /* zbar-samples.png in Resources */,
+				33D92C251AB98373004C1FA2 /* collect_no.png in Resources */,
 				263386651A52FFEA00C94D8F /* SVWebViewControllerActivityChrome@2x.png in Resources */,
 				26DE7FCB1A2A12B8007F4B16 /* avatarIronMan@2x.png in Resources */,
 				262CD4801A5DB4A600A712BA /* M012.png in Resources */,

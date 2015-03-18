@@ -24,10 +24,17 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSString *orderStatus; // 订单状态
+@property (nonatomic, strong) NSString *shippingStatus; // 发货状态
+@property (nonatomic, strong) NSString *payStatus; // 支付状态
+
 
 @end
 
-@implementation OrderDetailViewController
+@implementation OrderDetailViewController {
+    UIButton *button;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,8 +101,8 @@
     return line;
 }
 
+/** d订单详情 */
 - (void)initView {
-    
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
         //    CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
@@ -142,7 +149,75 @@
         UILabel *lableH = [self createLable:[NSString stringWithFormat:@"订单编号：%@", model.order_sn] frame:CGRectMake(H_20, lableG.y+lableG.height+H_10, WIDTH-H_15*2, H_20) color:nil font:nil];
         [self.scrollView addSubview:lableH];
         
-        UILabel *lableI = [self createLable:[NSString stringWithFormat:@"订单状态：%@, %@, %@", model.order_status, model.shipping_status, model.pay_status] frame:CGRectMake(H_20, lableH.y+lableH.height+H_10, WIDTH-H_15*2, H_20) color:nil font:nil];
+        
+        switch ([model.order_status integerValue]) {
+            case 0:
+                self.orderStatus = T(@"未确认");
+                break;
+            case 1:
+                self.orderStatus = T(@"已确认");
+                break;
+            case 2:
+                self.orderStatus = T(@"已取消");
+                break;
+            case 3:
+                self.orderStatus = T(@"无效");
+                break;
+            case 4:
+                self.orderStatus = T(@"退货");
+                break;
+            case 5:
+                self.orderStatus = T(@"已分单");
+                break;
+            case 6:
+                self.orderStatus = T(@"部分分单");
+                break;
+            default:
+                break;
+                
+        }
+        
+        switch ([model.shipping_status integerValue]) {
+            case 0:
+                self.shippingStatus = T(@"未发货");
+                break;
+            case 1:
+                self.shippingStatus = T(@"已发货");
+                break;
+            case 2:
+                self.shippingStatus = T(@"已收货");
+                break;
+            case 3:
+                self.shippingStatus = T(@"备货中");
+                break;
+            case 4:
+                self.shippingStatus = T(@"已发货(部分商品)");
+                break;
+            case 5:
+                self.shippingStatus = T(@"发货中(处理分单)");
+                break;
+            case 6:
+                self.shippingStatus = T(@"已发货(部分商品)");
+                break;
+            default:
+                break;
+        }
+        
+        switch ([model.pay_status integerValue]) {
+            case 0:
+                self.payStatus = T(@"未付款");
+                break;
+            case 1:
+                self.payStatus = T(@"付款中");
+                break;
+            case 2:
+                self.payStatus = T(@"已付款");
+                break;
+            default:
+                break;
+        }
+        
+        UILabel *lableI = [self createLable:[NSString stringWithFormat:@"订单状态：%@, %@, %@", self.orderStatus, self.shippingStatus, self.payStatus] frame:CGRectMake(H_20, lableH.y+lableH.height+H_10, WIDTH-H_15*2, H_20) color:nil font:nil];
         [self.scrollView addSubview:lableI];
         
         UILabel *lableJ = [self createLable:[NSString stringWithFormat:@"订单金额：%@(包含邮费%@)", model.formated_order_amount, model.formated_shipping_fee] frame:CGRectMake(H_20, lableI.y+lableI.height+H_10, WIDTH-H_15*2, H_20) color:nil font:nil];
@@ -180,9 +255,11 @@
         UILabel *pricrLable = [self createLable:[NSString stringWithFormat:@"应付总额：%@", model.order_amount] frame:CGRectMake(H_15, H_20, WIDTH, H_40) color:ORANGECOLOR font:FONT_16];
         [btnView addSubview:pricrLable];
         
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(WIDTH/2+H_20, H_15, WIDTH/2-H_20*2, H_50)];
         [button setTitle:@"立即付款" forState:UIControlStateNormal];
+        [button setTitle:T(@"确认收货") forState:UIControlStateSelected];
+        button.selected = YES;
         [button setTintColor:WHITECOLOR];
         [button setBackgroundColor:ORANGECOLOR];
         [button.titleLabel setFont:FONT_16];
@@ -190,9 +267,29 @@
         button.clipsToBounds = YES;
         [button addTarget:self action:@selector(onBtnCLick) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:button];
+        [self setButtonSelect];
         [self.view addSubview:btnView];
-
+        
     }
+}
+
+/** 按钮显示的状态 */
+- (void)setButtonSelect {
+    
+    if (self.dataArray.count > 0) {
+        OrderDetailModel *model = [self.dataArray lastObject];
+        if ([model.order_status integerValue] != 0) {
+            button.hidden = YES;
+        } else {
+            if ([model.pay_status integerValue] == 0) {
+                button.selected = NO;
+            } else if ([model.pay_status integerValue] == 2){
+                button.selected = YES;
+            }
+        }
+        
+    }
+    
 }
 
 - (void)setupleftButton
@@ -272,7 +369,7 @@
         order.amount = [NSString stringWithFormat:@"%.2f",theOrder.order_amount.floatValue]; //商品价格
         //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     }
-        order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
+    order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
     order.inputCharset = @"utf-8";

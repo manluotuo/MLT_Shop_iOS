@@ -34,6 +34,7 @@
     CGFloat commentHeight;
     CGFloat cellHeight;
     CGSize fixedSize;
+    UILabel *lable;
 }
 // view
 @property(nonatomic, strong)GoodsModel *theGoods;
@@ -306,9 +307,9 @@
 
 -(void)initButtons
 {
-    self.topNavView = [[UIView alloc]initWithFrame:CGRectMake(0, H_20, TOTAL_WIDTH, H_40)];
+    self.topNavView = [[UIView alloc]initWithFrame:CGRectMake(0, H_25, TOTAL_WIDTH, H_40)];
     
-    self.backButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(H_20, 0, H_40, H_40)];
+    self.backButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(H_20, 0, H_30, H_30)];
     [self.backButton setIconString:[NSString fontAwesomeIconStringForEnum:FAChevronLeft]];
     [self.backButton setBackgroundColor:BlACKALPHACOLOR];
     [self.backButton setRounded];
@@ -317,13 +318,23 @@
     [self.topNavView addSubview:self.backButton];
     
     
-    self.shareButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_60, 0, H_40, H_40)];
+    self.shareButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_50, 0, H_30, H_30)];
     [self.shareButton setIconString:[NSString fontAwesomeIconStringForEnum:FAshareAlt]];
     [self.shareButton setBackgroundColor:BlACKALPHACOLOR];
     [self.shareButton setRounded];
     [self.shareButton setIconFont:FONT_AWESOME_20];
     [self.shareButton addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
     [self.topNavView addSubview:self.shareButton];
+    
+    self.favButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_50 - H_40, 0, H_30, H_30)];
+    [self.favButton setImage:[UIImage imageNamed:@"collect_no"] forState:UIControlStateNormal];
+    [self.favButton setImage:[UIImage imageNamed:@"collect_sel"] forState:UIControlStateSelected];
+    [self.favButton setSelected:NO];
+    [self.favButton setBackgroundColor:BlACKALPHACOLOR];
+    [self.favButton setRounded];
+    [self.favButton setIconFont:FONT_AWESOME_20];
+    [self.favButton addTarget:self action:@selector(onCollectBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.topNavView addSubview:self.favButton];
     
     [self.view addSubview:self.topNavView];
     
@@ -492,7 +503,7 @@
     //    [self.infoView addSubview:self.specificationButton];
     //    [self.infoView addSubview:htmlTitle];
     [self.infoView addSubview:self.lableView];
-    [self.infoView addSubview:self.collectBtn];
+    //    [self.infoView addSubview:self.collectBtn];
     
     
     
@@ -532,8 +543,8 @@
 
 - (void)initCommentView {
     
-    commentHeight = 0.1;
-    self.commentView = [[UITableView alloc] initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, commentHeight)];
+    commentHeight = 0.01;
+    self.commentView = [[UITableView alloc] initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, commentHeight+150)];
     self.commentView.delegate = self;
     self.commentView.dataSource = self;
     [self.fixedView addSubview:self.commentView];
@@ -657,7 +668,7 @@
     
     [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
     if ([self.theGoods.collected isEqualToNumber:INT(1)]) {
-        [self.collectBtn setSelected:YES];
+        [self.favButton setSelected:YES];
     }
 }
 
@@ -694,6 +705,7 @@
     
     NSLog(@"%d", self.commentData.count);
     return self.commentData.count;
+    
 }
 
 
@@ -703,6 +715,8 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"CommentTableViewCell" owner:self options:nil] lastObject];
     }
+    
+    lable.hidden = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     CommentModel *model = self.commentData[indexPath.row];
     [cell setCellData:model];
@@ -718,8 +732,7 @@
     self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
     fixedSize = self.fixedView.contentSize;
     
-    NSLog(@"!!!!!!!%f", cellHeight);
-    return 100;
+    return cellHeight;
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -757,10 +770,12 @@
 /** 用户评论点击事件 */
 - (void)onCommentBtnClick {
     
-    self.fixedView.contentOffset = CGPointMake(0, 0);
+        self.fixedView.contentOffset = CGPointMake(0, 0);
+    //    self.fixedView.contentSize
     if (self.commentBtn.selected == YES) {
         return;
     }
+    
     fixedHeight = H_550;
     if (self.htmlView != nil) {
         [self.htmlView removeFromSuperview];
@@ -774,7 +789,8 @@
                 
                 [self.commentData addObject:model];
             }
-            
+            [self initNotCollectView];
+            self.fixedView.contentSize = CGSizeMake(WIDTH, TOTAL_HEIGHT+250);
             [self.commentView reloadData];
         }];
     }
@@ -784,7 +800,12 @@
         
     } else {
         [self.commentView setHidden:NO];
-        self.fixedView.contentSize = fixedSize;
+        if (fixedSize.height == 0) {
+            self.fixedView.contentSize = CGSizeMake(WIDTH, TOTAL_HEIGHT+250);
+        } else {
+            NSLog(@"%f", fixedSize.height);
+            self.fixedView.contentSize = fixedSize;
+        }
     }
     
     self.htmlBtn.selected = NO;
@@ -793,15 +814,24 @@
     
 }
 
+- (void)initNotCollectView {
+    
+    lable = [[UILabel alloc] initWithFrame:CGRectMake(H_50, H_50, WIDTH-H_50*2, H_50)];
+    lable.text = T(@"该商品还没有评论");
+    lable.font = FONT_20;
+    [self.commentView addSubview:lable];
+    
+}
+
 /** 收藏按钮点击事件 */
 - (void)onCollectBtnClick {
     
-    if (self.collectBtn.selected == NO) {
+    if (self.favButton.selected == NO) {
         [[AppRequestManager sharedManager]getCollectAddWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
             NSLog(@"%@", responseObject[@"status"][@"succeed"]);
             if (responseObject != nil) {
                 [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:ICON_CHECK andDuration:1.0f];
-                self.collectBtn.selected = !self.collectBtn.selected;
+                self.favButton.selected = !self.favButton.selected;
             }
             /*if (error != nil) */ else {
                 NSDictionary *userDict = [error userInfo];
@@ -814,7 +844,7 @@
         [[AppRequestManager sharedManager]getDeleteCollectRecId:self.theGoods.goodsId andBlcok:^(id responseObject, NSError *error) {
             if (responseObject != nil) {
                 [DataTrans showWariningTitle:T(@"已取消收藏") andCheatsheet:ICON_TIMES andDuration:1.0f];
-                self.collectBtn.selected = !self.collectBtn.selected;
+                self.favButton.selected = !self.favButton.selected;
             } else {
                 NSDictionary *userDict = [error userInfo];
                 if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {

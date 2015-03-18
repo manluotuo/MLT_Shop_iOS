@@ -217,7 +217,7 @@
         
         if (responseObject != nil) {
             
-            [MobClick endEvent:UM_LOGIN];
+            [MobClick event:UM_LOGIN];
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             // 显示主页面

@@ -149,7 +149,7 @@
 
 - (void)registerAction
 {
-    [MobClick event:@"Register"];
+    [MobClick event:UM_REGISTER];
     RegisterViewController *vc = [[RegisterViewController alloc]initWithNibName:nil bundle:nil];
     [self presentViewController:vc animated:YES completion:^{}];
 }
