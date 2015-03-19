@@ -66,11 +66,23 @@
 
 - (void)setNewData:(BonusInfoModel *)model {
     
+
     self.data = model;
     self.bonus_name.text = [NSString stringWithFormat:@"红包名称：%@", self.data.type_name];
     self.bonusMoney.text = [NSString stringWithFormat:@"红包金额：%@元(满%@元可以使用)", self.data.type_money, self.data.min_goods_amount];
-    self.startTime.text = [NSString stringWithFormat:@"领取日期：%@", self.data.send_start_date];
-    self.endTime.text = [NSString stringWithFormat:@"截止日期：%@", self.data.use_end_date];
+    self.startTime.text = [NSString stringWithFormat:@"领取日期：%@", [self setTimer:self.data.send_start_date]];
+    self.endTime.text = [NSString stringWithFormat:@"截止日期：%@", [self setTimer:self.data.use_end_date]];
+}
+
+- (NSString *)setTimer:(NSString *)time {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[time integerValue]+8*3600];
+    NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+    return confromTimespStr;
     
 }
 

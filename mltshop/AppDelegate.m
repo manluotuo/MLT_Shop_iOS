@@ -39,6 +39,7 @@
 #import <SDWebImage/SDImageCache.h>
 
 #import "HYBJPushHelper.h"
+#import "APService.h"
 
 #define MR_LOGGING_ENABLED 0
 @interface AppDelegate ()
@@ -51,7 +52,9 @@
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    HTProgressHUD *HUD;
+}
 @synthesize drawerController;
 @synthesize firstHelpViewController;
 @synthesize loginViewController;
@@ -83,6 +86,30 @@
     TencentOAuth *tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_API_ID andDelegate:self];
     tencentOAuth.redirectURI = @"";
     
+    /** 推送 */
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+    }
+#else
+    //categories 必须为nil
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+#endif
+    // Required
+    [APService setupWithOption:launchOptions];
     
     // TODO: 先初始化 用来none insert vehicle
     //    [self managedObjectContext];
@@ -158,7 +185,10 @@
     
     UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
     [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
-
+    HUD = [[HTProgressHUD alloc] init];
+    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+    HUD.text = T(@"正在获取数据~请稍后");
+    [HUD showInView:self.window];
     [self getAllCategoryWithBlock:^(BOOL success) {
         if(success){
             [self.drawerController setCenterViewController:navigationController];
@@ -178,9 +208,9 @@
     
     if (!result.boolValue) {
         [self showIntroductionView];
-    }else{
+    } else {
+        
         NSLog(@"APP ME  %@",self.me);
-
         if (!StringHasValue(self.me.userId)) {
             NSLog(@"会记住登录信息,用户还没有登录");
             [self showLoginView];
@@ -268,12 +298,18 @@
     self.allCategory = [[NSMutableArray alloc]init];
     [[AppRequestManager sharedManager]getCategoryAllWithBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
+            if (!HUD) {
+                [HUD removeFromSuperview];
+            }
             for (int i = 0 ; i < [responseObject count]; i++) {
                 CategoryModel *model = [[CategoryModel alloc]initWithDict:responseObject[i]];
                 [self.allCategory addObject:model];
             }
             block(YES);
         }else{
+            if (!HUD) {
+                [HUD removeFromSuperview];
+            }
             [DataTrans showWariningTitle:T(@"分类获取失败") andCheatsheet:ICON_TIMES];
         }
     }];
@@ -349,11 +385,13 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [HYBJPushHelper registerDeviceToken:deviceToken];
+    [APService registerDeviceToken:deviceToken];
     return;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [HYBJPushHelper handleRemoteNotification:userInfo completion:nil];
+    [APService handleRemoteNotification:userInfo];
     return;
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -370,26 +408,14 @@
     return;
 }
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
-// ios7.0以后才有此功能
-- (void)application:(UIApplication *)application didReceiveRemoteNotification
-                   :(NSDictionary *)userInfo fetchCompletionHandler
-                   :(void (^)(UIBackgroundFetchResult))completionHandler {
-    [HYBJPushHelper handleRemoteNotification:userInfo completion:completionHandler];
-    
-    // 应用正处理前台状态下，不会收到推送消息，因此在此处需要额外处理一下
-    if (application.applicationState == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"收到推送消息"
-                                                        message:userInfo[@"aps"][@"alert"]
-                                                       delegate:nil
-                                              cancelButtonTitle:@"取消"
-                                              otherButtonTitles:@"确定", nil];
-        [alert show];
-    }  
-    return;  
-}  
-#endif
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    
+    // IOS 7 Support Required
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

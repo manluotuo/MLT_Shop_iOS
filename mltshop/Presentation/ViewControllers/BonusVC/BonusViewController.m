@@ -95,7 +95,8 @@
     }
     
     BonusInfoModel *model = self.dataArray[indexPath.row];
-//    BonusListModel *model = self.dataSource[indexPath.row];
+    BonusListModel *listModel = self.dataSource[indexPath.row];
+    model.bonus_date = listModel.bonus_date;
     [cell setNewData:model];
     return cell;
 }

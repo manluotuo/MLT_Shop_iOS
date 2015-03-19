@@ -323,6 +323,12 @@
 
 
 - (void)doAlipayAction:(OrderDetailModel *)theOrder {
+    
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+    HUD.text = T(@"登录中...");
+    [HUD showInView:self.view];
+    
     /*
      *商户的唯一的parnter和seller。
      *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
@@ -361,11 +367,12 @@
     order.seller = seller;
     order.tradeNO = theOrder.order_sn; //订单ID（由商家自行制定）
     for (NSDictionary *dict in self.goods_list) {
+        NSLog(@"%@", dict);
         i++;
     }
     if (self.goods_list.count > 0) {
-        order.productName = [NSString stringWithFormat:@"%@等%d种商品", self.goods_list[0][@"goods_name"], i]; //商品标题
-        order.productDescription = [NSString stringWithFormat:@"%@等%d种商品", self.goods_list[0][@"goods_name"], i]; //商品描述
+        order.productName = [NSString stringWithFormat:@"%@等%ld种商品i", self.goods_list[0][@"goods_name"], i]; //商品标题
+        order.productDescription = [NSString stringWithFormat:@"%@等%ld种商品", self.goods_list[0][@"goods_name"], i]; //商品描述
         order.amount = [NSString stringWithFormat:@"%.2f",theOrder.order_amount.floatValue]; //商品价格
         //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     }

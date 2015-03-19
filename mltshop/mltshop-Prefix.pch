@@ -12,6 +12,14 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define NSLog(...)
+#define debugMethod()
+#endif
+
 
 #import <Availability.h>
 
@@ -48,6 +56,7 @@
 #import "FlowModel.h"
 #import "OrderModel.h"
 #import "CommentModel.h"
+
 
 
 #endif

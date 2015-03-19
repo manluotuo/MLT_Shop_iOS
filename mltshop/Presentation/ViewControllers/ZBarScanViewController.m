@@ -108,6 +108,7 @@
         [DataTrans showWariningTitle:T(@"扫描成功,正在打开") andCheatsheet:ICON_INFO andDuration:3.0];
 
         [self cancelAction];
+        NSLog(@"%@", s.data);
         self.scanData = s.data;
 //        [self.passDelegate passSignalValue:SIGNAL_BARCODE_SCAN_SUCCESS andData:s.data];
         //        text.text = s.data;

@@ -23,6 +23,8 @@
 @interface BonusInfoModel : NSObject
 
 /** 红包id */
+
+@property (nonatomic, strong) NSString *bonus_date;
 @property (nonatomic, strong) NSString *bonus_id;
 @property (nonatomic, strong) NSString *bonus_type_id;
 @property (nonatomic, strong) NSString *bonus_sn;

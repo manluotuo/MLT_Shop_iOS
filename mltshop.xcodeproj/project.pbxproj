@@ -206,7 +206,6 @@
 		26FF358C1A429AE80014A38F /* SpecModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FF358B1A429AE80014A38F /* SpecModel.m */; };
 		331612201AB02E4400F47730 /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316121F1AB02E4400F47730 /* CommentModel.m */; };
 		331612241AB02E6900F47730 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612221AB02E6900F47730 /* CommentTableViewCell.m */; };
-		331612251AB02E6900F47730 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 331612231AB02E6900F47730 /* CommentTableViewCell.xib */; };
 		3316122A1AB0316700F47730 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = 331612291AB0316700F47730 /* right.png */; };
 		3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316122D1AB03FA100F47730 /* CollectViewController.m */; };
 		331612311AB043BE00F47730 /* CollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612301AB043BE00F47730 /* CollectModel.m */; };
@@ -220,6 +219,9 @@
 		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
 		33CB64F51AAAF83500D0BE8D /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 33CB64F31AAAF83500D0BE8D /* image.png */; };
+		33D87DC71ABAC0CA007299C4 /* splash1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D87DC41ABAC0CA007299C4 /* splash1.jpg */; };
+		33D87DC81ABAC0CA007299C4 /* splash2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D87DC51ABAC0CA007299C4 /* splash2.jpg */; };
+		33D87DC91ABAC0CA007299C4 /* splash3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D87DC61ABAC0CA007299C4 /* splash3.jpg */; };
 		33D92C101AB95EC8004C1FA2 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */; };
 		33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C111AB95F11004C1FA2 /* CFNetwork.framework */; };
 		33D92C141AB95F1C004C1FA2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C131AB95F1C004C1FA2 /* CoreFoundation.framework */; };
@@ -665,7 +667,6 @@
 		3316121F1AB02E4400F47730 /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
 		331612211AB02E6900F47730 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
 		331612221AB02E6900F47730 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
-		331612231AB02E6900F47730 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		331612291AB0316700F47730 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
 		3316122C1AB03FA100F47730 /* CollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectViewController.h; path = CollectVC/CollectViewController.h; sourceTree = "<group>"; };
 		3316122D1AB03FA100F47730 /* CollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectViewController.m; path = CollectVC/CollectViewController.m; sourceTree = "<group>"; };
@@ -689,6 +690,9 @@
 		33CB64F11AAAF83500D0BE8D /* CExpandHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExpandHeader.h; sourceTree = "<group>"; };
 		33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CExpandHeader.m; sourceTree = "<group>"; };
 		33CB64F31AAAF83500D0BE8D /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		33D87DC41ABAC0CA007299C4 /* splash1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash1.jpg; sourceTree = "<group>"; };
+		33D87DC51ABAC0CA007299C4 /* splash2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash2.jpg; sourceTree = "<group>"; };
+		33D87DC61ABAC0CA007299C4 /* splash3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash3.jpg; sourceTree = "<group>"; };
 		33D92C0E1AB95EC8004C1FA2 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		33D92C111AB95F11004C1FA2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1206,6 +1210,9 @@
 		26BE39E31A170421009F37B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				33D87DC41ABAC0CA007299C4 /* splash1.jpg */,
+				33D87DC51ABAC0CA007299C4 /* splash2.jpg */,
+				33D87DC61ABAC0CA007299C4 /* splash3.jpg */,
 				331612261AB02F9300F47730 /* userVC */,
 				262CD4511A5DB4A600A712BA /* Avatars */,
 				262E1E6D1A555B2A00C29059 /* alipay@2x.png */,
@@ -1490,7 +1497,6 @@
 				26BB7D341A6B5B61002F4030 /* BrandTableViewCell.m */,
 				331612211AB02E6900F47730 /* CommentTableViewCell.h */,
 				331612221AB02E6900F47730 /* CommentTableViewCell.m */,
-				331612231AB02E6900F47730 /* CommentTableViewCell.xib */,
 				331612321AB0503F00F47730 /* CollectTableViewCell.h */,
 				331612331AB0503F00F47730 /* CollectTableViewCell.m */,
 				33C6673F1AB67476005ACDD5 /* BonusListTableViewCell.h */,
@@ -1619,10 +1625,10 @@
 		26DE7FD21A2BFE17007F4B16 /* FunctionVC */ = {
 			isa = PBXGroup;
 			children = (
-				26BB7D7F1A6BB688002F4030 /* ZBarScanViewController.m */,
 				26BB7D801A6BB688002F4030 /* ZBarScanViewController.h */,
-				263D3E3E1A4E6C5A004D8181 /* AreaPickerViewController.m */,
+				26BB7D7F1A6BB688002F4030 /* ZBarScanViewController.m */,
 				263D3E3F1A4E6C5A004D8181 /* AreaPickerViewController.h */,
+				263D3E3E1A4E6C5A004D8181 /* AreaPickerViewController.m */,
 				26DE7FD31A2BFE40007F4B16 /* SearchCategoryViewController.h */,
 				26DE7FD41A2BFE40007F4B16 /* SearchCategoryViewController.m */,
 				26B1C2571A4688D700295D32 /* AddressListViewController.h */,
@@ -1831,6 +1837,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				262CD4771A5DB4A600A712BA /* M002.png in Resources */,
+				33D87DC91ABAC0CA007299C4 /* splash3.jpg in Resources */,
 				262E1E6E1A555B2A00C29059 /* alipay@2x.png in Resources */,
 				26435AD01A20CA7900E117A0 /* Default-568h@2x.png in Resources */,
 				33D92C1E1AB96089004C1FA2 /* PushConfig.plist in Resources */,
@@ -1849,6 +1856,7 @@
 				262CD4711A5DB4A600A712BA /* F008.png in Resources */,
 				262CD46C1A5DB4A600A712BA /* F003.png in Resources */,
 				26BE3A8D1A170421009F37B4 /* ding.wav in Resources */,
+				33D87DC81ABAC0CA007299C4 /* splash2.jpg in Resources */,
 				26BB7D661A6BA9F9002F4030 /* zbar-helpicons.png in Resources */,
 				33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */,
 				262CD47B1A5DB4A600A712BA /* M006.png in Resources */,
@@ -1857,6 +1865,7 @@
 				26BE3A8C1A170421009F37B4 /* ding.caf in Resources */,
 				262E1E7D1A58352300C29059 /* AlipaySDK.bundle in Resources */,
 				26435AC11A208F9200E117A0 /* logo_luotuo@2x.png in Resources */,
+				33D87DC71ABAC0CA007299C4 /* splash1.jpg in Resources */,
 				262E1E791A58348F00C29059 /* pkcs8.txt in Resources */,
 				262CD47E1A5DB4A600A712BA /* M009.png in Resources */,
 				33CB64F51AAAF83500D0BE8D /* image.png in Resources */,
@@ -1872,7 +1881,6 @@
 				26435AC31A20B44F00E117A0 /* InfoPlist.strings in Resources */,
 				262CD4721A5DB4A600A712BA /* F009.png in Resources */,
 				26435ACB1A20C55000E117A0 /* MLTLogo-60@2x.png in Resources */,
-				331612251AB02E6900F47730 /* CommentTableViewCell.xib in Resources */,
 				26BE3A811A170421009F37B4 /* message_share_ico.png in Resources */,
 				26435ACF1A20CA7900E117A0 /* Default@2x.png in Resources */,
 				26BE3A7E1A170421009F37B4 /* email@2x.png in Resources */,

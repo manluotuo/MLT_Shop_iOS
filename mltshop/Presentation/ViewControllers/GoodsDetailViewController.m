@@ -165,7 +165,7 @@
                 [self addToCart:newCartItem];
             }
         } else {
-            [DataTrans showWariningTitle:T(@"您还没有登陆，无法添加购物车") andCheatsheet:nil andDuration:1.0f];
+            [DataTrans showWariningTitle:T(@"您还没有登陆\n无法添加购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
         }
         
         
@@ -184,7 +184,7 @@
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [self presentViewController:nav animated:YES completion:nil];
         } else {
-            [DataTrans showWariningTitle:T(@"您还没有登陆，无法查看购物车") andCheatsheet:nil andDuration:1.f];
+            [DataTrans showWariningTitle:T(@"您还没有登陆\n无法查看购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.f];
         }
     }
 }
@@ -327,9 +327,9 @@
     [self.topNavView addSubview:self.shareButton];
     
     self.favButton = [[FAHoverButton alloc]initWithFrame:CGRectMake(TOTAL_WIDTH-H_50 - H_40, 0, H_30, H_30)];
-    [self.favButton setImage:[UIImage imageNamed:@"collect_no"] forState:UIControlStateNormal];
-    [self.favButton setImage:[UIImage imageNamed:@"collect_sel"] forState:UIControlStateSelected];
     [self.favButton setSelected:NO];
+    [self.favButton setTitle:[NSString fontAwesomeIconStringForEnum:FAStar] forState:UIControlStateNormal];
+    [self.favButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
     [self.favButton setBackgroundColor:BlACKALPHACOLOR];
     [self.favButton setRounded];
     [self.favButton setIconFont:FONT_AWESOME_20];
@@ -543,10 +543,11 @@
 
 - (void)initCommentView {
     
-    commentHeight = 0.01;
-    self.commentView = [[UITableView alloc] initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, commentHeight+150)];
+    commentHeight = 0.1;
+    self.commentView = [[UITableView alloc] initWithFrame:CGRectMake(0, fixedHeight, TOTAL_WIDTH, commentHeight)];
     self.commentView.delegate = self;
     self.commentView.dataSource = self;
+    self.commentView.userInteractionEnabled = NO;
     [self.fixedView addSubview:self.commentView];
     //    self.fixedView.contentOffset = CGPointMake(0, 0);
 }
@@ -567,7 +568,6 @@
     CGFloat playerY = fixedHeight;
     CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, TOTAL_WIDTH);
     self.galleryView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
-    
     self.galleryView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     self.galleryView.backgroundColor = GRAYEXLIGHTCOLOR;
     self.galleryView.minimumZoomScale = 1; //最小到0.3倍
@@ -703,7 +703,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"%d", self.commentData.count);
+    NSLog(@"%ld", (long)self.commentData.count);
+    self.commentView.height = self.commentData.count*120;
+    self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
+    fixedSize = self.fixedView.contentSize;
     return self.commentData.count;
     
 }
@@ -713,26 +716,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentId"];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"CommentTableViewCell" owner:self options:nil] lastObject];
+        cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommentId"];
     }
-    
-    lable.hidden = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     CommentModel *model = self.commentData[indexPath.row];
     [cell setCellData:model];
-    cellHeight = [cell setCellHeight];
-    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    self.commentView.height += cellHeight;
-    NSLog(@"%f", self.commentView.height);
-    self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
-    fixedSize = self.fixedView.contentSize;
-    
-    return cellHeight;
+    //    CGFloat hei = 0;
+    //    CommentModel *model = self.commentData[indexPath.row];
+    //    CGSize contentSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_12];
+    //    hei = contentSize.height+H_70;
+    return H_120;
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -770,7 +768,7 @@
 /** 用户评论点击事件 */
 - (void)onCommentBtnClick {
     
-        self.fixedView.contentOffset = CGPointMake(0, 0);
+    self.fixedView.contentOffset = CGPointMake(0, 0);
     //    self.fixedView.contentSize
     if (self.commentBtn.selected == YES) {
         return;
@@ -789,7 +787,7 @@
                 
                 [self.commentData addObject:model];
             }
-            [self initNotCollectView];
+            //            [self initNotCollectView];
             self.fixedView.contentSize = CGSizeMake(WIDTH, TOTAL_HEIGHT+250);
             [self.commentView reloadData];
         }];
@@ -826,32 +824,36 @@
 /** 收藏按钮点击事件 */
 - (void)onCollectBtnClick {
     
-    if (self.favButton.selected == NO) {
-        [[AppRequestManager sharedManager]getCollectAddWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
-            NSLog(@"%@", responseObject[@"status"][@"succeed"]);
-            if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:ICON_CHECK andDuration:1.0f];
-                self.favButton.selected = !self.favButton.selected;
-            }
-            /*if (error != nil) */ else {
-                NSDictionary *userDict = [error userInfo];
-                if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
-                    [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
+    if (XAppDelegate.me.userId) {
+        if (self.favButton.selected == NO) {
+            [[AppRequestManager sharedManager]getCollectAddWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
+                NSLog(@"%@", responseObject[@"status"][@"succeed"]);
+                if (responseObject != nil) {
+                    [DataTrans showWariningTitle:T(@"已成功收藏") andCheatsheet:ICON_CHECK andDuration:1.0f];
+                    self.favButton.selected = !self.favButton.selected;
                 }
-            }
-        }];
+                /*if (error != nil) */ else {
+                    NSDictionary *userDict = [error userInfo];
+                    if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
+                        [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
+                    }
+                }
+            }];
+        } else {
+            [[AppRequestManager sharedManager]getDeleteCollectRecId:self.theGoods.goodsId andBlcok:^(id responseObject, NSError *error) {
+                if (responseObject != nil) {
+                    [DataTrans showWariningTitle:T(@"已取消收藏") andCheatsheet:ICON_TIMES andDuration:1.0f];
+                    self.favButton.selected = !self.favButton.selected;
+                } else {
+                    NSDictionary *userDict = [error userInfo];
+                    if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
+                        [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
+                    }
+                }
+            }];
+        }
     } else {
-        [[AppRequestManager sharedManager]getDeleteCollectRecId:self.theGoods.goodsId andBlcok:^(id responseObject, NSError *error) {
-            if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"已取消收藏") andCheatsheet:ICON_TIMES andDuration:1.0f];
-                self.favButton.selected = !self.favButton.selected;
-            } else {
-                NSDictionary *userDict = [error userInfo];
-                if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
-                    [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
-                }
-            }
-        }];
+        [DataTrans showWariningTitle:T(@"您还没有登陆\n无法收藏商品") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
     }
     
 }
