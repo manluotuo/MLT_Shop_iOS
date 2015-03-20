@@ -319,6 +319,7 @@ static dispatch_once_t onceToken;
     }];
 }
 
+/** 获取评论 */
 - (void)getCommentWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block {
     
     NSString *postUrl = API_COMMENT_PATH;
@@ -330,6 +331,7 @@ static dispatch_once_t onceToken;
                                };
     postDict = [DataTrans makePostDict:postDict];
     
+    NSLog(@"%@", goodsId);
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if ([DataTrans isCorrectResponseObject:responseObject]) {
@@ -352,6 +354,40 @@ static dispatch_once_t onceToken;
         }
         
     }];
+}
+
+/** 增加评论 */
+- (void)getCommentAddWithDict:(NSDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block {
+    NSString *postUrl = API_COMMENT_ADD;
+    
+    NSDictionary *postDict = @{@"goods_id": dict[@"goods_id"],
+                               @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                             },
+                               @"comment_rank": dict[@"comment_rank"],
+                               @"content": dict[@"content"]
+                               };
+    [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+            if (block) {
+                block(responseObject, nil);
+                
+        } else {
+            
+            NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                                 code:200
+                                             userInfo:responseObject[@"status"]];
+            block(nil,error);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block) {
+            block(nil , error);
+        }
+    }];
+
+    
+    
 }
 
 /** 收藏 */
@@ -605,8 +641,8 @@ static dispatch_once_t onceToken;
     
     
     NSDictionary * postDict = [DataTrans makePostDict:baseDict];
-    NSLog(@"!!!!%@", baseDict);
-    NSLog(@"####%@", postDict);
+//    NSLog(@"!!!!%@", baseDict);
+//    NSLog(@"####%@", postDict);
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSLog(@"%@", responseObject);

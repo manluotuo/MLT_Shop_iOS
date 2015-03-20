@@ -781,6 +781,7 @@
     }
     if (self.commentData.count < 1) {
         [[AppRequestManager sharedManager] getCommentWithGoodsId:self.theGoods.goodsId andBlock:^(id responseObject, NSError *error) {
+            
             for (NSDictionary *dict in responseObject[@"data"]) {
                 CommentModel *model = [[CommentModel alloc] init];
                 [model setValuesForKeysWithDictionary:dict];

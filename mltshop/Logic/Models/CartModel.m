@@ -19,6 +19,7 @@
         _recId          = dict[@"rec_id"];
         _parentId       = dict[@"parent_id"];
         _goodsAttrId    = dict[@"goods_attr_id"];
+        _goods_id       = dict[@"goods_id"];
         _subtotal       = [DataTrans noNullNumberObj:[dict objectForKey:@"subtotal"]];
         _extensionCode  = dict[@"extension_code"];
         if (ArrayHasValue(dict[@"goods_attr"])) {

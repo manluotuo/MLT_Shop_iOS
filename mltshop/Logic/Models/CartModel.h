@@ -34,6 +34,8 @@ typedef NS_ENUM(NSUInteger,CartOps)
 @property(nonatomic, strong)NSNumber *canHandsel;
 @property(nonatomic, strong)NSNumber *goodsIsPosted;
 
+@property (nonatomic, strong) NSString *goods_id;
+
 //goods initWithdict
 //goods.infos all
 //

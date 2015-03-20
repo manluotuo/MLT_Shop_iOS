@@ -27,8 +27,10 @@
 #define API_ORDER_INFO              @"/ecmobile/?url=/order/info"
 /** 红包列表 */
 #define API_BONUS_LIST              @"/ecmobile/?url=/user/bonus"
-
-#define API_COMMENT_PATH            @"/ecmobile/?url=/comments"
+/** 评论列表 */
+#define API_COMMENT_PATH            @"/ecmobile/?url=/comments/list"
+/** 增加评论 */
+#define API_COMMENT_ADD             @"/ecmobile/?url=/comments/add"
 
 #define API_ADDRESS_LIST_PATH       @"/ecmobile/?url=/address/list"
 #define API_ADDRESS_CREATE_PATH     @"/ecmobile/?url=/address/add"
@@ -177,6 +179,9 @@
 - (void)getOrderDetailOrderId:(NSString *)orderId andBlock:(void (^)(id responseObject, NSError *error))block;
 /** 红包列表 */
 - (void)getBonusListWithBlock:(void (^)(id responseObject, NSError *error))block;
+
+/** 新增评论 */
+- (void)getCommentAddWithDict:(NSDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block;
 
 // ORDER function
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder

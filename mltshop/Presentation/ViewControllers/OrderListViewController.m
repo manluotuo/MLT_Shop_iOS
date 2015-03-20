@@ -273,7 +273,6 @@
     OrderModel *theOrder = self.dataArray[indexPath.section];
     orderVC.order_id = theOrder.orderId;
     orderVC.goods_list = theOrder.goods_list;
-    
     ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:orderVC];
     [self presentViewController:nav animated:YES completion:nil];
     

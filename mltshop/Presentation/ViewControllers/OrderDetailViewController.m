@@ -20,7 +20,9 @@
 #import "FAHoverButton.h"
 #import "Order.h"
 
-@interface OrderDetailViewController ()
+#import "SIAlertView.h"
+
+@interface OrderDetailViewController ()<UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -28,18 +30,30 @@
 @property (nonatomic, strong) NSString *shippingStatus; // 发货状态
 @property (nonatomic, strong) NSString *payStatus; // 支付状态
 
-
+/** 评论窗口 */
+@property (nonatomic, strong) UIView *collectView;
+/** 缩略图 */
+@property (nonatomic, strong) UIImageView *iconImage;
+/** 名称 */
+@property (nonatomic, strong) UILabel *goodsName;
+/** 评论 */
+@property (nonatomic, strong) UITextView *collectText;
+/** 取消 */
+@property (nonatomic, strong) UIButton *cancelBtn;
+/** 确认 */
+@property (nonatomic, strong) UIButton *certainBtn;
 @end
 
 @implementation OrderDetailViewController {
     UIButton *button;
-
+    NSInteger count;
+    UILabel *placeLable;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    count = 0;
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(H_0, H_0, WIDTH, TOTAL_HEIGHT-10)];
     self.scrollView.contentSize = CGSizeMake(WIDTH, 1000);
     [self.scrollView setBackgroundColor:WHITECOLOR];
@@ -167,10 +181,10 @@
                 self.orderStatus = T(@"退货");
                 break;
             case 5:
-                self.orderStatus = T(@"已分单");
+                self.orderStatus = T(@"已确认");
                 break;
             case 6:
-                self.orderStatus = T(@"部分分单");
+                self.orderStatus = T(@"已确认");
                 break;
             default:
                 break;
@@ -259,7 +273,7 @@
         [button setFrame:CGRectMake(WIDTH/2+H_20, H_15, WIDTH/2-H_20*2, H_50)];
         [button setTitle:@"立即付款" forState:UIControlStateNormal];
         [button setTitle:T(@"确认收货") forState:UIControlStateSelected];
-        button.selected = YES;
+        button.selected = NO;
         [button setTintColor:WHITECOLOR];
         [button setBackgroundColor:ORANGECOLOR];
         [button.titleLabel setFont:FONT_16];
@@ -278,7 +292,7 @@
     
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
-        if ([model.order_status integerValue] != 0) {
+        if ([model.order_status integerValue] == 2 || [model.order_status integerValue] == 3 || [model.order_status integerValue] == 4 || [model.shipping_status integerValue] == 2) {
             button.hidden = YES;
         } else {
             if ([model.pay_status integerValue] == 0) {
@@ -315,19 +329,119 @@
 
 - (void)onBtnCLick {
     
-    if (self.dataArray.count > 0) {
-        OrderDetailModel *model = [self.dataArray lastObject];
-        [self doAlipayAction:model];
+    
+    if (button.selected == YES) {
+        if (self.dataArray.count > 0) {
+            OrderDetailModel *model = [self.dataArray lastObject];
+            [self doAlipayAction:model];
+        }
+    } else {
+        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"确认收货" andMessage:@"您真的要确认收货吗？"];
+        [alertView addButtonWithTitle:@"取消"
+                                 type:SIAlertViewButtonTypeCancel
+                              handler:^(SIAlertView *alertView) {
+                                  NSLog(@"取消评论");
+                              }];
+        [alertView addButtonWithTitle:@"确认"
+                                 type:SIAlertViewButtonTypeDefault
+                              handler:^(SIAlertView *alertView) {
+                                  OrderModel *model = [[OrderModel alloc] init];
+                                  model.orderId = self.order_id;
+                                  [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andBlock:^(id responseObject, NSError *error) {
+                                      if (responseObject == nil) {
+                                          [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
+                                          button.enabled = NO;
+                                          [button setBackgroundColor:[UIColor grayColor]];
+                                          if (count < self.goods_list.count) {
+                                              [self initCollectView];
+                                              [self setCollectViewData];
+                                          }
+                                      }
+                                  }];
+                              }];
+        alertView.titleColor = [UIColor blueColor];
+        alertView.cornerRadius = 10;
+        alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
+        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+        [alertView show];
+        
     }
 }
 
 
-- (void)doAlipayAction:(OrderDetailModel *)theOrder {
+- (void)initCollectView {
     
-    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
-    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
-    HUD.text = T(@"登录中...");
-    [HUD showInView:self.view];
+    self.scrollView.contentOffset = CGPointMake(0, H_90);
+    self.collectView = [[UIView alloc] initWithFrame:CGRectMake(H_20, H_90, TOTAL_WIDTH-H_40, H_180)];
+    //    self.collectView = [[UIView alloc] initWithFrame:CGRectMake(TOTAL_WIDTH/2, TOTAL_HEIGHT/2, 0, 0)];
+    self.collectView.backgroundColor = GRAYEXLIGHTCOLOR;
+    self.collectView.alpha = 0;
+    self.collectView.clipsToBounds = YES;
+    self.collectView.layer.cornerRadius = 10;
+    
+    self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(H_10, H_10, H_50, H_50)];
+    
+    self.goodsName = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImage.x+self.iconImage.width+H_5, H_10, self.scrollView.width-self.iconImage.width-H_20, H_20)];
+    self.goodsName.font = FONT_14;
+    
+    self.collectText = [[UITextView alloc] initWithFrame:CGRectMake(H_10, H_70, self.collectView.width-H_20, H_60)];
+    [self.collectText becomeFirstResponder];
+    self.collectText.layer.backgroundColor = [[UIColor clearColor] CGColor];
+    self.collectText.layer.borderColor = [[UIColor grayColor] CGColor];
+    self.collectText.layer.borderWidth = 1.0;
+    self.collectText.layer.cornerRadius = 8.0f;
+    self.collectText.delegate = self;
+    [self.collectText.layer setMasksToBounds:YES];
+    [self.collectText setFont:FONT_16];
+    placeLable = [[UILabel alloc] initWithFrame:CGRectMake(3, 3, 150, 30)];
+    placeLable.enabled = NO;
+    placeLable.text = @"请在此填写评价";
+    placeLable.font = FONT_16;
+    placeLable.textColor = [UIColor lightGrayColor];
+    [self.collectText addSubview:placeLable];
+    
+    
+    
+    self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.cancelBtn.frame = CGRectMake(H_10, self.collectText.y+self.collectText.height+H_6, H_120, H_30+H_5);
+    [self.cancelBtn setTitle:T(@"取消") forState:UIControlStateNormal];
+    [self.cancelBtn setBackgroundColor:[UIColor grayColor]];
+    [self.cancelBtn addTarget:self action:@selector(onCancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.cancelBtn.clipsToBounds = YES;
+    self.cancelBtn.layer.cornerRadius = 5;
+    
+    self.certainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.certainBtn.frame = CGRectMake(self.collectView.width/2+H_10, self.cancelBtn.y, H_120, self.cancelBtn.height);
+    [self.certainBtn setTitle:T(@"确定") forState:UIControlStateNormal];
+    [self.certainBtn addTarget:self action:@selector(onCertainBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.certainBtn setBackgroundColor:[UIColor orangeColor]];
+    self.certainBtn.clipsToBounds = YES;
+    self.certainBtn.layer.cornerRadius = 5;
+    
+    
+    [self.scrollView addSubview:self.collectView];
+    [self.collectView addSubview:self.iconImage];
+    [self.collectView addSubview:self.goodsName];
+    [self.collectView addSubview:self.collectText];
+    [self.collectView addSubview:self.cancelBtn];
+    [self.collectView addSubview:self.certainBtn];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.collectView.alpha = 1;
+    }];
+    
+}
+
+- (void)setCollectViewData {
+    
+    
+    NSLog(@"%@", self.goods_list[count][@"img"][@"small"]);
+    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:self.goods_list[count][@"img"][@"small"]] placeholderImage:nil];
+    self.goodsName.text = self.goods_list[count][@"goods_name"];
+    
+}
+
+- (void)doAlipayAction:(OrderDetailModel *)theOrder {
     
     /*
      *商户的唯一的parnter和seller。
@@ -371,8 +485,8 @@
         i++;
     }
     if (self.goods_list.count > 0) {
-        order.productName = [NSString stringWithFormat:@"%@等%ld种商品i", self.goods_list[0][@"goods_name"], i]; //商品标题
-        order.productDescription = [NSString stringWithFormat:@"%@等%ld种商品", self.goods_list[0][@"goods_name"], i]; //商品描述
+        order.productName = [NSString stringWithFormat:@"%@等%d种商品i", self.goods_list[0][@"goods_name"], i]; //商品标题
+        order.productDescription = [NSString stringWithFormat:@"%@等%d种商品", self.goods_list[0][@"goods_name"], i]; //商品描述
         order.amount = [NSString stringWithFormat:@"%.2f",theOrder.order_amount.floatValue]; //商品价格
         //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     }
@@ -401,18 +515,57 @@
                        orderSpec, signedString, @"RSA"];
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            
             NSLog(@"reslut = %@",resultDic);
             if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
+                
                 [self.navigationController popViewControllerAnimated:YES];
+                
             }
+            
         }];
         
     }
 }
 
+/** 取消按钮点击事件 */
+- (void)onCancelBtnClick {
+    [self.collectView removeFromSuperview];
+}
+/** 确认按钮点击事件 */
+- (void)onCertainBtnClick {
+    
+    [self.collectText resignFirstResponder];
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+    HUD.text = T(@"请稍后\n正在提交评论");
+    [HUD showInView:self.view];
+    
+    NSLog(@"%@", self.goods_list[count][@"goods_id"]);
+    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": @"5", @"content": self.collectText.text};
+    
+    [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
+        [HUD removeFromSuperview];
+        count++;
+        [self.collectView removeFromSuperview];
+        if (count < self.goods_list.count) {
+            [self initCollectView];
+            [self setCollectViewData];
+        }
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) textViewDidChange:(UITextView *)textView{
+    if ([textView.text length] == 0) {
+        [placeLable setHidden:NO];
+    }else{
+        [placeLable setHidden:YES];
+    }
 }
 
 /*

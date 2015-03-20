@@ -191,6 +191,7 @@
     [HUD showInView:self.window];
     [self getAllCategoryWithBlock:^(BOOL success) {
         if(success){
+            [HUD removeFromSuperview];
             [self.drawerController setCenterViewController:navigationController];
             [self.window setRootViewController:self.drawerController];
             [self.window addSubview:self.drawerController.view];

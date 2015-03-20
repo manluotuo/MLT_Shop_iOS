@@ -210,6 +210,8 @@
 		3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316122D1AB03FA100F47730 /* CollectViewController.m */; };
 		331612311AB043BE00F47730 /* CollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612301AB043BE00F47730 /* CollectModel.m */; };
 		331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612331AB0503F00F47730 /* CollectTableViewCell.m */; };
+		3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */; };
+		3362E1FA1ABBF9E000D0704B /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E1F81ABBF9E000D0704B /* SIAlertView.m */; };
 		336B62AC1AB16CD500476A93 /* BonusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336B62AB1AB16CD500476A93 /* BonusViewController.m */; };
 		336D045A1AB40E0A00A87137 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D04591AB40E0A00A87137 /* OrderDetailViewController.m */; };
 		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
@@ -674,6 +676,9 @@
 		331612301AB043BE00F47730 /* CollectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectModel.m; sourceTree = "<group>"; };
 		331612321AB0503F00F47730 /* CollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectTableViewCell.h; sourceTree = "<group>"; };
 		331612331AB0503F00F47730 /* CollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableViewCell.m; sourceTree = "<group>"; };
+		3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
+		3362E1F71ABBF9E000D0704B /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
+		3362E1F81ABBF9E000D0704B /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
 		336B62AA1AB16CD500476A93 /* BonusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BonusViewController.h; path = BonusVC/BonusViewController.h; sourceTree = "<group>"; };
 		336B62AB1AB16CD500476A93 /* BonusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BonusViewController.m; path = BonusVC/BonusViewController.m; sourceTree = "<group>"; };
 		336D04581AB40E0A00A87137 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
@@ -1269,6 +1274,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3362E1F51ABBF9E000D0704B /* SIAlertView */,
 				33D92C0D1AB95EC8004C1FA2 /* lib */,
 				33E517371AB7C9A8005DC76F /* UMAnalytics_Sdk_3.4.6 */,
 				33CB64F01AAAF83500D0BE8D /* CExpandHeader */,
@@ -1532,8 +1538,8 @@
 				26BB7D821A6BB703002F4030 /* ScanOverlayView.m */,
 				26BB7D831A6BB703002F4030 /* ScanOverlayView.h */,
 				267B85EB1A360BDF0084DDEA /* Template */,
-				265BB8931A1CF1CC0040ACC0 /* NoDataView.m */,
 				265BB8941A1CF1CC0040ACC0 /* NoDataView.h */,
+				265BB8931A1CF1CC0040ACC0 /* NoDataView.m */,
 				265BB8901A1CEFCF0040ACC0 /* RoundedAvatarButton.h */,
 				265BB8911A1CEFCF0040ACC0 /* RoundedAvatarButton.m */,
 				26BE3AB31A173739009F37B4 /* FAIconButton.m */,
@@ -1662,6 +1668,16 @@
 				3316122D1AB03FA100F47730 /* CollectViewController.m */,
 			);
 			name = CollectVC;
+			sourceTree = "<group>";
+		};
+		3362E1F51ABBF9E000D0704B /* SIAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */,
+				3362E1F71ABBF9E000D0704B /* SIAlertView.h */,
+				3362E1F81ABBF9E000D0704B /* SIAlertView.m */,
+			);
+			path = SIAlertView;
 			sourceTree = "<group>";
 		};
 		336B62A91AB16C8B00476A93 /* BonusVC */ = {
@@ -1859,6 +1875,7 @@
 				33D87DC81ABAC0CA007299C4 /* splash2.jpg in Resources */,
 				26BB7D661A6BA9F9002F4030 /* zbar-helpicons.png in Resources */,
 				33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */,
+				3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */,
 				262CD47B1A5DB4A600A712BA /* M006.png in Resources */,
 				262CD4731A5DB4A600A712BA /* F010.png in Resources */,
 				26BB7D651A6BA9F9002F4030 /* zbar-help.html in Resources */,
@@ -1979,6 +1996,7 @@
 				26BE3AD71A173C3D009F37B4 /* DataTrans.m in Sources */,
 				265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */,
 				26BB7D811A6BB688002F4030 /* ZBarScanViewController.m in Sources */,
+				3362E1FA1ABBF9E000D0704B /* SIAlertView.m in Sources */,
 				26BE3AC31A173739009F37B4 /* FAHoverButton.m in Sources */,
 				262E1EE91A5839A900C29059 /* Order.m in Sources */,
 				26BE3A8E1A170421009F37B4 /* NSData+Conversion.m in Sources */,

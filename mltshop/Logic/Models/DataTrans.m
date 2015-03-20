@@ -63,6 +63,8 @@
 //  goods-([^.|-]+) => 372
 //  http://www.manluotuo.com/goods-372.html
 
+
+/** 二维码扫描判断 */
 + (id)parseDataFromURL:(NSString *)url
 {
     NSString *cateRegex = @"category-([^-]+)-b([^.|-]+)";
