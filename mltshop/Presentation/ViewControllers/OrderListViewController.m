@@ -76,6 +76,10 @@
             [self doAlipayAction:theOrder];
         }
     }
+    
+    if ([value isEqualToString:CERTRAL_BTN_CLICK]) {
+        NSLog(@"11111");
+    }
 }
 
 - (void)doAlipayAction:(OrderModel *)theOrder
@@ -149,14 +153,11 @@
     if (signedString != nil) {
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
-        
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
-            [MobClick event:UM_PAY];
+            
             if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
-                
                 [self.navigationController popViewControllerAnimated:YES];
-                
             }
         }];
         
@@ -284,6 +285,11 @@
 //    NSLog(@"订单被点击");
 }
 
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self setupDataSource];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

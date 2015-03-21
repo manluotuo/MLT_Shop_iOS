@@ -57,7 +57,7 @@
                 [self.tableView reloadData];
             }
             if (error != nil) {
-                [DataTrans showWariningTitle:T(@"获取地址列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
+                [DataTrans showWariningTitle:T(@"您还没有红包哦~~~") andCheatsheet:ICON_TIMES andDuration:1.5f];
             }
         }
     }];

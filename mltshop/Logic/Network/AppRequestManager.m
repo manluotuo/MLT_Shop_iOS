@@ -27,14 +27,14 @@ static dispatch_once_t onceToken;
             [_sharedManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
             
             _sharedManager.responseSerializer = [AFJSONResponseSerializer serializer];
-
+            
             // 设置网络超时时间
             _sharedManager.requestSerializer.timeoutInterval = 30;
             _sharedManager.securityPolicy.allowInvalidCertificates = YES;
             
             
             [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidCompleteNotification object:nil];
-
+            
         }
     });
     
@@ -72,7 +72,7 @@ static dispatch_once_t onceToken;
     static AppRequestManager *_sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-
+        
         _sharedManager = [[AppRequestManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost:8899"]];
     });
     
@@ -84,7 +84,7 @@ static dispatch_once_t onceToken;
     NSError *error = [notification.userInfo objectForKey:AFNetworkingTaskDidCompleteErrorKey];
     
     id responseObject = [notification.userInfo objectForKey:AFNetworkingTaskDidCompleteSerializedResponseKey];
-
+    
     NSHTTPURLResponse *httpResponse = error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey];
     
     if ([responseObject isKindOfClass:[NSDictionary class]] && error != nil) {
@@ -110,9 +110,9 @@ static dispatch_once_t onceToken;
 - (void)signInWithUsername:(NSString *)username password:(NSString *)password andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = API_SIGNIN_PATH;
-
+    
     NSDictionary *postDict = @{@"name" :username,
-                                @"password": password};
+                               @"password": password};
     
     postDict = [DataTrans makePostDict:postDict];
     
@@ -125,7 +125,7 @@ static dispatch_once_t onceToken;
                 block(responseObject[@"data"] , nil);
             }
         }
-
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //
         NSLog(@"%@ %@",postURL, error);
@@ -149,7 +149,7 @@ static dispatch_once_t onceToken;
                                @"field":@"{SIGNUP_FIELD_VALUE}"};
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
@@ -163,11 +163,11 @@ static dispatch_once_t onceToken;
             block(nil,error);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@ %@",postURL, error);
         if (block) {
+            [DataTrans showWariningTitle:T(@"用户名或邮箱已使用") andCheatsheet:ICON_INFO andDuration:1.0f];
             block(nil , error);
         }
-
+        
     }];
 }
 
@@ -180,6 +180,33 @@ static dispatch_once_t onceToken;
  * {"filter":{"keywords":"","category_id":"4","price_range":"{PRICE_RANGE}","brand_id":"1","sort_by":"id_desc"},"pagination":{"page":"1","count":"100"}}
  */
 
+- (void)setLimitDataBlock:(void (^)(id responseObject, NSError *error))block
+{
+    NSString *postURL = API_SEARCH_PATH;
+    NSDictionary *filter = @{@"filter": @{@"keywords":@"",
+                                          @"price_range" :@"",
+                                          @"category_id": @"",
+                                          @"brand_id": @"",
+                                          @"sort_by":@""},
+                             @"pagination": @{@"page": @"1",
+                                              @"count": @"100"
+                                     },
+                             @"intro": @"promotion"
+                             };
+    [[AppRequestManager sharedManager]POST:postURL parameters:filter success:^(NSURLSessionDataTask *task, id responseObject) {
+       
+        if([DataTrans isCorrectResponseObject:responseObject]) {
+            
+            if (block) {
+                block(responseObject, nil);
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+}
 
 - (void)searchWithKeywords:(NSString *)keywords
                     cateId:(NSString *)cateId
@@ -204,15 +231,16 @@ static dispatch_once_t onceToken;
     if (size > 0) {
         sizeString = STR_INT(size);
     }
-
+    
     NSDictionary *pagination = @{@"page":pageString,@"count":sizeString};
-
+    
     NSDictionary *postDict = @{@"filter" : filter,
                                @"pagination": pagination,
                                @"intro": introString};
     
     postDict = [DataTrans makePostDict:postDict];
     
+    NSLog(@"%@", postDict);
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         //
         if([DataTrans isCorrectResponseObject:responseObject]) {
@@ -279,7 +307,7 @@ static dispatch_once_t onceToken;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
-
+    
 }
 
 /** 订单详情 */
@@ -296,9 +324,9 @@ static dispatch_once_t onceToken;
     
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
-//        NSLog(@"!!!!!!!!!!!\n%@", responseObject);
+        //        NSLog(@"!!!!!!!!!!!\n%@", responseObject);
         if ([DataTrans isCorrectResponseObject:responseObject]) {
-//            NSLog(@"################\n%@", responseObject);
+            //            NSLog(@"################\n%@", responseObject);
             if (block) {
                 block(responseObject, nil);
             }
@@ -308,7 +336,7 @@ static dispatch_once_t onceToken;
                                                  code:200
                                              userInfo:responseObject[@"status"]];
             block(nil,error);        }
-
+        
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -345,7 +373,7 @@ static dispatch_once_t onceToken;
                                                  code:200
                                              userInfo:responseObject[@"status"]];
             block(nil,error);        }
-//        NSLog(@"%@", responseObject);
+        //        NSLog(@"%@", responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
@@ -368,13 +396,12 @@ static dispatch_once_t onceToken;
                                @"content": dict[@"content"]
                                };
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
         NSLog(@"%@", responseObject);
+        if ([DataTrans isCorrectResponseObject:responseObject]) {
             if (block) {
                 block(responseObject, nil);
-                
-        } else {
-            
+            }
+        }else {
             NSError *error = [NSError errorWithDomain:NSURLErrorDomain
                                                  code:200
                                              userInfo:responseObject[@"status"]];
@@ -385,7 +412,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
     
     
 }
@@ -393,7 +420,7 @@ static dispatch_once_t onceToken;
 /** 收藏 */
 - (void)getCollectAddWithGoodsId:(NSString *)goodsId andBlock:(void (^)(id responseObject, NSError *error))block {
     
-   NSString *postURL = API_COLLECT_ADD;
+    NSString *postURL = API_COLLECT_ADD;
     NSDictionary *postDict = @{@"goods_id" :goodsId,
                                @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
                                              @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
@@ -414,7 +441,7 @@ static dispatch_once_t onceToken;
         }
         
     }];
-
+    
     
 }
 
@@ -528,6 +555,7 @@ static dispatch_once_t onceToken;
     postDict = [DataTrans makePostDict:postDict];
     
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
             if (block) {
@@ -544,16 +572,16 @@ static dispatch_once_t onceToken;
 
 
 - (void)operateAddressWithAddress:(AddressModel *)theAddress
-                         operation:(NSUInteger)operation
+                        operation:(NSUInteger)operation
                          andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = @"";
     NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
-                              @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
-                                             @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
-                                             }}];
-
-
+                                     @{@"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
+                                                     @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
+                                                     }}];
+    
+    
     switch (operation) {
         case AddressOpsGet:
             postURL = API_ADDRESS_GET_PATH;
@@ -561,6 +589,7 @@ static dispatch_once_t onceToken;
             break;
         case AddressOpsCreate:
             postURL = API_ADDRESS_CREATE_PATH;
+            NSLog(@"%@", theAddress.postDict);
             baseDict[@"address"] = theAddress.postDict;
             break;
         case AddressOpsUpdate:
@@ -580,7 +609,7 @@ static dispatch_once_t onceToken;
             break;
     }
     
-
+    
     NSDictionary * postDict = [DataTrans makePostDict:baseDict];
     
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -606,8 +635,8 @@ static dispatch_once_t onceToken;
  *  @param block     <#block description#>
  */
 - (void)operateCartWithCartModel:(CartModel *)theCart
-                     operation:(NSUInteger)operation
-                      andBlock:(void (^)(id responseObject, NSError *error))block
+                       operation:(NSUInteger)operation
+                        andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = @"";
     NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
@@ -641,8 +670,8 @@ static dispatch_once_t onceToken;
     
     
     NSDictionary * postDict = [DataTrans makePostDict:baseDict];
-//    NSLog(@"!!!!%@", baseDict);
-//    NSLog(@"####%@", postDict);
+    //    NSLog(@"!!!!%@", baseDict);
+    //    NSLog(@"####%@", postDict);
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSLog(@"%@", responseObject);
@@ -668,8 +697,8 @@ static dispatch_once_t onceToken;
  *  @param block     <#block description#>
  */
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder
-                        operation:(NSUInteger)operation
-                         andBlock:(void (^)(id responseObject, NSError *error))block
+                         operation:(NSUInteger)operation
+                          andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = @"";
     NSMutableDictionary *baseDict = [[NSMutableDictionary alloc]initWithDictionary:
@@ -763,7 +792,7 @@ static dispatch_once_t onceToken;
                                                      }}];
     
     NSLog(@"%@", baseDict);
-//    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
+    //    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
     [[AppRequestManager sharedManager]POST:postURL parameters:baseDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if([DataTrans isCorrectResponseObject:responseObject]) {
@@ -783,7 +812,7 @@ static dispatch_once_t onceToken;
         }
         
     }];
-
+    
 }
 
 
@@ -838,7 +867,7 @@ static dispatch_once_t onceToken;
      parameters:nil
      constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
      {
-        if (url.path) {
+         if (url.path) {
              // 如果有resize 那么 按照 size 来
              if (!CGSizeEqualToSize(CGSizeZero, resize)) {
                  NSDictionary *dict= [[NSDictionary alloc]initWithObjectsAndKeys:
@@ -848,9 +877,9 @@ static dispatch_once_t onceToken;
              }else{
                  NSData *originData = [@"origin" dataUsingEncoding:NSUTF8StringEncoding];
                  [formData appendPartWithFormData:originData name:@"resize"];
- 
+                 
              }
- 
+             
              [formData appendPartWithFileURL:url name:@"file" fileName:@"file.jpg" mimeType:@"image/jpg" error:nil];
          }
          
@@ -885,32 +914,32 @@ static dispatch_once_t onceToken;
         [uploadTask resume];
     }];
     
-//    [[AppRequestManager sharedManager] POST:API_UPLOAD_PICTURE parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        NSLog(@"url.path %@", url.path);
-//        if (url.path) {
-//            // 如果有resize 那么 按照 size 来
-//            if (!CGSizeEqualToSize(CGSizeZero, resize)) {
-//                NSDictionary *dict= [[NSDictionary alloc]initWithObjectsAndKeys:
-//                                     @(resize.height), @"height", @(resize.width), @"width", nil];
-//                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
-//                [formData appendPartWithFormData:jsonData name:@"resize"];                
-//            }else{
-//                NSData *originData = [@"origin" dataUsingEncoding:NSUTF8StringEncoding];
-//                [formData appendPartWithFormData:originData name:@"resize"];
-//
-//            }
-//            
-//            [formData appendPartWithFileURL:url name:@"file" fileName:@"file.jpg" mimeType:@"image/jpg" error:nil];
-//        }
-//    } success:^(NSURLSessionDataTask *task, id responseObject) {
-//        if(responseObject != nil && block != nil) {
-//            block(responseObject , nil);
-//        }
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        if (block) {
-//            block(nil , error);
-//        }
-//    }];
+    //    [[AppRequestManager sharedManager] POST:API_UPLOAD_PICTURE parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    //        NSLog(@"url.path %@", url.path);
+    //        if (url.path) {
+    //            // 如果有resize 那么 按照 size 来
+    //            if (!CGSizeEqualToSize(CGSizeZero, resize)) {
+    //                NSDictionary *dict= [[NSDictionary alloc]initWithObjectsAndKeys:
+    //                                     @(resize.height), @"height", @(resize.width), @"width", nil];
+    //                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:nil];
+    //                [formData appendPartWithFormData:jsonData name:@"resize"];
+    //            }else{
+    //                NSData *originData = [@"origin" dataUsingEncoding:NSUTF8StringEncoding];
+    //                [formData appendPartWithFormData:originData name:@"resize"];
+    //
+    //            }
+    //
+    //            [formData appendPartWithFileURL:url name:@"file" fileName:@"file.jpg" mimeType:@"image/jpg" error:nil];
+    //        }
+    //    } success:^(NSURLSessionDataTask *task, id responseObject) {
+    //        if(responseObject != nil && block != nil) {
+    //            block(responseObject , nil);
+    //        }
+    //    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    //        if (block) {
+    //            block(nil , error);
+    //        }
+    //    }];
 }
 
 
@@ -921,7 +950,7 @@ static dispatch_once_t onceToken;
     NSDictionary* postDict = @{@"category_id":@"0"};
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if([DataTrans isCorrectResponseObject:responseObject]) {
             block(responseObject[@"data"] , nil);
@@ -931,7 +960,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 
@@ -945,7 +974,7 @@ static dispatch_once_t onceToken;
         if([DataTrans isCorrectResponseObject:responseObject]) {
             block(responseObject[@"data"] , nil);
         }
-
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (block) {
             block(nil , error);
@@ -960,12 +989,12 @@ static dispatch_once_t onceToken;
     NSString *postURL = API_CREATE_VEHICLE_GALLERY;
     
     NSDictionary* postDict = [DataTrans makePostDict:dict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
             block(responseObject , nil);
         }
-
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (block) {
             block(nil , error);
@@ -1039,7 +1068,7 @@ static dispatch_once_t onceToken;
 {
     NSString *postURL = API_UPDATE_VEHICLE;
     NSDictionary* postDict = [DataTrans makePostDict:dict];
-
+    
     
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
@@ -1076,7 +1105,7 @@ static dispatch_once_t onceToken;
                                @"offline":cloudStatus};
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     // TODO: cloudStatus
     
     [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -1111,7 +1140,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 
@@ -1123,7 +1152,7 @@ static dispatch_once_t onceToken;
     
     // TODO: cloudStatus
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
             block(responseObject, nil);
@@ -1146,13 +1175,13 @@ static dispatch_once_t onceToken;
 - (void)listDistributionSiteWithAccountType:(NSString *)accountType andBlock:(void (^)(id responseObject, NSError *error))block;
 {
     NSString *postURL = API_LIST_SHARE_ACCOUNT;
-        
+    
     NSDictionary *postDict = @{@"page":@"0",
                                @"size":@"100"
                                };
-
+    
     postDict = [DataTrans makePostDict:postDict];
-
+    
     
     if (StringHasValue(accountType)) {
         [postDict setValue:accountType forKey:@"accountType"];
@@ -1168,7 +1197,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 /**
@@ -1212,14 +1241,14 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 -(void)userExistWithInviteMobile:(NSString *)inviteMobile andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = API_USER_EXIST;
     NSDictionary *postDict = @{@"name":@"mobile",
-                           @"content":inviteMobile};
+                               @"content":inviteMobile};
     postDict = [DataTrans makePostDict:postDict];
     
     [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -1232,7 +1261,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 -(void)updatePasswordWithUserId:(NSString *)userId
@@ -1245,7 +1274,7 @@ static dispatch_once_t onceToken;
                                @"oldPassword":oldPassword,
                                @"password":password};
     
-//    postDict = [DataTrans makePostDict:postDict];
+    //    postDict = [DataTrans makePostDict:postDict];
     
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
@@ -1265,7 +1294,7 @@ static dispatch_once_t onceToken;
     NSString *postURL = API_FORGOT_PASSWORD;
     NSDictionary *postDict = @{@"mobile":myMobile};
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
             block(responseObject, nil);
@@ -1284,11 +1313,11 @@ static dispatch_once_t onceToken;
 {
     NSString *postURL = API_RESET_PASSWORD;
     NSDictionary *postDict = @{@"mobile":myMobile,
-                           @"verificationCode":code,
-                           @"newPassword":password};
+                               @"verificationCode":code,
+                               @"newPassword":password};
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
             block(responseObject, nil);
@@ -1312,7 +1341,7 @@ static dispatch_once_t onceToken;
                                @"inviteMobile":inviteMobile};
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
             block(responseObject, nil);
@@ -1323,7 +1352,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 
@@ -1331,9 +1360,9 @@ static dispatch_once_t onceToken;
 {
     NSString *postURL = API_VERIFICATION_CHECKSMS;
     NSDictionary *postDict = @{@"mobile": mobile,
-                           @"code":code};
+                               @"code":code};
     postDict = [DataTrans makePostDict:postDict];
-
+    
     
     [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
@@ -1345,7 +1374,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 
@@ -1359,7 +1388,7 @@ static dispatch_once_t onceToken;
     }
     
     postDict = [DataTrans makePostDict:postDict];
-
+    
     
     [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
@@ -1384,7 +1413,7 @@ static dispatch_once_t onceToken;
         postDict = @{@"userId": userId};
     }
     
-//    postDict = [DataTrans makePostDict:postDict];
+    //    postDict = [DataTrans makePostDict:postDict];
     
     
     [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -1404,7 +1433,7 @@ static dispatch_once_t onceToken;
 {
     NSString *postURL = API_USER_UPDATE_PATH;
     NSDictionary* postDict = [DataTrans makePostDict:userData];
-
+    
     
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
@@ -1435,9 +1464,9 @@ static dispatch_once_t onceToken;
     }
     
     NSMutableDictionary *postDict = [[NSMutableDictionary alloc]initWithDictionary:@{
-                                                                @"userId":XAppDelegate.me.userId,
-                                                                @"page":postString,
-                                                                @"size":sizeString}];
+                                                                                     @"userId":XAppDelegate.me.userId,
+                                                                                     @"page":postString,
+                                                                                     @"size":sizeString}];
     
     if (StringHasValue(vehicleId)) {
         [postDict setObject:vehicleId forKey:@"vehicleId"];
@@ -1484,9 +1513,9 @@ static dispatch_once_t onceToken;
     NSDictionary *postDict = @{@"page":postString,
                                @"size":sizeString,
                                @"shareJobId":historyId};
-
+    
     postDict = [DataTrans makePostDict:postDict];
-
+    
     // TODO: cloudStatus
     [[AppRequestManager sharedManager]GET:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if(responseObject != nil && block != nil) {
@@ -1498,7 +1527,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 #pragma mark 选择第三方车型后重新发车
@@ -1511,7 +1540,7 @@ static dispatch_once_t onceToken;
     
     if (StringHasValue(modelId)) {
         dict = @{@"shareJobId": shareJobId,
-                @"externalVehicleModelId": modelId};
+                 @"externalVehicleModelId": modelId};
     }else{
         dict = @{@"shareJobId": shareJobId};
     }
@@ -1559,16 +1588,16 @@ static dispatch_once_t onceToken;
     
     NSString *postString = STR_INT(page);
     NSString *sizeString = @"20";
-
+    
     NSMutableDictionary *postDict = [[NSMutableDictionary alloc]initWithDictionary:@{@"page":postString,@"size":sizeString}];
-
+    
     // merge searchDict and orderDict -> postDict
     [postDict addEntriesFromDictionary:searchDict];
     [postDict addEntriesFromDictionary:orderDict];
     
     // clean all empty key
     NSMutableArray *keysToDelete = [NSMutableArray array];
-
+    
     for (NSString* key in [postDict keyEnumerator]) {
         NSString * value = [postDict objectForKey:key];
         if(!StringHasValue(value)){
@@ -1611,7 +1640,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 - (void)getOneContactWithUserId:(NSString *)userId customerId:(NSString *)customerId andBlock:(void (^)(id, NSError *))block
@@ -1720,7 +1749,7 @@ static dispatch_once_t onceToken;
             block(nil , error);
         }
     }];
-
+    
 }
 
 #pragma mark 收藏
@@ -1763,7 +1792,7 @@ static dispatch_once_t onceToken;
             NSLog(@"%@", task);
         }
     }];
-
+    
 }
 
 - (void)checkFavoriteIsExistedWithResourceType:(NSString *)resourceType andResourceId:(NSString *)resourceId andBlock:(void (^)(id, NSError *))block
@@ -1788,7 +1817,7 @@ static dispatch_once_t onceToken;
 - (void)deleteFavoriteWithResourceType:(NSString *)resourceType andResourceId:(NSString *)resourceId andBlock:(void (^)(id, NSError *))block
 {
     NSString *postUrl = API_FAVORITE_DELETE;
-
+    
     NSDictionary *postDict = @{@"resourceType": resourceType,
                                @"resourceId": resourceId};
     
@@ -1809,7 +1838,7 @@ static dispatch_once_t onceToken;
     NSString *postUrl = API_NOTIFICATION_LIST;
     NSString *pageString = STR_INT(page);
     NSString *sizeString = @"20";
-
+    
     NSDictionary *postDict = @{@"userId": userId,
                                @"page": pageString,
                                @"size": sizeString};

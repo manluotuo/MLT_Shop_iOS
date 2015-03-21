@@ -48,7 +48,10 @@
     UIButton *button;
     NSInteger count;
     UILabel *placeLable;
+    UILabel *pricrLable;
 }
+
+//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndex) name:SIGNAL_GO_TO_INDEX object:nil];
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,7 +68,7 @@
     self.scrollView.y = IOS7_CONTENT_OFFSET_Y;
     self.scrollView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBtnClick) name:@"tongzhi" object:nil];
     self.dataArray = [[NSMutableArray alloc]init];
     
     [self setData];
@@ -98,7 +101,7 @@
     lable.numberOfLines = 2;
     [lable setFont:font];
     if (font == nil) {
-        [lable setFont:FONT_12];
+        [lable setFont:FONT_16];
     }
     lable.textColor = color;
     if (color == nil) {
@@ -120,7 +123,7 @@
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
         //    CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
-        UILabel *lableAA = [self createLable:@"收货信息" frame:CGRectMake(H_15, H_5, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_20];
+        UILabel *lableAA = [self createLable:@"收货信息" frame:CGRectMake(H_15, H_5, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_14];
         [self.scrollView addSubview:lableAA];
         
         UIView *lineA = [self createLine:CGRectMake(H_14, lableAA.y+lableAA.height, WIDTH-H_14*2, 1)];
@@ -136,7 +139,7 @@
         UILabel *lableD = [self createLable:[NSString stringWithFormat:@"联系电话：%@", model.tel] frame:CGRectMake(H_20, lableC.y+lableC.height+H_10, lableAA.width, H_20) color:nil font:nil];
         [self.scrollView addSubview:lableD];
         
-        UILabel *lableAB = [self createLable:@"支付及配送" frame:CGRectMake(H_15, lableD.y+lableD.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_20];
+        UILabel *lableAB = [self createLable:@"支付及配送" frame:CGRectMake(H_15, lableD.y+lableD.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_14];
         [self.scrollView addSubview:lableAB];
         
         UIView *lineB = [self createLine:CGRectMake(H_14, lableAB.y+lableAB.height, lineA.width, 1)];
@@ -151,7 +154,7 @@
         lableF.numberOfLines = 0;
         [self.scrollView addSubview:lableF];
         
-        UILabel *lableAC = [self createLable:@"订单信息" frame:CGRectMake(H_15, lableF.y+lableF.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_20];
+        UILabel *lableAC = [self createLable:@"订单信息" frame:CGRectMake(H_15, lableF.y+lableF.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_14];
         [self.scrollView addSubview:lableAC];
         
         UIView *lineC = [self createLine:CGRectMake(lineB.x, lableAC.y+lableAC.height, lineA.width, 1)];
@@ -237,7 +240,7 @@
         UILabel *lableJ = [self createLable:[NSString stringWithFormat:@"订单金额：%@(包含邮费%@)", model.formated_order_amount, model.formated_shipping_fee] frame:CGRectMake(H_20, lableI.y+lableI.height+H_10, WIDTH-H_15*2, H_20) color:nil font:nil];
         [self.scrollView addSubview:lableJ];
         
-        UILabel *lableAD = [self createLable:@"商品列表" frame:CGRectMake(H_15, lableJ.y+lableJ.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_20];
+        UILabel *lableAD = [self createLable:@"商品列表" frame:CGRectMake(H_15, lableJ.y+lableJ.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_14];
         [self.scrollView addSubview:lableAD];
         
         UIView *lineD = [self createLine:CGRectMake(lineA.x, lableAD.y+lableAD.height, lineA.width, 1)];
@@ -266,18 +269,21 @@
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(H_0, H_0, WIDTH, H_80)];
         image.image = [UIImage imageNamed:@"1"];
         [btnView addSubview:image];
-        UILabel *pricrLable = [self createLable:[NSString stringWithFormat:@"应付总额：%@", model.order_amount] frame:CGRectMake(H_15, H_20, WIDTH, H_40) color:ORANGECOLOR font:FONT_16];
+        pricrLable = [self createLable:[NSString stringWithFormat:@"应付总额：%@", model.order_amount] frame:CGRectMake(H_15, H_20, WIDTH, H_40) color:ORANGECOLOR font:FONT_16];
         [btnView addSubview:pricrLable];
+        if ([model.pay_status integerValue] == 2) {
+            pricrLable.hidden = YES;
+        }
         
         button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setFrame:CGRectMake(WIDTH/2+H_20, H_15, WIDTH/2-H_20*2, H_50)];
+        [button setFrame:CGRectMake(WIDTH/2+H_20, H_20, WIDTH/2-H_20*2, H_40)];
         [button setTitle:@"立即付款" forState:UIControlStateNormal];
         [button setTitle:T(@"确认收货") forState:UIControlStateSelected];
         button.selected = NO;
         [button setTintColor:WHITECOLOR];
         [button setBackgroundColor:ORANGECOLOR];
         [button.titleLabel setFont:FONT_16];
-        button.layer.cornerRadius = 20;
+        button.layer.cornerRadius = 5;
         button.clipsToBounds = YES;
         [button addTarget:self action:@selector(onBtnCLick) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:button];
@@ -329,18 +335,18 @@
 
 - (void)onBtnCLick {
     
-    
-    if (button.selected == YES) {
+    //TODO:记着切换
+    if (button.selected == NO) {
         if (self.dataArray.count > 0) {
             OrderDetailModel *model = [self.dataArray lastObject];
             [self doAlipayAction:model];
         }
     } else {
-        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"确认收货" andMessage:@"您真的要确认收货吗？"];
+        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:nil andMessage:@"确认收货"];
         [alertView addButtonWithTitle:@"取消"
                                  type:SIAlertViewButtonTypeCancel
                               handler:^(SIAlertView *alertView) {
-                                  NSLog(@"取消评论");
+                                  
                               }];
         [alertView addButtonWithTitle:@"确认"
                                  type:SIAlertViewButtonTypeDefault
@@ -348,14 +354,12 @@
                                   OrderModel *model = [[OrderModel alloc] init];
                                   model.orderId = self.order_id;
                                   [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andBlock:^(id responseObject, NSError *error) {
-                                      if (responseObject == nil) {
-                                          [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
-                                          button.enabled = NO;
-                                          [button setBackgroundColor:[UIColor grayColor]];
-                                          if (count < self.goods_list.count) {
-                                              [self initCollectView];
-                                              [self setCollectViewData];
-                                          }
+                                      [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
+                                      button.enabled = NO;
+                                      [button setBackgroundColor:[UIColor grayColor]];
+                                      if (count < self.goods_list.count) {
+                                          [self initCollectView];
+                                          [self setCollectViewData];
                                       }
                                   }];
                               }];
@@ -481,12 +485,12 @@
     order.seller = seller;
     order.tradeNO = theOrder.order_sn; //订单ID（由商家自行制定）
     for (NSDictionary *dict in self.goods_list) {
-        NSLog(@"%@", dict);
+        
         i++;
     }
     if (self.goods_list.count > 0) {
-        order.productName = [NSString stringWithFormat:@"%@等%d种商品i", self.goods_list[0][@"goods_name"], i]; //商品标题
-        order.productDescription = [NSString stringWithFormat:@"%@等%d种商品", self.goods_list[0][@"goods_name"], i]; //商品描述
+        order.productName = [NSString stringWithFormat:@"%@等%ld种商品i", self.goods_list[0][@"goods_name"], (long)i]; //商品标题
+        order.productDescription = [NSString stringWithFormat:@"%@等%ld种商品", self.goods_list[0][@"goods_name"], (long)i]; //商品描述
         order.amount = [NSString stringWithFormat:@"%.2f",theOrder.order_amount.floatValue]; //商品价格
         //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     }
@@ -515,17 +519,19 @@
                        orderSpec, signedString, @"RSA"];
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            
             NSLog(@"reslut = %@",resultDic);
             if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
-                
-                [self.navigationController popViewControllerAnimated:YES];
-                
+                [self.navigationController popViewControllerAnimated:YES]; 
             }
             
         }];
         
     }
+}
+
+- (void)changeBtnClick {
+    button.enabled = NO;
+    button.backgroundColor = [UIColor grayColor];
 }
 
 /** 取消按钮点击事件 */
@@ -545,12 +551,14 @@
     NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": @"5", @"content": self.collectText.text};
     
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
-        [HUD removeFromSuperview];
-        count++;
-        [self.collectView removeFromSuperview];
-        if (count < self.goods_list.count) {
-            [self initCollectView];
-            [self setCollectViewData];
+        if (responseObject == nil) {
+            [HUD removeFromSuperview];
+            count++;
+            [self.collectView removeFromSuperview];
+            if (count < self.goods_list.count) {
+                [self initCollectView];
+                [self setCollectViewData];
+            }
         }
     }];
 }

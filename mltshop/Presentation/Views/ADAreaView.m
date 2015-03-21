@@ -149,6 +149,9 @@
 -(void)initWithItemData:(NSDictionary *)item
 {
     UIImageView *goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(H_20, H_10, H_120, H_120)];
+    
+
+    
     [goodsImg sd_setImageWithURL:[NSURL URLWithString:item[@"img"]] placeholderImage:PLACEHOLDERIMAGE];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_130, TOTAL_WIDTH/2, H_20)];

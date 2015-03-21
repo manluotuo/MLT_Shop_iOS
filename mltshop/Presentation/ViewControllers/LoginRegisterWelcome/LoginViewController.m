@@ -212,6 +212,7 @@
     
     if (!StringHasValue(self.passTextView.text)) {
         [DataTrans showWariningTitle:T(@"密码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
+        return;
     }
     if (![DataTrans isValidatePassword:self.passTextView.text]) {
         [DataTrans showWariningTitle:T(@"密码为6-16位\n数字或字母组合") andCheatsheet:ICON_TIMES andDuration:1.5f];

@@ -104,6 +104,7 @@
 {
     [self dismissViewControllerAnimated:YES completion:^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO_TO_INDEX object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO object:nil userInfo:nil];
     }];
 }
 
@@ -234,21 +235,21 @@
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if ([scrollView isEqual:self.galleryView]) {
-        if (self.galleryView.contentOffset.x < -H_80) {
-            [self backAction];
-        }
-    }
-    
-    if ([scrollView isEqual:self.fixedView]) {
-        
-        if (self.fixedView.contentOffset.y < -H_80) {
-            [self backAction];
-        }
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if ([scrollView isEqual:self.galleryView]) {
+//        if (self.galleryView.contentOffset.x < -H_80) {
+//            [self backAction];
+//        }
+//    }
+//    
+//    if ([scrollView isEqual:self.fixedView]) {
+//        
+//        if (self.fixedView.contentOffset.y < -H_80) {
+//            [self backAction];
+//        }
+//    }
+//}
 
 - (void)initTabbarButton
 {
@@ -704,7 +705,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     NSLog(@"%ld", (long)self.commentData.count);
-    self.commentView.height = self.commentData.count*120;
+    self.commentView.height = self.commentData.count*H_100;
     self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
     fixedSize = self.fixedView.contentSize;
     return self.commentData.count;
@@ -712,7 +713,6 @@
 }
 
 
-// 这有个BUG
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentId"];
     if (!cell) {
@@ -730,7 +730,7 @@
     //    CommentModel *model = self.commentData[indexPath.row];
     //    CGSize contentSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_12];
     //    hei = contentSize.height+H_70;
-    return H_120;
+    return H_100;
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -788,7 +788,7 @@
                 
                 [self.commentData addObject:model];
             }
-            //            [self initNotCollectView];
+//            [self initNotCollectView];
             self.fixedView.contentSize = CGSizeMake(WIDTH, TOTAL_HEIGHT+250);
             [self.commentView reloadData];
         }];

@@ -16,6 +16,7 @@
     UILabel *attrLabel;
     UILabel *priceLabel;
     UILabel *numberLabel;
+    UIButton *certainBtn;
 }
 
 @property(nonatomic, strong)CartModel *data;
@@ -52,6 +53,8 @@
     priceLabel.textColor = GRAYCOLOR;
     priceLabel.font = LITTLECUSTOMFONT;
     
+    
+    
     changeCountBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     changeCountBtn.titleLabel.font = FONT_12;
     [changeCountBtn setTitle:T(@"修改数量") forState:UIControlStateNormal];
@@ -59,6 +62,14 @@
     [changeCountBtn addTarget:self action:@selector(changeCountAction) forControlEvents:UIControlEventTouchUpInside];
     [changeCountBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
     
+    certainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    certainBtn.titleLabel.font = FONT_14;
+    [certainBtn setTitle:T(@"立即付款") forState:UIControlStateNormal];
+    [certainBtn setFrame:CGRectMake(H_220, H_40, H_80, H_40)];
+    [certainBtn addTarget:self action:@selector(onCertainBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [certainBtn setBackgroundColor:[UIColor orangeColor]];
+    
+//    [self addSubview:certainBtn];
     [self addSubview:coverImageView];
     [self addSubview:nameLabel];
     [self addSubview:priceLabel];
@@ -88,6 +99,10 @@
     
     priceLabel.text = [NSString stringWithFormat:@"%@ x %@", priceString, numberString];
     
+}
+
+- (void)onCertainBtnClick {
+    [self.passDelegate passSignalValue:CERTRAL_BTN_CLICK andData:nil];
 }
 
 - (void)changeCountAction

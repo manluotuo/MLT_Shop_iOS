@@ -45,6 +45,13 @@
 
     [self initDataSource];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO object:nil];
+}
+
+- (void)gotoIndexAction
+{
+    [self dismissViewControllerAnimated:NO completion:^{
+    }];
 }
 
 - (void)initDataSource

@@ -426,7 +426,8 @@
 #define SIGNAL_GO_TO_INDEX_PAGE             @"60000"
 #define SIGNAL_GO_TO_INDEX                  @"60001"
 #define SIGNAL_GO_TO                        @"60002"
-
+#define SIGNAL_GO                           @"60003"
+#define CERTRAL_BTN_CLICK                   @"60004"
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 #define NOWBUILD [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];

@@ -42,13 +42,21 @@
 - (void)initCellView {
     
     self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(H_8, H_8, H_50, H_50)];
-    self.author = [[UILabel alloc] initWithFrame:CGRectMake(H_60+H_6, H_12, WIDTH-self.author.x*2, H_18)];
+    self.author = [[UILabel alloc] initWithFrame:CGRectMake(H_10, H_12, H_70, H_18)];
     [self.author setFont:FONT_14];
-    self.create = [[UILabel alloc] initWithFrame:CGRectMake(self.author.x, self.author.y+self.author.height+H_5, self.author.width, H_18)];
+    self.author.textColor = [UIColor redColor];
+    self.create = [[UILabel alloc] initWithFrame:CGRectMake(self.author.x+self.author.width+H_5, H_12, H_150, H_18)];
     [self.create setFont:FONT_14];
     
-    self.content = [[UILabel alloc] initWithFrame:CGRectMake(H_30, self.create.y+self.create.height+H_5, WIDTH-H_60, H_30)];
-    [self addSubview:self.iconImage];
+    self.content = [[UILabel alloc] initWithFrame:CGRectMake(H_50+2, self.create.y+self.create.height+H_5, WIDTH-H_60, H_30)];
+    self.content.textColor = [UIColor grayColor];
+    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(H_10, self.content.y-2, H_50, H_30)];
+    lable.text = @"评论：";
+    [lable setFont:FONT_14];
+    lable.textColor = [UIColor redColor];
+    
+    [self addSubview:lable];
+//    [self addSubview:self.iconImage];
     [self addSubview:self.author];
     [self addSubview:self.create];
     [self addSubview:self.content];
@@ -65,11 +73,11 @@
     }
     self.author.text = model.author;
     
-    CGSize contentSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_12];
+    CGSize contentSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_14];
     self.content.height = contentSize.height;
     self.content.text = model.content;
     self.content.numberOfLines = 0;
-    [self.content setFont:FONT_12];
+    [self.content setFont:FONT_14];
 }
 
 - (CGFloat)setCellHeight {

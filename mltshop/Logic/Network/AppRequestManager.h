@@ -31,6 +31,8 @@
 #define API_COMMENT_PATH            @"/ecmobile/?url=/comments/list"
 /** 增加评论 */
 #define API_COMMENT_ADD             @"/ecmobile/?url=/comments/add"
+/** 限时特价 */
+
 
 #define API_ADDRESS_LIST_PATH       @"/ecmobile/?url=/address/list"
 #define API_ADDRESS_CREATE_PATH     @"/ecmobile/?url=/address/add"
@@ -182,6 +184,9 @@
 
 /** 新增评论 */
 - (void)getCommentAddWithDict:(NSDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block;
+/** 限时特价 */
+- (void)setLimitDataBlock:(void (^)(id responseObject, NSError *error))block;
+
 
 // ORDER function
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder

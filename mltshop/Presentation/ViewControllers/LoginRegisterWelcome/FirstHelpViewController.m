@@ -56,7 +56,12 @@
     self.pagedScrollView.scrollEnabled = YES;
     self.pagedScrollView.pagingEnabled = YES;
     self.pagedScrollView.delegate = self;
-    self.scrollInfoArray = @[@"splash1.jpg", @"splash2.jpg", @"splash3.jpg", @"Default-568h"];
+    if (WIDTH == 320) {
+        self.scrollInfoArray = @[@"splash1.jpg", @"splash2.jpg", @"splash3.jpg"];
+    } else {
+        self.scrollInfoArray = @[@"splash1.jpg", @"splash2.jpg", @"splash3.jpg"];
+    }
+    
     for (int i = 0 ; i < [self.scrollInfoArray count]; i++) {
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -75,7 +80,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     //    NSLog(@"%f", scrollView.contentOffset.x);
-    if (scrollView.contentOffset.x > WIDTH*3) {
+    if (scrollView.contentOffset.x > WIDTH*2+H_50) {
         [self skipAction];
     }
 }

@@ -148,14 +148,30 @@
                 [DataTrans showWariningTitle:T(@"更新成功") andCheatsheet:ICON_CHECK];
                 [self.navigationController popViewControllerAnimated:YES];
                 [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
-
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setValue:@"YES" forKey:@"address"];
+                [user synchronize];
+                if ([user valueForKey:@"OK"]) {
+                    [self dismissViewControllerAnimated:YES completion:^{
+                    [user setValue:@"YES" forKey:@"OK"];
+                        [user synchronize];
+                    }];
+                }
             }];
-        }else{
+        } else {
             [[AppRequestManager sharedManager]operateAddressWithAddress:theAddress operation:AddressOpsCreate andBlock:^(id responseObject, NSError *error) {
                 [DataTrans showWariningTitle:T(@"新建成功") andCheatsheet:ICON_CHECK];
                 [self.navigationController popViewControllerAnimated:YES];
                 [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
-
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setValue:@"YES" forKey:@"address"];
+                [user synchronize];
+                if ([user valueForKey:@"OK"]) {
+                    [self dismissViewControllerAnimated:YES completion:^{
+                    [user setValue:@"YES" forKey:@"OK"];
+                        [user synchronize];
+                    }];
+                }
             }];
 
         }
@@ -182,7 +198,17 @@
 -(void)defaultAction
 {
     if ([self verifyAddress]) {
+        
         [[AppRequestManager sharedManager]operateAddressWithAddress:theAddress operation:AddressOpsDefault andBlock:^(id responseObject, NSError *error) {
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setValue:@"YES" forKey:@"address"];
+            [user synchronize];
+            if ([user valueForKey:@"OK"]) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [user setValue:@"YES" forKey:@"OK"];
+                    [user synchronize];
+                }];
+            }
             [DataTrans showWariningTitle:T(@"默认收货地址设置成功") andCheatsheet:ICON_CHECK];
             [self.navigationController popViewControllerAnimated:YES];
             [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];

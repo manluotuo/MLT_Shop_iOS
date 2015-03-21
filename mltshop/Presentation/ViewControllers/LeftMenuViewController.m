@@ -28,6 +28,9 @@
 #import "WebHelpViewController.h"
 #import "WebViewController.h"
 #import "SGActionView.h"
+
+#import "LimitViewController.h"
+
 //#import "HistoryListViewController.h"
 //#import "MoreViewController.h"
 //#import "ProfileTableViewCell.h"
@@ -519,11 +522,8 @@
             //限时特价
         case LeftMenuPromotion:
         {
-            ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
-            VC.search = [[SearchModel alloc]init];
-            VC.search.intro= @"promotion";
+            LimitViewController *VC = [[LimitViewController alloc]initWithNibName:nil bundle:nil];
             VC.title = T(@"限时特价");
-            [VC setupLeftMMButton];
             ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
             [self.mm_drawerController setCenterViewController:nav];
             [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {}];

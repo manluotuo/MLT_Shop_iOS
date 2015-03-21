@@ -104,6 +104,21 @@
     }
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    if (self.dataSource.count == 0) {
+        [user setValue:@"NO" forKey:@"address"];
+        [user setValue:@"NO" forKey:@"OK"];
+        [user synchronize];
+    } else {
+        [user setValue:@"YES" forKey:@"OK"];
+        [user setValue:@"YES" forKey:@"address"];
+        [user synchronize];
+    }
+    return [self.dataSource count];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AddressInfoViewController *vc = [[AddressInfoViewController alloc]initWithNibName:nil bundle:nil];
@@ -127,6 +142,11 @@
             if (responseObject != nil) {
                 [self.dataArray removeObjectAtIndex:indexPath.row];
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                if (self.dataArray.count == 0) {
+                    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                    [user setValue:@"NO" forKey:@"address"];
+                    [user synchronize];
+                }
             }
 
         }];
@@ -140,6 +160,12 @@
 
 - (void)createGetMoreData {
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"OK"] isEqualToString:@"NO"]) {
+        [self addAction];
+    }
 }
 
 /*

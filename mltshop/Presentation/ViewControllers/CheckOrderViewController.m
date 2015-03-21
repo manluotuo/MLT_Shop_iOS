@@ -203,16 +203,13 @@
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
         
-        
         [self dismissViewControllerAnimated:YES completion:nil];
-        
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             
             NSLog(@"reslut = %@",resultDic);
-            [MobClick event:UM_PAY];
-            //            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
-            //                [self.navigationController popViewControllerAnimated:YES];
-            //            }
+            if([resultDic[@"resultStatus"] isEqualToNumber:INT(9000)]){
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }];
         
         
@@ -286,11 +283,11 @@
     }
     
     CGFloat canUseIntegral  = 0.0f;
-//    if (self.dataSource.yourIntegral < self.dataSource.orderMaxIntegral) {
-//        canUseIntegral = self.dataSource.yourIntegral.floatValue;
-//    }else{
-//        canUseIntegral = self.dataSource.orderMaxIntegral.floatValue;
-//    }
+    //    if (self.dataSource.yourIntegral < self.dataSource.orderMaxIntegral) {
+    //        canUseIntegral = self.dataSource.yourIntegral.floatValue;
+    //    }else{
+    //        canUseIntegral = self.dataSource.orderMaxIntegral.floatValue;
+    //    }
     
     self.flowDoneData.usedIntegral = FLOAT([integralText.text floatValue]);
     canUseIntegral = integralText.text.floatValue;
@@ -335,10 +332,10 @@
     
     /** 使用积分 */
     
-//    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(H_20, H_40*3, H_100, H_20)];
-//    lable.text = T(@"使用积分");
-//    lable.font = FONT_13;
-//    [self.infoView addSubview:lable];
+    //    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(H_20, H_40*3, H_100, H_20)];
+    //    lable.text = T(@"使用积分");
+    //    lable.font = FONT_13;
+    //    [self.infoView addSubview:lable];
     
     integralText = [[UITextField alloc] initWithFrame:CGRectMake(H_20, H_40*3, H_100, H_20)];
     integralText.borderStyle = UITextBorderStyleBezel;
@@ -361,7 +358,7 @@
     
     doneButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [doneButton setFrame:CGRectMake(H_180, H_40*4, H_100, H_40)];
-    [doneButton setTitle:T(@"确认") forState:UIControlStateNormal];
+    [doneButton setTitle:T(@"提交订单") forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -650,7 +647,7 @@
         }
     } else {
         integralText.text = STR_INT([self.dataSource.orderMaxIntegral integerValue]);
-       
+        
     }
 }
 

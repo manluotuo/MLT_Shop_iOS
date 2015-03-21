@@ -16,11 +16,14 @@
 #import "ListViewController.h"
 #import "WebViewController.h"
 #import "GoodsDetailViewController.h"
+#import "CycleScrollView.h"
 
+static const NSInteger kTotalPageCount = 5;
 @interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate>
 @property(nonatomic, strong)YWDictionary *fixedData;
 @property(nonatomic, strong)UIScrollView *fixedView;
 @property (nonatomic, strong) GCPagedScrollView *pagedScrollView;
+@property (nonatomic , strong) CycleScrollView *mainScorllView;
 
 @end
 
@@ -32,6 +35,7 @@
     [self setupDataSource];
 }
 
+/*
 - (void)handleImageTap:(UIGestureRecognizer *)tap
 {
     NSArray *items = [self.fixedData objectForKey:@"player"];
@@ -40,6 +44,7 @@
     [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
     
 }
+ */
 
 
 -(void)passSignalValue:(NSString *)value andData:(id)data
@@ -114,6 +119,8 @@
     }];
 }
 
+
+// TODO:滚动试图
 - (void)buildFixedView
 {
     /**
@@ -121,7 +128,7 @@
      */
     CGFloat fixedHeight = 0.0f;
     self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, self.view.frame.size.height)];
-    
+    NSMutableArray *viewsArray = [@[] mutableCopy];
     for (NSString *key in [self.fixedData allKeys]) {
         
         NSArray *listData = [self.fixedData objectForKey:key];
@@ -130,8 +137,11 @@
         if ([key isEqualToString:@"player"]) {
             CGFloat playerY = fixedHeight;
             CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
-            self.pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
+
             
+/*
+            替换滚动试图
+            self.pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
             self.pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
             self.pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
             self.pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
@@ -141,14 +151,19 @@
             self.pagedScrollView.pagingEnabled = YES;
             self.pagedScrollView.delegate = self;
             [self.pagedScrollView removeAllContentSubviews];
+ */
             
             CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
             for (int i = 0 ; i < [listData count]; i++) {
-                // last one
+
                 UIImageView *page = [[UIImageView alloc]
                                      initWithFrame:scrollFrame];
                 [page setContentMode:UIViewContentModeScaleAspectFill];
+                [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
+                [viewsArray addObject:page];
                 
+                /*
+                 替换滚动试图
                 // 点击事件
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageTap:)];
                 tap.cancelsTouchesInView = YES;
@@ -157,16 +172,26 @@
                 page.tag = i;
                 [page addGestureRecognizer:tap];
 
-                
+                NSLog(@"%@", listData[i][@"photo"][@"thumb"]);
                 [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
+                [viewsArray addObject:page];
                 [self.pagedScrollView addContentSubview:page];
+                */
             }
-            
-
-            // list data foreach add page
-            [self.fixedView addSubview:self.pagedScrollView];
-            /** 创建定时器 */
-            [self.pagedScrollView createTimer];
+            self.mainScorllView = [[CycleScrollView alloc] initWithFrame:rect animationDuration:3];
+            self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
+            self.mainScorllView.totalPagesCount = ^NSInteger(void){
+                return viewsArray.count;
+            };
+            self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+                return viewsArray[pageIndex];
+            };
+            self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+                NSArray *items = [self.fixedData objectForKey:@"player"];
+                NSDictionary *item = items[pageIndex];
+                [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
+            };
+            [self.fixedView addSubview:self.mainScorllView];
             
             fixedHeight += SLIDE_FIX_HEIGHT;
         }
@@ -186,11 +211,14 @@
         }
         //区域信息
         else if([key isEqualToString:@"area"]){
+            
+            
             for (NSDictionary *oneArea in listData) {
                 CGFloat height = AREA_FIX_HEIGHT;
                 if (StringHasValue(oneArea[@"title"])) {
                     height += H_30;
                 }
+                
                 
                 CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT*2, TOTAL_WIDTH, height);
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
@@ -220,23 +248,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [self.pagedScrollView starTimer];
-    
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [self.pagedScrollView stopTimer];
-    
-}
-
-- (void)dealloc {
-    // 关闭自动滑屏定时器
-    [self.pagedScrollView disMissTimer];
-}
 
 /*
 #pragma mark - Navigation

@@ -180,15 +180,15 @@
     [self resetPosition];
     if ([self checkAllTextField]) {
         [[AppRequestManager sharedManager]signUpWithMobile:self.userTextView.text password:self.passTextView.text email:self.emailTextView.text andBlock:^(id responseObject, NSError *error) {
-            //
+
             if (responseObject != nil) {
                 [MobClick event:UM_REGISTER];
                 [self verifyPasswordAction];
             }
             
             if (error != nil) {
+                NSLog(@"%@", error);
                 NSDictionary *userDict = [error userInfo];
-                
                 if ([userDict[@"succeed"] isEqualToNumber:INT(0)]) {
                     [DataTrans showWariningTitle:userDict[@"error_desc"] andCheatsheet:ICON_TIMES andDuration:1.0f];
                 }
@@ -265,13 +265,18 @@
     if (StringHasValue(self.passTextView.text)) {
         if (![DataTrans isValidatePassword:self.passTextView.text]) {
             [DataTrans showWariningTitle:T(@"密码应该设置为6位以上\n数字或字母组合") andCheatsheet:ICON_TIMES andDuration:1.0f];
+            return NO;
         }
     }else{
         [DataTrans showWariningTitle:T(@"密码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
         return NO;
     }
-    if (StringHasValue(self.userTextView.text) &&
-        [DataTrans isValidatePassword:self.passTextView.text] &&
+    if (!StringHasValue(self.userTextView.text)) {
+        [DataTrans showWariningTitle:T(@"用户名不能为空") andCheatsheet:ICON_INFO andDuration:1.0f];
+        return NO;
+    }
+    //TODO：检测用户名
+    if (StringHasValue(self.userTextView.text)&&[DataTrans isValidatePassword:self.passTextView.text] &&
         [DataTrans isValidateEmail:self.emailTextView.text]) {
         
         return YES;
@@ -289,6 +294,7 @@
 {
     if (textField.tag == MY_TAG) {
         //检查用户名
+        
     }
     else{
         [self checkAllTextField];
@@ -307,13 +313,14 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [self resetPosition];
     if (textField.tag == INVITE_TAG || textField.tag == MY_TAG) {
-        if (![DataTrans isValidateMobile:textField.text]) {
-            [textField.layer setBorderColor:REDCOLOR.CGColor];
-            [DataTrans showWariningTitle:T(@"手机号格式有误") andCheatsheet:ICON_TIMES andDuration:1.0f];
-        }else{
-            [textField.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
-        }
+//        if (![DataTrans isValidateMobile:textField.text]) {
+//            [textField.layer setBorderColor:REDCOLOR.CGColor];
+//            [DataTrans showWariningTitle:T(@"手机号格式有误") andCheatsheet:ICON_TIMES andDuration:1.0f];
+//        }else{
+//            [textField.layer setBorderColor:GRAYEXLIGHTCOLOR.CGColor];
+//        }
     }
     else if (textField.tag == PASSWORD_TAG || textField.tag == REPASSWORD_TAG){
         [self checkPasswordAction];

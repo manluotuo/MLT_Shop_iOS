@@ -330,6 +330,9 @@
              
              // 付款成功查看订单
              if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
+                 [MobClick event:UM_PAY];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"tongzhi" object:nil userInfo:nil];
+                 
 //                 [self showDrawerView];
                  // FIXME: 清掉所有的app  如果在 详情页点过去 profile页面会显示不出来
 //                 ProfileViewController *VC = [[ProfileViewController alloc]init];

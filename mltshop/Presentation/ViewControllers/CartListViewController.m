@@ -13,9 +13,13 @@
 #import "KKFlatButton.h"
 #import "CheckOrderViewController.h"
 #import "AppDelegate.h"
+#import "AddressInfoViewController.h"
+#import "AddressListViewController.h"
+
 
 @interface CartListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
 
+@property(nonatomic, strong)NSMutableArray *addressArray;
 @property(nonatomic, strong)NSMutableArray *dataArray;
 @property(nonatomic, strong)NSMutableDictionary *totalInfo;
 @property(nonatomic, strong)UIView *footerView;
@@ -42,8 +46,32 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndex) name:SIGNAL_GO_TO object:nil];
     
     [self initDataSource];
+    [self setupAddressData];
 //    [self setUpImageDownButton:0];
 }
+
+- (void)setupAddressData {
+    
+    self.addressArray = [[NSMutableArray alloc]init];
+    [[AppRequestManager sharedManager]getAddressListWithBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            // 集中处理所有的数据
+            NSUInteger count = [responseObject count];
+            for (int i = 0 ; i < count; i++) {
+                AddressModel *oneAddress = [[AddressModel alloc]initWithDict:responseObject[i]];
+                [self.addressArray addObject:oneAddress];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                if (self.addressArray.count == 0) {
+                    [user setValue:@"NO" forKey:@"address"];
+                } else {
+                    [user setValue:@"YES" forKey:@"address"];
+                }
+                [user synchronize];
+            }
+        }
+    }];
+}
+
 
 - (void)gotoIndex {
     [self dismissViewControllerAnimated:NO completion:^{
@@ -107,9 +135,21 @@
 - (void)checkOrderAction
 {
     if ([self.dataArray count] > 0) {
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        
+        if ([[user valueForKey:@"address"] isEqualToString:@"YES"]) {
         CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
         [VC setupDataSource];
-        [self.navigationController pushViewController:VC animated:YES];
+            [self.navigationController pushViewController:VC animated:YES];
+        } else {
+            [DataTrans showWariningTitle:T(@"请您先填写地址") andCheatsheet:ICON_INFO andDuration:1.0f];
+            AddressListViewController *address = [[AddressListViewController alloc] init];
+            ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:address];
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setValue:@"NO" forKey:@"OK"];
+            [user synchronize];
+            [self presentViewController:nav animated:YES completion:nil];
+        }
     }else{
         // 去首页逛逛
         // 发通知
@@ -211,23 +251,23 @@
 //    sgaction
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        AddressModel *vehicleModel = self.dataArray[indexPath.row];
-        [[AppRequestManager sharedManager]operateAddressWithAddress:vehicleModel operation:AddressOpsDelete andBlock:^(id responseObject, NSError *error) {
-            if (responseObject != nil) {
-                [self.dataArray removeObjectAtIndex:indexPath.row];
-                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            
-        }];
-    }
-}
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return UITableViewCellEditingStyleDelete;
+//}
+//
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        AddressModel *vehicleModel = self.dataArray[indexPath.row];
+//        [[AppRequestManager sharedManager]operateAddressWithAddress:vehicleModel operation:AddressOpsDelete andBlock:^(id responseObject, NSError *error) {
+//            if (responseObject != nil) {
+//                [self.dataArray removeObjectAtIndex:indexPath.row];
+//                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            }
+//            
+//        }];
+//    }
+//}
 
 - (void)createGetMoreData {
     
