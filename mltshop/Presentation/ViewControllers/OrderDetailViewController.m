@@ -22,6 +22,7 @@
 
 #import "RFExampleToolbarButton.h"
 #import "SIAlertView.h"
+#import "FAHoverButton.h"
 
 @interface OrderDetailViewController ()<UITextViewDelegate>
 
@@ -43,6 +44,10 @@
 @property (nonatomic, strong) UIButton *cancelBtn;
 /** 确认 */
 @property (nonatomic, strong) UIButton *certainBtn;
+/** 星 */
+@property (nonatomic, strong) UIButton *starButton;
+/** 星级 */
+@property (nonatomic, strong) NSString *star;
 @end
 
 @implementation OrderDetailViewController {
@@ -119,7 +124,7 @@
     return line;
 }
 
-/** 订单详情 */
+/** 订单详情---初始化页面 */
 - (void)initView {
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
@@ -313,6 +318,7 @@
     
 }
 
+/** 设置导航栏按钮 */
 - (void)setupleftButton
 {
     CGFloat leftMargin = 10.0f;
@@ -327,13 +333,14 @@
     self.navigationItem.leftBarButtonItem = barBackButtonItem;
     self.navigationItem.hidesBackButton = YES;
 }
-
+/** 导航栏按钮点击事件 */
 - (void)onLeftBtnClick {
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
+/** 确认收货/立即付款按钮点击事件 */
 - (void)onBtnCLick {
     
     //TODO:记着切换
@@ -373,7 +380,7 @@
     }
 }
 
-
+/** 初始化评价窗口 */
 - (void)initCollectView {
     
     self.scrollView.contentOffset = CGPointMake(0, H_90);
@@ -388,6 +395,17 @@
     
     self.goodsName = [[UILabel alloc] initWithFrame:CGRectMake(self.iconImage.x+self.iconImage.width+H_5, H_10, self.scrollView.width-self.iconImage.width-H_20, H_20)];
     self.goodsName.font = FONT_14;
+    
+    for (NSInteger i = 0; i < 5; i++) {
+        self.starButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
+        [self.starButton setTitle:[NSString fontAwesomeIconStringForEnum:FAStar] forState:UIControlStateNormal];
+        [self.starButton setFrame:CGRectMake(self.goodsName.x+32*i, self.goodsName.y+self.goodsName.height+5, 30, 30)];
+        [self.starButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+        [self.starButton addTarget:self action:@selector(onStarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.starButton setSelected:NO];
+        self.starButton.tag = i+H_10;
+        [self.collectView addSubview:self.starButton];
+    }
     
     self.collectText = [[UITextView alloc] initWithFrame:CGRectMake(H_10, H_70, self.collectView.width-H_20, H_60)];
     [self.collectText becomeFirstResponder];
@@ -427,6 +445,7 @@
     self.certainBtn.layer.cornerRadius = 5;
     
     
+    
     [self.scrollView addSubview:self.collectView];
     [self.collectView addSubview:self.iconImage];
     [self.collectView addSubview:self.goodsName];
@@ -440,15 +459,13 @@
     
 }
 
+/** 设置评价窗口信息 */
 - (void)setCollectViewData {
-    
-    
-    NSLog(@"%@", self.goods_list[count][@"img"][@"small"]);
     [self.iconImage sd_setImageWithURL:[NSURL URLWithString:self.goods_list[count][@"img"][@"small"]] placeholderImage:nil];
     self.goodsName.text = self.goods_list[count][@"goods_name"];
-    
 }
 
+/** 支付 */
 - (void)doAlipayAction:(OrderDetailModel *)theOrder {
     
     /*
@@ -533,6 +550,7 @@
     }
 }
 
+/** 改变付款/收货按钮状态 */
 - (void)changeBtnClick {
     button.enabled = NO;
     button.backgroundColor = [UIColor grayColor];
@@ -542,6 +560,7 @@
 - (void)onCancelBtnClick {
     [self.collectView removeFromSuperview];
 }
+
 /** 确认按钮点击事件 */
 - (void)onCertainBtnClick {
     
@@ -552,10 +571,10 @@
     [HUD showInView:self.view];
     
     NSLog(@"%@", self.goods_list[count][@"goods_id"]);
-    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": @"5", @"content": self.collectText.text};
+    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": self.star, @"content": self.collectText.text};
     
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
-        if (responseObject == nil) {
+        if ([responseObject isEqualToString:@"YES"]) {
             [HUD removeFromSuperview];
             count++;
             [self.collectView removeFromSuperview];
@@ -572,6 +591,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/** textView提示文字 */
 - (void) textViewDidChange:(UITextView *)textView{
     if ([textView.text length] == 0) {
         [placeLable setHidden:NO];
@@ -580,6 +600,23 @@
     }
 }
 
+/** 星数被点击 */
+- (void)onStarButtonClick:(UIButton *)sender {
+    
+    
+    for (NSInteger j = 10; j < 15; j++) {
+        UIButton *btn = (UIButton *)[self.view viewWithTag:j];
+        [btn setSelected:NO];
+    }
+    for (NSInteger i = 10; i <= sender.tag; i++) {
+        UIButton *btn = (UIButton *)[self.view viewWithTag:i];
+        [btn setSelected:YES];
+    }
+    self.star = [NSString stringWithFormat:@"%d", sender.tag];
+    if (self.star.length == 0) {
+        self.star = [NSString stringWithFormat:@"5"];
+    }
+}
 /*
  #pragma mark - Navigation
  

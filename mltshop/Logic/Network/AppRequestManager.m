@@ -399,7 +399,7 @@ static dispatch_once_t onceToken;
         NSLog(@"%@", responseObject);
         if ([DataTrans isCorrectResponseObject:responseObject]) {
             if (block) {
-                block(responseObject, nil);
+                block([NSString stringWithFormat:@"YES"], nil);
             }
         }else {
             NSError *error = [NSError errorWithDomain:NSURLErrorDomain

@@ -16,12 +16,15 @@
 #import "LimitModel.h"
 #import "LimitGoodsTableViewCell.h"
 #import "GoodsDetailViewController.h"
+#import "FAHoverButton.h"
+
 
 @interface LimitViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-
+@property (nonatomic, strong) UILabel *lable;
+@property(nonatomic, strong)FAHoverButton *leftDrawerAvatarButton;
 @end
 
 @implementation LimitViewController
@@ -31,12 +34,43 @@
 
     [self setData];
     [self customUI];
+    [self setupLeftMenuButton];
     self.dataArray = [[NSMutableArray alloc] init];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.y = IOS7_CONTENT_OFFSET_Y;
     self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
 }
+
+- (void)setupLeftMenuButton {
+    self.leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
+    [self.leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
+    [self.leftDrawerAvatarButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
+    [self.leftDrawerAvatarButton addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc]initWithCustomView:self.leftDrawerAvatarButton];
+    
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
+}
+
+//- (void)setUpImageBackButton
+//{
+//    CGFloat leftMargin = 10.0f;
+//    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 12+leftMargin, 21)];
+//    [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
+//    [backButton.titleLabel setFont:FONT_AWESOME_36];
+//    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
+//    
+//    
+//    UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+//    [backButton addTarget:self action:@selector(popCurrentViewController) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = barBackButtonItem;
+//    self.navigationItem.hidesBackButton = YES;
+//}
+
+//- (void)popCurrentViewController {
+//    
+//}
 
 - (void)customUI {
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -95,6 +129,10 @@
     
     [self presentViewController:VC animated:YES completion:nil];
 
+}
+
+-(void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -210,6 +210,7 @@
 		3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316122D1AB03FA100F47730 /* CollectViewController.m */; };
 		331612311AB043BE00F47730 /* CollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612301AB043BE00F47730 /* CollectModel.m */; };
 		331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612331AB0503F00F47730 /* CollectTableViewCell.m */; };
+		3330F3041AC11B0400EEC898 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3330F3031AC11B0400EEC898 /* ServiceViewController.m */; };
 		3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */; };
 		3362E1FA1ABBF9E000D0704B /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E1F81ABBF9E000D0704B /* SIAlertView.m */; };
 		3362E2CB1ABC4CC900D0704B /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E2A21ABC4CC900D0704B /* CycleScrollView.m */; };
@@ -692,6 +693,8 @@
 		331612301AB043BE00F47730 /* CollectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectModel.m; sourceTree = "<group>"; };
 		331612321AB0503F00F47730 /* CollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectTableViewCell.h; sourceTree = "<group>"; };
 		331612331AB0503F00F47730 /* CollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableViewCell.m; sourceTree = "<group>"; };
+		3330F3021AC11B0400EEC898 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		3330F3031AC11B0400EEC898 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
 		3362E1F71ABBF9E000D0704B /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
 		3362E1F81ABBF9E000D0704B /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
@@ -1707,6 +1710,8 @@
 				26BB7D311A6B5797002F4030 /* BrandListViewController.m */,
 				33D621C81ABD5A5F009D86A1 /* LimitViewController.h */,
 				33D621C91ABD5A5F009D86A1 /* LimitViewController.m */,
+				3330F3021AC11B0400EEC898 /* ServiceViewController.h */,
+				3330F3031AC11B0400EEC898 /* ServiceViewController.m */,
 			);
 			name = FunctionVC;
 			sourceTree = "<group>";
@@ -2158,6 +2163,7 @@
 				265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */,
 				26BE3A911A170421009F37B4 /* NSDate-Utilities.m in Sources */,
 				33D621E21ABDA6F8009D86A1 /* HttpRequestManager.m in Sources */,
+				3330F3041AC11B0400EEC898 /* ServiceViewController.m in Sources */,
 				263386611A52FFEA00C94D8F /* SVWebViewController.m in Sources */,
 				26BE3A971A170421009F37B4 /* UIViewController+ImageBackButton.m in Sources */,
 				3362E2CB1ABC4CC900D0704B /* CycleScrollView.m in Sources */,

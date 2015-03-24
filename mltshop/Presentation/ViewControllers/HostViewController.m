@@ -117,7 +117,7 @@
 
 #pragma mark - Button Handlers
 
-- (void)setupLeftMenuButton{
+- (void)setupLeftMenuButton {
     self.leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
     [self.leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
     [self.leftDrawerAvatarButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];

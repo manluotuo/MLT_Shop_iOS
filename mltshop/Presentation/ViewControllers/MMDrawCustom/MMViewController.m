@@ -22,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setClick) name:SIGNAL_PAN object:nil];
     }
     return self;
 }
@@ -75,6 +76,10 @@
 }
 
 #pragma mark - Button Handlers
+
+- (void)setClick {
+    [self leftDrawerButtonPress:nil];
+}
 -(void)leftDrawerButtonPress:(id)sender{
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }

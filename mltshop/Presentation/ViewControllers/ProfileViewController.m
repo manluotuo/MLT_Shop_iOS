@@ -25,6 +25,8 @@
 
 #import "CollectViewController.h"
 #import "BonusVC/BonusViewController.h"
+#import "ServiceViewController.h"
+
 
 /** 个人中心 */
 
@@ -358,7 +360,7 @@
     [buttonBigE.titleLabel setFont:FONT_14];
     [buttonBigE setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [buttonBigE setBackgroundColor:WHITECOLOR];
-    [buttonBigE addTarget:self action:@selector(onBonusClick) forControlEvents:UIControlEventTouchUpInside];
+    [buttonBigE addTarget:self action:@selector(onServiceClick) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *imageE = RIGHT_IMAGE_FRAME;
     [imageE setImage:RIGHT_IMAGE];
     [buttonBigE addSubview:imageE];
@@ -414,6 +416,8 @@
     
 }
 
+
+#pragma mark - 点击事件
 /** 地址管理 */
 - (void)addressAction
 {
@@ -450,6 +454,13 @@
     ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:bonusVC];
     [self presentViewController:nav animated:YES completion:nil];
     
+}
+
+/** 客服中心 */
+- (void)onServiceClick {
+    ServiceViewController *vc = [[ServiceViewController alloc] init];
+    ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

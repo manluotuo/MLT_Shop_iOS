@@ -908,7 +908,7 @@
     [self selectTabAtIndex:index];
 }
 
-
+/** 改动改动改动改动改动 */
 /** 左滑调用 */
 #pragma mark - UIScrollViewDelegate, Responding to Scrolling and Dragging
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -918,13 +918,15 @@
     }
     
     if (self.activeTabIndex == 0) {
-     NSLog(@"X = %f, Y = %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
         if (scrollView.contentOffset.x < 320) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_PAN object:nil userInfo:nil];
             scrollView.bounces = NO;
         }
-            [self tabWidth];
+        
+    } else {
+        scrollView.bounces = YES;
     }
-    
+    [self tabWidth];
     if (![self isAnimatingToTab]) {
         UIView *tabView = [self tabViewAtIndex:self.activeTabIndex];
         

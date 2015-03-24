@@ -429,6 +429,8 @@
 #define SIGNAL_GO                           @"60003"
 #define CERTRAL_BTN_CLICK                   @"60004"
 
+#define SIGNAL_PAN                          @"60005"
+
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 #define NOWBUILD [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 

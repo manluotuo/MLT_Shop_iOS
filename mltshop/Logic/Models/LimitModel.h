@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSString *promote_price;
 @property (nonatomic, strong) NSString *promote_start_date;
 @property (nonatomic, strong) NSString *promote_end_date;
+@property (nonatomic, strong) NSNumber *promote_date_time;
 @property (nonatomic, strong) NSDictionary *img;
+
 
 @end
