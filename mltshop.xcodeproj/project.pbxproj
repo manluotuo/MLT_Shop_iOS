@@ -221,6 +221,9 @@
 		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
 		336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045F1AB412CA00A87137 /* OrderDetailModel.m */; };
 		336D049E1AB4473400A87137 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336D049D1AB4473400A87137 /* 1.png */; };
+		337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */; };
+		337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */; };
+		337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E91AC02195000CAF14 /* RFToolbarButton.m */; };
 		33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C666C71AB4EC26005ACDD5 /* BonusListModel.m */; };
 		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
@@ -708,6 +711,12 @@
 		336D045E1AB412CA00A87137 /* OrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailModel.h; sourceTree = "<group>"; };
 		336D045F1AB412CA00A87137 /* OrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailModel.m; sourceTree = "<group>"; };
 		336D049D1AB4473400A87137 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		337B33E41AC02195000CAF14 /* RFExampleToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFExampleToolbarButton.h; sourceTree = "<group>"; };
+		337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFExampleToolbarButton.m; sourceTree = "<group>"; };
+		337B33E61AC02195000CAF14 /* RFKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFKeyboardToolbar.h; sourceTree = "<group>"; };
+		337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFKeyboardToolbar.m; sourceTree = "<group>"; };
+		337B33E81AC02195000CAF14 /* RFToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFToolbarButton.h; sourceTree = "<group>"; };
+		337B33E91AC02195000CAF14 /* RFToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFToolbarButton.m; sourceTree = "<group>"; };
 		33C666C61AB4EC26005ACDD5 /* BonusListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListModel.h; sourceTree = "<group>"; };
 		33C666C71AB4EC26005ACDD5 /* BonusListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusListModel.m; sourceTree = "<group>"; };
 		33C6673F1AB67476005ACDD5 /* BonusListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListTableViewCell.h; sourceTree = "<group>"; };
@@ -1312,6 +1321,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				337B33E31AC02195000CAF14 /* RFKeyboardToolbar */,
 				33D621DC1ABDA6F8009D86A1 /* QFHttpRequest */,
 				3362E2A01ABC4CC900D0704B /* AutoSlideScrollView */,
 				3362E1F51ABBF9E000D0704B /* SIAlertView */,
@@ -1768,6 +1778,19 @@
 			name = OrderDetail;
 			sourceTree = "<group>";
 		};
+		337B33E31AC02195000CAF14 /* RFKeyboardToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				337B33E41AC02195000CAF14 /* RFExampleToolbarButton.h */,
+				337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */,
+				337B33E61AC02195000CAF14 /* RFKeyboardToolbar.h */,
+				337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */,
+				337B33E81AC02195000CAF14 /* RFToolbarButton.h */,
+				337B33E91AC02195000CAF14 /* RFToolbarButton.m */,
+			);
+			path = RFKeyboardToolbar;
+			sourceTree = "<group>";
+		};
 		33CB64F01AAAF83500D0BE8D /* CExpandHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -2116,6 +2139,7 @@
 				26FF358C1A429AE80014A38F /* SpecModel.m in Sources */,
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,
 				265BB88F1A1CEA180040ACC0 /* ModelHelper.m in Sources */,
+				337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */,
 				26BE3AA51A170421009F37B4 /* SGPickerMenu.m in Sources */,
 				336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */,
 				261E24B81A31CB3700DA06A2 /* CategoryModel.m in Sources */,
@@ -2170,11 +2194,13 @@
 				26EC862E1A65434400307120 /* OrderListViewController.m in Sources */,
 				26BE3A991A170421009F37B4 /* NSString+FontAwesome.m in Sources */,
 				26BE3A981A170421009F37B4 /* FAImageView.m in Sources */,
+				337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */,
 				26BE3AC21A173739009F37B4 /* FAInfoButton.m in Sources */,
 				331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */,
 				26BE3AC11A173739009F37B4 /* FAIconButton.m in Sources */,
 				262E1EE61A5836A100C29059 /* RSADataVerifier.m in Sources */,
 				26BE3AA41A170421009F37B4 /* SGMultiMenu.m in Sources */,
+				337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */,
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
 				263D3E3D1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m in Sources */,
 				269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */,

@@ -20,6 +20,7 @@
 #import "FAHoverButton.h"
 #import "Order.h"
 
+#import "RFExampleToolbarButton.h"
 #import "SIAlertView.h"
 
 @interface OrderDetailViewController ()<UITextViewDelegate>
@@ -118,7 +119,7 @@
     return line;
 }
 
-/** d订单详情 */
+/** 订单详情 */
 - (void)initView {
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
@@ -404,6 +405,9 @@
     placeLable.textColor = [UIColor lightGrayColor];
     [self.collectText addSubview:placeLable];
     
+    /** 给键盘增加完成按钮 */
+    RFExampleToolbarButton *exampleButton = [RFExampleToolbarButton new];
+    [RFKeyboardToolbar addToTextView:self.collectText withButtons:@[exampleButton]];
     
     
     self.cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -148,6 +148,7 @@
         for (UIScrollView *view in self.pageViewController.view.subviews) {
             if ([view isKindOfClass:[UIScrollView class]]) {
                 view.scrollEnabled = NO;
+
             }
         }
     }
@@ -696,7 +697,7 @@
     
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
-    
+
     self.animatingToTab = NO;
     self.defaultSetupDone = NO;
     
@@ -736,6 +737,7 @@
         self.tabsView.backgroundColor = self.tabsViewBackgroundColor;
         self.tabsView.showsHorizontalScrollIndicator = NO;
         self.tabsView.showsVerticalScrollIndicator = NO;
+        self.tabsView.bounces = NO;
         self.tabsView.tag = kTabViewTag;
         
         [self.view insertSubview:self.tabsView atIndex:0];
@@ -917,8 +919,10 @@
     
     if (self.activeTabIndex == 0) {
      NSLog(@"X = %f, Y = %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
-        [self tabWidth];
-
+        if (scrollView.contentOffset.x < 320) {
+            scrollView.bounces = NO;
+        }
+            [self tabWidth];
     }
     
     if (![self isAnimatingToTab]) {

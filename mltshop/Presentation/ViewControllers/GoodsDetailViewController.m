@@ -227,7 +227,7 @@
     
     [self initButtons];
     
-    // 左滑退出
+//     左滑退出
     UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(backAction)];
     [gestureRec setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -344,9 +344,7 @@
 
 -(void)backAction
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        //
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)shareAction

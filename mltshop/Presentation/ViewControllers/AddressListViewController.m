@@ -16,7 +16,9 @@
 @property(nonatomic, strong)NSMutableArray *dataArray;
 @end
 
-@implementation AddressListViewController
+@implementation AddressListViewController {
+    UIButton *button;
+}
 
 - (void)viewDidLoad {
 
@@ -32,6 +34,15 @@
 
     self.dataArray = [[NSMutableArray alloc]init];
     
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(H_10, H_10, WIDTH-H_20, H_40);
+    [button setBackgroundColor:[UIColor orangeColor]];
+    button.clipsToBounds = YES;
+    button.layer.cornerRadius = 5;
+    [button setTitle:T(@"新增地址") forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableView addSubview:button];
+    
     [self initDataSource];
     [self setUpImageDownButton:0];
     [self setupRightAddButton];
@@ -46,6 +57,8 @@
     self.navigationItem.rightBarButtonItem = leftBarButtonItem;
     [backButton addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];
 }
+
+
 
 - (void)addAction
 {
@@ -116,6 +129,7 @@
         [user setValue:@"YES" forKey:@"address"];
         [user synchronize];
     }
+    button.y = self.dataSource.count*H_60+H_10;
     return [self.dataSource count];
 }
 

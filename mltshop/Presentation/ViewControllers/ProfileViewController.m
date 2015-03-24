@@ -192,7 +192,7 @@
 - (void)initScrollView
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, TOTAL_HEIGHT)];
-    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, self.scrollView.frame.size.height-VIEW_HEIGHT+200)];
+    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, self.scrollView.frame.size.height-VIEW_HEIGHT+H_200+H_30)];
     [self.view addSubview:self.scrollView];
     
     
@@ -353,11 +353,27 @@
     [lableD setTextColor:DARKCOLOR];
     [buttonBigD addSubview:lableD];
     
+    KKFlatButton *buttonBigE = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+    [buttonBigE setFrame:CGRectMake(H_5, H_120+H_60*4+H_22, WIDTH-H_5*2, H_60)];
+    [buttonBigE.titleLabel setFont:FONT_14];
+    [buttonBigE setTitleColor:DARKCOLOR forState:UIControlStateNormal];
+    [buttonBigE setBackgroundColor:WHITECOLOR];
+    [buttonBigE addTarget:self action:@selector(onBonusClick) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView *imageE = RIGHT_IMAGE_FRAME;
+    [imageE setImage:RIGHT_IMAGE];
+    [buttonBigE addSubview:imageE];
+    
+    UILabel *lableE = TITLE_LABLE;
+    [lableE setText:T(@"客服中心")];
+    [lableE setFont:FONT_14];
+    [lableE setTextColor:DARKCOLOR];
+    [buttonBigE addSubview:lableE];
     
     [self.orderView addSubview:buttonBigA];
     [self.orderView addSubview:buttonBigB];
     [self.orderView addSubview:buttonBigC];
     [self.orderView addSubview:buttonBigD];
+    [self.orderView addSubview:buttonBigE];
 }
 
 - (void)initLineView {
