@@ -26,6 +26,7 @@
 @property(nonatomic, strong)UIView *logoView;
 @property(nonatomic, strong)KKTextField *userTextView;
 @property(nonatomic, strong)KKTextField *passTextView;
+@property(nonatomic, strong)KKTextField *passTextViewTwo;
 @property(nonatomic, strong)KKTextField *emailTextView;
 @property(nonatomic, strong)KKFlatButton *verifyButton;
 @property(nonatomic, strong)FAHoverButton *closeButton;
@@ -45,6 +46,7 @@
 #define MY_TAG              102
 #define CODE_TAG            103
 #define PASSWORD_TAG        104
+#define PASSWORD_TWO_TAG    107
 #define REPASSWORD_TAG      105
 #define EMAIL_TAG           106
 
@@ -95,7 +97,7 @@
     // userTextView
     self.userTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50,TOTAL_WIDTH-LEFT_PADDING*6, H_50)];
     self.userTextView.delegate = self;
-    [self.userTextView setPlaceholder:T(@"用户名")];
+    [self.userTextView setPlaceholder:T(@"请输入用户名")];
     [self.userTextView setIconString:[NSString fontAwesomeIconStringForEnum:FAUser]];
     self.userTextView.keyboardType = UIKeyboardTypeDefault;
     self.userTextView.returnKeyType = UIReturnKeyNext;
@@ -104,16 +106,25 @@
     // passTextView
     self.passTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*2, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
     self.passTextView.delegate = self;
-    [self.passTextView setPlaceholder:T(@"密码")];
+    [self.passTextView setPlaceholder:T(@"请输入密码")];
     [self.passTextView setIconString:[NSString fontAwesomeIconStringForEnum:FALock]];
     self.passTextView.returnKeyType = UIReturnKeyNext;
     self.passTextView.tag = PASSWORD_TAG;
     self.passTextView.secureTextEntry = YES;
-
+    
+    self.passTextViewTwo = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*3, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
+    self.passTextViewTwo.delegate = self;
+    [self.passTextViewTwo setPlaceholder:T(@"请确认密码")];
+    [self.passTextViewTwo setIconString:[NSString fontAwesomeIconStringForEnum:FALock]];
+    self.passTextViewTwo.returnKeyType = UIReturnKeyNext;
+    self.passTextViewTwo.tag = REPASSWORD_TAG;
+    self.passTextViewTwo.secureTextEntry = YES;
+    
+    
     // emailTextView
-    self.emailTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*3, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
+    self.emailTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*4, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
     self.emailTextView.delegate = self;
-    [self.emailTextView setPlaceholder:T(@"邮箱")];
+    [self.emailTextView setPlaceholder:T(@"请输入邮箱")];
     [self.emailTextView setIconString:[NSString fontAwesomeIconStringForEnum:FAEnvelope]];
     self.emailTextView.returnKeyType = UIReturnKeyDone;
     self.emailTextView.tag = EMAIL_TAG;
@@ -121,7 +132,7 @@
     // verifyButton
     self.verifyButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [self.verifyButton setTitle:T(@"注册") forState:UIControlStateNormal];
-    [self.verifyButton setFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*4+TOP_PADDING*2, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
+    [self.verifyButton setFrame:CGRectMake(LEFT_PADDING*3, OFFSET_Y+H_50*5+TOP_PADDING*2, TOTAL_WIDTH-LEFT_PADDING*6 , H_50)];
     [self.verifyButton addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
     [self.verifyButton setBackgroundColor:BLUECOLOR];
 
@@ -130,6 +141,8 @@
     self.userTextView = (KKTextField *)[DataTrans roundCornersOnView:self.userTextView onTopLeft:YES topRight:YES bottomLeft:NO bottomRight:NO radius:5.0f];
 
     self.passTextView = (KKTextField *)[DataTrans roundCornersOnView:self.passTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
+    
+    self.passTextViewTwo = (KKTextField *)[DataTrans roundCornersOnView:self.passTextViewTwo onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
 
     self.emailTextView = (KKTextField *)[DataTrans roundCornersOnView:self.emailTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:5.0f];
 
@@ -137,6 +150,7 @@
     [self.loginPanel addSubview:self.logoView];
     [self.loginPanel addSubview:self.userTextView];
     [self.loginPanel addSubview:self.passTextView];
+    [self.loginPanel addSubview:self.passTextViewTwo];
     [self.loginPanel addSubview:self.emailTextView];
     [self.loginPanel addSubview:self.verifyButton];
     
@@ -262,24 +276,37 @@
 
 - (BOOL)checkAllTextField
 {
+    
+    if (!StringHasValue(self.userTextView.text)) {
+        [DataTrans showWariningTitle:T(@"用户名不能为空") andCheatsheet:ICON_INFO andDuration:1.0f];
+        return NO;
+    }
+    
     if (StringHasValue(self.passTextView.text)) {
         if (![DataTrans isValidatePassword:self.passTextView.text]) {
             [DataTrans showWariningTitle:T(@"密码应该设置为6位以上\n数字或字母组合") andCheatsheet:ICON_TIMES andDuration:1.0f];
             return NO;
         }
-    }else{
+    } else {
         [DataTrans showWariningTitle:T(@"密码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
         return NO;
     }
-    if (!StringHasValue(self.userTextView.text)) {
-        [DataTrans showWariningTitle:T(@"用户名不能为空") andCheatsheet:ICON_INFO andDuration:1.0f];
+    
+    if (StringHasValue(self.passTextView.text) != StringHasValue(self.passTextViewTwo.text)) {
+        [DataTrans showWariningTitle:T(@"两次密码输入不一致") andCheatsheet:ICON_TIMES andDuration:1.0f];
         return NO;
     }
+    
+    if (![DataTrans isValidateEmail:self.emailTextView.text]) {
+        [DataTrans showWariningTitle:T(@"请填写正确的邮箱") andCheatsheet:ICON_TIMES andDuration:1.0f];
+        return NO;
+    }
+    
     //TODO：检测用户名
     if (StringHasValue(self.userTextView.text)&&[DataTrans isValidatePassword:self.passTextView.text] &&
-        [DataTrans isValidateEmail:self.emailTextView.text]) {
-        
+        [DataTrans isValidateEmail:self.emailTextView.text] && StringHasValue(self.passTextView.text) == StringHasValue(self.passTextView.text)) {
         return YES;
+        
     }else{
         return NO;
     }
@@ -290,24 +317,24 @@
 #pragma mark - uitextfield delegate
 /////////////////////////////////////////////////////////
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    if (textField.tag == MY_TAG) {
-        //检查用户名
-        
-    }
-    else{
-        [self checkAllTextField];
-    }
-    
-    return YES;
-}
+//- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+//{
+//    if (textField.tag == MY_TAG) {
+//        //检查用户名
+//        
+//    }
+//    else{
+//        [self checkAllTextField];
+//    }
+//    
+//    return YES;
+//}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     self.nowEditing = textField.tag;
     [UIView animateWithDuration:0.5f animations:^{
-        [self.loginPanel setY:-IOS7_CONTENT_OFFSET_Y];
+        [self.loginPanel setY:-IOS7_CONTENT_OFFSET];
     }];
 }
 
@@ -357,6 +384,7 @@
 {
     [self.userTextView resignFirstResponder];
     [self.passTextView resignFirstResponder];
+    [self.passTextViewTwo resignFirstResponder];
     [self.emailTextView resignFirstResponder];
     
     [UIView animateWithDuration:0.5f animations:^{

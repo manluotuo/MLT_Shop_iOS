@@ -62,6 +62,10 @@
     [changeCountBtn addTarget:self action:@selector(changeCountAction) forControlEvents:UIControlEventTouchUpInside];
     [changeCountBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
     
+    self.imageRight = RIGHT_FRAME;
+    [self.imageRight setImage:RIGHT_IMAGE];
+    [self addSubview:self.imageRight];
+    
     certainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     certainBtn.titleLabel.font = FONT_14;
     [certainBtn setTitle:T(@"立即付款") forState:UIControlStateNormal];

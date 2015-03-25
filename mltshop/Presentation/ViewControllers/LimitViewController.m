@@ -17,7 +17,7 @@
 #import "LimitGoodsTableViewCell.h"
 #import "GoodsDetailViewController.h"
 #import "FAHoverButton.h"
-
+/** 限时特价 */
 
 @interface LimitViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate>
 
@@ -52,25 +52,6 @@
     
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
 }
-
-//- (void)setUpImageBackButton
-//{
-//    CGFloat leftMargin = 10.0f;
-//    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 12+leftMargin, 21)];
-//    [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
-//    [backButton.titleLabel setFont:FONT_AWESOME_36];
-//    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
-//    
-//    
-//    UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-//    [backButton addTarget:self action:@selector(popCurrentViewController) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.leftBarButtonItem = barBackButtonItem;
-//    self.navigationItem.hidesBackButton = YES;
-//}
-
-//- (void)popCurrentViewController {
-//    
-//}
 
 - (void)customUI {
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];

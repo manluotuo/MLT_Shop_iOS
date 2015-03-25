@@ -93,7 +93,6 @@
 		266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */; };
 		266B7E1B1A3DD25C0001835F /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 266B7E1A1A3DD25C0001835F /* GoodsDetailViewController.m */; };
 		266FA8001A134A72000C2AAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA7FF1A134A72000C2AAE /* main.m */; };
-		266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA8021A134A72000C2AAE /* AppDelegate.m */; };
 		266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266FA80D1A134A72000C2AAE /* Images.xcassets */; };
 		266FA81D1A134A72000C2AAE /* mltshopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 266FA81C1A134A72000C2AAE /* mltshopTests.m */; };
 		267B85EE1A360C170084DDEA /* ADBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 267B85ED1A360C170084DDEA /* ADBrandView.m */; };
@@ -225,6 +224,7 @@
 		337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */; };
 		337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */; };
 		337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E91AC02195000CAF14 /* RFToolbarButton.m */; };
+		33C656A11AC25EC8004C16C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C656A01AC25EC8004C16C3 /* AppDelegate.m */; };
 		33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C666C71AB4EC26005ACDD5 /* BonusListModel.m */; };
 		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
 		33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CB64F21AAAF83500D0BE8D /* CExpandHeader.m */; };
@@ -249,7 +249,6 @@
 		33D92C1A1AB95F58004C1FA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C191AB95F58004C1FA2 /* UIKit.framework */; };
 		33D92C1C1AB95F63004C1FA2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C1B1AB95F63004C1FA2 /* Security.framework */; };
 		33D92C1E1AB96089004C1FA2 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C1D1AB96089004C1FA2 /* PushConfig.plist */; };
-		33D92C211AB96712004C1FA2 /* HYBJPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */; };
 		33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C221AB98373004C1FA2 /* collect_sel.png */; };
 		33D92C251AB98373004C1FA2 /* collect_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C231AB98373004C1FA2 /* collect_no.png */; };
 		33E5173B1AB7C9A8005DC76F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */; };
@@ -475,7 +474,6 @@
 		266FA7FE1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA7FF1A134A72000C2AAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		266FA8011A134A72000C2AAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		266FA8021A134A72000C2AAE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		266FA80D1A134A72000C2AAE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		266FA8161A134A72000C2AAE /* mltshopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mltshopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266FA81B1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -720,6 +718,7 @@
 		337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFKeyboardToolbar.m; sourceTree = "<group>"; };
 		337B33E81AC02195000CAF14 /* RFToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFToolbarButton.h; sourceTree = "<group>"; };
 		337B33E91AC02195000CAF14 /* RFToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFToolbarButton.m; sourceTree = "<group>"; };
+		33C656A01AC25EC8004C16C3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		33C666C61AB4EC26005ACDD5 /* BonusListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListModel.h; sourceTree = "<group>"; };
 		33C666C71AB4EC26005ACDD5 /* BonusListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusListModel.m; sourceTree = "<group>"; };
 		33C6673F1AB67476005ACDD5 /* BonusListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListTableViewCell.h; sourceTree = "<group>"; };
@@ -754,8 +753,6 @@
 		33D92C191AB95F58004C1FA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33D92C1B1AB95F63004C1FA2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		33D92C1D1AB96089004C1FA2 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		33D92C1F1AB96712004C1FA2 /* HYBJPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBJPushHelper.h; sourceTree = "<group>"; };
-		33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYBJPushHelper.m; sourceTree = "<group>"; };
 		33D92C221AB98373004C1FA2 /* collect_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect_sel.png; sourceTree = "<group>"; };
 		33D92C231AB98373004C1FA2 /* collect_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect_no.png; sourceTree = "<group>"; };
 		33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
@@ -1097,7 +1094,7 @@
 				26BE3A581A170421009F37B4 /* Logic */,
 				26BE3A5D1A170421009F37B4 /* Presentation */,
 				266FA8011A134A72000C2AAE /* AppDelegate.h */,
-				266FA8021A134A72000C2AAE /* AppDelegate.m */,
+				33C656A01AC25EC8004C16C3 /* AppDelegate.m */,
 				266FA80D1A134A72000C2AAE /* Images.xcassets */,
 				266FA7FD1A134A72000C2AAE /* Supporting Files */,
 			);
@@ -1822,8 +1819,6 @@
 			children = (
 				33D92C0E1AB95EC8004C1FA2 /* APService.h */,
 				33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */,
-				33D92C1F1AB96712004C1FA2 /* HYBJPushHelper.h */,
-				33D92C201AB96712004C1FA2 /* HYBJPushHelper.m */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -2129,7 +2124,6 @@
 				26435AB81A1EC07E00E117A0 /* RegisterViewController.m in Sources */,
 				331612311AB043BE00F47730 /* CollectModel.m in Sources */,
 				267B85F11A360D5F0084DDEA /* ADAreaView.m in Sources */,
-				266FA8031A134A72000C2AAE /* AppDelegate.m in Sources */,
 				26BE3AC41A173739009F37B4 /* KKTextField.m in Sources */,
 				33D621E11ABDA6F8009D86A1 /* HttpRequest.m in Sources */,
 				336D045D1AB411F800A87137 /* OrderModel.m in Sources */,
@@ -2223,6 +2217,7 @@
 				26875B551A4FAA2900FA5335 /* CartModel.m in Sources */,
 				263386701A5304D600C94D8F /* WebViewController.m in Sources */,
 				26BB7D321A6B5797002F4030 /* BrandListViewController.m in Sources */,
+				33C656A11AC25EC8004C16C3 /* AppDelegate.m in Sources */,
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
@@ -2231,7 +2226,6 @@
 				262E1EE11A5836A100C29059 /* DataVerifier.m in Sources */,
 				26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
-				33D92C211AB96712004C1FA2 /* HYBJPushHelper.m in Sources */,
 				336B62AC1AB16CD500476A93 /* BonusViewController.m in Sources */,
 				262E1EE31A5836A100C29059 /* NSDataEx.m in Sources */,
 				262E1EE51A5836A100C29059 /* RSADataSigner.m in Sources */,

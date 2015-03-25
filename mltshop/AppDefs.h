@@ -245,6 +245,7 @@
 #define MAX_COMMENT_LENGTH      140
 #define MAX_VINCODE_LENGTH      17
 #define MAX_WEIBO_SHARE_LENGTH  115
+#define IOS7_CONTENT_OFFSET     100.0f
 #define IOS7_CONTENT_OFFSET_Y   64.0f
 #define STATUS_BAR_HEIGHT       20.0f
 #define TOP_HEIGHT              44.0f
@@ -868,5 +869,12 @@ NS_INLINE BOOL ArrayHasValue(id array)
 #define VIEW_HEIGHT 250
 #define RIGHT_IMAGE [UIImage imageNamed:@"right"]
 
-#define RIGHT_IMAGE_FRAME [[UIImageView alloc] initWithFrame:CGRectMake(270, 25, 10, 13)]
-#define TITLE_LABLE [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 20)]
+#define RIGHT_IMAGE_FRAME   [[UIImageView alloc] initWithFrame:CGRectMake(270, 25, 10, 13)]
+#define RIGHT_FRAME         [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-30, 33, 10, 13)]
+#define TITLE_LABLE         [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 20)]
+
+
+
+
+
+

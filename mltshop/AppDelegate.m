@@ -38,7 +38,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SDWebImage/SDImageCache.h>
 
-#import "HYBJPushHelper.h"
+//#import "HYBJPushHelper.h"
 #import "APService.h"
 
 #define MR_LOGGING_ENABLED 0
@@ -67,49 +67,60 @@
 //    NSString *nowBuild = NOWBUILD;
 //    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
 
-    [HYBJPushHelper setupWithOptions:launchOptions];
+//    [HYBJPushHelper setupWithOptions:launchOptions];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:@"NO" forKey:@"HELLO"];
+    [user synchronize];
+    
     
     /** 设置友盟 */
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH   channelId:@"nil"];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    
+    //TODO: 发布时注释掉这行
     // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
     [MobClick setLogEnabled:YES];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
     
     [MobClick event:UM_START];
-    
+    [MobClick event:UM_PAY];
     
     [WXApi registerApp:WXAPI_APP_ID];
     [WeiboSDK registerApp:WEIBO_APP_KEY];
     TencentOAuth *tencentOAuth = [[TencentOAuth alloc] initWithAppId:QQ_API_ID andDelegate:self];
     tencentOAuth.redirectURI = @"";
     
-    /** 推送 */
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //可以添加自定义categories
-        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                       UIUserNotificationTypeSound |
-                                                       UIUserNotificationTypeAlert)
-                                           categories:nil];
-    } else {
-        //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
-                                           categories:nil];
-    }
-#else
-    //categories 必须为nil
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)
-                                       categories:nil];
-#endif
-    // Required
-    [APService setupWithOption:launchOptions];
+    /** 调用极光推送 */
+    [self initJPush:launchOptions];
+//    /** 推送 */
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//        //可以添加自定义categories
+//        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+//                                                       UIUserNotificationTypeSound |
+//                                                       UIUserNotificationTypeAlert)
+//                                           categories:nil];
+//    } else {
+//        //categories 必须为nil
+//        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                       UIRemoteNotificationTypeSound |
+//                                                       UIRemoteNotificationTypeAlert)
+//                                           categories:nil];
+//    }
+//#else
+//    //categories 必须为nil
+//    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                   UIRemoteNotificationTypeSound |
+//                                                   UIRemoteNotificationTypeAlert)
+//                                       categories:nil];
+//#endif
+//    // Required
+//    [APService setupWithOption:launchOptions];
+    
+    
     
     // TODO: 先初始化 用来none insert vehicle
     //    [self managedObjectContext];
@@ -122,9 +133,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.me = [[ModelHelper sharedHelper]findOnlyMe];
-    
-    
-
     
     
     /**
@@ -174,6 +182,46 @@
     return YES;
 }
 
+/** 极光推送 */
+- (void)initJPush:(NSDictionary *)launchOptions {
+    
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    
+    [defaultCenter addObserver:self selector:@selector(networkDidSetup:) name:kJPFNetworkDidSetupNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(networkDidClose:) name:kJPFNetworkDidCloseNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(networkDidRegister:) name:kJPFNetworkDidSetupNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidSetupNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
+    // Required
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories 必须为nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+                                           categories:nil];
+    }
+#else
+    //categories 必须为nil
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+#endif
+    // Required
+    [APService setupWithOption:launchOptions];
+    
+    
+    [APService setTags:[NSSet setWithObjects:@"tag1",@"tag2",@"tag3",nil] alias:@"测试" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    
+}
+
 - (void)onlineConfigCallBack:(NSNotification *)note {
     
     NSLog(@"online config has fininshed and note = %@", note.userInfo);
@@ -204,13 +252,13 @@
 
 - (void)skipIntroView
 {
+    
     // 用户第一次打开
     NSNumber *result = GET_DEFAULT(@"HELPSEEN_INTRO");
     
     if (!result.boolValue) {
         [self showIntroductionView];
     } else {
-        
         NSLog(@"APP ME  %@",self.me);
         if (!StringHasValue(self.me.userId)) {
             NSLog(@"会记住登录信息,用户还没有登录");
@@ -316,6 +364,7 @@
     }];
 }
 
+/** 支付宝 */
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -369,7 +418,7 @@
     return YES;
 }
 
-
+/** QQ分享 */
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
 #if __QQAPI_ENABLE__
@@ -387,21 +436,22 @@
     return YES;
 }
 
+/** 推送 */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [HYBJPushHelper registerDeviceToken:deviceToken];
+//    [HYBJPushHelper registerDeviceToken:deviceToken];
     [APService registerDeviceToken:deviceToken];
     return;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [HYBJPushHelper handleRemoteNotification:userInfo completion:nil];
+//    [HYBJPushHelper handleRemoteNotification:userInfo completion:nil];
     [APService handleRemoteNotification:userInfo];
     return;
 }
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [HYBJPushHelper showLocalNotificationAtFront:notification];
-    return;
-}
+//- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+//    [HYBJPushHelper showLocalNotificationAtFront:notification];
+//    return;
+//}
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSLog(@"Error in registration. Error: %@", err);
@@ -412,14 +462,49 @@
     return;
 }
 
-
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
     
     // IOS 7 Support Required
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
+
+
+#pragma mark - 极光推送通知信息
+- (void)networkDidSetup:(NSNotification *)notification {
+
+    NSLog(@"已连接");
+}
+
+- (void)networkDidClose:(NSNotification *)notification {
+
+    NSLog(@"未连接。。。");
+}
+
+- (void)networkDidRegister:(NSNotification *)notification {
+
+    NSLog(@"已注册");
+}
+
+- (void)networkDidLogin:(NSNotification *)notification {
+
+    NSLog(@"已登录");
+
+}
+
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    NSDictionary * userInfo = [notification userInfo];
+    NSString *extras = [userInfo valueForKey:@"extras"];
+    NSString *content = [userInfo valueForKey:@"content"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSLog(@"收到消息\ndate:%@\nextras:%@\ncontent:%@", [dateFormatter stringFromDate:[NSDate date]],extras,content);
+}
+
+- (void)tagsAliasCallback:(int)iResCode tags:(NSSet*)tags alias:(NSString*)alias {
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

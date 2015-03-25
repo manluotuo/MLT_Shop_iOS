@@ -38,7 +38,6 @@
 - (void)setNewData:(CollectModel *)model {
     
     [image sd_setImageWithURL:[NSURL URLWithString:model.img[@"goods"]] placeholderImage:PLACEHOLDERIMAGE];
-    
     name.text = model.goods_name;
     CGSize contentSize = [model.goods_name sizeWithWidth:H_200 andFont:FONT_14];
     name.height = contentSize.height;
@@ -58,7 +57,7 @@
 
 - (void)initCellView {
     
-    image = [[UIImageView alloc] initWithFrame:CGRectMake(H_0, H_5, H_80, H_80)];
+    image = [[UIImageView alloc] initWithFrame:CGRectMake(H_5, H_5, H_80, H_80)];
     name = [[UILabel alloc] initWithFrame:CGRectMake(H_100, H_10, H_200, H_80)];
     name.numberOfLines = 0;
     name.font = FONT_14;

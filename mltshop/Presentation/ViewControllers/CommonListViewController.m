@@ -469,6 +469,7 @@
         if (cell == nil) {
             cell = [[CartTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             cell.passDelegate = self;
+            [cell.imageRight setHidden:YES];
         }
         [cell setNewData:cellData];
         

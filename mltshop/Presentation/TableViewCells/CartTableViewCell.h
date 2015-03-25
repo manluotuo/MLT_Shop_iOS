@@ -16,6 +16,7 @@
 - (void)setNewData:(CartModel *)_newData;
 @property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 @property (nonatomic, strong)KKFlatButton *changeCountBtn;
+@property (nonatomic, strong)UIImageView *imageRight;
 
 
 @end

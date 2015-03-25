@@ -48,19 +48,21 @@
     CGFloat W = TOTAL_WIDTH;
     CGFloat H = W;
     self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(X, Y, W, H)];
+    
     self.goodsPrice = [[UILabel alloc] initWithFrame:CGRectMake(0, self.iconImage.height+H_20, W, H_20)];
     self.goodsPrice.textColor = REDCOLOR;
     [self.goodsPrice setFont:[UIFont boldSystemFontOfSize:14.0f]];
     self.goodsPrice.textAlignment = UIBaselineAdjustmentAlignCenters;
+    
     self.goodsName = [[UILabel alloc] initWithFrame:CGRectMake(0, self.goodsPrice.y+self.goodsPrice.height, W, H_20)];
     [self.goodsName setFont:FONT_14];
     self.goodsName.textAlignment = UIBaselineAdjustmentAlignCenters;
     
-    self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(TOTAL_WIDTH-H_150, H-H_20, H_150, H_40)];
+    self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(TOTAL_WIDTH-H_150-H_5, H-H_20, H_150, H_40)];
     self.timeLable.font = FONT_16;
     self.timeLable.textColor = WHITECOLOR;
     
-    UIView *timeView = [[UIView alloc] initWithFrame:CGRectMake(self.timeLable.x-10, H-H_15, H_150-3, H_30)];
+    UIView *timeView = [[UIView alloc] initWithFrame:CGRectMake(self.timeLable.x-10, H-H_15, H_150+H_10, H_30)];
     [timeView setBackgroundColor:[UIColor grayColor]];
     
     
@@ -74,21 +76,27 @@
 
 - (void)setCellData:(LimitModel *)model {
     
-    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.img[@"goods"]] placeholderImage:[UIImage imageNamed:nil]];
+    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.img[@"goods"]]];
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%@元", model.promote_price];
     
     self.goodsName.text = model.goods_name;
+
+    if (!self.timer) {
+        NSInteger time = [model.promote_date_time integerValue];
+        day = time/(60*60*24);
+        hour = (time - (day*24*3600))/3600;
+        m = (time - (day*24*3600) - (hour*3600))/60;
+        s = (time - (day*24*3600) - (hour*3600) - (m*60));
+        self.timeLable.text = [NSString stringWithFormat:@"%d天%d小时%d分%d秒", day, hour, m, s];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    } else {
+        self.timeLable.text = [NSString stringWithFormat:@"%d天%d小时%d分%d秒", day, hour, m, s];
+    }
     
-    NSInteger time = [model.promote_date_time integerValue];
-    
-    day = time/(60*60*24);
-    hour = (time - (day*24*3600))/3600;
-    m = (time - (day*24*3600) - (hour*3600))/60;
-    s = (time - (day*24*3600) - (hour*3600) - (m*60));
-    self.timeLable.text = [NSString stringWithFormat:@"%d天%d小时%d分%d秒", day, hour, m, s];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
 }
 
+/** 定时器触发事件 */
 - (void)timerClick {
     --s;
     if (s<0) {
@@ -111,10 +119,6 @@
     }
 }
 
-- (void)dealloc {
-    [self.timer invalidate];
-    self.timer = nil;
-}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -122,7 +126,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

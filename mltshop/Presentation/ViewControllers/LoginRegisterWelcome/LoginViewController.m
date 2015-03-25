@@ -56,6 +56,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *str = [user valueForKey:@"HELLO"];
+    if ([str isEqualToString:@"YES"]) {
+        [self tourAction];
+    }
+    
     self.title = [NSString stringWithFormat:T(@"欢迎使用%@"),APP_NAME];
     
     self.loginPanel = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT-1)];

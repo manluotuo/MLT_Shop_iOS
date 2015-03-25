@@ -40,6 +40,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:@"YES" forKey:@"HELLO"];
+    [user synchronize];
+    
     [self initScrollView];
 }
 

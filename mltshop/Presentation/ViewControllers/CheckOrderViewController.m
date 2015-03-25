@@ -382,24 +382,6 @@
          [NSIndexPath indexPathForRow:i inSection:indexPath.section]];
     }
     
-    //    if (indexPath.section == CONSIGNEE_TAG) {
-    //        // refresh all
-    //        for (ShippingModel *ship in self.dataSource.consignee) {
-    //            ship.selected = NO;
-    //        }
-    //        [self.tableView beginUpdates];
-    //        [self.tableView reloadRowsAtIndexPaths:indexPathsOfSection
-    //                              withRowAnimation:UITableViewRowAnimationNone];
-    //        [self.tableView endUpdates];
-    //
-    //        // 更新一条
-    //        ShippingModel *theShip = self.dataSource.shippingList[indexPath.row];
-    //        ShippingTableViewCell *cell = (ShippingTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-    //        theShip.selected = YES;
-    //        [cell setNewData:theShip];
-    //        self.flowDoneData.shippingId = theShip.shippingId;
-    //
-    //    }
     
     if (indexPath.section == SHIPPING_TAG) {
         // refresh all
@@ -505,6 +487,7 @@
         cellData.indexPath = indexPath;
         CartTableViewCell *cell = [[CartTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.passDelegate = self;
+        [cell.imageRight setHidden:YES];
         [cell.changeCountBtn setHidden:YES];
         [cell setNewData:cellData];
         

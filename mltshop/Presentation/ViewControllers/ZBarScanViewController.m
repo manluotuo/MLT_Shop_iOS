@@ -83,7 +83,7 @@
     [self.cancelButton setBackgroundColor:[UIColor clearColor]];
     [self.cancelButton setIconFont:FONT_AWESOME_36];
     [self.cancelButton setIconColor:GRAYLIGHTCOLOR];
-    [self.cancelButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelButton addTarget:self action:@selector(dismissCollection) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.cancelButton];
     
     CGFloat xOffset = 0.0;
