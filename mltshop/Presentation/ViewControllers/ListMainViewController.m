@@ -178,6 +178,7 @@ static const NSInteger kTotalPageCount = 5;
                 [self.pagedScrollView addContentSubview:page];
                 */
             }
+            
             self.mainScorllView = [[CycleScrollView alloc] initWithFrame:rect animationDuration:3];
             self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
             self.mainScorllView.totalPagesCount = ^NSInteger(void){
@@ -191,6 +192,7 @@ static const NSInteger kTotalPageCount = 5;
                 NSDictionary *item = items[pageIndex];
                 [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
             };
+            
             [self.fixedView addSubview:self.mainScorllView];
             
             fixedHeight += SLIDE_FIX_HEIGHT;

@@ -140,7 +140,9 @@
         if ([[user valueForKey:@"address"] isEqualToString:@"YES"]) {
         CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
         [VC setupDataSource];
+            
             [self.navigationController pushViewController:VC animated:YES];
+            
         } else {
             [DataTrans showWariningTitle:T(@"请您先填写地址") andCheatsheet:ICON_INFO andDuration:1.0f];
             AddressListViewController *address = [[AddressListViewController alloc] init];

@@ -919,8 +919,8 @@
     
     if (self.activeTabIndex == 0) {
         if (scrollView.contentOffset.x < 320) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_PAN object:nil userInfo:nil];
-            scrollView.bounces = NO;
+//            [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_PAN object:nil userInfo:nil];
+//            scrollView.bounces = NO;
         }
         
     } else {

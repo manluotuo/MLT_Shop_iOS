@@ -434,7 +434,7 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-/** 全部订单 */
+/** 客服 */
 - (void)callcenterAction
 {
     NSString *urlString = CUSTOMER_SERVICE_URL;

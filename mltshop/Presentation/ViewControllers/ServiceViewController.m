@@ -33,7 +33,7 @@
     [self.view addSubview:rootView];
     
     UILabel *lableA = [[UILabel alloc] initWithFrame:CGRectMake(H_10, H_20, H_70, H_25)];
-    lableA.text = [NSString stringWithFormat:@"商店民称："];
+    lableA.text = [NSString stringWithFormat:@"商店名称："];
     lableA.textColor = [UIColor blackColor];
     [lableA setFont:FONT_14];
     [rootView addSubview:lableA];

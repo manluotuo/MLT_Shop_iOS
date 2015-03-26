@@ -571,7 +571,7 @@
     [HUD showInView:self.view];
     
     NSLog(@"%@", self.goods_list[count][@"goods_id"]);
-    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": self.star, @"content": self.collectText.text};
+    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": @"5", @"content": self.collectText.text};
     
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
         if ([responseObject isEqualToString:@"YES"]) {
