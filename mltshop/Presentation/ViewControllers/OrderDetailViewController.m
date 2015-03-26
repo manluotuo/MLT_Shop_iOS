@@ -55,6 +55,7 @@
     NSInteger count;
     UILabel *placeLable;
     UILabel *pricrLable;
+    UIButton *logisticsButton;
 }
 
 //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndex) name:SIGNAL_GO_TO_INDEX object:nil];
@@ -281,6 +282,18 @@
             pricrLable.hidden = YES;
         }
         
+        logisticsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [logisticsButton setFrame:CGRectMake(H_20, H_20, WIDTH/2-H_20*2, H_40)];
+        [logisticsButton setTitle:T(@"查询物流") forState:UIControlStateNormal];
+        [logisticsButton setTintColor:WHITECOLOR];
+        [logisticsButton setBackgroundColor:ORANGECOLOR];
+        [logisticsButton.titleLabel setFont:FONT_16];
+        logisticsButton.layer.cornerRadius = 5;
+        logisticsButton.clipsToBounds = YES;
+        [logisticsButton addTarget:self action:@selector(onLogisticsBtnCLick) forControlEvents:UIControlEventTouchUpInside];
+        [btnView addSubview:logisticsButton];
+        [self setButtonSelect];
+        
         button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(WIDTH/2+H_20, H_20, WIDTH/2-H_20*2, H_40)];
         [button setTitle:@"立即付款" forState:UIControlStateNormal];
@@ -304,6 +317,10 @@
     
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
+        
+        if ([model.shipping_status integerValue] == 0) {
+            logisticsButton.hidden = YES;
+        }
         if ([model.order_status integerValue] == 2 || [model.order_status integerValue] == 3 || [model.order_status integerValue] == 4 || [model.shipping_status integerValue] == 2) {
             button.hidden = YES;
         } else {
@@ -617,6 +634,11 @@
         self.star = [NSString stringWithFormat:@"5"];
     }
 }
+/** 物流查询点击 */
+- (void)onLogisticsBtnCLick {
+    NSLog(@"查看物流");
+}
+
 /*
  #pragma mark - Navigation
  

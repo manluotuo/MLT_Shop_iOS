@@ -163,6 +163,10 @@
 
 - (void)tourAction
 {
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:@"NO" forKey:@"HELLO"];
+    [user synchronize];
+    
     [XAppDelegate showDrawerView];
 }
 

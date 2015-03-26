@@ -38,8 +38,10 @@
 
 - (void)initCellView
 {
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"text"]];
+//    [self setBackgroundView:image];
     
-    coverImageView = [[UIImageView alloc]initWithFrame:CGRectMake(H_15, H_14, H_60, H_60)];
+    coverImageView = [[UIImageView alloc]initWithFrame:CGRectMake(H_15, H_14, H_55, H_55)];
     
     nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_100, H_14, H_200, H_20)];
     nameLabel.font = FONT_14;
@@ -58,7 +60,7 @@
     changeCountBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     changeCountBtn.titleLabel.font = FONT_12;
     [changeCountBtn setTitle:T(@"修改数量") forState:UIControlStateNormal];
-    [changeCountBtn setFrame:CGRectMake(H_220, H_40, H_80, H_40)];
+    [changeCountBtn setFrame:CGRectMake(H_220, H_40, H_80, H_20)];
     [changeCountBtn addTarget:self action:@selector(changeCountAction) forControlEvents:UIControlEventTouchUpInside];
     [changeCountBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
     

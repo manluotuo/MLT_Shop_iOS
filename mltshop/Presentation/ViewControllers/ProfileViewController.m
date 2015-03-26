@@ -309,6 +309,7 @@
     KKFlatButton *buttonBigB = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     [buttonBigB setFrame:CGRectMake(H_5, H_120+H_60, WIDTH-H_5*2, H_60)];
     [buttonBigB.titleLabel setFont:FONT_14];
+//    [buttonBigB setBackgroundImage:[UIImage imageNamed:@"text"] forState:UIControlStateNormal];
     [buttonBigB setTitleColor:DARKCOLOR forState:UIControlStateNormal];
     [buttonBigB setBackgroundColor:WHITECOLOR];
     [buttonBigB addTarget:self action:@selector(addressAction) forControlEvents:UIControlEventTouchUpInside];

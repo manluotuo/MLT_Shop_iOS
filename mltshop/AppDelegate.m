@@ -218,7 +218,7 @@
     [APService setupWithOption:launchOptions];
     
     
-    [APService setTags:[NSSet setWithObjects:@"tag1",@"tag2",@"tag3",nil] alias:@"测试" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    [APService setTags:[NSSet setWithObjects:@"tag1", @"tag2", @"tag3", nil] alias:@"小新" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
     
 }
 

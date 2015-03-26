@@ -73,7 +73,9 @@
     timeLabel.text = [DataTrans dateStringFromDate:self.data.orderTime];
     if ([self.data.paymentType isEqualToString:@"UNPAYED"]) {
         [actionBtn setHidden:NO];
-    }else{
+        
+    } else {
+        
         [actionBtn setHidden:YES];
     }
 

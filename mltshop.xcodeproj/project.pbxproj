@@ -221,6 +221,7 @@
 		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
 		336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045F1AB412CA00A87137 /* OrderDetailModel.m */; };
 		336D049E1AB4473400A87137 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336D049D1AB4473400A87137 /* 1.png */; };
+		3375328D1AC3ED9D00A95D4C /* text.png in Resources */ = {isa = PBXBuildFile; fileRef = 3375328C1AC3ED9D00A95D4C /* text.png */; };
 		337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */; };
 		337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */; };
 		337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E91AC02195000CAF14 /* RFToolbarButton.m */; };
@@ -712,6 +713,7 @@
 		336D045E1AB412CA00A87137 /* OrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailModel.h; sourceTree = "<group>"; };
 		336D045F1AB412CA00A87137 /* OrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailModel.m; sourceTree = "<group>"; };
 		336D049D1AB4473400A87137 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		3375328C1AC3ED9D00A95D4C /* text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text.png; sourceTree = "<group>"; };
 		337B33E41AC02195000CAF14 /* RFExampleToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFExampleToolbarButton.h; sourceTree = "<group>"; };
 		337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFExampleToolbarButton.m; sourceTree = "<group>"; };
 		337B33E61AC02195000CAF14 /* RFKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFKeyboardToolbar.h; sourceTree = "<group>"; };
@@ -1259,6 +1261,7 @@
 		26BE39E31A170421009F37B4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3375328C1AC3ED9D00A95D4C /* text.png */,
 				33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */,
 				33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */,
 				33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */,
@@ -1966,6 +1969,7 @@
 				26435ACA1A20C55000E117A0 /* MLTLogo-60.png in Resources */,
 				262CD46F1A5DB4A600A712BA /* F006.png in Resources */,
 				26BB7D611A6BA9F9002F4030 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				3375328D1AC3ED9D00A95D4C /* text.png in Resources */,
 				336D049E1AB4473400A87137 /* 1.png in Resources */,
 				26435ACC1A20C55000E117A0 /* MLTLogo-60@3x.png in Resources */,
 				262CD4751A5DB4A600A712BA /* F012.png in Resources */,

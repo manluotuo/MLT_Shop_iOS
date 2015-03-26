@@ -35,6 +35,7 @@
     CGFloat cellHeight;
     CGSize fixedSize;
     UILabel *lable;
+    CGFloat tableHeight;
 }
 // view
 @property(nonatomic, strong)GoodsModel *theGoods;
@@ -554,6 +555,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, 1500)];
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         return NO;
     }else{
@@ -702,10 +704,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"%ld", (long)self.commentData.count);
-    self.commentView.height = self.commentData.count*H_100;
-    self.fixedView.contentSize = CGSizeMake(WIDTH, H_550+H_100 + self.commentView.height);
+    tableHeight = 0;
+    for (NSInteger i = 0; i < self.commentData.count; i++) {
+        CommentModel *model = self.commentData[i];
+        CGSize heightSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_14];
+        tableHeight = tableHeight + H_60+heightSize.height;
+    }
+    
     fixedSize = self.fixedView.contentSize;
+    fixedSize.height = self.commentView.height+TOTAL_HEIGHT+H_150;
+    self.fixedView.contentSize = fixedSize;
+    self.commentView.height = tableHeight;\
     return self.commentData.count;
     
 }
@@ -713,10 +722,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentId"];
+    
     if (!cell) {
         cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommentId"];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
+    
     CommentModel *model = self.commentData[indexPath.row];
     [cell setCellData:model];
     return cell;
@@ -724,11 +736,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //    CGFloat hei = 0;
-    //    CommentModel *model = self.commentData[indexPath.row];
-    //    CGSize contentSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_12];
-    //    hei = contentSize.height+H_70;
-    return H_100;
+    CommentModel *model = self.commentData[indexPath.row];
+    CGSize heightSize = [model.content sizeWithWidth:WIDTH-H_60 andFont:FONT_14];
+    return H_60+heightSize.height;
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -771,7 +781,7 @@
     if (self.commentBtn.selected == YES) {
         return;
     }
-    
+
     fixedHeight = H_550;
     if (self.htmlView != nil) {
         [self.htmlView removeFromSuperview];

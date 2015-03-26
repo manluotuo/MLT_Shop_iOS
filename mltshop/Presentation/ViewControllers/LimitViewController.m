@@ -43,6 +43,7 @@
 }
 
 - (void)setupLeftMenuButton {
+    
     self.leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
     [self.leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
     [self.leftDrawerAvatarButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
@@ -96,7 +97,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return WIDTH+H_70;
+    return WIDTH+H_90;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
