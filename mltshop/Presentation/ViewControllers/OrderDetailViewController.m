@@ -24,7 +24,9 @@
 #import "SIAlertView.h"
 #import "FAHoverButton.h"
 
-@interface OrderDetailViewController ()<UITextViewDelegate>
+#import "LogisticsViewController.h"
+
+@interface OrderDetailViewController ()<UITextViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -292,7 +294,6 @@
         logisticsButton.clipsToBounds = YES;
         [logisticsButton addTarget:self action:@selector(onLogisticsBtnCLick) forControlEvents:UIControlEventTouchUpInside];
         [btnView addSubview:logisticsButton];
-        [self setButtonSelect];
         
         button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(WIDTH/2+H_20, H_20, WIDTH/2-H_20*2, H_40)];
@@ -317,10 +318,11 @@
     
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
+        //TODO:修改按钮的状态
+//        if ([model.shipping_status integerValue] == 0) {
+//            logisticsButton.hidden = YES;
+//        }
         
-        if ([model.shipping_status integerValue] == 0) {
-            logisticsButton.hidden = YES;
-        }
         if ([model.order_status integerValue] == 2 || [model.order_status integerValue] == 3 || [model.order_status integerValue] == 4 || [model.shipping_status integerValue] == 2) {
             button.hidden = YES;
         } else {
@@ -352,9 +354,7 @@
 }
 /** 导航栏按钮点击事件 */
 - (void)onLeftBtnClick {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 /** 确认收货/立即付款按钮点击事件 */
@@ -367,6 +367,12 @@
             [self doAlipayAction:model];
         }
     } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:T(@"确定收货") delegate:self cancelButtonTitle:T(@"取消") otherButtonTitles:T(@"确认"), nil];
+        alert.delegate = self;
+        
+        [alert show];
+        
         SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:nil andMessage:@"确认收货"];
         [alertView addButtonWithTitle:@"取消"
                                  type:SIAlertViewButtonTypeCancel
@@ -392,8 +398,25 @@
         alertView.cornerRadius = 10;
         alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
         alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-        [alertView show];
+//        [alertView show];
         
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        OrderModel *model = [[OrderModel alloc] init];
+        model.orderId = self.order_id;
+        [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andBlock:^(id responseObject, NSError *error) {
+            [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
+            button.userInteractionEnabled = NO;
+            [button setBackgroundColor:[UIColor grayColor]];
+            if (count < self.goods_list.count) {
+                [self initCollectView];
+                [self setCollectViewData];
+            }
+        }];
+ 
     }
 }
 
@@ -570,6 +593,7 @@
 /** 改变付款/收货按钮状态 */
 - (void)changeBtnClick {
     button.enabled = NO;
+    
     button.backgroundColor = [UIColor grayColor];
 }
 
@@ -637,6 +661,8 @@
 /** 物流查询点击 */
 - (void)onLogisticsBtnCLick {
     NSLog(@"查看物流");
+    LogisticsViewController *logVC = [[LogisticsViewController alloc] init];
+    [self.navigationController pushViewController:logVC animated:YES];
 }
 
 /*

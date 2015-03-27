@@ -253,6 +253,7 @@
 		33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C221AB98373004C1FA2 /* collect_sel.png */; };
 		33D92C251AB98373004C1FA2 /* collect_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D92C231AB98373004C1FA2 /* collect_no.png */; };
 		33E5173B1AB7C9A8005DC76F /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */; };
+		33F1C7B61AC4F54D0006974E /* LogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F1C7B51AC4F54D0006974E /* LogisticsViewController.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -760,6 +761,8 @@
 		33E517381AB7C9A8005DC76F /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		33E517391AB7C9A8005DC76F /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		33E5173A1AB7C9A8005DC76F /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		33F1C7B41AC4F54D0006974E /* LogisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticsViewController.h; sourceTree = "<group>"; };
+		33F1C7B51AC4F54D0006974E /* LogisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsViewController.m; sourceTree = "<group>"; };
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1712,6 +1715,8 @@
 				33D621C91ABD5A5F009D86A1 /* LimitViewController.m */,
 				3330F3021AC11B0400EEC898 /* ServiceViewController.h */,
 				3330F3031AC11B0400EEC898 /* ServiceViewController.m */,
+				33F1C7B41AC4F54D0006974E /* LogisticsViewController.h */,
+				33F1C7B51AC4F54D0006974E /* LogisticsViewController.m */,
 			);
 			name = FunctionVC;
 			sourceTree = "<group>";
@@ -2121,6 +2126,7 @@
 				262E1EE01A5836A100C29059 /* DataSigner.m in Sources */,
 				26BE3AC61A173739009F37B4 /* KKIconButton.m in Sources */,
 				26BE3A9F1A170421009F37B4 /* ViewPagerController.m in Sources */,
+				33F1C7B61AC4F54D0006974E /* LogisticsViewController.m in Sources */,
 				26EC86341A6549B400307120 /* OrderTableViewCell.m in Sources */,
 				262E1EE21A5836A100C29059 /* MD5DataSigner.m in Sources */,
 				26BB7D6D1A6BAB51002F4030 /* ShareHelper.m in Sources */,

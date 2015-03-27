@@ -315,6 +315,7 @@ static dispatch_once_t onceToken;
     
     NSString *postUrl = API_ORDER_INFO;
     
+    NSLog(@"%@", orderId);
     NSDictionary *postDict = @{@"order_id": orderId,
                                @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
                                              @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
@@ -359,7 +360,7 @@ static dispatch_once_t onceToken;
                                };
     postDict = [DataTrans makePostDict:postDict];
     
-    NSLog(@"%@", goodsId);
+//    NSLog(@"%@", goodsId);
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if ([DataTrans isCorrectResponseObject:responseObject]) {
