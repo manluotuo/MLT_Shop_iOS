@@ -70,6 +70,7 @@
 #define WEIBO_APP_SECRET    @"6a5991b5a4950416ca9491eb863c19be"
 #define WEIBO_REDIRECT_URI  @"https://api.weibo.com/oauth2/default.html"
 
+
 //#define WXAPI_APP_ID        @"wxfad0032de4fc339a"
 
 #define WXAPI_APP_ID        @"wx18098a9221270776"
@@ -83,6 +84,9 @@
 #ifndef __QQAPI_ENABLE__
 #define __QQAPI_ENABLE__ 1
 #endif
+
+/** 聚合快递查询openid */
+#define JUHE_OPENID         @"JH412bd3fbbdaf0f97a0295530728eb018"
 
 ////////////////////////////////////////////
 

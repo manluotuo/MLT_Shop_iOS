@@ -411,6 +411,7 @@
         
         // 更新一条
         PayModel *theShip = self.dataSource.paymentList[indexPath.row];
+        NSLog(@"%d", indexPath.row);
         PaymentTableViewCell *cell = (PaymentTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         theShip.selected = YES;
         [cell setNewData:theShip];

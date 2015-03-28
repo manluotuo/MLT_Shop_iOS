@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSString *orderStatus; // 订单状态
 @property (nonatomic, strong) NSString *shippingStatus; // 发货状态
 @property (nonatomic, strong) NSString *payStatus; // 支付状态
+@property (nonatomic, strong) NSString *invoice_no;
 
 /** 评论窗口 */
 @property (nonatomic, strong) UIView *collectView;
@@ -92,8 +93,8 @@
         if (responseObject != nil) {
             // 集中处理所有的数据
             OrderDetailModel *model = [[OrderDetailModel alloc]init];
-            
             [model setValuesForKeysWithDictionary:responseObject[@"data"]];
+            self.invoice_no = model.invoice_no;
             [self.dataArray addObject:model];
             [self initView];
         }
@@ -158,12 +159,21 @@
         [self.scrollView addSubview:lableE];
         
         UILabel *lableF = [self createLable:[NSString stringWithFormat:@"配送方式：%@", model.shipping_name] frame:CGRectMake(H_20, lableE.y+lableE.height+H_10, lableAA.width, H_20) color:nil font:nil];
-        CGSize contentSize = [model.shipping_name sizeWithWidth:lableAA.width - H_80 andFont:FONT_12];
+        CGSize contentSize = [model.shipping_name sizeWithWidth:lableAA.width - H_80 andFont:FONT_16];
         lableF.height = contentSize.height;
         lableF.numberOfLines = 0;
         [self.scrollView addSubview:lableF];
         
+        if (model.invoice_no.length != 0) {
+            UILabel *lableXX = [self createLable:[NSString stringWithFormat:@"快递编号：%@", model.invoice_no] frame:CGRectMake(H_20, lableF.y+lableF.height+H_8, lableAA.width, H_20) color:nil font:nil];
+            [self.scrollView addSubview:lableXX];
+            
+        }
+        
         UILabel *lableAC = [self createLable:@"订单信息" frame:CGRectMake(H_15, lableF.y+lableF.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_14];
+        if (model.invoice_no.length != 0) {
+            lableAC.y += 28;
+        }
         [self.scrollView addSubview:lableAC];
         
         UIView *lineC = [self createLine:CGRectMake(lineB.x, lableAC.y+lableAC.height, lineA.width, 1)];
@@ -249,6 +259,7 @@
         UILabel *lableJ = [self createLable:[NSString stringWithFormat:@"订单金额：%@(包含邮费%@)", model.formated_order_amount, model.formated_shipping_fee] frame:CGRectMake(H_20, lableI.y+lableI.height+H_10, WIDTH-H_15*2, H_20) color:nil font:nil];
         [self.scrollView addSubview:lableJ];
         
+        
         UILabel *lableAD = [self createLable:@"商品列表" frame:CGRectMake(H_15, lableJ.y+lableJ.height+H_8, WIDTH-H_15*2, H_50) color:[UIColor grayColor] font:FONT_14];
         [self.scrollView addSubview:lableAD];
         
@@ -280,6 +291,8 @@
         [btnView addSubview:image];
         pricrLable = [self createLable:[NSString stringWithFormat:@"应付总额：%@", model.order_amount] frame:CGRectMake(H_15, H_20, WIDTH, H_40) color:ORANGECOLOR font:FONT_16];
         [btnView addSubview:pricrLable];
+        
+        
         if ([model.pay_status integerValue] == 2) {
             pricrLable.hidden = YES;
         }
@@ -319,9 +332,9 @@
     if (self.dataArray.count > 0) {
         OrderDetailModel *model = [self.dataArray lastObject];
         //TODO:修改按钮的状态
-//        if ([model.shipping_status integerValue] == 0) {
-//            logisticsButton.hidden = YES;
-//        }
+        if ([model.shipping_status integerValue] == 0) {
+            logisticsButton.hidden = YES;
+        }
         
         if ([model.order_status integerValue] == 2 || [model.order_status integerValue] == 3 || [model.order_status integerValue] == 4 || [model.shipping_status integerValue] == 2) {
             button.hidden = YES;
@@ -360,7 +373,7 @@
 /** 确认收货/立即付款按钮点击事件 */
 - (void)onBtnCLick {
     
-    //TODO:记着切换
+
     if (button.selected == NO) {
         if (self.dataArray.count > 0) {
             OrderDetailModel *model = [self.dataArray lastObject];
@@ -662,6 +675,7 @@
 - (void)onLogisticsBtnCLick {
     NSLog(@"查看物流");
     LogisticsViewController *logVC = [[LogisticsViewController alloc] init];
+    logVC.invoice_no = self.invoice_no;
     [self.navigationController pushViewController:logVC animated:YES];
 }
 

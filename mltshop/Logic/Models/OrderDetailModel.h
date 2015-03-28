@@ -36,6 +36,8 @@
 @property (nonatomic, strong) NSString *formated_shipping_fee;
 /** 应付总额 */
 @property (nonatomic, strong) NSString *order_amount;
+/** 订单编号 */
+@property (nonatomic, strong) NSString *invoice_no;
 
 @property (nonatomic, strong) NSString *order_status;
 @property (nonatomic, strong) NSString *shipping_status;

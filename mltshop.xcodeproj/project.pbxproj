@@ -209,6 +209,12 @@
 		3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316122D1AB03FA100F47730 /* CollectViewController.m */; };
 		331612311AB043BE00F47730 /* CollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612301AB043BE00F47730 /* CollectModel.m */; };
 		331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612331AB0503F00F47730 /* CollectTableViewCell.m */; };
+		3321EDD51AC563CA00866FB9 /* JuheApisSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD41AC563CA00866FB9 /* JuheApisSDK.a */; };
+		3321EDD71AC5645300866FB9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD61AC5645300866FB9 /* libc++.dylib */; };
+		3321EDD91AC565A200866FB9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD81AC565A200866FB9 /* AdSupport.framework */; };
+		3321EDDB1AC565B300866FB9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDDA1AC565B300866FB9 /* CoreLocation.framework */; };
+		3321EDDE1AC56AFB00866FB9 /* LogisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3321EDDD1AC56AFB00866FB9 /* LogisticsModel.m */; };
+		3321EDE11AC571F900866FB9 /* LogisticsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3321EDE01AC571F900866FB9 /* LogisticsTableViewCell.m */; };
 		3330F3041AC11B0400EEC898 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3330F3031AC11B0400EEC898 /* ServiceViewController.m */; };
 		3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */; };
 		3362E1FA1ABBF9E000D0704B /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E1F81ABBF9E000D0704B /* SIAlertView.m */; };
@@ -242,6 +248,7 @@
 		33D621F81ABDB7CB009D86A1 /* splash1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */; };
 		33D621F91ABDB7CB009D86A1 /* splash2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */; };
 		33D621FA1ABDB7CB009D86A1 /* splash3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */; };
+		33D8FE341AC658C000A6B974 /* LogisticsFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */; };
 		33D92C101AB95EC8004C1FA2 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */; };
 		33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C111AB95F11004C1FA2 /* CFNetwork.framework */; };
 		33D92C141AB95F1C004C1FA2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C131AB95F1C004C1FA2 /* CoreFoundation.framework */; };
@@ -693,6 +700,16 @@
 		331612301AB043BE00F47730 /* CollectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectModel.m; sourceTree = "<group>"; };
 		331612321AB0503F00F47730 /* CollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectTableViewCell.h; sourceTree = "<group>"; };
 		331612331AB0503F00F47730 /* CollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableViewCell.m; sourceTree = "<group>"; };
+		3321EDD21AC563CA00866FB9 /* JHAPISDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAPISDK.h; sourceTree = "<group>"; };
+		3321EDD31AC563CA00866FB9 /* JHOpenidSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHOpenidSupplier.h; sourceTree = "<group>"; };
+		3321EDD41AC563CA00866FB9 /* JuheApisSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = JuheApisSDK.a; sourceTree = "<group>"; };
+		3321EDD61AC5645300866FB9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		3321EDD81AC565A200866FB9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		3321EDDA1AC565B300866FB9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3321EDDC1AC56AFB00866FB9 /* LogisticsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticsModel.h; sourceTree = "<group>"; };
+		3321EDDD1AC56AFB00866FB9 /* LogisticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsModel.m; sourceTree = "<group>"; };
+		3321EDDF1AC571F900866FB9 /* LogisticsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticsTableViewCell.h; sourceTree = "<group>"; };
+		3321EDE01AC571F900866FB9 /* LogisticsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsTableViewCell.m; sourceTree = "<group>"; };
 		3330F3021AC11B0400EEC898 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		3330F3031AC11B0400EEC898 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
@@ -747,6 +764,8 @@
 		33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash1@2x.jpg"; sourceTree = "<group>"; };
 		33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash2@2x.jpg"; sourceTree = "<group>"; };
 		33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash3@2x.jpg"; sourceTree = "<group>"; };
+		33D8FE321AC658C000A6B974 /* LogisticsFirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticsFirstTableViewCell.h; sourceTree = "<group>"; };
+		33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsFirstTableViewCell.m; sourceTree = "<group>"; };
 		33D92C0E1AB95EC8004C1FA2 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		33D92C111AB95F11004C1FA2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -773,6 +792,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3321EDDB1AC565B300866FB9 /* CoreLocation.framework in Frameworks */,
+				3321EDD91AC565A200866FB9 /* AdSupport.framework in Frameworks */,
+				3321EDD71AC5645300866FB9 /* libc++.dylib in Frameworks */,
 				26BB7D781A6BAFDA002F4030 /* libz.dylib in Frameworks */,
 				33D92C1C1AB95F63004C1FA2 /* Security.framework in Frameworks */,
 				33D92C1A1AB95F58004C1FA2 /* UIKit.framework in Frameworks */,
@@ -780,6 +802,7 @@
 				26BB7D711A6BAF8E002F4030 /* CoreGraphics.framework in Frameworks */,
 				262E1E801A5835EC00C29059 /* SystemConfiguration.framework in Frameworks */,
 				33D92C161AB95F27004C1FA2 /* CoreTelephony.framework in Frameworks */,
+				3321EDD51AC563CA00866FB9 /* JuheApisSDK.a in Frameworks */,
 				33D92C141AB95F1C004C1FA2 /* CoreFoundation.framework in Frameworks */,
 				33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */,
 				26BB7D7E1A6BB070002F4030 /* libstdc++.dylib in Frameworks */,
@@ -1327,6 +1350,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3321EDCF1AC563CA00866FB9 /* JuheApisSDK */,
 				337B33E31AC02195000CAF14 /* RFKeyboardToolbar */,
 				33D621DC1ABDA6F8009D86A1 /* QFHttpRequest */,
 				3362E2A01ABC4CC900D0704B /* AutoSlideScrollView */,
@@ -1513,6 +1537,8 @@
 				33C666C71AB4EC26005ACDD5 /* BonusListModel.m */,
 				33D621CB1ABD5AA7009D86A1 /* LimitModel.h */,
 				33D621CC1ABD5AA7009D86A1 /* LimitModel.m */,
+				3321EDDC1AC56AFB00866FB9 /* LogisticsModel.h */,
+				3321EDDD1AC56AFB00866FB9 /* LogisticsModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1567,6 +1593,10 @@
 				33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */,
 				33D621C51ABD5542009D86A1 /* LimitGoodsTableViewCell.h */,
 				33D621C61ABD5542009D86A1 /* LimitGoodsTableViewCell.m */,
+				3321EDDF1AC571F900866FB9 /* LogisticsTableViewCell.h */,
+				3321EDE01AC571F900866FB9 /* LogisticsTableViewCell.m */,
+				33D8FE321AC658C000A6B974 /* LogisticsFirstTableViewCell.h */,
+				33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1738,6 +1768,32 @@
 			name = CollectVC;
 			sourceTree = "<group>";
 		};
+		3321EDCF1AC563CA00866FB9 /* JuheApisSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3321EDD01AC563CA00866FB9 /* include */,
+				3321EDD41AC563CA00866FB9 /* JuheApisSDK.a */,
+			);
+			path = JuheApisSDK;
+			sourceTree = "<group>";
+		};
+		3321EDD01AC563CA00866FB9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3321EDD11AC563CA00866FB9 /* JuheApisSDK */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		3321EDD11AC563CA00866FB9 /* JuheApisSDK */ = {
+			isa = PBXGroup;
+			children = (
+				3321EDD21AC563CA00866FB9 /* JHAPISDK.h */,
+				3321EDD31AC563CA00866FB9 /* JHOpenidSupplier.h */,
+			);
+			path = JuheApisSDK;
+			sourceTree = "<group>";
+		};
 		3362E1F51ABBF9E000D0704B /* SIAlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1853,6 +1909,9 @@
 		E781564BAD464C1A94F8A622 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3321EDDA1AC565B300866FB9 /* CoreLocation.framework */,
+				3321EDD81AC565A200866FB9 /* AdSupport.framework */,
+				3321EDD61AC5645300866FB9 /* libc++.dylib */,
 				33D92C1B1AB95F63004C1FA2 /* Security.framework */,
 				33D92C191AB95F58004C1FA2 /* UIKit.framework */,
 				33D92C171AB95F50004C1FA2 /* Foundation.framework */,
@@ -2110,6 +2169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D8FE341AC658C000A6B974 /* LogisticsFirstTableViewCell.m in Sources */,
 				26BE3AD71A173C3D009F37B4 /* DataTrans.m in Sources */,
 				265BB88B1A1CE96B0040ACC0 /* ListMainViewController.m in Sources */,
 				26BB7D811A6BB688002F4030 /* ZBarScanViewController.m in Sources */,
@@ -2237,6 +2297,7 @@
 				26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */,
 				26BE3AC51A173739009F37B4 /* KKTextView.m in Sources */,
 				336B62AC1AB16CD500476A93 /* BonusViewController.m in Sources */,
+				3321EDE11AC571F900866FB9 /* LogisticsTableViewCell.m in Sources */,
 				262E1EE31A5836A100C29059 /* NSDataEx.m in Sources */,
 				262E1EE51A5836A100C29059 /* RSADataSigner.m in Sources */,
 				26435AB41A1EBDB600E117A0 /* LoginViewController.m in Sources */,
@@ -2245,6 +2306,7 @@
 				336D045A1AB40E0A00A87137 /* OrderDetailViewController.m in Sources */,
 				26166E181AAB0E5300820948 /* HostListViewController.m in Sources */,
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
+				3321EDDE1AC56AFB00866FB9 /* LogisticsModel.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,
 				26BE3A9C1A170421009F37B4 /* UIFont+FontAwesome.m in Sources */,
 			);
@@ -2401,6 +2463,7 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/mltshop/Frameworks/lib",
 					"$(SRCROOT)/mltshop/Frameworks/lib",
+					"$(PROJECT_DIR)/mltshop/Frameworks/JuheApisSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2509,6 +2572,7 @@
 					"$(PROJECT_DIR)/mltshop/Frameworks/UMAnalytics_Sdk_3.4.6",
 					"$(PROJECT_DIR)/mltshop/Frameworks/lib",
 					"$(SRCROOT)/mltshop/Frameworks/lib",
+					"$(PROJECT_DIR)/mltshop/Frameworks/JuheApisSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

@@ -10,4 +10,6 @@
 
 @interface LogisticsViewController : UIViewController
 
+@property (nonatomic, strong) NSString *invoice_no;
+@property (nonatomic, strong) NSString *com;
 @end
