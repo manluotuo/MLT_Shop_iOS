@@ -129,6 +129,7 @@
     {
         if ([s.data isEqualToString:@"http://www.manluotuo.com/huodong.php"]) {
             [HttpRequest requestWithString:s.data andTarget:self];
+//            [HttpRequest requestWithString:@"http://192.168.1.199/huodong.php" andTarget:self];
         } else {
             [DataTrans showWariningTitle:T(@"扫描成功,正在打开") andCheatsheet:ICON_INFO andDuration:3.0];
             [self cancelAction];
@@ -154,11 +155,17 @@
 //数据请求成功
 - (void)httpRequestFinished:(HttpRequest *)request {
     
+    
+    
+    
+    NSString *str1 = [[NSString alloc] initWithData:request.respondsData encoding:NSUTF8StringEncoding];
+
+    NSLog(@"%@", str1);
+    
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:request.respondsData options:NSJSONReadingAllowFragments error:nil];
     
-    NSLog(@"%@", responseObject);
+    NSLog(@"!!!!!!!!%@", responseObject);
     NSString *str = responseObject[@"status"];
-    NSLog(@"%@", str);
     
     if ([str isEqualToString:@"no"]) {
         
@@ -168,6 +175,7 @@
     }
     if ([str isEqualToString:@"yes"]){
         NSString *str = [NSString stringWithFormat:@"http://www.manluotuo.com/goods-%@.html", responseObject[@"goods"]];
+//        192.168.1.199/huodong.php
         self.scanData = str;
         [self cancelAction];
     }

@@ -41,7 +41,10 @@
         
         if (ArrayHasValue( dict[@"payment_list"])) {
             for (NSDictionary *item in [dict objectForKey:@"payment_list"]) {
-                if ([item[@"pay_code"] isEqualToString:@"alipay"]) {
+                
+                /** 敏 - 微信支付，在这加判断 */
+                if ([item[@"pay_code"] isEqualToString:@"alipay"] || [item[@"pay_code"] isEqualToString:@"chinabank"]) {
+                    NSLog(@"!!!!!!!!!!!!!!%@", item);
                     [_paymentList addObject:[[PayModel alloc]initWithDict:item]];
                 }
             }
@@ -98,6 +101,7 @@
 {
     if (DictionaryHasValue(dict)) {
         _payId = dict[@"pay_id"];
+        NSLog(@"%@", _payId);
         _payCode = dict[@"pay_code"];
         _payName = dict[@"pay_name"];
         _payFee  = [DataTrans noNullBoolObj:dict[@"pay_fee"]];

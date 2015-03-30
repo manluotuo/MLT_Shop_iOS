@@ -674,7 +674,7 @@ static dispatch_once_t onceToken;
     //    NSLog(@"!!!!%@", baseDict);
     //    NSLog(@"####%@", postDict);
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        
+
         NSLog(@"%@", responseObject);
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库

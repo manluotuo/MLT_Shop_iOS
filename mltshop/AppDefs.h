@@ -6,10 +6,11 @@
 //  Copyright (c) 2013年 thinktube. All rights reserved.
 //
 
-#define UM_REGISTER @"Register"
-#define UM_LOGIN    @"Login"
-#define UM_START    @"Start"
-#define UM_PAY      @"SuccessPay"
+#define UM_REGISTER @"Register"         // 注册
+#define UM_LOGIN    @"Login"            // 登陆
+#define UM_START    @"Start"            // 启动
+#define UM_PAY      @"SuccessPay"       // 支付
+#define UM_FORUM    @"forum"            // 进入论坛
 
 #define XAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define CODE_OK                     @"10000"

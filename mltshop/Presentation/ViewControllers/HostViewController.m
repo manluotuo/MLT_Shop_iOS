@@ -22,6 +22,7 @@
 #import "ZBarScanViewController.h"
 #import "WebViewController.h"
 #import "GoodsDetailViewController.h"
+#import "ForumViewController.h"
 
 
 @interface HostViewController ()<ViewPagerDataSource, ViewPagerDelegate, PassValueDelegate>
@@ -94,7 +95,24 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(rightDrawerButtonPress:)
                                                  name:NOTIFICATION_QUICK_ADD_STEP object:nil];
+    
+    
+    /** 论坛入口按钮 */
+    [self createForumButton];
 
+}
+
+/** 创建论坛入口按钮 */
+- (void)createForumButton {
+    
+    FAHoverButton *forumButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(WIDTH-H_80, TOTAL_HEIGHT-H_80, H_50, H_50)];
+    [forumButton setTitle:[NSString fontAwesomeIconStringForEnum:FAat] forState:UIControlStateNormal];
+    [forumButton setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
+    [forumButton setRounded];
+    [forumButton setIconFont:FONT_AWESOME_30];
+    [forumButton addTarget:self action:@selector(onForumButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:forumButton];
+    
 }
 
 /////////////////////////////////////////////////////
@@ -324,6 +342,19 @@
         default:
             return color;
     }
+}
+
+
+- (void)onForumButtonClick {
+    
+    ForumViewController *forumView = [[ForumViewController alloc] init];
+    ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:forumView];
+    // 翻转 UIModalTransitionStyleFlipHorizontal
+    [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:nav animated:YES completion:^{
+        [MobClick event:UM_FORUM];
+    }];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated

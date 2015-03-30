@@ -86,7 +86,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
     
     [MobClick event:UM_START];
-    [MobClick event:UM_PAY];
     
     [WXApi registerApp:WXAPI_APP_ID];
     [WeiboSDK registerApp:WEIBO_APP_KEY];
@@ -127,13 +126,13 @@
     
     // MagicalRecord
     //    [MagicalRecord setupCoreDataStack];
+    
     NSString *storeNamed = @"manluotuo.sqlite";
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:storeNamed];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.me = [[ModelHelper sharedHelper]findOnlyMe];
-    
     
     /**
      *  DRAWER ViewController

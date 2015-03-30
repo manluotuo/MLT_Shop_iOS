@@ -39,6 +39,7 @@
     UITextField *integralText;
     KKFlatButton *doneButton;
     CGFloat payAmount;
+    NSString *payType;
 }
 
 @property (nonatomic, strong)UITableView *tableView;
@@ -59,6 +60,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillhide:) name:UIKeyboardWillHideNotification object:nil];
     
     self.title = T(@"结算页面");
+    payType = @"支付宝付款";
     // Do any additional setup after loading the view.
     sectionTitles = @[@"商品列表",@"收货人", @"快递方式", @"支付方式",@"红包列表"];
     
@@ -135,6 +137,7 @@
     }];
 }
 
+/** 支付宝付款 */
 - (void)doAlipayAction:(OrderModel *)theOrder
 {
     /*
@@ -179,7 +182,6 @@
     //    order.amount = [NSString stringWithFormat:@"%.2f", (arc4random() % 100)/10.0f]; //商品价格 9.9-0.1
     order.notifyURL = [NSString stringWithFormat:@"%@%@",BASE_API,@"/ws_pay/notify_url.php"]; //回调URL
     
-    
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
     order.inputCharset = @"utf-8";
@@ -217,6 +219,10 @@
     }
 }
 
+/** 微信支付 */
+- (void)doWeiXinAction {
+    NSLog(@"填写微信支付");
+}
 
 - (void)doneAction
 {
@@ -226,14 +232,20 @@
     [HUD showInView:self.view];
     
     [[AppRequestManager sharedManager]flowDoneWithFlowDoneModel:self.flowDoneData andBlock:^(id responseObject, NSError *error) {
-
+        
         [HUD removeFromSuperview];
         if (responseObject != nil) {
             OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
             [DataTrans showWariningTitle:T(@"订单已生成") andCheatsheet:ICON_CHECK];
-            [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[@"支付宝付款", @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
+            
+            [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[payType, @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
                 if(index == 0) {
-                    [self doAlipayAction:theOrder];
+                    if ([payType isEqualToString:T(@"支付宝付款")]) {
+                        [self doAlipayAction:theOrder];
+                    } else {
+                        NSLog(@"调用微信支付");
+                        [self doWeiXinAction];
+                    }
                 } else {
                     [self dismissViewControllerAnimated:NO completion:^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:SIGNAL_GO_TO object:nil userInfo:nil];
@@ -411,7 +423,10 @@
         
         // 更新一条
         PayModel *theShip = self.dataSource.paymentList[indexPath.row];
-        NSLog(@"%d", indexPath.row);
+        if (indexPath.row == 1) {
+            payType = T(@"微信支付付款");
+        }
+        
         PaymentTableViewCell *cell = (PaymentTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         theShip.selected = YES;
         [cell setNewData:theShip];

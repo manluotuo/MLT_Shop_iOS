@@ -50,6 +50,7 @@
     self.author.textColor = [UIColor redColor];
     
     for (NSInteger i = 0; i < 5; i++) {
+        
         self.starBtn = [FAHoverButton buttonWithType:UIButtonTypeCustom];
         [self.starBtn setFrame:CGRectMake(WIDTH/2+H_10+i*H_25, H_8, H_25, H_25)];
         [self.starBtn setTitle:[NSString fontAwesomeIconStringForEnum:FAStar] forState:UIControlStateNormal];

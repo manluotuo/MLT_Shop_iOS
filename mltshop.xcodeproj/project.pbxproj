@@ -216,6 +216,8 @@
 		3321EDDE1AC56AFB00866FB9 /* LogisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3321EDDD1AC56AFB00866FB9 /* LogisticsModel.m */; };
 		3321EDE11AC571F900866FB9 /* LogisticsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3321EDE01AC571F900866FB9 /* LogisticsTableViewCell.m */; };
 		3330F3041AC11B0400EEC898 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3330F3031AC11B0400EEC898 /* ServiceViewController.m */; };
+		3353FA0A1AC9459000181EAA /* ForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3353FA091AC9459000181EAA /* ForumViewController.m */; };
+		3353FA0D1AC955E900181EAA /* ForumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3353FA0C1AC955E900181EAA /* ForumTableViewCell.m */; };
 		3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */; };
 		3362E1FA1ABBF9E000D0704B /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E1F81ABBF9E000D0704B /* SIAlertView.m */; };
 		3362E2CB1ABC4CC900D0704B /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E2A21ABC4CC900D0704B /* CycleScrollView.m */; };
@@ -712,6 +714,10 @@
 		3321EDE01AC571F900866FB9 /* LogisticsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsTableViewCell.m; sourceTree = "<group>"; };
 		3330F3021AC11B0400EEC898 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		3330F3031AC11B0400EEC898 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		3353FA081AC9459000181EAA /* ForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumViewController.h; sourceTree = "<group>"; };
+		3353FA091AC9459000181EAA /* ForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumViewController.m; sourceTree = "<group>"; };
+		3353FA0B1AC955E900181EAA /* ForumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumTableViewCell.h; sourceTree = "<group>"; };
+		3353FA0C1AC955E900181EAA /* ForumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumTableViewCell.m; sourceTree = "<group>"; };
 		3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
 		3362E1F71ABBF9E000D0704B /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
 		3362E1F81ABBF9E000D0704B /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
@@ -1121,6 +1127,7 @@
 				26BE3A141A170421009F37B4 /* Frameworks */,
 				26BE3A581A170421009F37B4 /* Logic */,
 				26BE3A5D1A170421009F37B4 /* Presentation */,
+				3353FA041AC93FA300181EAA /* Forum */,
 				266FA8011A134A72000C2AAE /* AppDelegate.h */,
 				33C656A01AC25EC8004C16C3 /* AppDelegate.m */,
 				266FA80D1A134A72000C2AAE /* Images.xcassets */,
@@ -1573,8 +1580,8 @@
 				262E1E6A1A55517000C29059 /* PaymentTableViewCell.m */,
 				266B7E171A3D67D20001835F /* GoodsTwoTableViewCell.h */,
 				266B7E161A3D67D20001835F /* GoodsTwoTableViewCell.m */,
-				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
 				26DE7FD71A2C009C007F4B16 /* CategoryItemViewCell.h */,
+				26DE7FD61A2C009C007F4B16 /* CategoryItemViewCell.m */,
 				2658A8FC1A3D24D500D9C011 /* GoodsOneTableViewCell.h */,
 				2658A8FD1A3D24D500D9C011 /* GoodsOneTableViewCell.m */,
 				26B1C25D1A46BAC400295D32 /* AddressTableViewCell.h */,
@@ -1792,6 +1799,41 @@
 				3321EDD31AC563CA00866FB9 /* JHOpenidSupplier.h */,
 			);
 			path = JuheApisSDK;
+			sourceTree = "<group>";
+		};
+		3353FA041AC93FA300181EAA /* Forum */ = {
+			isa = PBXGroup;
+			children = (
+				3353FA051AC93FE800181EAA /* Models */,
+				3353FA061AC93FE800181EAA /* TableViewCells */,
+				3353FA071AC93FE800181EAA /* ViewControllers */,
+			);
+			path = Forum;
+			sourceTree = "<group>";
+		};
+		3353FA051AC93FE800181EAA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3353FA061AC93FE800181EAA /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				3353FA0B1AC955E900181EAA /* ForumTableViewCell.h */,
+				3353FA0C1AC955E900181EAA /* ForumTableViewCell.m */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		3353FA071AC93FE800181EAA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3353FA081AC9459000181EAA /* ForumViewController.h */,
+				3353FA091AC9459000181EAA /* ForumViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		3362E1F51ABBF9E000D0704B /* SIAlertView */ = {
@@ -2236,6 +2278,7 @@
 				26BE3AE51A197865009F37B4 /* KKDrawerViewController.m in Sources */,
 				265BB8991A1CF4B50040ACC0 /* YWDictionary.m in Sources */,
 				266B7E1B1A3DD25C0001835F /* GoodsDetailViewController.m in Sources */,
+				3353FA0A1AC9459000181EAA /* ForumViewController.m in Sources */,
 				26435ABD1A2032C400E117A0 /* ColorNavigationController.m in Sources */,
 				3362E2CC1ABC4CC900D0704B /* MyPageControl.m in Sources */,
 				26BB7D841A6BB703002F4030 /* ScanOverlayView.m in Sources */,
@@ -2285,6 +2328,7 @@
 				26BE3ADD1A19759B009F37B4 /* KKViewController.m in Sources */,
 				265BB8951A1CF1CC0040ACC0 /* NoDataView.m in Sources */,
 				26875B551A4FAA2900FA5335 /* CartModel.m in Sources */,
+				3353FA0D1AC955E900181EAA /* ForumTableViewCell.m in Sources */,
 				263386701A5304D600C94D8F /* WebViewController.m in Sources */,
 				26BB7D321A6B5797002F4030 /* BrandListViewController.m in Sources */,
 				33C656A11AC25EC8004C16C3 /* AppDelegate.m in Sources */,

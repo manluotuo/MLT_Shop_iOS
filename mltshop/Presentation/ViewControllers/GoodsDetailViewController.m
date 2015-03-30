@@ -196,6 +196,7 @@
     [SGActionView resetSGActionViewInstance:nil];
     NSArray *titles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7"];
     [SGActionView showGridMenuWithTitle:T(@"选择数量") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
+        NSLog(@"%d", index);
         cartModel.goodsCount = INT(index+1);
         [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
             if (responseObject != nil) {
@@ -233,7 +234,6 @@
                                                                                      action:@selector(backAction)];
     [gestureRec setDirection:UISwipeGestureRecognizerDirectionRight];
     [self.fixedView addGestureRecognizer:gestureRec];
-    
 }
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -350,6 +350,7 @@
 
 -(void)shareAction
 {
+    [MobClick event:@"share"];
     [ShareHelper sharedHelper].baseViewController = self.navigationController;
     [[ShareHelper sharedHelper]showShareView:self.theGoods];
     
