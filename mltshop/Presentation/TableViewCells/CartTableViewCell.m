@@ -66,16 +66,8 @@
     
     self.imageRight = RIGHT_FRAME;
     [self.imageRight setImage:RIGHT_IMAGE];
-    [self addSubview:self.imageRight];
+//    [self addSubview:self.imageRight];
     
-    certainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    certainBtn.titleLabel.font = FONT_14;
-    [certainBtn setTitle:T(@"立即付款") forState:UIControlStateNormal];
-    [certainBtn setFrame:CGRectMake(H_220, H_40, H_80, H_40)];
-    [certainBtn addTarget:self action:@selector(onCertainBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [certainBtn setBackgroundColor:[UIColor orangeColor]];
-    
-//    [self addSubview:certainBtn];
     [self addSubview:coverImageView];
     [self addSubview:nameLabel];
     [self addSubview:priceLabel];

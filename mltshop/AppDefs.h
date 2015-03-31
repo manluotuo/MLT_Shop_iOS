@@ -875,7 +875,7 @@ NS_INLINE BOOL ArrayHasValue(id array)
 #define RIGHT_IMAGE [UIImage imageNamed:@"right"]
 
 #define RIGHT_IMAGE_FRAME   [[UIImageView alloc] initWithFrame:CGRectMake(270, 25, 10, 13)]
-#define RIGHT_FRAME         [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-30, 33, 10, 13)]
+#define RIGHT_FRAME         [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-30, 20, 10, 13)]
 #define TITLE_LABLE         [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 20)]
 
 

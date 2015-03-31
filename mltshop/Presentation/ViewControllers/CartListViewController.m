@@ -17,7 +17,7 @@
 #import "AddressListViewController.h"
 
 
-@interface CartListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate>
+@interface CartListViewController ()<PullListViewDelegate, PassValueDelegate>
 
 @property(nonatomic, strong)NSMutableArray *addressArray;
 @property(nonatomic, strong)NSMutableArray *dataArray;
@@ -27,7 +27,9 @@
 
 @end
 
-@implementation CartListViewController
+@implementation CartListViewController {
+    NSString *str;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -224,9 +226,13 @@
     //    [self setupDataSource];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0001;
+}
 
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
+    
     CartModel * theCart = data;
     if ([value isEqualToString:SIGNAL_CHANGE_CART_GOODS_COUNT]) {
         NSArray *titles = @[@"删除", @"1", @"2", @"3", @"4", @"5", @"6", @"7"];

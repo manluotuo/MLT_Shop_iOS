@@ -69,7 +69,7 @@
     self.view.backgroundColor = BGCOLOR;
     self.editing = NO;
     
-    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = BGCOLOR;
     self.tableView.separatorStyle = UITableViewCellSelectionStyleGray;
     self.tableView.separatorColor = SEPCOLOR;

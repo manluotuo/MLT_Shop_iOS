@@ -14,7 +14,8 @@
     UILabel *idLabel;
     UILabel *amountLabel;
 }
-@property(nonatomic, strong)OrderModel *data;
+@property (nonatomic, strong)OrderModel *data;
+@property (nonatomic, strong) UIImageView *imageRight;
 @end
 
 @implementation OrderTableViewCell
@@ -33,6 +34,9 @@
 
 - (void)initCellView
 {
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 0.6)];
+    [line setBackgroundColor:GRAYLELIGHTCOLOR];
+    [self addSubview:line];
     
     idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_240, H_20)];
     idLabel.numberOfLines = 0;
@@ -54,17 +58,24 @@
     [actionBtn setTitleColor:WHITECOLOR andStyle:KKFlatButtonStyleLight];
     [actionBtn setBackgroundColor:[UIColor orangeColor]];
     
-    self.backgroundColor = BGCOLOR;
+    self.imageRight = RIGHT_FRAME;
+    [self.imageRight setImage:RIGHT_IMAGE];
+    [self addSubview:self.imageRight];
+    
+//    self.backgroundColor = BGCOLOR;
+    self.backgroundColor = WHITECOLOR;
     
     [self addSubview:timeLabel];
     [self addSubview:idLabel];
     [self addSubview:amountLabel];
-    [self addSubview:actionBtn];
+//    [self addSubview:actionBtn];
 }
 
 - (void)setNewData:(OrderModel *)_newData
 {
     self.data = _newData;
+    
+
     
     idLabel.text = [NSString stringWithFormat:@"编号: %@",self.data.orderSn];
     amountLabel.text = [NSString stringWithFormat:@"总计: %@元",

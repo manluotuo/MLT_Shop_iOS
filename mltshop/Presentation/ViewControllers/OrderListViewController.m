@@ -13,6 +13,7 @@
 #import "KKFlatButton.h"
 #import "CartTableViewCell.h"
 #import "OrderTableViewCell.h"
+#import "OrderFootTableViewCell.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
@@ -70,8 +71,6 @@
 {
     if([value isEqualToString:SIGNAL_ORDER_ACTION]){
         OrderModel *theOrder = data;
-        NSMutableArray *titles = [[NSMutableArray alloc]init];
-        
         if ([theOrder.paymentType isEqualToString:@"UNPAYED"]) {
             [self doAlipayAction:theOrder];
         }
@@ -191,6 +190,7 @@
                                andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle]
                                  andDuration:1.0f];
                 [self showSetupDataSource:self.dataArray andError:nil];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             
         }
@@ -228,13 +228,29 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     OrderTableViewCell *cellview = [[OrderTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    [cellview setFrame:CGRectMake(0, 0, TOTAL_WIDTH, H_40)];
+    [cellview setFrame:CGRectMake(0, 0, WIDTH, H_40)];
     NSLog(@"%d", self.dataArray.count);
     if(self.dataArray.count > 0) {
     [cellview setNewData:self.dataArray[section]];
     }
     cellview.passDelegate = self;
     return cellview;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 65;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    OrderFootTableViewCell *cellView = [[OrderFootTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    [cellView setFrame:CGRectMake(0, -40, WIDTH, 40)];
+
+    if (self.dataArray.count > 0) {
+        [cellView setNewData:self.dataArray[section]];
+    }
+    cellView.passDelegate = self;
+    return cellView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

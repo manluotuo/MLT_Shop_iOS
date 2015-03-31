@@ -98,7 +98,8 @@
     
     
     /** 论坛入口按钮 */
-    [self createForumButton];
+    // TODO: 评论按钮
+//    [self createForumButton];
 
 }
 

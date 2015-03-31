@@ -85,6 +85,10 @@
     }];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.001;
+}
+
 - (void)recomendNewItems
 {
     [self setupDataSource];

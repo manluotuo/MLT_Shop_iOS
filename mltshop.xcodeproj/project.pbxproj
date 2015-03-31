@@ -233,6 +233,7 @@
 		337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */; };
 		337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */; };
 		337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E91AC02195000CAF14 /* RFToolbarButton.m */; };
+		339AEB041ACA693200F8ED3B /* OrderFootTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339AEB031ACA693200F8ED3B /* OrderFootTableViewCell.m */; };
 		33C656A11AC25EC8004C16C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C656A01AC25EC8004C16C3 /* AppDelegate.m */; };
 		33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C666C71AB4EC26005ACDD5 /* BonusListModel.m */; };
 		33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C667401AB67476005ACDD5 /* BonusListTableViewCell.m */; };
@@ -744,6 +745,8 @@
 		337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFKeyboardToolbar.m; sourceTree = "<group>"; };
 		337B33E81AC02195000CAF14 /* RFToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFToolbarButton.h; sourceTree = "<group>"; };
 		337B33E91AC02195000CAF14 /* RFToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFToolbarButton.m; sourceTree = "<group>"; };
+		339AEB021ACA693200F8ED3B /* OrderFootTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFootTableViewCell.h; sourceTree = "<group>"; };
+		339AEB031ACA693200F8ED3B /* OrderFootTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFootTableViewCell.m; sourceTree = "<group>"; };
 		33C656A01AC25EC8004C16C3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		33C666C61AB4EC26005ACDD5 /* BonusListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusListModel.h; sourceTree = "<group>"; };
 		33C666C71AB4EC26005ACDD5 /* BonusListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusListModel.m; sourceTree = "<group>"; };
@@ -1574,6 +1577,8 @@
 			children = (
 				26EC86321A6549B400307120 /* OrderTableViewCell.h */,
 				26EC86331A6549B400307120 /* OrderTableViewCell.m */,
+				339AEB021ACA693200F8ED3B /* OrderFootTableViewCell.h */,
+				339AEB031ACA693200F8ED3B /* OrderFootTableViewCell.m */,
 				26875B5A1A4FE4ED00FA5335 /* CartTableViewCell.h */,
 				26875B591A4FE4ED00FA5335 /* CartTableViewCell.m */,
 				262E1E6C1A55519000C29059 /* PaymentTableViewCell.h */,
@@ -2352,6 +2357,7 @@
 				26BE3AC71A173739009F37B4 /* KKFlatButton.m in Sources */,
 				3321EDDE1AC56AFB00866FB9 /* LogisticsModel.m in Sources */,
 				26BE3A901A170421009F37B4 /* NSDate+Utilities.m in Sources */,
+				339AEB041ACA693200F8ED3B /* OrderFootTableViewCell.m in Sources */,
 				26BE3A9C1A170421009F37B4 /* UIFont+FontAwesome.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
