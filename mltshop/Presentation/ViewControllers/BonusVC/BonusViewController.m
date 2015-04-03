@@ -78,13 +78,16 @@
     self.navigationItem.hidesBackButton = YES;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%d", self.dataSource.count);
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 95;
+    return H_100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,8 +97,8 @@
         cell = [[BonusListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
     }
     
-    BonusInfoModel *model = self.dataArray[indexPath.row];
-    BonusListModel *listModel = self.dataSource[indexPath.row];
+    BonusInfoModel *model = self.dataArray[indexPath.section];
+    BonusListModel *listModel = self.dataSource[indexPath.section];
     model.bonus_date = listModel.bonus_date;
     [cell setNewData:model];
     return cell;
@@ -108,6 +111,10 @@
 /** 加载 */
 - (void)createGetMoreData {
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
 }
 
 #pragma mark - ButtonClick

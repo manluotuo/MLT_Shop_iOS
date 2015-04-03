@@ -6,11 +6,19 @@
 //  Copyright (c) 2013年 thinktube. All rights reserved.
 //
 
-#define UM_REGISTER @"Register"         // 注册
-#define UM_LOGIN    @"Login"            // 登陆
-#define UM_START    @"Start"            // 启动
-#define UM_PAY      @"SuccessPay"       // 支付
-#define UM_FORUM    @"forum"            // 进入论坛
+// TODO:将友盟的各种数据监控
+#define UM_REGISTER                 @"Register"         // 注册
+#define UM_LOGIN                    @"Login"            // 登陆
+#define UM_START                    @"Start"            // 启动
+#define UM_PAY                      @"SuccessPay"       // 支付
+#define UM_FORUM                    @"forum"            // 进入论坛
+#define UM_ORDER_YES                @"Orders_YES"       // 下单成功
+#define UM_ORDER_NO                 @"Orders_NO"        // 下单失败
+#define UM_SHARE                    @"share"            // 分享
+#define UM_PAY_BAD                  @"BadPay"           // 支付失败
+
+
+
 
 #define XAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define CODE_OK                     @"10000"
@@ -277,6 +285,7 @@
 #define H_8     8.0f
 #define H_10    10.0f
 #define H_12   12.0f
+#define H_13    13.0f
 #define H_14   14.0f
 #define H_15   15.0f
 #define H_16   16.0f
@@ -364,40 +373,40 @@
 #define BUTTON_SEP (TOTAL_WIDTH - BUTTON_W * 4)/5
 
 // Signal
-#define SIGNAL_WEIBO_BINDING    @"50001"
-#define SIGNAL_LEFT_MENU        @"50002"
-#define SIGNAL_WEIBO_UNBINDING  @"50003"
-#define SIGNAL_REPLY_COMMENT    @"50004"
-#define SIGNAL_UP_COMMENT       @"50005"
-#define SIGNAL_UP_VEHICLE       @"50015"
-#define SIGNAL_DOWN_VEHICLE     @"50016"
-#define SIGNAL_COLLECT_VEHICLE @"50017"
-#define SIGNAL_READ_VEHICLE     @"50018"
-#define SIGNAL_SHARE_VEHICLE    @"50019"
+#define SIGNAL_WEIBO_BINDING                @"50001"
+#define SIGNAL_LEFT_MENU                    @"50002"
+#define SIGNAL_WEIBO_UNBINDING              @"50003"
+#define SIGNAL_REPLY_COMMENT                @"50004"
+#define SIGNAL_UP_COMMENT                   @"50005"
+#define SIGNAL_UP_VEHICLE                   @"50015"
+#define SIGNAL_DOWN_VEHICLE                 @"50016"
+#define SIGNAL_COLLECT_VEHICLE              @"50017"
+#define SIGNAL_READ_VEHICLE                 @"50018"
+#define SIGNAL_SHARE_VEHICLE                @"50019"
 
-#define SIGNAL_SHARE_SUCCESS        @"50006"
-#define SIGNAL_VEHICLE_IN_COMMENT   @"50010"
-#define SIGNAL_CREATE_VEHICLE       @"50030"
-#define SIGNAL_PICK_VEHICLE_MODEL   @"50032"
-#define SIGNAL_ONLINE_VEHICLE       @"50033"
-#define SIGNAL_EDIT_VEHICLE         @"50034"
-#define SIGNAL_DELETE_VEHICLE       @"50035"
-#define SIGNAL_TAP_VEHICLE          @"50036"
-#define SIGNAL_OFFLINE_VEHICLE      @"50037"
-#define SIGNAL_OFFLINE_VEHICLE_SURE @"50137"
-#define SIGNAL_CREATE_SHARE_VEHICLE @"50138"
-#define SIGNAL_CREATE_SUBSTITUTE_VEHICLE @"50139"
+#define SIGNAL_SHARE_SUCCESS                    @"50006"
+#define SIGNAL_VEHICLE_IN_COMMENT               @"50010"
+#define SIGNAL_CREATE_VEHICLE                   @"50030"
+#define SIGNAL_PICK_VEHICLE_MODEL               @"50032"
+#define SIGNAL_ONLINE_VEHICLE                   @"50033"
+#define SIGNAL_EDIT_VEHICLE                     @"50034"
+#define SIGNAL_DELETE_VEHICLE                   @"50035"
+#define SIGNAL_TAP_VEHICLE                      @"50036"
+#define SIGNAL_OFFLINE_VEHICLE                  @"50037"
+#define SIGNAL_OFFLINE_VEHICLE_SURE             @"50137"
+#define SIGNAL_CREATE_SHARE_VEHICLE             @"50138"
+#define SIGNAL_CREATE_SUBSTITUTE_VEHICLE        @"50139"
 #define SIGNAL_CREATE_SHARE_VEHICLE_AFTER_SHARE_ACCOUNT @"50140"
 
-#define SIGNAL_SEND_VEHICLE         @"50038"
-#define SIGNAL_PICK_AREA_MODEL      @"50039"
-#define SIGNAL_PICK_DESC_MODEL      @"50040"
-#define SIGNAL_CHECK_VEHICLE_VIN    @"50041"
-#define SIGNAL_BARCODE_SCAN_VIN     @"50042"
-#define SIGNAL_BARCODE_SCAN_SUCCESS @"50043"
-#define SIGNAL_AVATAR_UPLOAD_DONE   @"50044"
-#define SIGNAL_STOP_SUBSTITUTE      @"50045"
-#define SIGNAL_STOP_SUBSTITUTE_SURE @"50145"
+#define SIGNAL_SEND_VEHICLE                     @"50038"
+#define SIGNAL_PICK_AREA_MODEL                  @"50039"
+#define SIGNAL_PICK_DESC_MODEL                  @"50040"
+#define SIGNAL_CHECK_VEHICLE_VIN                @"50041"
+#define SIGNAL_BARCODE_SCAN_VIN                 @"50042"
+#define SIGNAL_BARCODE_SCAN_SUCCESS             @"50043"
+#define SIGNAL_AVATAR_UPLOAD_DONE               @"50044"
+#define SIGNAL_STOP_SUBSTITUTE                  @"50045"
+#define SIGNAL_STOP_SUBSTITUTE_SURE             @"50145"
 #define SIGNAL_SUBSTITUTE_USER_GET_DONE @"50151"
 #define SIGNAL_VEHICLE_COUNT_UPDATE_DONE @"50152"
 
@@ -436,6 +445,9 @@
 #define CERTRAL_BTN_CLICK                   @"60004"
 
 #define SIGNAL_PAN                          @"60005"
+
+#define LOGBTN_CLICK                        @"70000"
+
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 #define NOWBUILD [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];

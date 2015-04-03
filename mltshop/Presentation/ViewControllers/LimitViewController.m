@@ -104,7 +104,7 @@
 //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 20)];
 //    [view setBackgroundColor:BGCOLOR];
     
-    return 20;
+    return 0.1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

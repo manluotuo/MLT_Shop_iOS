@@ -10,7 +10,7 @@
 #import "ScanOverlayView.h"
 #import "FAHoverButton.h"
 #import "AppRequestManager.h"
-
+#import <AVFoundation/AVFoundation.h>
 #import "HuoDongViewController.h"
 
 #import "HttpRequest.h"
@@ -54,12 +54,29 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
+- (void) showLocationAlert {
+
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"请在iPhone的“设置-隐私-相机”选项中，允许漫骆驼访问你的相机。" message:nil delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+    [alert show];
+    
+}
+
 - (void) init_camera
 {
+    
     ZBarImageScanner * scanner = [[ZBarImageScanner alloc]init];
     [scanner setSymbology:ZBAR_PARTIAL config:0 to:0];
     
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+        [self showLocationAlert];
+        return;
+    }
+    
     self.reader = [[ZBarReaderView alloc] initWithImageScanner:scanner];
+    
+    
     self.reader.torchMode = UIImagePickerControllerCameraFlashModeOff;
     self.reader.readerDelegate = self;
     
@@ -129,7 +146,7 @@
     {
         if ([s.data isEqualToString:@"http://www.manluotuo.com/huodong.php"]) {
             [HttpRequest requestWithString:s.data andTarget:self];
-//            [HttpRequest requestWithString:@"http://192.168.1.199/huodong.php" andTarget:self];
+            //            [HttpRequest requestWithString:@"http://192.168.1.199/huodong.php" andTarget:self];
         } else {
             [DataTrans showWariningTitle:T(@"扫描成功,正在打开") andCheatsheet:ICON_INFO andDuration:3.0];
             [self cancelAction];
@@ -148,7 +165,7 @@
     NSLog(@"%@", responseObject);
     
     
-
+    
     
 }
 
@@ -159,7 +176,7 @@
     
     
     NSString *str1 = [[NSString alloc] initWithData:request.respondsData encoding:NSUTF8StringEncoding];
-
+    
     NSLog(@"%@", str1);
     
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:request.respondsData options:NSJSONReadingAllowFragments error:nil];
@@ -175,7 +192,7 @@
     }
     if ([str isEqualToString:@"yes"]){
         NSString *str = [NSString stringWithFormat:@"http://www.manluotuo.com/goods-%@.html", responseObject[@"goods"]];
-//        192.168.1.199/huodong.php
+        //        192.168.1.199/huodong.php
         self.scanData = str;
         [self cancelAction];
     }

@@ -75,7 +75,7 @@
     OrderModel *theOrder1 = [[OrderModel alloc]init];
     theOrder1.type = @"await_pay";
     
-    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder1 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder1 operation:OrderOpsList andPage:0 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSUInteger count = [responseObject count];
@@ -87,7 +87,7 @@
     OrderModel *theOrder2 = [[OrderModel alloc]init];
     theOrder2.type = @"await_ship";
     
-    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder2 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder2 operation:OrderOpsList andPage:0 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSUInteger count = [responseObject count];
@@ -100,7 +100,7 @@
     OrderModel *theOrder3 = [[OrderModel alloc]init];
     theOrder3.type = @"shipped";
     
-    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder3 operation:OrderOpsList andBlock:^(id responseObject, NSError *error) {
+    [[AppRequestManager sharedManager]operateOrderWithOrderModel:theOrder3 operation:OrderOpsList andPage:0 andBlock:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
             // 集中处理所有的数据
             NSUInteger count = [responseObject count];

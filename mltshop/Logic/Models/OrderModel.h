@@ -26,6 +26,12 @@ typedef NS_ENUM(NSUInteger,OrderOps)
 @property(nonatomic, strong)NSString *desc;
 @property(nonatomic, strong)NSString *type;
 @property(nonatomic, strong)NSString *paymentType;
+/** 订单状态 */
+@property (nonatomic, strong) NSString *order_status;
+/** 配送状态 */
+@property (nonatomic, strong) NSString *shipping_status;
+/** 物流编号 */
+@property (nonatomic, strong) NSString *invoice_no;
 @property(nonatomic, strong)NSNumber *orderAmount;
 @property(nonatomic, strong)NSNumber *totalFee;
 @property(nonatomic, strong)NSMutableArray *cartList;

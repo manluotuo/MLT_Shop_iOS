@@ -397,7 +397,7 @@
                               handler:^(SIAlertView *alertView) {
                                   OrderModel *model = [[OrderModel alloc] init];
                                   model.orderId = self.order_id;
-                                  [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andBlock:^(id responseObject, NSError *error) {
+                                  [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andPage:0 andBlock:^(id responseObject, NSError *error) {
                                       [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
                                       button.enabled = NO;
                                       [button setBackgroundColor:[UIColor grayColor]];
@@ -420,7 +420,7 @@
     if (buttonIndex == 1) {
         OrderModel *model = [[OrderModel alloc] init];
         model.orderId = self.order_id;
-        [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andBlock:^(id responseObject, NSError *error) {
+        [[AppRequestManager sharedManager]operateOrderWithOrderModel:model operation:OrderOpsAffirmReceived andPage:0 andBlock:^(id responseObject, NSError *error) {
             [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
             button.userInteractionEnabled = NO;
             [button setBackgroundColor:[UIColor grayColor]];
@@ -455,7 +455,7 @@
         [self.starButton setFrame:CGRectMake(self.goodsName.x+32*i, self.goodsName.y+self.goodsName.height+5, 30, 30)];
         [self.starButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
         [self.starButton addTarget:self action:@selector(onStarButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.starButton setSelected:NO];
+        [self.starButton setSelected:YES];
         self.starButton.tag = i+H_10;
         [self.collectView addSubview:self.starButton];
     }
@@ -615,6 +615,15 @@
     [self.collectView removeFromSuperview];
 }
 
+/** textView提示文字 */
+- (void) textViewDidChange:(UITextView *)textView{
+    if ([textView.text length] == 0) {
+        [placeLable setHidden:NO];
+    }else{
+        [placeLable setHidden:YES];
+    }
+}
+
 /** 确认按钮点击事件 */
 - (void)onCertainBtnClick {
     
@@ -625,7 +634,7 @@
     [HUD showInView:self.view];
     
     NSLog(@"%@", self.goods_list[count][@"goods_id"]);
-    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": @"5", @"content": self.collectText.text};
+    NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": self.star, @"content": self.collectText.text};
     
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
         if ([responseObject isEqualToString:@"YES"]) {
@@ -645,14 +654,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/** textView提示文字 */
-- (void) textViewDidChange:(UITextView *)textView{
-    if ([textView.text length] == 0) {
-        [placeLable setHidden:NO];
-    }else{
-        [placeLable setHidden:YES];
-    }
-}
+
 
 /** 星数被点击 */
 - (void)onStarButtonClick:(UIButton *)sender {

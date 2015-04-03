@@ -190,7 +190,7 @@
 
 // ORDER function
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder
-                        operation:(NSUInteger)operation
+                         operation:(NSUInteger)operation andPage:(NSInteger)page
                          andBlock:(void (^)(id responseObject, NSError *error))block;
 
 

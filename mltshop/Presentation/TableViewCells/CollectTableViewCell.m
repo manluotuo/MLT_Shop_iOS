@@ -55,6 +55,7 @@
     return 100;
 }
 
+
 - (void)initCellView {
     
     image = [[UIImageView alloc] initWithFrame:CGRectMake(H_5, H_5, H_80, H_80)];

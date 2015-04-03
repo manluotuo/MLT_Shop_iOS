@@ -14,6 +14,7 @@
 #import "AreaPickerViewController.h"
 #import "AppDelegate.h"
 #import "Me.h"
+#import "RFExampleToolbarButton.h"
 
 @interface AddressInfoViewController ()<UITextFieldDelegate, UIScrollViewDelegate, PassValueDelegate>
 {
@@ -45,7 +46,7 @@
         self.title = T(@"收货地址");
         [self initView];
         [self initButton];
-
+        
     }
     return self;
 }
@@ -79,7 +80,7 @@
     theAddress.address = self.addressTextView.text;
     theAddress.tel = self.telTextView.text;
     theAddress.email = self.emailTextView.text;
-//    theAddress.zipcode = self.zipcodeTextView.text;
+    //    theAddress.zipcode = self.zipcodeTextView.text;
 }
 
 - (void)setNewData:(AddressModel *)address;
@@ -91,13 +92,13 @@
     self.telTextView.text = theAddress.tel;
     self.emailTextView.text = theAddress.email;
     self.addressTextView.text = theAddress.address;
-//    self.zipcodeTextView.text = theAddress.zipcode;
+    //    self.zipcodeTextView.text = theAddress.zipcode;
     if (StringHasValue(theAddress.provinceCode) &&
         StringHasValue(theAddress.cityCode) &&
         StringHasValue(theAddress.districtCode)) {
         self.locationTextView.text = [NSString stringWithFormat:@"%@ %@ %@",  theAddress.provinceName,
                                       theAddress.cityName,  theAddress.districtName];
-
+        
     }
     
     
@@ -106,7 +107,7 @@
     [self.saveButton setEnabled:NO];
     [self.defaultButton setEnabled:NO];
     [self.deleteButton setEnabled:NO];
-
+    
     if (StringHasValue(theAddress.consignee) &&
         StringHasValue(theAddress.tel) &&
         StringHasValue(theAddress.email) &&
@@ -136,6 +137,26 @@
         [self transTextViewToAddress];
         return YES;
     }else{
+        if (!StringHasValue(self.consigneeTextView.text)) {
+            [DataTrans showWariningTitle:T(@"收货人不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
+            return NO;
+        }
+        if (!StringHasValue(self.telTextView.text)) {
+            [DataTrans showWariningTitle:T(@"电话号码不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
+            return NO;
+        }
+        if (!StringHasValue(self.emailTextView.text)) {
+            [DataTrans showWariningTitle:T(@"邮箱不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
+            return NO;
+        }
+        if (!StringHasValue(self.addressTextView.text) ||
+            !StringHasValue(self.locationTextView.text) ||
+            !StringHasValue(theAddress.provinceCode) ||
+            !StringHasValue(theAddress.cityCode) ||
+            !StringHasValue(theAddress.districtCode)) {
+            [DataTrans showWariningTitle:T(@"地址不能为空") andCheatsheet:ICON_TIMES andDuration:1.0f];
+            return NO;
+        }
         return NO;
     }
 }
@@ -153,7 +174,7 @@
                 [user synchronize];
                 if ([user valueForKey:@"OK"]) {
                     [self dismissViewControllerAnimated:YES completion:^{
-                    [user setValue:@"YES" forKey:@"OK"];
+                        [user setValue:@"YES" forKey:@"OK"];
                         [user synchronize];
                     }];
                 }
@@ -168,12 +189,12 @@
                 [user synchronize];
                 if ([user valueForKey:@"OK"]) {
                     [self dismissViewControllerAnimated:YES completion:^{
-                    [user setValue:@"YES" forKey:@"OK"];
+                        [user setValue:@"YES" forKey:@"OK"];
                         [user synchronize];
                     }];
                 }
             }];
-
+            
         }
     }
 }
@@ -212,7 +233,7 @@
             [DataTrans showWariningTitle:T(@"默认收货地址设置成功") andCheatsheet:ICON_CHECK];
             [self.navigationController popViewControllerAnimated:YES];
             [self.passDelegate passSignalValue:SIGNAL_ADDRESS_OPERATE_DONE andData:nil];
-
+            
         }];
     }
 }
@@ -286,20 +307,20 @@
     self.addressTextView.tag = ADDRESS_TAG;
     
     // zipcodeTextView
-//    self.zipcodeTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*5, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
-//    self.zipcodeTextView.delegate = self;
-//    [self.zipcodeTextView setPlaceholder:T(@"邮编")];
-//    self.zipcodeTextView.returnKeyType = UIReturnKeyNext;
-//    self.zipcodeTextView.tag = ZIPCODE_TAG;
+    //    self.zipcodeTextView = [[KKTextField alloc]initWithFrame:CGRectMake(LEFT_PADDING*2, OFFSET_Y+H_50*5, TOTAL_WIDTH-LEFT_PADDING*4 , H_50)];
+    //    self.zipcodeTextView.delegate = self;
+    //    [self.zipcodeTextView setPlaceholder:T(@"邮编")];
+    //    self.zipcodeTextView.returnKeyType = UIReturnKeyNext;
+    //    self.zipcodeTextView.tag = ZIPCODE_TAG;
     
     
     self.consigneeTextView.textIndent = TEXT_INDENT;
     self.telTextView.textIndent = TEXT_INDENT;
     self.emailTextView.textIndent = TEXT_INDENT;
-//    self.zipcodeTextView.textIndent = TEXT_INDENT;
+    //    self.zipcodeTextView.textIndent = TEXT_INDENT;
     self.locationTextView.textIndent = TEXT_INDENT;
     self.addressTextView.textIndent = TEXT_INDENT;
-
+    
     
     // change corner
     self.consigneeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.consigneeTextView onTopLeft:YES topRight:YES bottomLeft:NO bottomRight:NO radius:10.0f];
@@ -307,8 +328,20 @@
     self.emailTextView = (KKTextField *)[DataTrans roundCornersOnView:self.emailTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     self.locationTextView = (KKTextField *)[DataTrans roundCornersOnView:self.locationTextView onTopLeft:YES topRight:YES bottomLeft:YES bottomRight:YES radius:0.0f];
     self.addressTextView = (KKTextField *)[DataTrans roundCornersOnView:self.addressTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
-//    self.zipcodeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.zipcodeTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
-
+    //    self.zipcodeTextView = (KKTextField *)[DataTrans roundCornersOnView:self.zipcodeTextView onTopLeft:NO topRight:NO bottomLeft:YES bottomRight:YES radius:10.0f];
+    
+    /** 给键盘增加完成按钮 */
+//    RFExampleToolbarButton *exampleButton = [RFExampleToolbarButton new];
+//    [RFKeyboardToolbar addToTextField:self.consigneeTextView withButtons:@[exampleButton]];
+//    RFExampleToolbarButton *exampleButton1 = [RFExampleToolbarButton new];
+//    [RFKeyboardToolbar addToTextField:self.telTextView withButtons:@[exampleButton1]];
+//    RFExampleToolbarButton *exampleButton2 = [RFExampleToolbarButton new];
+//    [RFKeyboardToolbar addToTextField:self.emailTextView withButtons:@[exampleButton2]];
+    RFExampleToolbarButton *exampleButton3 = [RFExampleToolbarButton new];
+    [RFKeyboardToolbar addToTextField:self.addressTextView withButtons:@[exampleButton3]];
+    
+    
+    
     self.loginPanel = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_HEIGHT)];
     [self.loginPanel setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT)];
     self.loginPanel.delegate = self;
@@ -316,7 +349,7 @@
     [self.loginPanel addSubview:self.consigneeTextView];
     [self.loginPanel addSubview:self.telTextView];
     [self.loginPanel addSubview:self.emailTextView];
-//    [self.loginPanel addSubview:self.zipcodeTextView];
+    //    [self.loginPanel addSubview:self.zipcodeTextView];
     [self.loginPanel addSubview:self.locationTextView];
     [self.loginPanel addSubview:self.addressTextView];
     
@@ -369,7 +402,7 @@
     [self.consigneeTextView resignFirstResponder];
     [self.telTextView resignFirstResponder];
     [self.emailTextView resignFirstResponder];
-//    [self.zipcodeTextView resignFirstResponder];
+    //    [self.zipcodeTextView resignFirstResponder];
     [self.locationTextView resignFirstResponder];
     [self.addressTextView resignFirstResponder];
     
@@ -384,13 +417,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

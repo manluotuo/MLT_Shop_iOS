@@ -37,6 +37,7 @@
         _cover = [[PhotoModel alloc]initWithDict:[dict objectForKey:@"img"]];
         
         _gallery = [[NSMutableArray alloc]init];
+        
         if ([[dict objectForKey:@"pictures"] isKindOfClass:[NSArray class]]) {
             for (NSDictionary *pic in [dict objectForKey:@"pictures"]) {
                 [_gallery addObject:[[PhotoModel alloc]initWithDict:pic]];

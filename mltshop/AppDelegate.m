@@ -61,13 +61,13 @@
 @synthesize registerViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//     Override point for customization after application launch.
-//    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
-//    NSString *nowVersion = NOWVERSION;
-//    NSString *nowBuild = NOWBUILD;
-//    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
-
-//    [HYBJPushHelper setupWithOptions:launchOptions];
+    //     Override point for customization after application launch.
+    //    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
+    //    NSString *nowVersion = NOWVERSION;
+    //    NSString *nowBuild = NOWBUILD;
+    //    [MobClick setAppVersion:[NSString stringWithFormat:@"V_%@#%@",nowVersion,nowBuild]];
+    
+    //    [HYBJPushHelper setupWithOptions:launchOptions];
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setValue:@"NO" forKey:@"HELLO"];
@@ -81,8 +81,8 @@
     
     //TODO: 发布时注释掉这行
     // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
-    [MobClick setLogEnabled:YES];
-
+    // [MobClick setLogEnabled:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
     
     [MobClick event:UM_START];
@@ -94,30 +94,30 @@
     
     /** 调用极光推送 */
     [self initJPush:launchOptions];
-//    /** 推送 */
-//#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-//        //可以添加自定义categories
-//        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-//                                                       UIUserNotificationTypeSound |
-//                                                       UIUserNotificationTypeAlert)
-//                                           categories:nil];
-//    } else {
-//        //categories 必须为nil
-//        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-//                                                       UIRemoteNotificationTypeSound |
-//                                                       UIRemoteNotificationTypeAlert)
-//                                           categories:nil];
-//    }
-//#else
-//    //categories 必须为nil
-//    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-//                                                   UIRemoteNotificationTypeSound |
-//                                                   UIRemoteNotificationTypeAlert)
-//                                       categories:nil];
-//#endif
-//    // Required
-//    [APService setupWithOption:launchOptions];
+    //    /** 推送 */
+    //#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    //    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+    //        //可以添加自定义categories
+    //        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+    //                                                       UIUserNotificationTypeSound |
+    //                                                       UIUserNotificationTypeAlert)
+    //                                           categories:nil];
+    //    } else {
+    //        //categories 必须为nil
+    //        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+    //                                                       UIRemoteNotificationTypeSound |
+    //                                                       UIRemoteNotificationTypeAlert)
+    //                                           categories:nil];
+    //    }
+    //#else
+    //    //categories 必须为nil
+    //    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+    //                                                   UIRemoteNotificationTypeSound |
+    //                                                   UIRemoteNotificationTypeAlert)
+    //                                       categories:nil];
+    //#endif
+    //    // Required
+    //    [APService setupWithOption:launchOptions];
     
     
     
@@ -166,15 +166,15 @@
     [self.drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
-//    [self checkUserLogin];
+    //    [self checkUserLogin];
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     [[UINavigationBar appearance] setTintColor:WHITECOLOR];
     
-//    if (!OSVersionIsAtLeastiOS7()) {
-//        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
-//    }
+    //    if (!OSVersionIsAtLeastiOS7()) {
+    //        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+    //    }
     
     [self skipIntroView];
     
@@ -217,7 +217,7 @@
     [APService setupWithOption:launchOptions];
     
     
-    [APService setTags:[NSSet setWithObjects:@"tag1", @"tag2", @"tag3", nil] alias:@"小新" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    [APService setTags:[NSSet setWithObjects:@"r", nil] alias:@"RR" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
     
 }
 
@@ -264,8 +264,8 @@
             [self showLoginView];
         }else{
             [self loginWithSavedUserInfo];
-//            NSLog(@"用户已经登录");
-//            [self showDrawerView];
+            //            NSLog(@"用户已经登录");
+            //            [self showDrawerView];
         }
     }
 }
@@ -273,10 +273,10 @@
 // 利用现有的用户名密码登陆
 - (void)loginWithSavedUserInfo
 {
-//    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
-//    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
-//    HUD.text = T(@"登录中...");
-//    [HUD showInView:self.window.rootViewController.view];
+    //    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    //    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+    //    HUD.text = T(@"登录中...");
+    //    [HUD showInView:self.window.rootViewController.view];
     
     // 缺一不可
     if (!StringHasValue(self.me.username) ||  !StringHasValue(self.me.password)) {
@@ -286,12 +286,12 @@
     
     
     [self showDrawerView];
-
     
-
+    
+    
     [[AppRequestManager sharedManager] signInWithUsername:self.me.username password:self.me.password andBlock:^(id responseObject, NSError *error) {
         
-//        [HUD removeFromSuperview];
+        //        [HUD removeFromSuperview];
         
         if (responseObject != nil) {
             
@@ -308,7 +308,7 @@
         }
         
     }];
-
+    
 }
 
 - (void)showIntroductionView
@@ -374,25 +374,25 @@
         [[AlipaySDK defaultService]
          processOrderWithPaymentResult:url
          standbyCallback:^(NSDictionary *resultDic) {
-             NSLog(@"result = %@", resultDic);
-             
+             //             NSLog(@"result = %@", resultDic);
              // 付款成功查看订单
              if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
                  [MobClick event:UM_PAY];
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"tongzhi" object:nil userInfo:nil];
-                 
-//                 [self showDrawerView];
+                 //                 [self showDrawerView];
                  // FIXME: 清掉所有的app  如果在 详情页点过去 profile页面会显示不出来
-//                 ProfileViewController *VC = [[ProfileViewController alloc]init];
-//                 [self.drawerController setCenterViewController:VC];
+                 //                 ProfileViewController *VC = [[ProfileViewController alloc]init];
+                 //                 [self.drawerController setCenterViewController:VC];
              }
-             
+             if ([resultDic[@"resultStatus"] isEqualToString:@"4000"]) {
+                 [MobClick event:UM_PAY_BAD];
+             }
              if([resultDic[@"resultStatus"] isEqualToString:@"6001"]){
                  [DataTrans showWariningTitle:T(@"您取消了支付") andCheatsheet:ICON_TIMES];
                  
              }
              
-
+             
          }];
     }
     
@@ -437,16 +437,11 @@
 
 /** 推送 */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    [HYBJPushHelper registerDeviceToken:deviceToken];
+    //    [HYBJPushHelper registerDeviceToken:deviceToken];
     [APService registerDeviceToken:deviceToken];
     return;
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-//    [HYBJPushHelper handleRemoteNotification:userInfo completion:nil];
-    [APService handleRemoteNotification:userInfo];
-    return;
-}
 //- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
 //    [HYBJPushHelper showLocalNotificationAtFront:notification];
 //    return;
@@ -461,36 +456,69 @@
     return;
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
-    // IOS 7 Support Required
-    [APService handleRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
-}
 
 
 #pragma mark - 极光推送通知信息
 - (void)networkDidSetup:(NSNotification *)notification {
-
+    
     NSLog(@"已连接");
 }
 
 - (void)networkDidClose:(NSNotification *)notification {
-
+    
     NSLog(@"未连接。。。");
 }
 
 - (void)networkDidRegister:(NSNotification *)notification {
-
+    
     NSLog(@"已注册");
 }
 
 - (void)networkDidLogin:(NSNotification *)notification {
-
+    
     NSLog(@"已登录");
-
+    
 }
 
+
+
+/** 获取附加字段 */
+- (void)setJPushAvtion:(NSDictionary *)userInfo {
+    
+    //url 网页地址
+    //goods  商品id
+    //action 我们自己定
+    //app
+    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
+    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
+    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
+    
+    // 取得自定义字段内容
+    NSString *customizeField1 = [userInfo valueForKey:@"url"]; //自定义参数，key是自己定义的
+    NSLog(@"content = [%@], badge = [%d], sound = [%@], customize field  = [%@]",content,badge,sound,customizeField1);
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // 取得 APNs 标准信息内容
+    [self setJPushAvtion:userInfo];
+    // Required
+    [APService handleRemoteNotification:userInfo];
+}
+
+//iOS 7 Remote Notification
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:  (NSDictionary *)userInfo fetchCompletionHandler:(void (^)   (UIBackgroundFetchResult))completionHandler {
+    // 取得 APNs 标准信息内容
+    [self setJPushAvtion:userInfo];
+    // Required
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNoData);
+}
+
+
+
+/** 自定义消息 */
 - (void)networkDidReceiveMessage:(NSNotification *)notification {
     NSDictionary * userInfo = [notification userInfo];
     NSString *extras = [userInfo valueForKey:@"extras"];

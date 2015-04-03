@@ -118,6 +118,7 @@ enum WXAPISupport {
  * @see onResp
  */
 @interface SendAuthResp : BaseResp
+
 /** todo */
 @property (nonatomic, retain) NSString* code;
 /** 第三方程序发送时用来标识其请求的唯一性的标志，由第三方程序调用sendReq时传入，由微信终端回传

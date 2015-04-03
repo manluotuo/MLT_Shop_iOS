@@ -325,7 +325,7 @@ static dispatch_once_t onceToken;
     
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        //        NSLog(@"!!!!!!!!!!!\n%@", responseObject);
+        NSLog(@"!!!!!!!!!!!\n%@", responseObject);
         if ([DataTrans isCorrectResponseObject:responseObject]) {
             //            NSLog(@"################\n%@", responseObject);
             if (block) {
@@ -698,7 +698,7 @@ static dispatch_once_t onceToken;
  *  @param block     <#block description#>
  */
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder
-                         operation:(NSUInteger)operation
+                         operation:(NSUInteger)operation andPage:(NSInteger)page
                           andBlock:(void (^)(id responseObject, NSError *error))block
 {
     NSString *postURL = @"";
@@ -711,7 +711,7 @@ static dispatch_once_t onceToken;
     switch (operation) {
         case OrderOpsList:
             postURL = API_ORDER_LIST_PATH;
-            baseDict[@"pagination"]= @{@"page":@"1", @"count":@"100"};
+            baseDict[@"pagination"]= @{@"page":[NSString stringWithFormat:@"%d", page], @"count":@"10"};
             NSLog(@"%@", theOrder.type);
             baseDict[@"type"] = theOrder.type;
             break;
@@ -737,6 +737,8 @@ static dispatch_once_t onceToken;
     [[AppRequestManager sharedManager]POST:postURL parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
+            NSNumber *i = responseObject[@"paginated"][@"total"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Page" object:i userInfo:nil];
             if (block) {
                 block(responseObject[@"data"] , nil);
             }

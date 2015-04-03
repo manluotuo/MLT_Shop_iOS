@@ -235,14 +235,19 @@
         
         [HUD removeFromSuperview];
         if (responseObject != nil) {
+            
+            /** 友盟 —— 生成订单 */
+            [MobClick event:UM_ORDER_YES];
             OrderModel *theOrder = [[OrderModel alloc]initWithDict:responseObject];
             [DataTrans showWariningTitle:T(@"订单已生成") andCheatsheet:ICON_CHECK];
             
             [SGActionView showSheetWithTitle:@"支付流程" itemTitles:@[payType, @"再逛逛"] selectedIndex:100 selectedHandle:^(NSInteger index) {
                 if(index == 0) {
+                    // TODO:增加支付方式统计
                     if ([payType isEqualToString:T(@"支付宝付款")]) {
                         [self doAlipayAction:theOrder];
                     } else {
+                        
                         NSLog(@"调用微信支付");
                         [self doWeiXinAction];
                     }
@@ -255,6 +260,8 @@
             }];
         }
         if (error != nil) {
+            /** 友盟 - 下单失败 */
+            [MobClick event:UM_ORDER_NO];
             [DataTrans showWariningTitle:T(@"订单生成失败") andCheatsheet:ICON_TIMES];
         }
         
@@ -376,7 +383,7 @@
     [self.infoView addSubview:bonusLabel];
     [self.infoView addSubview:summaryLabel];
     [self.infoView addSubview:doneButton];
-    [self.infoView addSubview:integralText];
+//    [self.infoView addSubview:integralText];
 }
 
 #pragma mark -

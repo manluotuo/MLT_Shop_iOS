@@ -49,7 +49,7 @@
     
     [self initDataSource];
     [self setupAddressData];
-//    [self setUpImageDownButton:0];
+    //    [self setUpImageDownButton:0];
 }
 
 - (void)setupAddressData {
@@ -98,7 +98,7 @@
     
     UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 1)];
     lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
-
+    
     UILabel *totalShopPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20, H_200, H_24)];
     totalShopPrice.textColor = REDCOLOR;
     UILabel *totalMarketPrice = [[UILabel alloc]initWithFrame:CGRectMake(H_60, H_20+H_22, H_200, H_50)];
@@ -108,7 +108,7 @@
     
     totalShopPrice.font = CUSTOMFONT;
     totalMarketPrice.font = LITTLECUSTOMFONT;
-
+    
     NSNumber *t1 = total[@"total_shop_price"];
     NSNumber *t2 = total[@"total_market_price"];
     NSNumber *t3 = total[@"saving"];
@@ -130,36 +130,58 @@
     [self.footerView addSubview:self.flowButton];
     
     self.tableView.tableFooterView = self.footerView;
-
+    
 }
 
 
 - (void)checkOrderAction
 {
     if ([self.dataArray count] > 0) {
-        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-        
-        if ([[user valueForKey:@"address"] isEqualToString:@"YES"]) {
-        CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
-        [VC setupDataSource];
-            
-            [self.navigationController pushViewController:VC animated:YES];
-            
-        } else {
-            [DataTrans showWariningTitle:T(@"请您先填写地址") andCheatsheet:ICON_INFO andDuration:1.0f];
-            AddressListViewController *address = [[AddressListViewController alloc] init];
-            ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:address];
-            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setValue:@"NO" forKey:@"OK"];
-            [user synchronize];
-            [self presentViewController:nav animated:YES completion:nil];
-        }
-    }else{
-        // 去首页逛逛
-        // 发通知
+        [[AppRequestManager sharedManager]getAddressListWithBlock:^(id responseObject, NSError *error) {
+            if (responseObject != nil) {
+                NSUInteger count = [responseObject count];
+                if (count == 0) {
+                    [DataTrans showWariningTitle:T(@"请您先填写地址") andCheatsheet:ICON_INFO andDuration:1.0f];
+                    AddressListViewController *address = [[AddressListViewController alloc] init];
+                    ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:address];
+                    [self presentViewController:nav animated:NO completion:nil];
+                    return;
+                }
+                for (int i = 0 ; i < count; i++) {
+                   NSInteger count = [responseObject[i][@"default_address"] integerValue];
+                    if (count == 1) {
+                        CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
+                        [VC setupDataSource];
+                        [self.navigationController pushViewController:VC animated:YES];
+                        return;
+                    }
+                }
+                [DataTrans showWariningTitle:T(@"由于您没有默认收货地址\n请您先设置默认收货地址") andCheatsheet:ICON_INFO andDuration:1.0f];
+                AddressListViewController *address = [[AddressListViewController alloc] init];
+                ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:address];
+                [self presentViewController:nav animated:YES completion:nil];
+            }
+        }];
+    } else {
         [self gotoIndexAction];
-        
     }
+//    if ([self.dataArray count] > 0) {
+//        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//        
+//        if ([[user valueForKey:@"address"] isEqualToString:@"YES"]) {
+//            CheckOrderViewController *VC = [[CheckOrderViewController alloc]initWithNibName:nil bundle:nil];
+//            [VC setupDataSource];
+//            
+//            [self.navigationController pushViewController:VC animated:YES];
+//            
+//        } else {
+//        }
+//    }else{
+//        // 去首页逛逛
+//        // 发通知
+//        [self gotoIndexAction];
+//        
+//    }
 }
 
 -(void)gotoIndexAction
@@ -198,21 +220,21 @@
                 NSLog(@"start %ld",(long)self.start);
                 
                 [self.flowButton setTitle:T(@"去结算") forState:UIControlStateNormal];
-
+                
             }else{
                 [DataTrans showWariningTitle:T(@"购物车空空如也")
                                andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle]
                                  andDuration:1.0f];
                 [self showSetupDataSource:self.dataArray andError:nil];
                 [self.flowButton setTitle:T(@"去首页逛逛") forState:UIControlStateNormal];
-
+                
             }
             
         }
         if (error != nil) {
             [DataTrans showWariningTitle:T(@"获取地址列表有误") andCheatsheet:ICON_TIMES andDuration:1.5f];
         }
-
+        
     }];
 }
 
@@ -255,8 +277,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    修改数量
-//    sgaction
+    //    修改数量
+    //    sgaction
 }
 
 //- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,7 +294,7 @@
 //                [self.dataArray removeObjectAtIndex:indexPath.row];
 //                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 //            }
-//            
+//
 //        }];
 //    }
 //}
@@ -287,13 +309,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

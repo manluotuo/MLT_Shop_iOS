@@ -40,25 +40,25 @@
 /** 初始化控件 */
 - (void)initCellView {
     
-    self.bonus_name = [[UILabel alloc] initWithFrame:CGRectMake(H_15, H_15, WIDTH-H_10*2, H_10)];
+    self.bonus_name = [[UILabel alloc] initWithFrame:CGRectMake(H_15, H_10, WIDTH-H_10*2, H_15)];
     self.bonus_name.font = FONT_16;
     [self addSubview:self.bonus_name];
-    self.bonusMoney = [[UILabel alloc] initWithFrame:CGRectMake(H_15, self.bonus_name.y+self.bonus_name.height+H_10, self.bonus_name.width, H_10)];
+    self.bonusMoney = [[UILabel alloc] initWithFrame:CGRectMake(H_15, self.bonus_name.y+self.bonus_name.height+H_10, self.bonus_name.width, H_13)];
     self.bonusMoney.font = FONT_14;
     self.bonusMoney.textColor = GREENCOLOR;
     [self addSubview:self.bonusMoney];
     
-    self.startTime = [[UILabel alloc] initWithFrame:CGRectMake(H_15, self.bonusMoney.y+self.bonusMoney.height+H_10, WIDTH-H_10*2, H_10)];
+    self.startTime = [[UILabel alloc] initWithFrame:CGRectMake(H_15, self.bonusMoney.y+self.bonusMoney.height+H_10, WIDTH-H_10*2, H_13)];
     self.startTime.font = FONT_14;
     self.startTime.textColor = [UIColor grayColor];
     [self addSubview:self.startTime];
     
-    self.endTime = [[UILabel alloc] initWithFrame:CGRectMake(H_15, self.startTime.y+self.startTime.height+H_10, WIDTH-H_10*2, H_10)];
+    self.endTime = [[UILabel alloc] initWithFrame:CGRectMake(H_15, self.startTime.y+self.startTime.height+H_10, WIDTH-H_10*2, H_13)];
     self.endTime.font = FONT_14;
     self.endTime.textColor = [UIColor grayColor];
     [self addSubview:self.endTime];
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(H_10, 95, WIDTH-H_10*2, 1)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(H_10, 100, WIDTH-H_10*2, 1)];
     line.backgroundColor = [UIColor grayColor];
     line.alpha = 0.3;
     [self addSubview:line];

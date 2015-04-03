@@ -19,6 +19,7 @@
 #import "WebViewController.h"
 #import "CartListViewController.h"
 #import "ShareHelper.h"
+#import "SVPullToRefresh.h"
 
 #import "CommentTableViewCell.h"
 #import "AppDelegate.h"
@@ -79,7 +80,10 @@
 
 @end
 
-@implementation GoodsDetailViewController
+@implementation GoodsDetailViewController {
+    BOOL state;
+    BOOL dataState;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,12 +98,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self buildFixedView];
+    state = NO;
+
     self.commentData = [[NSMutableArray alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO_INDEX_PAGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO object:nil];
     
 }
+
+
 
 - (void)gotoIndexAction
 {
@@ -127,9 +135,13 @@
         
         NSMutableArray *titleArray = [[NSMutableArray alloc]init];
         if (XAppDelegate.me.userId) {
-            /**
-             *  如果只有一个 那么默认选第一个
-             */
+            
+            if ([self.theGoods.goodsInvertory integerValue] == 0) {
+                [DataTrans showWariningTitle:T(@"该商品库存不足\n无法添加购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
+            } else {
+                /**
+                 *  如果只有一个 那么默认选第一个
+                 */
             if ([self.theGoods.spec.values count] == 1) {
                 SpecItemModel *item = [self.theGoods.spec.values firstObject];
                 CartModel *newCartItem = [[CartModel alloc]init];
@@ -165,6 +177,7 @@
                 newCartItem.goodsAttrId = @"";
                 
                 [self addToCart:newCartItem];
+            }
             }
         } else {
             [DataTrans showWariningTitle:T(@"您还没有登陆\n无法添加购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
@@ -229,7 +242,7 @@
     
     [self initButtons];
     
-//     左滑退出
+    //     左滑退出
     UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(backAction)];
     [gestureRec setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -243,9 +256,9 @@
 //            [self backAction];
 //        }
 //    }
-//    
+//
 //    if ([scrollView isEqual:self.fixedView]) {
-//        
+//
 //        if (self.fixedView.contentOffset.y < -H_80) {
 //            [self backAction];
 //        }
@@ -592,8 +605,8 @@
     
     [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
-            
-            NSLog(@"%@", responseObject);
+            __weak GoodsDetailViewController *weakSelf = self;
+            [weakSelf.fixedView.pullToRefreshView stopAnimating];
             self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];
             [self refreshViewWithData];
         }
@@ -606,7 +619,6 @@
 - (void)refreshCartCount
 {
     if (XAppDelegate.me.userId == nil) {
-        
         self.cartCountLabel.text = @"0";
         
     } else {
@@ -634,19 +646,19 @@
 - (void)refreshViewWithData
 {
     // refresh galleryView
-    CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_WIDTH);
-    for (int i = 0 ; i < [self.theGoods.gallery count]; i++) {
-        // last one
-        UIImageView *page = [[UIImageView alloc]
-                             initWithFrame:scrollFrame];
-        
-        [page setContentMode:UIViewContentModeScaleAspectFill];
-        
-        PhotoModel *onePhoto = self.theGoods.gallery[i];
-        [page sd_setImageWithURL:[NSURL URLWithString:onePhoto.thumb]];
-        [self.galleryView addContentSubview:page];
-    }
     
+    CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_WIDTH);
+    if (state == NO) {
+        for (int i = 0 ; i < [self.theGoods.gallery count]; i++) {
+            // last one
+            UIImageView *page = [[UIImageView alloc]
+                                 initWithFrame:scrollFrame];
+            [page setContentMode:UIViewContentModeScaleAspectFill];
+            PhotoModel *onePhoto = self.theGoods.gallery[i];
+            [page sd_setImageWithURL:[NSURL URLWithString:onePhoto.thumb]];
+            [self.galleryView addContentSubview:page];
+        }
+    }
     self.titleLabel.text = self.theGoods.goodsName;
     self.briefLabel.text = self.theGoods.goodsBrief;
     
@@ -665,12 +677,15 @@
     
     self.marketPriceLabel.attributedText = marketPriceString;
     
+    
     self.inventoryLabel.text = STR_INT([self.theGoods.goodsInvertory integerValue]);
     [self.brandButton setTitle:self.theGoods.brandName forState:UIControlStateNormal];
     
-    [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
-    if ([self.theGoods.collected isEqualToNumber:INT(1)]) {
-        [self.favButton setSelected:YES];
+    if (state == NO) {
+        [self.htmlView loadHTMLString:self.theGoods.goodsDesc baseURL:nil];
+        if ([self.theGoods.collected isEqualToNumber:INT(1)]) {
+            [self.favButton setSelected:YES];
+        }
     }
 }
 
@@ -680,6 +695,11 @@
         htmlHeight = self.htmlView.scrollView.contentSize.height;
         self.htmlView.height = htmlHeight;
         fixedHeight += htmlHeight;
+        __weak GoodsDetailViewController *weakSelf = self;
+        [self.fixedView addPullToRefreshWithActionHandler:^{
+            state = YES;
+            [weakSelf setGoodsData:self.theGoods];
+        }];
         [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
     }
 }
@@ -782,7 +802,7 @@
     if (self.commentBtn.selected == YES) {
         return;
     }
-
+    
     fixedHeight = H_550;
     if (self.htmlView != nil) {
         [self.htmlView removeFromSuperview];
@@ -797,7 +817,7 @@
                 
                 [self.commentData addObject:model];
             }
-//            [self initNotCollectView];
+            //            [self initNotCollectView];
             self.fixedView.contentSize = CGSizeMake(WIDTH, TOTAL_HEIGHT+250);
             [self.commentView reloadData];
         }];

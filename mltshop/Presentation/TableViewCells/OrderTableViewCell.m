@@ -38,7 +38,7 @@
     [line setBackgroundColor:GRAYLELIGHTCOLOR];
     [self addSubview:line];
     
-    idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_240, H_20)];
+    idLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_5, H_250, H_20)];
     idLabel.numberOfLines = 0;
     idLabel.textColor = GRAYCOLOR;
     idLabel.font = FONT_12;
@@ -75,7 +75,22 @@
 {
     self.data = _newData;
     
-
+//    /** 已付款 */
+//    if ([self.data.paymentType isEqualToString:@"PAYED"]) {
+//        idLabel.text = T(@"已付款");
+//    }
+//    /** 未付款 */
+//    if ([self.data.paymentType isEqualToString:@"UNPAYED"]) {
+//        idLabel.text = T(@"未付款");
+//    }
+//    /** 已取消，未付款 */
+//    if ([self.data.order_status integerValue] == 2 && [self.data.paymentType isEqualToString:@"UNPAYED"]) {
+//        idLabel.text = T(@"已取消");
+//    }
+//    /** 已确认，已收货，已付款 */
+//    if ([self.data.order_status integerValue] == 1 && [self.data.paymentType isEqualToString:@"PAYED"] && [self.data.shipping_status integerValue] == 2) {
+//        idLabel.text = T(@"已完成");
+//    }
     
     idLabel.text = [NSString stringWithFormat:@"编号: %@",self.data.orderSn];
     amountLabel.text = [NSString stringWithFormat:@"总计: %@元",

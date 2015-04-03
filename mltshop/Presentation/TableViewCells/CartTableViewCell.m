@@ -60,8 +60,11 @@
     changeCountBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
     changeCountBtn.titleLabel.font = FONT_12;
     [changeCountBtn setTitle:T(@"修改数量") forState:UIControlStateNormal];
-    [changeCountBtn setFrame:CGRectMake(H_220, H_40, H_80, H_20)];
+    [changeCountBtn setFrame:CGRectMake(H_220, H_45, H_80, H_25)];
     [changeCountBtn addTarget:self action:@selector(changeCountAction) forControlEvents:UIControlEventTouchUpInside];
+    [changeCountBtn.layer setBorderColor:ORANGECOLOR.CGColor];
+    [changeCountBtn.layer setBorderWidth:1.0f];
+    [changeCountBtn.layer setCornerRadius:5.0f];
     [changeCountBtn setTitleColor:ORANGE_DARK_COLOR andStyle:KKFlatButtonStyleLight];
     
     self.imageRight = RIGHT_FRAME;

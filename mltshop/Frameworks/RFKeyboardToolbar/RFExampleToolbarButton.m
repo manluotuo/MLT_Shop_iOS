@@ -16,6 +16,7 @@
 - (void)buttonTarget {
     
     NSLog(@"按钮被点击");
+    [[RFToolbarButton textField] resignFirstResponder];
     [[RFToolbarButton textView] resignFirstResponder];
 }
 

@@ -9,6 +9,36 @@
 #import "OrderFootTableViewCell.h"
 #import "AppRequestManager.h"
 
+#define OS_UNCONFIRMED            0 // 未确认
+
+#define OS_CONFIRMED              1 // 已确认
+
+#define OS_CANCELED               2 // 已取消
+
+#define OS_INVALID                3 // 无效
+
+#define OS_RETURNED               4 // 退货
+
+#define OS_SPLITED                5 // 已分单
+
+#define OS_SPLITING_PART          6 // 部分分单
+
+/* 配送状态 */
+
+#define SS_UNSHIPPED              0 // 未发货
+
+#define SS_SHIPPED                1 // 已发货
+
+#define SS_RECEIVED               2 // 已收货
+
+#define SS_PREPARING              3 // 备货中
+
+#define SS_SHIPPED_PART           4 // 已发货(部分商品)
+
+#define SS_SHIPPED_ING            5 // 发货中(处理分单)
+
+#define OS_SHIPPED_PART           6 // 已发货(部分商品)
+
 @interface OrderFootTableViewCell()<UIAlertViewDelegate>
 
 @property(nonatomic, strong)OrderModel *data;
@@ -19,10 +49,15 @@
 @property (nonatomic, strong) UIButton *logBtn;
 /** 评论按钮 */
 @property (nonatomic, strong) UIButton *commentBtn;
-
+/** 已取消 */
+@property (nonatomic, strong) UILabel *lable;
 @end
 
-@implementation OrderFootTableViewCell
+@implementation OrderFootTableViewCell {
+    UIView *backgrounkView;
+    UIView *line;
+    NSInteger count;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -37,12 +72,12 @@
 
 - (void)initCellView {
     self.backgroundColor = WHITECOLOR;
-    UIView *backgrounkView = [[UIView alloc] initWithFrame:CGRectMake(0, H_45, WIDTH, H_20)];
+    backgrounkView = [[UIView alloc] initWithFrame:CGRectMake(0, H_45, WIDTH, H_20)];
     [backgrounkView setBackgroundColor:BGCOLOR];
     [self addSubview:backgrounkView];
     
     self.payBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.payBtn setFrame:CGRectMake(WIDTH-H_90, H_5+1, H_70, H_32)];
+    [self.payBtn setFrame:CGRectMake(WIDTH-H_90, H_8, H_70, H_28)];
     [self.payBtn setTitle:T(@"立即付款") forState:UIControlStateNormal];
     [self.payBtn setTitle:T(@"确认收货") forState:UIControlStateSelected];
     [self.payBtn addTarget:self action:@selector(onPayBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -56,7 +91,7 @@
     
     
     self.logBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.logBtn setFrame:CGRectMake(WIDTH-self.payBtn.width-H_20 - H_80, H_5+1, H_70, H_32)];
+    [self.logBtn setFrame:CGRectMake(WIDTH-self.payBtn.width-H_20 - H_80, self.payBtn.y, H_70, self.payBtn.height)];
     [self.logBtn setTitle:T(@"查看物流") forState:UIControlStateNormal];
     [self.logBtn setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
     [self.logBtn.layer setBorderColor:GRAYCOLOR.CGColor];
@@ -67,7 +102,7 @@
     [self.logBtn.titleLabel setFont:FONT_14];
     
     self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.commentBtn setFrame:CGRectMake(WIDTH-H_90, H_5+1, H_70, H_32)];
+    [self.commentBtn setFrame:CGRectMake(WIDTH-H_90, self.payBtn.y, H_70, self.payBtn.height)];
 
     [self.commentBtn setTitle:T(@"评价订单") forState:UIControlStateNormal];
     [self.commentBtn.titleLabel setFont:FONT_14];
@@ -76,13 +111,23 @@
     [self.commentBtn.layer setBorderWidth:1.0f];
     [self.commentBtn.layer setCornerRadius:5.0f];
     [self.commentBtn addTarget:self action:@selector(onCommentBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH, 0.6)];
+    
+    self.lable = [[UILabel alloc] initWithFrame:CGRectMake(self.commentBtn.x, self.commentBtn.y, self.commentBtn.width, self.commentBtn.height)];
+    [self.lable setFont:FONT_14];
+    [self.lable setTextColor:REDCOLOR];
+    self.lable.textAlignment = UIBaselineAdjustmentAlignCenters;
+//    [self.lable.layer setBorderColor:GRAYCOLOR.CGColor];
+//    [self.lable.layer setBorderWidth:1.0f];
+//    [self.lable.layer setCornerRadius:5.0f];
+    [self addSubview:self.lable];
+    
+    line = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH, 0.6)];
     [line setBackgroundColor:GRAYLELIGHTCOLOR];
     [self addSubview:line];
     
     [self addSubview:self.payBtn];
     [self addSubview:self.logBtn];
-//    [self addSubview:self.commentBtn];
+    [self addSubview:self.commentBtn];
     
 }
 
@@ -99,33 +144,77 @@
 /** 付款与确认收货按钮点击 */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-
-        [[AppRequestManager sharedManager]operateOrderWithOrderModel:self.data operation:OrderOpsAffirmReceived andBlock:^(id responseObject, NSError *error) {
-            NSLog(@"%@", responseObject);
+        [[AppRequestManager sharedManager]operateOrderWithOrderModel:self.data operation:OrderOpsAffirmReceived andPage:0 andBlock:^(id responseObject, NSError *error) {
             [DataTrans showWariningTitle:T(@"成功收货") andCheatsheet:ICON_INFO andDuration:1.0f];
-            
+            if (count < self.data.goods_list.count) {
+                [self.passDelegate passSignalValue:@"Comment" andData:self.data];
+            }
+            [self.payBtn setHidden:NO];
+            [self.commentBtn setHidden:YES];
         }];
-        
     }
 }
 
 /** 物流按钮点击 */
 - (void)onLogBtnClick {
-//    [self.passDelegate passSignalValue:<#(NSString *)#> andData:<#(id)#>];
+    [self.passDelegate passSignalValue:LOGBTN_CLICK andData:self.data];
 }
 
 /** 评论按钮点击 */
 - (void)onCommentBtnClick {
-//    [self.passDelegate passSignalValue:<#(NSString *)#> andData:<#(id)#>];
+    [self.passDelegate passSignalValue:@"Comment" andData:self.data];
 }
 
-- (void)setButtonState:(OrderModel *)model {
+- (void)setButtonState {
+    
+    /** 已取消 都不显示 */
+    if ([self.data.order_status integerValue] == OS_CANCELED || [self.data.order_status integerValue] == OS_RETURNED) {
+        self.lable.text = @"无效订单";
+        [self.payBtn setHidden:YES];
+        [self.commentBtn setHidden:YES];
+        [self.logBtn setHidden:YES];
+        [line setHidden:YES];
+//        backgrounkView.y = H_0;
+
+    }
+    
+    
+    if ([self.data.shipping_status integerValue] == SS_UNSHIPPED && [self.data.paymentType isEqualToString:@"PAYED"]) {
+        [self.logBtn setHidden:YES];
+        [self.payBtn setHidden:NO];
+        [self.payBtn setSelected:YES];
+        [self.commentBtn setHidden:YES];
+//        backgrounkView.y = H_0;
+    }
+    
+    /** 未确认 未付款 显示立即付款 */
+    if ([self.data.order_status intValue] == OS_UNCONFIRMED && [self.data.paymentType isEqualToString:T(@"UNPAYED")]) {
+        [self.payBtn setHidden:NO];
+        [self.payBtn setSelected:NO];
+        [self.commentBtn setHidden:YES];
+        [self.logBtn setHidden:YES];
+    }
+    
+    
+    /** 已发货 已付款 显示查看物流 */
+    if ([self.data.shipping_status integerValue] == SS_SHIPPED && [self.data.paymentType isEqualToString:T(@"PAYED")]) {
+        [self.payBtn setSelected:YES];
+        [self.logBtn setHidden:NO];
+        
+    }
+
+    /** 已收货 已付款 显示评论 */
+    if ([self.data.shipping_status integerValue] == SS_RECEIVED && [self.data.paymentType isEqualToString:T(@"PAYED")]) {
+        [self.payBtn setHidden:YES];
+        [self.commentBtn setHidden:NO];
+    }
     
 }
 
 - (void)setNewData:(OrderModel *)_newData {
-    
+
     self.data = _newData;
+    [self setButtonState];
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

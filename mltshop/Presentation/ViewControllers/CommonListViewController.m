@@ -536,7 +536,7 @@
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     // TODO: TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification  in articleViewCell
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:scrollView];
+    // [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:scrollView];
 }
 
 

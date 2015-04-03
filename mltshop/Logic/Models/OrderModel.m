@@ -15,11 +15,13 @@
     if (DictionaryHasValue(dict)) {
         _orderId = [DataTrans noNullStringObj:dict[@"order_id"]];
         _goods_list = dict[@"goods_list"];
+        _invoice_no = dict[@"invoice_no"];
         _orderSn = [DataTrans noNullStringObj:dict[@"order_sn"]];
         _type = [DataTrans noNullStringObj:dict[@"type"]];
         _paymentType = [DataTrans noNullStringObj:dict[@"payment_type"]];
         _orderTime = [DataTrans dateFromNSDatetimeStr:dict[@"order_time"]];
-        NSLog(@"_orderTime %@",_orderTime);
+        _order_status = [DataTrans noNullStringObj:dict[@"order_status"]];
+        _shipping_status = [DataTrans noNullStringObj:dict[@"shipping_status"]];
         _totalFee = [DataTrans noNullNumberObj:dict[@"total_fee"]];
         
         if (DictionaryHasValue(dict[@"order_info"])) {
