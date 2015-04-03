@@ -60,12 +60,12 @@
 - (void)setNewData:(LogisticsModel *)_newData andType:(BOOL)type {
     self.model = _newData;
     
-    CGSize titleHeight = [self.model.remark sizeWithWidth:self.titleLable.width andFont:FONT_14];
+    CGSize titleHeight = [self.model.context sizeWithWidth:self.titleLable.width andFont:FONT_14];
     self.titleLable.height = titleHeight.height;
     self.timeLable.y = self.titleLable.y+self.titleLable.height+5;
     
-    self.titleLable.text = self.model.remark;
-    self.timeLable.text = self.model.datetime;
+    self.titleLable.text = self.model.context;
+    self.timeLable.text = self.model.time;
     self.lineView.height = self.timeLable.y+self.timeLable.height+5;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(H_50, self.timeLable.y+self.timeLable.height+H_15, WIDTH-H_60, 1)];
     [view setBackgroundColor:GRAYLELIGHTCOLOR];

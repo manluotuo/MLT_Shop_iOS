@@ -17,4 +17,10 @@
 /** 区域 */
 @property (nonatomic, strong) NSString *zone;
 
+//==========================  快递100  ================================\\
+/** 时间 */
+@property (nonatomic, strong) NSString *time;
+/** 物流信息 */
+@property (nonatomic, strong) NSString *context;
+
 @end

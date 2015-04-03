@@ -209,7 +209,6 @@
 		3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316122D1AB03FA100F47730 /* CollectViewController.m */; };
 		331612311AB043BE00F47730 /* CollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612301AB043BE00F47730 /* CollectModel.m */; };
 		331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331612331AB0503F00F47730 /* CollectTableViewCell.m */; };
-		3321EDD51AC563CA00866FB9 /* JuheApisSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD41AC563CA00866FB9 /* JuheApisSDK.a */; };
 		3321EDD71AC5645300866FB9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD61AC5645300866FB9 /* libc++.dylib */; };
 		3321EDD91AC565A200866FB9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD81AC565A200866FB9 /* AdSupport.framework */; };
 		3321EDDB1AC565B300866FB9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDDA1AC565B300866FB9 /* CoreLocation.framework */; };
@@ -703,9 +702,6 @@
 		331612301AB043BE00F47730 /* CollectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectModel.m; sourceTree = "<group>"; };
 		331612321AB0503F00F47730 /* CollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectTableViewCell.h; sourceTree = "<group>"; };
 		331612331AB0503F00F47730 /* CollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableViewCell.m; sourceTree = "<group>"; };
-		3321EDD21AC563CA00866FB9 /* JHAPISDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAPISDK.h; sourceTree = "<group>"; };
-		3321EDD31AC563CA00866FB9 /* JHOpenidSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHOpenidSupplier.h; sourceTree = "<group>"; };
-		3321EDD41AC563CA00866FB9 /* JuheApisSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = JuheApisSDK.a; sourceTree = "<group>"; };
 		3321EDD61AC5645300866FB9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		3321EDD81AC565A200866FB9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		3321EDDA1AC565B300866FB9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -811,7 +807,6 @@
 				26BB7D711A6BAF8E002F4030 /* CoreGraphics.framework in Frameworks */,
 				262E1E801A5835EC00C29059 /* SystemConfiguration.framework in Frameworks */,
 				33D92C161AB95F27004C1FA2 /* CoreTelephony.framework in Frameworks */,
-				3321EDD51AC563CA00866FB9 /* JuheApisSDK.a in Frameworks */,
 				33D92C141AB95F1C004C1FA2 /* CoreFoundation.framework in Frameworks */,
 				33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */,
 				26BB7D7E1A6BB070002F4030 /* libstdc++.dylib in Frameworks */,
@@ -1360,7 +1355,6 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3321EDCF1AC563CA00866FB9 /* JuheApisSDK */,
 				337B33E31AC02195000CAF14 /* RFKeyboardToolbar */,
 				33D621DC1ABDA6F8009D86A1 /* QFHttpRequest */,
 				3362E2A01ABC4CC900D0704B /* AutoSlideScrollView */,
@@ -1778,32 +1772,6 @@
 				3316122D1AB03FA100F47730 /* CollectViewController.m */,
 			);
 			name = CollectVC;
-			sourceTree = "<group>";
-		};
-		3321EDCF1AC563CA00866FB9 /* JuheApisSDK */ = {
-			isa = PBXGroup;
-			children = (
-				3321EDD01AC563CA00866FB9 /* include */,
-				3321EDD41AC563CA00866FB9 /* JuheApisSDK.a */,
-			);
-			path = JuheApisSDK;
-			sourceTree = "<group>";
-		};
-		3321EDD01AC563CA00866FB9 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				3321EDD11AC563CA00866FB9 /* JuheApisSDK */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		3321EDD11AC563CA00866FB9 /* JuheApisSDK */ = {
-			isa = PBXGroup;
-			children = (
-				3321EDD21AC563CA00866FB9 /* JHAPISDK.h */,
-				3321EDD31AC563CA00866FB9 /* JHOpenidSupplier.h */,
-			);
-			path = JuheApisSDK;
 			sourceTree = "<group>";
 		};
 		3353FA041AC93FA300181EAA /* Forum */ = {

@@ -23,7 +23,6 @@
 @end
 
 @implementation ZBarScanViewController {
-    NSURLConnection *_connection;
     NSMutableData *_responseData;
     HttpRequest *_request;
 }
@@ -163,21 +162,10 @@
 - (void)requestDidFinishLoadingWithData:(NSData *)data {
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
     NSLog(@"%@", responseObject);
-    
-    
-    
-    
 }
 
 //数据请求成功
 - (void)httpRequestFinished:(HttpRequest *)request {
-    
-    
-    
-    
-    NSString *str1 = [[NSString alloc] initWithData:request.respondsData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"%@", str1);
     
     NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:request.respondsData options:NSJSONReadingAllowFragments error:nil];
     

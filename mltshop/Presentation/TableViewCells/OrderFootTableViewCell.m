@@ -168,7 +168,7 @@
 - (void)setButtonState {
     
     /** 已取消 都不显示 */
-    if ([self.data.order_status integerValue] == OS_CANCELED || [self.data.order_status integerValue] == OS_RETURNED) {
+    if ([self.data.order_status integerValue] == OS_CANCELED || [self.data.order_status integerValue] == OS_RETURNED || [self.data.order_status integerValue] == OS_INVALID) {
         self.lable.text = @"无效订单";
         [self.payBtn setHidden:YES];
         [self.commentBtn setHidden:YES];
