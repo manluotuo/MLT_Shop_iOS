@@ -396,9 +396,11 @@ static dispatch_once_t onceToken;
                                @"comment_rank": dict[@"comment_rank"],
                                @"content": dict[@"content"]
                                };
+    
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"%@", responseObject);
+
         if ([DataTrans isCorrectResponseObject:responseObject]) {
+            
             if (block) {
                 block([NSString stringWithFormat:@"YES"], nil);
             }
@@ -409,6 +411,7 @@ static dispatch_once_t onceToken;
             block(nil,error);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+
         if (block) {
             block(nil , error);
         }

@@ -99,15 +99,10 @@
     [super viewDidLoad];
     [self buildFixedView];
     state = NO;
-    
     self.commentData = [[NSMutableArray alloc] init];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO_INDEX_PAGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO_TO object:nil];
-    
 }
-
-
 
 - (void)gotoIndexAction
 {
@@ -135,7 +130,6 @@
         
         NSMutableArray *titleArray = [[NSMutableArray alloc]init];
         if (XAppDelegate.me.userId) {
-            
             if ([self.theGoods.goodsInvertory integerValue] == 0) {
                 [DataTrans showWariningTitle:T(@"该商品库存不足\n无法添加购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
             } else {
@@ -148,26 +142,18 @@
                     newCartItem.goodsId = self.theGoods.goodsId;
                     newCartItem.goodsCount = INT(1);
                     newCartItem.goodsAttrId = item.itemId;
-                    
                     [self addToCart:newCartItem];
                 }else if ([self.theGoods.spec.values count] > 1){
-                    
-                    
                     for (SpecItemModel *item in self.theGoods.spec.values) {
                         [titleArray addObject:item.label];
                     }
-                    
                     [SGActionView showSheetWithTitle:T(@"选择尺码/颜色分类")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
-                        
                         SpecItemModel *specItem = [self.theGoods.spec.values objectAtIndex:index];
                         CartModel *newCartItem = [[CartModel alloc]init];
                         newCartItem.goodsId = self.theGoods.goodsId;
                         newCartItem.goodsCount = INT(1);
                         newCartItem.goodsAttrId = specItem.itemId;
-                        
-                        
                         [self addToCart:newCartItem];
-                        
                     }];
                 }else{
                     // 没有spec 的

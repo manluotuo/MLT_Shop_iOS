@@ -67,6 +67,7 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     count = 0;
+    self.star = @"5";
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(H_0, H_0, WIDTH, TOTAL_HEIGHT-10)];
     self.scrollView.contentSize = CGSizeMake(WIDTH, 1000);
     [self.scrollView setBackgroundColor:WHITECOLOR];
@@ -634,6 +635,9 @@
     [HUD showInView:self.view];
     
     NSLog(@"%@", self.goods_list[count][@"goods_id"]);
+    NSLog(@"%@", self.star);
+    NSLog(@"%@", self.collectText.text);
+    
     NSDictionary *dict = @{@"goods_id": self.goods_list[count][@"goods_id"], @"comment_rank": self.star, @"content": self.collectText.text};
     
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
@@ -658,7 +662,6 @@
 
 /** 星数被点击 */
 - (void)onStarButtonClick:(UIButton *)sender {
-    
     
     for (NSInteger j = 10; j < 15; j++) {
         UIButton *btn = (UIButton *)[self.view viewWithTag:j];

@@ -21,6 +21,7 @@
 
 
 #define XAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define USER_DEFAULTS               [NSUserDefaults standardUserDefaults]
 #define CODE_OK                     @"10000"
 #define ERROR_TOKEN_OVERDUE         @"21315"
 #define ERROR_PARAM                 @"10008"

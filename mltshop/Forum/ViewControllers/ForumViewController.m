@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.title = @"漫骆驼";
     [self createUI];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -38,6 +38,7 @@
     [self.view addSubview:self.tableView];
     /** 商城入口按钮 */
     [self createForumButton];
+    [self setupleftButton];
     
 }
 
@@ -63,20 +64,24 @@
     return nil;
 }
 
-//- (void)setupleftButton
-//{
-//    CGFloat leftMargin = 10.0f;
-//    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 12+leftMargin, 21)];
-//    [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
-//    [backButton.titleLabel setFont:FONT_AWESOME_36];
-//    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
-//    
-//    
-//    UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-//    [backButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.leftBarButtonItem = barBackButtonItem;
-//    self.navigationItem.hidesBackButton = YES;
-//}
+- (void)setupleftButton
+{
+    CGFloat leftMargin = 10.0f;
+    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(0, 0, 12+leftMargin, 21)];
+    [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
+    [backButton.titleLabel setFont:FONT_AWESOME_36];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
+    
+    
+    UIBarButtonItem *barBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [backButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = barBackButtonItem;
+    self.navigationItem.hidesBackButton = YES;
+}
+
+- (void)onLeftBtnClick {
+    
+}
 
 - (void)onForumButtonClick {
     [self dismissViewControllerAnimated:YES completion:nil];

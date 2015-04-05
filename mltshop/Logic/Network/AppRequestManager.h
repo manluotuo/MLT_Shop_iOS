@@ -30,7 +30,7 @@
 /** 评论列表 */
 #define API_COMMENT_PATH            @"/ecmobile/?url=/comments/list"
 /** 增加评论 */
-#define API_COMMENT_ADD             @"/ecmobile/?url=/comments/add"
+#define API_COMMENT_ADD             @"/ecmobile/?url=/comment/add"
 /** 限时特价 */
 
 

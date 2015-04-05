@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UILabel *titleLable;
 /** 时间 */
 @property (nonatomic, strong) UILabel *timeLable;
+/** 卡片式View背景颜色 */
+@property (nonatomic, strong) UIView *backgroundView;
+
 
 @end
 

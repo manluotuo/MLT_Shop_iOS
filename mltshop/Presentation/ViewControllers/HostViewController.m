@@ -24,6 +24,8 @@
 #import "GoodsDetailViewController.h"
 #import "ForumViewController.h"
 
+#import "JPushViewController.h"
+#import "XXYNavigationController.h"
 
 @interface HostViewController ()<ViewPagerDataSource, ViewPagerDelegate, PassValueDelegate>
 @property(nonatomic, strong)NSString *currentCategoryID;
@@ -48,6 +50,25 @@
 {
     [super viewDidLoad];
     [ModelHelper sharedHelper].modelHelperDelegateForHostVC = self;
+    
+    NSUserDefaults *user = USER_DEFAULTS;
+    if ([user valueForKey:T(@"url")]) {
+        JPushViewController *pushVC = [[JPushViewController alloc] init];
+        ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:pushVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+    
+    if ([user valueForKey:T(@"goods")]) {
+        GoodsDetailViewController *VC = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+        VC.passDelegate = self;
+        GoodsModel *theGoods = [[GoodsModel alloc]init];
+        theGoods.goodsId = [user valueForKey:@"goods"];
+        [VC setGoodsData:theGoods];
+        [user removeObjectForKey:@"goods"];
+        [user synchronize];
+        [self presentViewController:VC animated:YES completion:nil];
+        
+    }
     
 //  TODO click logo and refresh current view
     UILabel *logoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, TITLE_HEIGHT)];
@@ -98,8 +119,8 @@
     
     
     /** 论坛入口按钮 */
-    // TODO: 评论按钮
-//    [self createForumButton];
+    // TODO: 论坛按钮需要改进
+    [self createForumButton];
 
 }
 
@@ -349,10 +370,13 @@
 - (void)onForumButtonClick {
     
     ForumViewController *forumView = [[ForumViewController alloc] init];
-    ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:forumView];
+    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
+    UITabBarController *tabbar = [[UITabBarController alloc] init];
+    tabbar.viewControllers = @[nav];
     // 翻转 UIModalTransitionStyleFlipHorizontal
-    [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentViewController:nav animated:YES completion:^{
+    tabbar.tabBar.hidden = YES;
+    [tabbar setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:tabbar animated:YES completion:^{
         [MobClick event:UM_FORUM];
     }];
     

@@ -159,8 +159,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
        CollectModel *model = self.dataArray[indexPath.row];
-        NSLog(@"%@", model.rec_id);
-        
        [[AppRequestManager sharedManager]getDeleteCollectRecId:model.rec_id andBlcok:^(id responseObject, NSError *error) {
            if (responseObject != nil) {
                [self.dataArray removeObjectAtIndex:indexPath.row];

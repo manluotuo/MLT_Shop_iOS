@@ -103,7 +103,7 @@
     
     self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.commentBtn setFrame:CGRectMake(WIDTH-H_90, self.payBtn.y, H_70, self.payBtn.height)];
-
+    
     [self.commentBtn setTitle:T(@"评价订单") forState:UIControlStateNormal];
     [self.commentBtn.titleLabel setFont:FONT_14];
     [self.commentBtn setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
@@ -116,9 +116,9 @@
     [self.lable setFont:FONT_14];
     [self.lable setTextColor:REDCOLOR];
     self.lable.textAlignment = UIBaselineAdjustmentAlignCenters;
-//    [self.lable.layer setBorderColor:GRAYCOLOR.CGColor];
-//    [self.lable.layer setBorderWidth:1.0f];
-//    [self.lable.layer setCornerRadius:5.0f];
+    //    [self.lable.layer setBorderColor:GRAYCOLOR.CGColor];
+    //    [self.lable.layer setBorderWidth:1.0f];
+    //    [self.lable.layer setCornerRadius:5.0f];
     [self addSubview:self.lable];
     
     line = [[UIView alloc] initWithFrame:CGRectMake(0, 45, WIDTH, 0.6)];
@@ -133,7 +133,7 @@
 
 - (void)onPayBtnClick {
     if (self.payBtn.selected == NO) {
-    [self.passDelegate passSignalValue:SIGNAL_ORDER_ACTION andData:self.data];
+        [self.passDelegate passSignalValue:SIGNAL_ORDER_ACTION andData:self.data];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:T(@"确定收货") delegate:self cancelButtonTitle:T(@"取消") otherButtonTitles:T(@"确认"), nil];
         alert.delegate = self;
@@ -174,8 +174,8 @@
         [self.commentBtn setHidden:YES];
         [self.logBtn setHidden:YES];
         [line setHidden:YES];
-//        backgrounkView.y = H_0;
-
+        //        backgrounkView.y = H_0;
+        
     }
     
     
@@ -184,7 +184,7 @@
         [self.payBtn setHidden:NO];
         [self.payBtn setSelected:YES];
         [self.commentBtn setHidden:YES];
-//        backgrounkView.y = H_0;
+        //        backgrounkView.y = H_0;
     }
     
     /** 未确认 未付款 显示立即付款 */
@@ -200,26 +200,37 @@
     if ([self.data.shipping_status integerValue] == SS_SHIPPED && [self.data.paymentType isEqualToString:T(@"PAYED")]) {
         [self.payBtn setSelected:YES];
         [self.logBtn setHidden:NO];
-        
+        [self.commentBtn setHidden:YES];
     }
-
+    
     /** 已收货 已付款 显示评论 */
     if ([self.data.shipping_status integerValue] == SS_RECEIVED && [self.data.paymentType isEqualToString:T(@"PAYED")]) {
         [self.payBtn setHidden:YES];
         [self.commentBtn setHidden:NO];
+        for (NSInteger i = 0; i < self.data.goods_list.count; i++) {
+            if ([self.data.goods_list[i][@"comments"] isEqualToString:@"0"]) {
+                [self.lable setHidden:YES];
+                [self.commentBtn setHidden:NO];
+                return;
+            } else {
+                [self.commentBtn setHidden:YES];
+                self.lable.text = @"交易成功";
+                [self.lable setHidden:NO];
+            }
+        }
     }
-    
 }
 
 - (void)setNewData:(OrderModel *)_newData {
-
+    
     self.data = _newData;
+    NSLog(@"%@", self.data);
     [self setButtonState];
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

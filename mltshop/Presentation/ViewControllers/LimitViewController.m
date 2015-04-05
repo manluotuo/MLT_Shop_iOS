@@ -119,7 +119,6 @@
     GoodsModel *theGoods = [[GoodsModel alloc]init];
     theGoods.goodsId = model.goods_id;
     [VC setGoodsData:theGoods];
-    
     [self presentViewController:VC animated:YES completion:nil];
 
 }

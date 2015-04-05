@@ -60,7 +60,8 @@
 @synthesize loginViewController;
 @synthesize registerViewController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     //     Override point for customization after application launch.
     //    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
     //    NSString *nowVersion = NOWVERSION;
@@ -72,7 +73,6 @@
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setValue:@"NO" forKey:@"HELLO"];
     [user synchronize];
-    
     
     /** 设置友盟 */
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH   channelId:@"nil"];
@@ -94,38 +94,8 @@
     
     /** 调用极光推送 */
     [self initJPush:launchOptions];
-    //    /** 推送 */
-    //#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
-    //    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-    //        //可以添加自定义categories
-    //        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-    //                                                       UIUserNotificationTypeSound |
-    //                                                       UIUserNotificationTypeAlert)
-    //                                           categories:nil];
-    //    } else {
-    //        //categories 必须为nil
-    //        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-    //                                                       UIRemoteNotificationTypeSound |
-    //                                                       UIRemoteNotificationTypeAlert)
-    //                                           categories:nil];
-    //    }
-    //#else
-    //    //categories 必须为nil
-    //    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-    //                                                   UIRemoteNotificationTypeSound |
-    //                                                   UIRemoteNotificationTypeAlert)
-    //                                       categories:nil];
-    //#endif
-    //    // Required
-    //    [APService setupWithOption:launchOptions];
     
-    
-    
-    // TODO: 先初始化 用来none insert vehicle
-    //    [self managedObjectContext];
-    
-    // MagicalRecord
-    //    [MagicalRecord setupCoreDataStack];
+    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     
     NSString *storeNamed = @"manluotuo.sqlite";
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:storeNamed];
@@ -495,8 +465,16 @@
     NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
     
     // 取得自定义字段内容
-    NSString *customizeField1 = [userInfo valueForKey:@"url"]; //自定义参数，key是自己定义的
-    NSLog(@"content = [%@], badge = [%d], sound = [%@], customize field  = [%@]",content,badge,sound,customizeField1);
+    NSString *url = [userInfo valueForKey:@"url"]; //自定义参数，key是自己定义的
+    NSString *goods = [userInfo valueForKey:@"goods"];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:url forKey:@"url"];
+    [user setValue:goods forKey:@"goods"];
+
+    [user synchronize];
+    
+    NSLog(@"content = [%@], badge = [%d], sound = [%@], goods = [%@], url = [%@]", content,badge,sound, goods, url);
     
 }
 
@@ -515,7 +493,6 @@
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNoData);
 }
-
 
 
 /** 自定义消息 */

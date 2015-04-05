@@ -24,7 +24,7 @@
 #import "FAHoverButton.h"
 #import "RFExampleToolbarButton.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "CommentViewController.h"
 
 @interface OrderListViewController ()<UITableViewDataSource, UITableViewDelegate, PullListViewDelegate, PassValueDelegate, UITextFieldDelegate>
 
@@ -129,9 +129,16 @@
     }
     
     
+//    if ([value isEqualToString:@"Comment"]) {
+//        [self initCollectView:theOrder];
+//        [self setCollectViewData:theOrder];
+//    }
+    
     if ([value isEqualToString:@"Comment"]) {
-        [self initCollectView:theOrder];
-        [self setCollectViewData:theOrder];
+        CommentViewController *comm = [[CommentViewController alloc] init];
+        comm.model = theOrder;
+        ColorNavigationController *nav = [[ColorNavigationController alloc] initWithRootViewController:comm];
+        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 
@@ -269,6 +276,7 @@
 /** 星数被点击 */
 - (void)onStarButtonClick:(UIButton *)sender {
     
+
     
     for (NSInteger j = 10; j < 15; j++) {
         UIButton *btn = (UIButton *)[self.view viewWithTag:j];

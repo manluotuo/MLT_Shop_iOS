@@ -401,8 +401,8 @@
     }else if(self.dataSourceType == ListDataSourceBrand){
         
         BrandModel *theBrand = [self.dataSource objectAtIndex:indexPath.row];
-        CGSize descSize = [theBrand.brandDesc sizeWithWidth:H_200 andFont:FONT_12];
-        return CELL_HEIGHT+descSize.height-H_10;
+        CGSize descSize = [theBrand.brandDesc sizeWithWidth:WIDTH-H_40 andFont:FONT_12];
+        return descSize.height+H_100+H_14+H_30;
         
     }else{
         return CELL_HEIGHT;
@@ -481,7 +481,7 @@
         BrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
         if (cell == nil) {
-            cell = [[BrandTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell = [[BrandTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
             cell.passDelegate = self;
         }
         [cell setNewData:cellData];

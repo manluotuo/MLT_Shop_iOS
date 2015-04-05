@@ -189,16 +189,16 @@
     return NO;
 }
 
-//- (void)textFieldDidBeginEditing:(UITextField *)textField
-//{
-//    if ([textField isEqual:self.userTextView]) {
-//        self.userTextView.text = @"";
-//    }
-//    
-//    if ([textField isEqual:self.passTextView]) {
-//        self.passTextView.text = @"";
-//    }
-//}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if ([textField isEqual:self.userTextView]) {
+        self.userTextView.text = @"";
+    }
+    
+    if ([textField isEqual:self.passTextView]) {
+        self.passTextView.text = @"";
+    }
+}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
