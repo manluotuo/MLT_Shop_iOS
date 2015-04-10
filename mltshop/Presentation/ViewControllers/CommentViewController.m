@@ -41,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataArray = [[NSMutableArray alloc] init];
+    self.title = T(@"评价商品");
     self.star = @"5";
     [self createUI];
     [self setupleftButton];
@@ -182,8 +183,8 @@
     NSLog(@"%@", dict);
     
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
+        [HUD removeFromSuperview];
         if ([responseObject isEqualToString:@"YES"]) {
-            [HUD removeFromSuperview];
             UIView *view = (UIView *)[self.scrollView viewWithTag:sender.tag + 100];
             [UIView animateWithDuration:0.3 animations:^{
                 view.x =  WIDTH * 3;

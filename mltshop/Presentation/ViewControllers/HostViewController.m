@@ -30,6 +30,7 @@
 @interface HostViewController ()<ViewPagerDataSource, ViewPagerDelegate, PassValueDelegate>
 @property(nonatomic, strong)NSString *currentCategoryID;
 @property(nonatomic, strong)FAHoverButton *leftDrawerAvatarButton;
+@property (nonatomic, strong)UITabBarController *tabbar;
 @end
 
 @implementation HostViewController
@@ -370,13 +371,13 @@
 - (void)onForumButtonClick {
     
     ForumViewController *forumView = [[ForumViewController alloc] init];
-    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
-    UITabBarController *tabbar = [[UITabBarController alloc] init];
-    tabbar.viewControllers = @[nav];
-    // 翻转 UIModalTransitionStyleFlipHorizontal
-    tabbar.tabBar.hidden = YES;
-    [tabbar setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentViewController:tabbar animated:YES completion:^{
+//    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
+//    self.tabbar = [[UITabBarController alloc] init];
+//    self.tabbar.viewControllers = @[nav];
+//     翻转 UIModalTransitionStyleFlipHorizontal
+//    tabbar.tabBar.hidden = YES;
+    [forumView setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:forumView animated:YES completion:^{
         [MobClick event:UM_FORUM];
     }];
     

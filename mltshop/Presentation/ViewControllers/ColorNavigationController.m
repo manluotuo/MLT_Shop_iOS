@@ -47,6 +47,7 @@
     }
 }
 
+
 - (BOOL)shouldAutorotate
 {
     return self.topViewController.shouldAutorotate;

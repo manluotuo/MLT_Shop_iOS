@@ -10,4 +10,6 @@
 
 @interface ForumTableViewCell : UITableViewCell
 
+- (void)setData;
+
 @end

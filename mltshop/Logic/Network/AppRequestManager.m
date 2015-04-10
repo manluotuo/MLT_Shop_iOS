@@ -385,18 +385,31 @@ static dispatch_once_t onceToken;
     }];
 }
 
+
 /** 增加评论 */
 - (void)getCommentAddWithDict:(NSDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block {
     NSString *postUrl = API_COMMENT_ADD;
+//    NSString *postUrl = @"http://192.168.1.199/ecmobile/?url=/comment/add";
     
-    NSDictionary *postDict = @{@"goods_id": dict[@"goods_id"],
+    NSDictionary *postDict = @{@"goods_id": @"253",
                                @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
                                              @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
                                              },
                                @"comment_rank": dict[@"comment_rank"],
-                               @"content": dict[@"content"]
+                               @"content": @"好"
                                };
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager POST:@"http://192.168.1.199/ecmobile/?url=/comment/add" parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"%@", dict);
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@", error);
+//
+//    }];
     
+    NSLog(@"%@", postDict);
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
 
         if ([DataTrans isCorrectResponseObject:responseObject]) {

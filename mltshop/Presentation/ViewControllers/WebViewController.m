@@ -70,6 +70,37 @@
 
 }
 
+/** 敏！ */
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSString *requestString = [[request URL] absoluteString];//获取请求的绝对路径.
+    NSLog(@"******%@", requestString);
+    NSArray *components = [requestString componentsSeparatedByString:@":"];//提交请求时候分割参数的分隔符
+    NSLog(@"!!!!!%@", components[0]);
+    NSLog(@"&&&&&%@", components[1]);
+    
+    if ([components count] > 1 && [(NSString *)[components objectAtIndex:0] isEqualToString:@"openGood"]) {
+        //过滤请求是否是我们需要的.不需要的请求不进入条件
+        NSLog(@"openGood == openGood == openGood == openGood");
+        return NO;
+    }
+    
+    if ([components count] > 1 && [(NSString *)[components objectAtIndex:0] isEqualToString:@"openCatagory"]) {
+        //过滤请求是否是我们需要的.不需要的请求不进入条件
+        
+        return NO;
+    }
+    return YES;
+}
+
+- (void)openGood {
+    NSLog(@"111");
+}
+
+- (void)openCatagory {
+    NSLog(@"222");
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

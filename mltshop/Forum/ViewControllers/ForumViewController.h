@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullListViewDelegate.h"
 
 @interface ForumViewController : UIViewController
+
+@property(nonatomic, assign)NSObject<PullListViewDelegate> *commonListDelegate;
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 @end

@@ -190,6 +190,8 @@ static const NSInteger kTotalPageCount = 5;
             self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
                 NSArray *items = [self.fixedData objectForKey:@"player"];
                 NSDictionary *item = items[pageIndex];
+                // TODO: 敏！
+//                [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://192.168.1.107:8080/manluotuo/"];
                 [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
             };
             

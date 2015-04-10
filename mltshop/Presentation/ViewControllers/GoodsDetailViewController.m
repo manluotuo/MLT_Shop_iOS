@@ -371,7 +371,9 @@
     [self.briefLabel setFont:FONT_12];
     [self.briefLabel setTextColor:GRAYCOLOR];
     [self.briefLabel setTextAlignment:NSTextAlignmentLeft];
-    self.briefLabel.numberOfLines = 0;
+    [self.briefLabel setLineBreakMode:NSLineBreakByClipping];
+    [self.briefLabel setLineBreakMode:NSLineBreakByCharWrapping];
+//    self.briefLabel.numberOfLines = 0;
     
     self.priceTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_90+H_15, H_60, H_24)];
     self.priceTitle.text = T(@"本店价");
@@ -644,7 +646,13 @@
         }
     }
     self.titleLabel.text = self.theGoods.goodsName;
+    CGSize height = [self.theGoods.goodsName sizeWithWidth:H_260 andFont:FONT_14];
+    NSLog(@"%f", height.height);
+    self.titleLabel.height = height.height;
     self.briefLabel.text = self.theGoods.goodsBrief;
+    if (height.height > 25) {
+    self.briefLabel.height += 5;
+    }
     
     // 售价
     if (self.theGoods.promotePrice.integerValue > 0) {
@@ -679,6 +687,7 @@
         htmlHeight = self.htmlView.scrollView.contentSize.height;
         self.htmlView.height = htmlHeight;
         fixedHeight += htmlHeight;
+        
         __weak GoodsDetailViewController *weakSelf = self;
         [self.fixedView addPullToRefreshWithActionHandler:^{
             state = YES;
@@ -719,7 +728,7 @@
     fixedSize = self.fixedView.contentSize;
     fixedSize.height = self.commentView.height+TOTAL_HEIGHT+H_150;
     self.fixedView.contentSize = fixedSize;
-    self.commentView.height = tableHeight;\
+    self.commentView.height = tableHeight;
     return self.commentData.count;
     
 }

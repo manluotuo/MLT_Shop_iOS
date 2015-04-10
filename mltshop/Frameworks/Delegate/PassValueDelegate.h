@@ -16,6 +16,6 @@
 -(void)passSignalValue:(NSString *)value andDict:(NSDictionary *)dict;
 -(void)passSignalValue:(NSString *)value andData:(id)data;
 -(void)passSignalValue:(NSString *)value andDict:(NSDictionary *)dict andBlock:(void (^)(BOOL status))block;
-
+- (void)selectedTabBarViewController:(NSInteger)index;
 
 @end
