@@ -8,10 +8,11 @@
 
 #import "KKViewController.h"
 #import "PassValueDelegate.h"
+#import "PullListViewDelegate.h"
 @interface GoodsDetailViewController : KKViewController
 
 - (void)setGoodsData:(GoodsModel *)_goods;
 @property(nonatomic,assign) NSObject<PassValueDelegate> *passDelegate;
-
+@property(nonatomic, assign)NSObject<PullListViewDelegate> *commonListDelegate;
 
 @end

@@ -186,8 +186,9 @@
     // Required
     [APService setupWithOption:launchOptions];
     
-    
-    [APService setTags:[NSSet setWithObjects:@"r", nil] alias:@"RR" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    NSLog(@"*********************************************************%@", XAppDelegate.me.userId);
+    [APService setTags:[NSSet setWithObjects:@"aaaa", nil] alias:@"上传" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+
     
 }
 

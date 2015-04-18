@@ -124,8 +124,8 @@
  */
 - (void)recomendOldItems
 {
+        
     NSLog(@"start %ld",(long)self.start);
-    
     [[AppRequestManager sharedManager]searchWithKeywords:self.search.keywords
                                                   cateId:self.search.catId
                                                  brandId:self.search.brandId
@@ -184,9 +184,9 @@
     }
 }
 
-- (void)createRefresh {
-    
-}
+//- (void)createRefresh {
+//    
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.001;

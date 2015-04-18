@@ -135,8 +135,6 @@
  */
 - (void)recomendOldItems
 {
-    NSLog(@"start %ld",(long)self.start);
-    
     [[AppRequestManager sharedManager]searchWithKeywords:self.search.keywords
                                                   cateId:self.search.catId
                                                  brandId:self.search.brandId

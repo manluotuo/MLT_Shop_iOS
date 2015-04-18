@@ -201,7 +201,7 @@
 
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_80, H_16, H_80, titleSize.height)];
     [titleLabel setText:[DataTrans getSepString:item[@"name"]]];
-    [titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [titleLabel setFont:[UIFont systemFontOfSize:12]];
     [titleLabel setTextColor:DARKCOLOR];
     [titleLabel setTextAlignment:NSTextAlignmentLeft];
     titleLabel.numberOfLines = 0;

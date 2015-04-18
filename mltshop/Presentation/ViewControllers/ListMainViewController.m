@@ -17,9 +17,10 @@
 #import "WebViewController.h"
 #import "GoodsDetailViewController.h"
 #import "CycleScrollView.h"
+#import "SVPullToRefresh.h"
 
 static const NSInteger kTotalPageCount = 5;
-@interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate>
+@interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate, PullListViewDelegate>
 @property(nonatomic, strong)YWDictionary *fixedData;
 @property(nonatomic, strong)UIScrollView *fixedView;
 @property (nonatomic, strong) GCPagedScrollView *pagedScrollView;
@@ -33,6 +34,7 @@ static const NSInteger kTotalPageCount = 5;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupDataSource];
+    [self createRefresh];
 }
 
 /*
@@ -42,9 +44,10 @@ static const NSInteger kTotalPageCount = 5;
     NSInteger tagag = tap.view.tag;
     NSDictionary *item = items[tap.view.tag];
     [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
-    
 }
  */
+
+
 
 
 -(void)passSignalValue:(NSString *)value andData:(id)data
@@ -54,7 +57,6 @@ static const NSInteger kTotalPageCount = 5;
         if ([parsed isKindOfClass:[SearchModel class]]) {
             if ([[(SearchModel*)parsed brandId] isEqualToString:@"all"]) {
                 // FIXME: goto 品牌街
-                
             }else{
                 ListViewController *VC = [[ListViewController alloc]initWithNibName:nil bundle:nil];
                 VC.search = parsed;
@@ -63,7 +65,6 @@ static const NSInteger kTotalPageCount = 5;
                 ColorNavigationController *nav = [[ColorNavigationController alloc]initWithRootViewController:VC];
                 [self.navigationController presentViewController:nav animated:YES completion:nil];
             }
-            
         }else{
             if (DictionaryHasValue(parsed)) {
                 if ([parsed[@"type"] isEqualToString:@"url"]) {
@@ -84,12 +85,16 @@ static const NSInteger kTotalPageCount = 5;
                     [self.navigationController presentViewController:VC animated:YES completion:nil];
                 }
             }
-            
-            
-
         }
     }
 
+}
+
+- (void)createRefresh {
+    __weak ListMainViewController *weakSelf = self;
+    [weakSelf.fixedView addPullToRefreshWithActionHandler:^{
+//        [weakSelf refreshTable];
+    }];
 }
 
 - (void)setupDataSource
@@ -128,6 +133,7 @@ static const NSInteger kTotalPageCount = 5;
      */
     CGFloat fixedHeight = 0.0f;
     self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, self.view.frame.size.height)];
+    [self.fixedView setBackgroundColor:WHITECOLOR];
     NSMutableArray *viewsArray = [@[] mutableCopy];
     for (NSString *key in [self.fixedData allKeys]) {
         
@@ -137,8 +143,6 @@ static const NSInteger kTotalPageCount = 5;
         if ([key isEqualToString:@"player"]) {
             CGFloat playerY = fixedHeight;
             CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
-
-            
 /*
             替换滚动试图
             self.pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
@@ -152,7 +156,6 @@ static const NSInteger kTotalPageCount = 5;
             self.pagedScrollView.delegate = self;
             [self.pagedScrollView removeAllContentSubviews];
  */
-            
             CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
             for (int i = 0 ; i < [listData count]; i++) {
 
@@ -161,7 +164,6 @@ static const NSInteger kTotalPageCount = 5;
                 [page setContentMode:UIViewContentModeScaleAspectFill];
                 [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
                 [viewsArray addObject:page];
-                
                 /*
                  替换滚动试图
                 // 点击事件
@@ -188,10 +190,11 @@ static const NSInteger kTotalPageCount = 5;
                 return viewsArray[pageIndex];
             };
             self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+                
                 NSArray *items = [self.fixedData objectForKey:@"player"];
                 NSDictionary *item = items[pageIndex];
                 // TODO: 敏！
-//                [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://192.168.1.107:8080/manluotuo/"];
+// [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://192.168.1.107:8080/manluotuo/"];
                 [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
             };
             
@@ -205,6 +208,7 @@ static const NSInteger kTotalPageCount = 5;
             CGFloat brandHeight = BRAND_FIX_HEIGHT * lines;
             CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT, TOTAL_WIDTH, brandHeight);
             ADBrandView *brandView = [[ADBrandView alloc]initWithFrame:rect];
+            [brandView setBackgroundColor:WHITECOLOR];
             [brandView initWithData:listData];
             [self.fixedView addSubview:brandView];
             
@@ -233,7 +237,7 @@ static const NSInteger kTotalPageCount = 5;
                 /**
                  *  高度-1 为了 获得一个像素的感觉
                  */
-                fixedHeight += height-1;
+                fixedHeight += height;
             }
             
         }else{

@@ -17,8 +17,8 @@
 #import "LimitGoodsTableViewCell.h"
 #import "GoodsDetailViewController.h"
 #import "FAHoverButton.h"
-/** 限时特价 */
 
+/** 限时特价 */
 @interface LimitViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;

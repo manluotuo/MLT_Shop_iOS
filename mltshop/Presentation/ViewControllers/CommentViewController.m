@@ -185,10 +185,14 @@
     [[AppRequestManager sharedManager]getCommentAddWithDict:dict andBlock:^(id responseObject, NSError *error) {
         [HUD removeFromSuperview];
         if ([responseObject isEqualToString:@"YES"]) {
+            if (self.scrollView.contentSize.height > TOTAL_HEIGHT+200) {
+                self.scrollView.contentSize = CGSizeMake(WIDTH, self.scrollView.contentSize.height-H_200);
+            }
             UIView *view = (UIView *)[self.scrollView viewWithTag:sender.tag + 100];
             [UIView animateWithDuration:0.3 animations:^{
                 view.x =  WIDTH * 3;
             }];
+            
             for (UIView *view1 in self.scrollView.subviews) {
                 [UIView animateWithDuration:0.8 animations:^{
                     if (view1.y != H_10) {

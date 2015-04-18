@@ -109,7 +109,7 @@
         goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(H_30, H_10, H_100, H_100)];
         
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_110, H_130, H_20)];
-        [titleLabel setFont:[UIFont boldSystemFontOfSize:12]];
+        [titleLabel setFont:[UIFont systemFontOfSize:12]];
         [titleLabel setTextColor:DARKCOLOR];
         [titleLabel setTextAlignment:NSTextAlignmentLeft];
         titleLabel.numberOfLines = 0;

@@ -27,6 +27,7 @@
 
 - (void)initWithData:(NSArray *)listData
 {
+    [self setBackgroundColor:WHITECOLOR];
     self.dataSource = [[NSArray alloc]init];
     self.dataSource = listData;
     for (int i = 0; i < [listData count]; i++) {
@@ -38,7 +39,7 @@
         button.tag = i;
         UIImageView *logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/PRELINE, BRAND_FIX_HEIGHT)];
         logoImageView.contentMode = UIViewContentModeScaleAspectFill;
-        
+        logoImageView.clipsToBounds = YES;
         [logoImageView sd_setImageWithURL:[NSURL URLWithString:[BASE_API stringByAppendingString:brand[@"logo"]]]
                          placeholderImage:PLACEHOLDERIMAGE];
         [button addSubview:logoImageView];

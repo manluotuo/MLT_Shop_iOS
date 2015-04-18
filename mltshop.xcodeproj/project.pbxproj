@@ -220,6 +220,11 @@
 		3353FA0A1AC9459000181EAA /* ForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3353FA091AC9459000181EAA /* ForumViewController.m */; };
 		3353FA0D1AC955E900181EAA /* ForumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3353FA0C1AC955E900181EAA /* ForumTableViewCell.m */; };
 		3354850A1AD6834B00E51DAF /* touming.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 335485091AD6834B00E51DAF /* touming.jpg */; };
+		335FCBCB1ADCB66500D01615 /* Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FCBC21ADCB66500D01615 /* Emoji.m */; };
+		335FCBCC1ADCB66500D01615 /* EmojiEmoticons.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FCBC41ADCB66500D01615 /* EmojiEmoticons.m */; };
+		335FCBCD1ADCB66500D01615 /* EmojiMapSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FCBC61ADCB66500D01615 /* EmojiMapSymbols.m */; };
+		335FCBCE1ADCB66500D01615 /* EmojiPictographs.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FCBC81ADCB66500D01615 /* EmojiPictographs.m */; };
+		335FCBCF1ADCB66500D01615 /* EmojiTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FCBCA1ADCB66500D01615 /* EmojiTransport.m */; };
 		3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */; };
 		3362E1FA1ABBF9E000D0704B /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E1F81ABBF9E000D0704B /* SIAlertView.m */; };
 		3362E2CB1ABC4CC900D0704B /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E2A21ABC4CC900D0704B /* CycleScrollView.m */; };
@@ -235,7 +240,14 @@
 		337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */; };
 		337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */; };
 		337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E91AC02195000CAF14 /* RFToolbarButton.m */; };
+		33971F731AE1FE93009AAB8D /* ForumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33971F721AE1FE93009AAB8D /* ForumModel.m */; };
+		33971F761AE1FF24009AAB8D /* ContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33971F751AE1FF24009AAB8D /* ContentModel.m */; };
+		33971F791AE2059E009AAB8D /* AnswerTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33971F781AE2059E009AAB8D /* AnswerTwoTableViewCell.m */; };
+		33971F7C1AE22B48009AAB8D /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33971F7B1AE22B48009AAB8D /* ContentViewController.m */; };
+		33971F7F1AE22C6C009AAB8D /* ForumRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33971F7E1AE22C6C009AAB8D /* ForumRootViewController.m */; };
 		339AEB041ACA693200F8ED3B /* OrderFootTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 339AEB031ACA693200F8ED3B /* OrderFootTableViewCell.m */; };
+		33A5F79E1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A5F79D1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.m */; };
+		33A5F7A11AE1F57600A3B0C1 /* ContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A5F7A01AE1F57600A3B0C1 /* ContentTableViewCell.m */; };
 		33BA87BD1ACE94AD0087CE34 /* JPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BA87BC1ACE94AD0087CE34 /* JPushViewController.m */; };
 		33BA87C01ACF89390087CE34 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BA87BF1ACF89390087CE34 /* CommentViewController.m */; };
 		33BA88011ACFE1600087CE34 /* GoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BA88001ACFE1600087CE34 /* GoodsDetail.m */; };
@@ -725,6 +737,16 @@
 		3353FA0B1AC955E900181EAA /* ForumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumTableViewCell.h; sourceTree = "<group>"; };
 		3353FA0C1AC955E900181EAA /* ForumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumTableViewCell.m; sourceTree = "<group>"; };
 		335485091AD6834B00E51DAF /* touming.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = touming.jpg; sourceTree = "<group>"; };
+		335FCBC11ADCB66500D01615 /* Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emoji.h; sourceTree = "<group>"; };
+		335FCBC21ADCB66500D01615 /* Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emoji.m; sourceTree = "<group>"; };
+		335FCBC31ADCB66500D01615 /* EmojiEmoticons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiEmoticons.h; sourceTree = "<group>"; };
+		335FCBC41ADCB66500D01615 /* EmojiEmoticons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiEmoticons.m; sourceTree = "<group>"; };
+		335FCBC51ADCB66500D01615 /* EmojiMapSymbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiMapSymbols.h; sourceTree = "<group>"; };
+		335FCBC61ADCB66500D01615 /* EmojiMapSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiMapSymbols.m; sourceTree = "<group>"; };
+		335FCBC71ADCB66500D01615 /* EmojiPictographs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiPictographs.h; sourceTree = "<group>"; };
+		335FCBC81ADCB66500D01615 /* EmojiPictographs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiPictographs.m; sourceTree = "<group>"; };
+		335FCBC91ADCB66500D01615 /* EmojiTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTransport.h; sourceTree = "<group>"; };
+		335FCBCA1ADCB66500D01615 /* EmojiTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTransport.m; sourceTree = "<group>"; };
 		3362E1F61ABBF9E000D0704B /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
 		3362E1F71ABBF9E000D0704B /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
 		3362E1F81ABBF9E000D0704B /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
@@ -751,8 +773,22 @@
 		337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFKeyboardToolbar.m; sourceTree = "<group>"; };
 		337B33E81AC02195000CAF14 /* RFToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFToolbarButton.h; sourceTree = "<group>"; };
 		337B33E91AC02195000CAF14 /* RFToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFToolbarButton.m; sourceTree = "<group>"; };
+		33971F711AE1FE93009AAB8D /* ForumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumModel.h; sourceTree = "<group>"; };
+		33971F721AE1FE93009AAB8D /* ForumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumModel.m; sourceTree = "<group>"; };
+		33971F741AE1FF23009AAB8D /* ContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentModel.h; sourceTree = "<group>"; };
+		33971F751AE1FF24009AAB8D /* ContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentModel.m; sourceTree = "<group>"; };
+		33971F771AE2059E009AAB8D /* AnswerTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTwoTableViewCell.h; sourceTree = "<group>"; };
+		33971F781AE2059E009AAB8D /* AnswerTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTwoTableViewCell.m; sourceTree = "<group>"; };
+		33971F7A1AE22B48009AAB8D /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		33971F7B1AE22B48009AAB8D /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		33971F7D1AE22C6C009AAB8D /* ForumRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumRootViewController.h; sourceTree = "<group>"; };
+		33971F7E1AE22C6C009AAB8D /* ForumRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumRootViewController.m; sourceTree = "<group>"; };
 		339AEB021ACA693200F8ED3B /* OrderFootTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFootTableViewCell.h; sourceTree = "<group>"; };
 		339AEB031ACA693200F8ED3B /* OrderFootTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFootTableViewCell.m; sourceTree = "<group>"; };
+		33A5F79C1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerOneTableViewCell.h; sourceTree = "<group>"; };
+		33A5F79D1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerOneTableViewCell.m; sourceTree = "<group>"; };
+		33A5F79F1AE1F57600A3B0C1 /* ContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTableViewCell.h; sourceTree = "<group>"; };
+		33A5F7A01AE1F57600A3B0C1 /* ContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTableViewCell.m; sourceTree = "<group>"; };
 		33BA87BB1ACE94AD0087CE34 /* JPushViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushViewController.h; sourceTree = "<group>"; };
 		33BA87BC1ACE94AD0087CE34 /* JPushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPushViewController.m; sourceTree = "<group>"; };
 		33BA87BE1ACF89390087CE34 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
@@ -1376,6 +1412,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				335FCBC01ADCB66500D01615 /* Emoji */,
 				33E49EDC1AD0FFD400192DF8 /* Classes */,
 				337B33E31AC02195000CAF14 /* RFKeyboardToolbar */,
 				33D621DC1ABDA6F8009D86A1 /* QFHttpRequest */,
@@ -1815,6 +1852,10 @@
 		3353FA051AC93FE800181EAA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				33971F711AE1FE93009AAB8D /* ForumModel.h */,
+				33971F721AE1FE93009AAB8D /* ForumModel.m */,
+				33971F741AE1FF23009AAB8D /* ContentModel.h */,
+				33971F751AE1FF24009AAB8D /* ContentModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1824,6 +1865,12 @@
 			children = (
 				3353FA0B1AC955E900181EAA /* ForumTableViewCell.h */,
 				3353FA0C1AC955E900181EAA /* ForumTableViewCell.m */,
+				33A5F79F1AE1F57600A3B0C1 /* ContentTableViewCell.h */,
+				33A5F7A01AE1F57600A3B0C1 /* ContentTableViewCell.m */,
+				33A5F79C1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.h */,
+				33A5F79D1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.m */,
+				33971F771AE2059E009AAB8D /* AnswerTwoTableViewCell.h */,
+				33971F781AE2059E009AAB8D /* AnswerTwoTableViewCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1833,8 +1880,29 @@
 			children = (
 				3353FA081AC9459000181EAA /* ForumViewController.h */,
 				3353FA091AC9459000181EAA /* ForumViewController.m */,
+				33971F7D1AE22C6C009AAB8D /* ForumRootViewController.h */,
+				33971F7E1AE22C6C009AAB8D /* ForumRootViewController.m */,
+				33971F7A1AE22B48009AAB8D /* ContentViewController.h */,
+				33971F7B1AE22B48009AAB8D /* ContentViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		335FCBC01ADCB66500D01615 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				335FCBC11ADCB66500D01615 /* Emoji.h */,
+				335FCBC21ADCB66500D01615 /* Emoji.m */,
+				335FCBC31ADCB66500D01615 /* EmojiEmoticons.h */,
+				335FCBC41ADCB66500D01615 /* EmojiEmoticons.m */,
+				335FCBC51ADCB66500D01615 /* EmojiMapSymbols.h */,
+				335FCBC61ADCB66500D01615 /* EmojiMapSymbols.m */,
+				335FCBC71ADCB66500D01615 /* EmojiPictographs.h */,
+				335FCBC81ADCB66500D01615 /* EmojiPictographs.m */,
+				335FCBC91ADCB66500D01615 /* EmojiTransport.h */,
+				335FCBCA1ADCB66500D01615 /* EmojiTransport.m */,
+			);
+			path = Emoji;
 			sourceTree = "<group>";
 		};
 		3362E1F51ABBF9E000D0704B /* SIAlertView */ = {
@@ -2239,6 +2307,7 @@
 				26BE3AA11A170421009F37B4 /* SGAlertMenu.m in Sources */,
 				33BA88011ACFE1600087CE34 /* GoodsDetail.m in Sources */,
 				331612201AB02E4400F47730 /* CommentModel.m in Sources */,
+				335FCBCD1ADCB66500D01615 /* EmojiMapSymbols.m in Sources */,
 				262E1EE01A5836A100C29059 /* DataSigner.m in Sources */,
 				26BE3AC61A173739009F37B4 /* KKIconButton.m in Sources */,
 				26BE3A9F1A170421009F37B4 /* ViewPagerController.m in Sources */,
@@ -2284,8 +2353,11 @@
 				265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */,
 				26BE3A911A170421009F37B4 /* NSDate-Utilities.m in Sources */,
 				33D621E21ABDA6F8009D86A1 /* HttpRequestManager.m in Sources */,
+				335FCBCC1ADCB66500D01615 /* EmojiEmoticons.m in Sources */,
 				3330F3041AC11B0400EEC898 /* ServiceViewController.m in Sources */,
 				263386611A52FFEA00C94D8F /* SVWebViewController.m in Sources */,
+				33971F731AE1FE93009AAB8D /* ForumModel.m in Sources */,
+				33971F761AE1FF24009AAB8D /* ContentModel.m in Sources */,
 				26BE3A971A170421009F37B4 /* UIViewController+ImageBackButton.m in Sources */,
 				3362E2CB1ABC4CC900D0704B /* CycleScrollView.m in Sources */,
 				26DE7FCF1A2AE857007F4B16 /* ProfileViewController.m in Sources */,
@@ -2307,27 +2379,34 @@
 				33D621CA1ABD5A5F009D86A1 /* LimitViewController.m in Sources */,
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
 				26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */,
+				33A5F7A11AE1F57600A3B0C1 /* ContentTableViewCell.m in Sources */,
 				262E1EE41A5836A100C29059 /* openssl_wrapper.m in Sources */,
 				263D3E3C1A4E6BEA004D8181 /* MultiTablesView.m in Sources */,
 				26BE3A9A1A170421009F37B4 /* README.md in Sources */,
+				335FCBCB1ADCB66500D01615 /* Emoji.m in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
+				33971F791AE2059E009AAB8D /* AnswerTwoTableViewCell.m in Sources */,
 				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,
 				2633866A1A52FFEA00C94D8F /* SVWebViewControllerActivity.m in Sources */,
 				263386681A52FFEA00C94D8F /* SVWebViewControllerActivitySafari.m in Sources */,
 				33C667411AB67476005ACDD5 /* BonusListTableViewCell.m in Sources */,
 				26435AB31A1EBDB600E117A0 /* FirstHelpViewController.m in Sources */,
+				33971F7F1AE22C6C009AAB8D /* ForumRootViewController.m in Sources */,
 				266FA8001A134A72000C2AAE /* main.m in Sources */,
 				331612241AB02E6900F47730 /* CommentTableViewCell.m in Sources */,
+				335FCBCE1ADCB66500D01615 /* EmojiPictographs.m in Sources */,
 				33D621D01ABD9FA6009D86A1 /* HuoDongViewController.m in Sources */,
 				26BE3AA21A170421009F37B4 /* SGBaseMenu.m in Sources */,
 				26EC862E1A65434400307120 /* OrderListViewController.m in Sources */,
 				26BE3A991A170421009F37B4 /* NSString+FontAwesome.m in Sources */,
 				26BE3A981A170421009F37B4 /* FAImageView.m in Sources */,
 				337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */,
+				33A5F79E1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.m in Sources */,
 				26BE3AC21A173739009F37B4 /* FAInfoButton.m in Sources */,
 				331612341AB0503F00F47730 /* CollectTableViewCell.m in Sources */,
 				26BE3AC11A173739009F37B4 /* FAIconButton.m in Sources */,
 				262E1EE61A5836A100C29059 /* RSADataVerifier.m in Sources */,
+				335FCBCF1ADCB66500D01615 /* EmojiTransport.m in Sources */,
 				26BE3AA41A170421009F37B4 /* SGMultiMenu.m in Sources */,
 				337B33EC1AC02195000CAF14 /* RFToolbarButton.m in Sources */,
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
@@ -2350,6 +2429,7 @@
 				26BB7D321A6B5797002F4030 /* BrandListViewController.m in Sources */,
 				33C656A11AC25EC8004C16C3 /* AppDelegate.m in Sources */,
 				26BE3AE71A197865009F37B4 /* MMViewController.m in Sources */,
+				33971F7C1AE22B48009AAB8D /* ContentViewController.m in Sources */,
 				26BE3A9E1A170421009F37B4 /* ScrollCellUIView.m in Sources */,
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
 				266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */,

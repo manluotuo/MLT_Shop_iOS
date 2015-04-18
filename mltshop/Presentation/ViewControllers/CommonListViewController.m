@@ -274,10 +274,11 @@
         return ;
     }
     __weak CommonListViewController *weakSelf = self;
+
     
     NSMutableArray *data = [DataTrans getDataArrayWithExtendData:responseObject];
     
-    NSLog(@"new data : %ld",[data count]);
+//    NSLog(@"new data : %ld",[data count]);
     // 大于20条清空列表
     //    if ([data count] >= 20) {
     //        self.dataSource = [[NSMutableArray alloc]init];
@@ -332,7 +333,6 @@
         // TODO: little ugly because can't addObject
         weakSelf.dataSource = [[NSMutableArray alloc]initWithArray:weakSelf.dataSource];
         for (NSDictionary *object in responseObject) {
-            NSLog(@"%@",object);
             [weakSelf.dataSource addObject:object];
             [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataSource.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
         }
@@ -341,13 +341,15 @@
         
         //        [self makeMaxAndMinID];
         
-        
-    }else{
-        if ([self.dataSource count] > 0 ) {
-            [weakSelf.tableView.infiniteScrollingView setTitle:T(@"全部加载完成") forState:SVInfiniteScrollingStateStopped];
-            [weakSelf.tableView.infiniteScrollingView setEnabled:NO];
-        }
     }
+//    }else{
+//        if ([self.dataSource count] > 0 ) {
+//
+//            [weakSelf.tableView.infiniteScrollingView setTitle:T(@"全部加载完成") forState:SVInfiniteScrollingStateStopped];
+//            
+//            [weakSelf.tableView.infiniteScrollingView setEnabled:NO];
+//        }
+//    }
 }
 
 

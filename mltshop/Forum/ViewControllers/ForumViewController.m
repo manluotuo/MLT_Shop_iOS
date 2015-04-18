@@ -47,6 +47,7 @@
 }
 
 - (void)customNavigationBar {
+    
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 64)];
     [self.view addSubview:headView];
     
@@ -62,6 +63,8 @@
     [backButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
     [headView addSubview:backButton];
+    
+//    FAHoverButton *postButton = [FAHoverButton allo] initWi
     
     UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, WIDTH, 30)];
     titleLable.textAlignment = UIBaselineAdjustmentAlignCenters;
@@ -127,7 +130,7 @@
 /** 创建View */
 - (void)createUI {
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, TOTAL_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -H_20, WIDTH, TOTAL_HEIGHT+H_20) style:UITableViewStyleGrouped];
         self.tableView.backgroundColor = REDCOLOR;
     UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pic_background"]];
     [image setFrame:self.tableView.bounds];

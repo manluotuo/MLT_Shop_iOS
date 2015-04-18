@@ -123,7 +123,7 @@
 {
     CGFloat x = rect.origin.x * (index % preLine * 2 + 1) + rect.size.width * (index % preLine) ;
     CGFloat y = rect.origin.y * (floor(index / preLine) * 2 + 1) + rect.size.height * floor(index / preLine);
-    return CGRectMake( x, y, rect.size.width, rect.size.height);
+    return CGRectMake(x, y, rect.size.width, rect.size.height);
 }
 
 + (NSString *)getSepString:(NSString *)inputString

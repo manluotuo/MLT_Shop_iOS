@@ -17,3 +17,10 @@ pod 'BlocksKit',	'2.2.5'
 #pod 'AVOSCloud',	'~>2.6.7'
 pod 'FXBlurView',	'1.6.3'
 pod 'UMengAnalytics-NO-IDFA'
+target 'FSMediaPicker', :exclusive => true do
+    pod "FSMediaPicker", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+    pod "FSMediaPicker", :path => "../"
+end

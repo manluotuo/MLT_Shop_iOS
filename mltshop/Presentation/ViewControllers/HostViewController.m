@@ -23,6 +23,7 @@
 #import "WebViewController.h"
 #import "GoodsDetailViewController.h"
 #import "ForumViewController.h"
+#import "ForumRootViewController.h"
 
 #import "JPushViewController.h"
 #import "XXYNavigationController.h"
@@ -121,7 +122,7 @@
     
     /** 论坛入口按钮 */
     // TODO: 论坛按钮需要改进
-    [self createForumButton];
+//    [self createForumButton];
 
 }
 
@@ -328,6 +329,7 @@
         default:
             return value;
     }
+    
 }
 
 - (NSArray *)viewPager:(ViewPagerController *)viewPager valueArrayForOption:(ViewPagerOption)option
@@ -336,7 +338,6 @@
     for (int index=0; index<[self.tabArray count]; index++) {
         NSDictionary *rowData  = [self.tabArray objectAtIndex:index];
         [result addObject:INT(TABS_VIEW_WIDTH)];
-        
 //        自适应宽度
 //        NSString *name = rowData[@"name"];
 //        CGSize size = [name sizeWithHeight:H_16 andFont:FONT_14];
@@ -370,14 +371,14 @@
 
 - (void)onForumButtonClick {
     
-    ForumViewController *forumView = [[ForumViewController alloc] init];
-//    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
+    ForumRootViewController *forumView = [[ForumRootViewController alloc] init];
+    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
 //    self.tabbar = [[UITabBarController alloc] init];
 //    self.tabbar.viewControllers = @[nav];
 //     翻转 UIModalTransitionStyleFlipHorizontal
 //    tabbar.tabBar.hidden = YES;
-    [forumView setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentViewController:forumView animated:YES completion:^{
+    [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:nav animated:NO completion:^{
         [MobClick event:UM_FORUM];
     }];
     

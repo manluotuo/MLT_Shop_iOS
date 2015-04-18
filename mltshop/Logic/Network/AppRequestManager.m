@@ -10,12 +10,15 @@
 #import "AppDelegate.h"
 #import "Me.h"
 #import "AFURLSessionManager.h"
+#import <AFNetworking/AFNetworking.h>
+
 
 static NSString * const kAppNetworkAPIBaseURLString = BASE_API;
 static AppRequestManager *_sharedManager = nil;
 static dispatch_once_t onceToken;
 
-@implementation AppRequestManager
+@implementation AppRequestManager  {
+}
 
 // 单例 HttpManager
 + (AppRequestManager *)sharedManager {
@@ -389,27 +392,15 @@ static dispatch_once_t onceToken;
 /** 增加评论 */
 - (void)getCommentAddWithDict:(NSDictionary *)dict andBlock:(void (^)(id responseObject, NSError *error))block {
     NSString *postUrl = API_COMMENT_ADD;
-//    NSString *postUrl = @"http://192.168.1.199/ecmobile/?url=/comment/add";
     
-    NSDictionary *postDict = @{@"goods_id": @"253",
+    NSDictionary *postDict = @{@"goods_id": dict[@"goods_id"],
                                @"session": @{@"uid": [DataTrans noNullStringObj: XAppDelegate.me.userId],
                                              @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
                                              },
                                @"comment_rank": dict[@"comment_rank"],
-                               @"content": @"好"
+                               @"content": dict[@"content"]
                                };
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager POST:@"http://192.168.1.199/ecmobile/?url=/comment/add" parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"%@", dict);
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"%@", error);
-//
-//    }];
-    
-    NSLog(@"%@", postDict);
+
     [[AppRequestManager sharedManager] POST:postUrl parameters:postDict success:^(NSURLSessionDataTask *task, id responseObject) {
 
         if ([DataTrans isCorrectResponseObject:responseObject]) {
@@ -496,7 +487,7 @@ static dispatch_once_t onceToken;
 
 /** 取消收藏 */
 - (void)getDeleteCollectRecId:(NSString *)recId andBlcok:(void (^)(id responseObject, NSError *error))block {
-    
+
     NSString *postURL = API_COLLECT_DELETE;
     NSDictionary *postDict = @{@"session": @{@"uid": [DataTrans
                                                       noNullStringObj: XAppDelegate.me.userId],

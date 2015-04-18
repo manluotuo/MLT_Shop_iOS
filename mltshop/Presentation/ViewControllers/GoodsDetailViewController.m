@@ -591,8 +591,9 @@
     
     [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
-            __weak GoodsDetailViewController *weakSelf = self;
-            [weakSelf.fixedView.pullToRefreshView stopAnimating];
+//            __weak GoodsDetailViewController *weakSelf = self;
+//            [weakSelf.fixedView.pullToRefreshView stopAnimating];
+            [self refreshTable];
             self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];
             [self refreshViewWithData];
         }
@@ -697,6 +698,16 @@
     }
 }
 
+- (void)refreshTable
+{
+    __weak GoodsDetailViewController *weakSelf = self;
+    //    [weakSelf.tableView.pullToRefreshView setTitle:T(@">_< 努力加载中..") forState:SVPullToRefreshStateAll];
+    int64_t delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.fixedView.pullToRefreshView stopAnimating];
+    });
+}
 
 
 - (void)chooseSpecAction
