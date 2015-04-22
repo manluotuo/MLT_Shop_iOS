@@ -371,6 +371,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
 /** 确认收货/立即付款按钮点击事件 */
 - (void)onBtnCLick {
     

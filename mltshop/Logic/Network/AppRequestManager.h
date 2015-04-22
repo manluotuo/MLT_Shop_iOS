@@ -33,6 +33,13 @@
 #define API_COMMENT_ADD             @"/ecmobile/?url=/comment/add"
 /** 限时特价 */
 
+/** 获取用户信息 */
+#define API_USER_INFO               @"/home/user/info"
+/** 更改用户昵称 */
+#define API_CHANGE_NICK_NAME        @" /home/user/changeNickName"
+/** 更改用户的头像 */
+#define API_CHANGE_ICON             @"/home/user/changeHeaderPicture"
+
 
 #define API_ADDRESS_LIST_PATH       @"/ecmobile/?url=/address/list"
 #define API_ADDRESS_CREATE_PATH     @"/ecmobile/?url=/address/add"

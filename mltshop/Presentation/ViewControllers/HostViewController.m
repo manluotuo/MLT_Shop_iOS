@@ -34,7 +34,11 @@
 @property (nonatomic, strong)UITabBarController *tabbar;
 @end
 
-@implementation HostViewController
+@implementation HostViewController  {
+    NSInteger indexNum;
+    CGFloat countSet;
+    FAHoverButton *forumButton;
+}
 @synthesize tabArray;
 @synthesize currentCategoryID;
 @synthesize leftDrawerAvatarButton;
@@ -72,7 +76,7 @@
         
     }
     
-//  TODO click logo and refresh current view
+    //  TODO click logo and refresh current view
     UILabel *logoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, TITLE_HEIGHT)];
     [logoLabel setText:T(@"漫骆驼")];
     [logoLabel setTextAlignment:NSTextAlignmentCenter];
@@ -95,19 +99,19 @@
         }
     }else{
         self.tabArray = [[NSMutableArray alloc]initWithArray:
-                        @[@{@"name": @"首页", @"catId":STR_INT(0)},
-                          @{@"name": @"服饰鞋帽", @"catId":STR_INT(4)},
-                          @{@"name": @"毛绒玩具", @"catId":STR_INT(7)},
-                          @{@"name": @"模型雕塑", @"catId":STR_INT(3)},
-                          @{@"name": @"精品挂饰", @"catId":STR_INT(6)},
-                          @{@"name": @"卡通箱包", @"catId":STR_INT(9)},
-                          @{@"name": @"生活娱乐", @"catId":STR_INT(2)}]
+                         @[@{@"name": @"首页", @"catId":STR_INT(0)},
+                           @{@"name": @"服饰鞋帽", @"catId":STR_INT(4)},
+                           @{@"name": @"毛绒玩具", @"catId":STR_INT(7)},
+                           @{@"name": @"模型雕塑", @"catId":STR_INT(3)},
+                           @{@"name": @"精品挂饰", @"catId":STR_INT(6)},
+                           @{@"name": @"卡通箱包", @"catId":STR_INT(9)},
+                           @{@"name": @"生活娱乐", @"catId":STR_INT(2)}]
                          ];
     }
     
-
     
-//    NSLog(@"Host view tabarray: %@",self.tabArray);
+    
+    //    NSLog(@"Host view tabarray: %@",self.tabArray);
     
     // TODO 机器默认的分类
     // 可以考虑写入数据库 用户定制完 也从数据库读取
@@ -122,16 +126,18 @@
     
     /** 论坛入口按钮 */
     // TODO: 论坛按钮需要改进
-//    [self createForumButton];
-
+    [self createForumButton];
+    
 }
 
 /** 创建论坛入口按钮 */
 - (void)createForumButton {
     
-    FAHoverButton *forumButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(WIDTH-H_80, TOTAL_HEIGHT-H_80, H_50, H_50)];
-    [forumButton setTitle:[NSString fontAwesomeIconStringForEnum:FAat] forState:UIControlStateNormal];
-    [forumButton setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
+    forumButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(WIDTH-H_80, TOTAL_HEIGHT-H_80, H_50, H_50)];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(12, 12, 23, 23)];
+    image.image = [UIImage imageNamed:T(@"ic_add_white_24dp")];
+    [forumButton addSubview:image];
+    [forumButton setBackgroundColor:ORANGECOLOR];
     [forumButton setRounded];
     [forumButton setIconFont:FONT_AWESOME_30];
     [forumButton addTarget:self action:@selector(onForumButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -147,7 +153,7 @@
 {
     [super viewWillAppear:animated];
     [self navigationGreenStyle];
-//    [self disableScroll];
+    //    [self disableScroll];
     [MobClick beginLogPageView:@"PageOne"];
 }
 
@@ -163,7 +169,7 @@
     self.leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
     [self.leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
     [self.leftDrawerAvatarButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
-
+    
     [self.leftDrawerAvatarButton addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc]initWithCustomView:self.leftDrawerAvatarButton];
@@ -177,7 +183,7 @@
 
 -(void)setupRightMenuButton{
     FAHoverButton *rightButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
-
+    
     [rightButton setTitle:[NSString fontAwesomeIconStringForEnum:FAQrcode] forState:UIControlStateNormal];
     [rightButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
     
@@ -198,7 +204,7 @@
     ColorNavigationController *popNavController = [[ColorNavigationController alloc]initWithRootViewController:viewController];
     
     [self.navigationController presentViewController:popNavController animated:YES completion:^{}];
-
+    
 }
 
 /////////////////////////////////////////////////////
@@ -232,6 +238,7 @@
     
     if (index == HOST_LOCAL_TAB) {
         ListMainViewController *listVC = [[ListMainViewController alloc]initWithNibName:nil bundle:nil];
+        listVC.passDelegate = self;
         return listVC;
     }else{
         HostListViewController *listOnlineVC = [[HostListViewController alloc]initWithNibName:nil bundle:nil];
@@ -239,18 +246,19 @@
         listOnlineVC.delegateForHostView = self;
         return listOnlineVC;
     }
-
+    
 }
 
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
+    
     if ([value isEqualToString:SIGNAL_BARCODE_SCAN_SUCCESS]) {
         NSLog(@"data %@",data);
         
-//        HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
-//        HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
-//        HUD.text = T(@"正在为你打开页面");
-//        [HUD showInView:self.view];
+        //        HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+        //        HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+        //        HUD.text = T(@"正在为你打开页面");
+        //        [HUD showInView:self.view];
         
         id parsed = [DataTrans parseDataFromURL:data];
         if ([parsed isKindOfClass:[SearchModel class]]) {
@@ -266,7 +274,7 @@
                 [self.navigationController presentViewController:nav animated:YES completion:nil];
             }
             
-        }else{
+        } else {
             if (DictionaryHasValue(parsed)) {
                 if ([parsed[@"type"] isEqualToString:@"url"]) {
                     NSString *urlString = parsed[@"id"];
@@ -285,13 +293,25 @@
                     [VC setGoodsData:theGoods];
                     
                     [self.navigationController presentViewController:VC animated:YES completion:^{
-//                        [HUD removeFromSuperview];
+                        //                        [HUD removeFromSuperview];
                     }];
                 }
             }
-            
-            
-            
+        }
+    }
+    if ([value isEqualToString:@"40000"]) {
+        if (forumButton.y == TOTAL_HEIGHT-H_80) {
+            [UIView animateWithDuration:0.3 animations:^{
+                forumButton.y = TOTAL_HEIGHT + H_10;
+            }];
+        }
+    }
+    
+    if ([value isEqualToString:@"40001"]) {
+        if (forumButton.y == TOTAL_HEIGHT + H_10) {
+            [UIView animateWithDuration:0.3 animations:^{
+                forumButton.y = TOTAL_HEIGHT - H_80;
+            }];
         }
     }
 }
@@ -302,6 +322,7 @@
 
 - (void)viewPager:(ViewPagerController *)viewPager didChangeTabToIndex:(NSUInteger)index
 {
+    indexNum = (NSInteger)index;
     NSLog(@"didChangeTabToIndex index: %lu",(unsigned long)index);
 }
 
@@ -338,12 +359,12 @@
     for (int index=0; index<[self.tabArray count]; index++) {
         NSDictionary *rowData  = [self.tabArray objectAtIndex:index];
         [result addObject:INT(TABS_VIEW_WIDTH)];
-//        自适应宽度
-//        NSString *name = rowData[@"name"];
-//        CGSize size = [name sizeWithHeight:H_16 andFont:FONT_14];
-//        [result addObject:INT(size.width + H_26)];
+        //        自适应宽度
+        //        NSString *name = rowData[@"name"];
+        //        CGSize size = [name sizeWithHeight:H_16 andFont:FONT_14];
+        //        [result addObject:INT(size.width + H_26)];
     }
-
+    
     switch (option) {
         case ViewPagerOptionTabWidthArray:
             return result;
@@ -368,17 +389,18 @@
     }
 }
 
-
 - (void)onForumButtonClick {
     
-    ForumRootViewController *forumView = [[ForumRootViewController alloc] init];
-    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
-//    self.tabbar = [[UITabBarController alloc] init];
-//    self.tabbar.viewControllers = @[nav];
-//     翻转 UIModalTransitionStyleFlipHorizontal
-//    tabbar.tabBar.hidden = YES;
-    [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    [self presentViewController:nav animated:NO completion:^{
+//    ForumRootViewController *forumView = [[ForumRootViewController alloc] init];
+//    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
+    ForumViewController *forVC = [[ForumViewController alloc] init];
+    XXYNavigationController *navc = [[XXYNavigationController alloc] initWithRootViewController:forVC];
+    //    self.tabbar = [[UITabBarController alloc] init];
+    //    self.tabbar.viewControllers = @[nav];
+    //     翻转 UIModalTransitionStyleFlipHorizontal
+    //    tabbar.tabBar.hidden = YES;
+    [navc setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:navc animated:YES completion:^{
         [MobClick event:UM_FORUM];
     }];
     

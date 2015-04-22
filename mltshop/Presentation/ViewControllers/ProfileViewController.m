@@ -27,10 +27,12 @@
 #import "BonusVC/BonusViewController.h"
 #import "ServiceViewController.h"
 
+/** 选择图片 */
+#import "FSMediaPicker.h"
 
 /** 个人中心 */
 
-@interface ProfileViewController ()<UIScrollViewDelegate>
+@interface ProfileViewController ()<UIScrollViewDelegate, FSMediaPickerDelegate>
 
 @property(nonatomic, strong)UIView *avatarView;
 @property(nonatomic, strong)UIScrollView *scrollView;
@@ -165,7 +167,8 @@
     // 头像
     self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
     [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
-    
+    [self.avatarButton.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
+                                       placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
     [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
     //    [self.avatarButton addSubview:editIcon];
     [self.avatarView addSubview:self.avatarButton];
@@ -392,8 +395,20 @@
     self.avatarView.y = AVATAR_Y_OFFSET + scrollView.contentOffset.y/2;
 }
 
+
+/** 选择头型上传 */
 - (void)avatarAction
 {
+    FSMediaPicker *mediaPicker = [[FSMediaPicker alloc] init];
+    mediaPicker.mediaType = FSMediaTypePhoto;
+    mediaPicker.editMode = FSEditModeCircular;
+    mediaPicker.delegate = self;
+    [mediaPicker showFromView:self.avatarButton];
+    return;
+   
+    /**
+     
+    已改为上传从本地上传头像
     NSArray *imgs = @[@"F001",@"F002",@"F003",@"F004",@"F005",@"F006",@"F007",@"F008",@"F009",
                       @"F010",@"F011",@"F012",@"M001",@"M002",@"M003",@"M004",@"M005",@"M006",
                       @"M007",@"M008",@"M009",@"M010",@"M011",@"M012",@"avatarIronMan"];
@@ -410,11 +425,65 @@
         theMe.avatarURL =  imgs[index];
         MRSave();
         XAppDelegate.me = theMe;
-        
+        NSLog(@"%@", XAppDelegate.me.avatarURL);
         [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
         [self.passDelegate passSignalValue:SIGNAL_AVATAR_UPLOAD_DONE andData:nil];
+    }]; 
+     */
+}
+
+/** 敏！！！！！！ */
+- (void)mediaPicker:(FSMediaPicker *)mediaPicker didFinishWithMediaInfo:(NSDictionary *)mediaInfo
+{
+    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
+    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
+    HUD.text = T(@"正在上传头像");
+    [HUD showInView:self.view];
+    
+    NSString *postUrl = @"http://192.168.1.199/home/user/changeHeaderPicture";
+    NSDictionary *postDict = @{@"userid": @"2032"};
+    NSData *imageData = UIImageJPEGRepresentation(mediaInfo.circularEditedImage, 0.0);
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:postUrl parameters:postDict constructingBodyWithBlock:^(id formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpg" mimeType:@"image/jpeg"];
     }];
     
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        /** 获取用户信息 */
+        NSString *httpUrl = @"http://192.168.1.199/home/user/info";
+        AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
+        rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
+        NSDictionary *postDict = @{@"userid": [DataTrans
+                                               noNullStringObj: XAppDelegate.me.userId]};
+        [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@", responseObject);
+            [HUD removeFromSuperview];
+            if ([responseObject[@"SUCESS"] integerValue] == 1) {
+            Me *theMe = [[ModelHelper sharedHelper]findOnlyMe];
+            theMe.avatarURL =  responseObject[@"data"][@"headerimg"];
+            MRSave();
+            XAppDelegate.me = theMe;
+            [self.avatarButton.avatarImageView setImage:mediaInfo.circularEditedImage];
+            [self.passDelegate passSignalValue:SIGNAL_AVATAR_UPLOAD_DONE andData:nil];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [HUD removeFromSuperview];
+            NSLog(@"%@",error);
+        }];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        [DataTrans showWariningTitle:T(@"头像上传失败\n请检查网络设置") andCheatsheet:ICON_TIMES andDuration:1.0f];
+        NSLog(@"fail :%@",error);
+    }];
+    
+    [operation start];
+    
+}
+
+- (void)mediaPickerDidCancel:(FSMediaPicker *)mediaPicker
+{
+    NSLog(@"%s",__FUNCTION__);
 }
 
 

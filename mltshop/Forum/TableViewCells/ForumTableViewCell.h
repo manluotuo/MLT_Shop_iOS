@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ForumModel.h"
 
 @interface ForumTableViewCell : UITableViewCell
 
-- (void)setData;
+- (void)setData:(ForumModel *)model;
 
 @end

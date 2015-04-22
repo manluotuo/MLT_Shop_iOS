@@ -11,6 +11,11 @@
 #import "ForumTableViewCell.h"
 #import "SVPullToRefresh.h"
 #import "CExpandHeader.h"
+#import "STAlertView.h"
+#import <AFNetworking/AFNetworking.h>
+#import "AppDelegate.h"
+#import "ForumModel.h"
+#import "PostViewController.h"
 
 @interface ForumViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -18,15 +23,20 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) CExpandHeader *header;
 @property (nonatomic, strong) UIImageView *headImage;
+@property (nonatomic, strong) STAlertView *stAlertView;
 
 @end
 
 @implementation ForumViewController {
     NSInteger _contentOffsetY;
+    NSInteger index;
+    FAHoverButton *forumButton;
+    NSInteger contentSet;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    index = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     [self.view setBackgroundColor:WHITECOLOR];
     self.navigationController.navigationBarHidden = YES;
@@ -35,16 +45,101 @@
     /** 创建导航栏 */
     [self customNavigationBar];
     /** 下拉刷新 */
-//    [self createRefresh];
+    [self createRefresh];
     /** 上拉加载 */
     [self createGetMoreData];
+    [self setNewData];
     self.commonListDelegate = self;
-
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-//    self.tableView.y = IOS7_CONTENT_OFFSET_Y;
-//    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
-
+    [self firstLogin];
+    
+    //    self.automaticallyAdjustsScrollViewInsets = NO;
+    //    self.tableView.y = IOS7_CONTENT_OFFSET_Y;
+    //    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
+    
 }
+
+- (void)firstLogin {
+    /** 获取用户信息 */
+    NSString *httpUrl = @"http://192.168.1.199/home/user/info";
+    AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
+    rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
+    NSDictionary *postDict = @{@"userid": [DataTrans
+                                           noNullStringObj: XAppDelegate.me.userId]};
+    [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject[@"SUCESS"] integerValue] == 1) {
+            NSString *str = responseObject[@"data"][@"nickname"];
+            NSLog(@"%@", str);
+            if (str.length == 0) {
+                [self setUserName];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+- (void)setUserName {
+    self.stAlertView = [[STAlertView alloc] initWithTitle:@"首次登陆，请设置昵称"
+                                                  message:@"请设置漫社区昵称，设置后不可修改"
+                                            textFieldHint:@"在此处输入昵称"
+                                           textFieldValue:nil
+                                        cancelButtonTitle:@"取消"
+                                        otherButtonTitles:@"确认"
+                                        cancelButtonBlock:^{
+                                            [self dismissViewControllerAnimated:YES completion:nil];
+                                        } otherButtonBlock:^(NSString *result){
+                                            if (result.length > 10) {
+                                                [DataTrans showWariningTitle:T(@"昵称应该在1-10个字符之间") andCheatsheet:nil andDuration:1.0f];
+                                                [self setUserName];
+                                                return;
+                                            }
+                                            if (result.length == 0) {
+                                                [DataTrans showWariningTitle:T(@"昵称应该在1-10个字符之间") andCheatsheet:nil andDuration:1.0f];
+                                                [self setUserName];
+                                            } else {
+                                                [self setNickName:result];
+                                            }
+                                        }];
+}
+
+- (void)setNewData {
+    NSString *httpUrl=@"http://192.168.1.199/home/post/home";
+    AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
+    rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
+    NSDictionary *postDict = @{@"page": [NSString stringWithFormat:@"%d", index],
+                               @"pagecount": @"20"};
+    [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject[@"SUCESS"] integerValue] == 1) {
+            [self.dataArray removeAllObjects];
+            for (NSDictionary *dict in responseObject[@"data"][@"data"]) {
+                ForumModel *model = [[ForumModel alloc] init];
+                [model setValuesForKeysWithDictionary:dict];
+                [self.dataArray addObject:model];
+            }
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+/** 设置昵称 */
+- (void)setNickName:(NSString *)nickName {
+    NSString *httpUrl=@"http://192.168.1.199/home/user/changeNickName";
+    AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
+    rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
+    NSDictionary *postDict = @{@"userid": @"2032",
+                               @"nickname": nickName};
+    [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)customNavigationBar {
     
@@ -63,8 +158,19 @@
     [backButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
     [headView addSubview:backButton];
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setFrame:CGRectMake(10, 25, 50, 30)];
+    [leftButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [headView addSubview:leftButton];
     
-//    FAHoverButton *postButton = [FAHoverButton allo] initWi
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setFrame:CGRectMake(WIDTH-80, 25, 80, 21)];
+    [rightButton addTarget:self action:@selector(onRightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [headView addSubview:rightButton];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-80+15, 25, 12+leftMargin, 21)];
+    image.image = [UIImage imageNamed:@""];
+    [rightButton addSubview:image];
+    
     
     UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, WIDTH, 30)];
     titleLable.textAlignment = UIBaselineAdjustmentAlignCenters;
@@ -86,6 +192,7 @@
 - (void)createGetMoreData {
     __weak ForumViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
+        index++;
         [weakSelf getMoreData];
     }];
 }
@@ -93,7 +200,6 @@
 - (void)refreshTable
 {
     __weak ForumViewController *weakSelf = self;
-    //    [weakSelf.tableView.pullToRefreshView setTitle:T(@">_< 努力加载中..") forState:SVPullToRefreshStateAll];
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -106,11 +212,6 @@
 - (void)getMoreData {
     
     __weak ForumViewController *weakSelf = self;
-    
-    // FIXME: 如果正在进行动画 那么不响应
-    //    if (weakSelf.tableView.infiniteScrollingView.state == SVInfiniteScrollingStateStopped) {
-    //
-    //    }
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -120,18 +221,18 @@
 }
 
 - (void)recomendNewItems {
-    
+    [self setNewData];
 }
 
 - (void)recomendOldItems {
-    
+    [self setNewData];
 }
 
 /** 创建View */
 - (void)createUI {
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -H_20, WIDTH, TOTAL_HEIGHT+H_20) style:UITableViewStyleGrouped];
-        self.tableView.backgroundColor = REDCOLOR;
+    self.tableView.backgroundColor = REDCOLOR;
     UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pic_background"]];
     [image setFrame:self.tableView.bounds];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
@@ -147,9 +248,12 @@
 /** 创建商城入口按钮 */
 - (void)createForumButton {
     
-    FAHoverButton *forumButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(WIDTH-H_80, TOTAL_HEIGHT-H_80, H_50, H_50)];
-    [forumButton setTitle:[NSString fontAwesomeIconStringForEnum:FAat] forState:UIControlStateNormal];
-    [forumButton setTitleColor:GRAYCOLOR forState:UIControlStateNormal];
+    forumButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(WIDTH-H_80, TOTAL_HEIGHT-H_80, H_50, H_50)];
+//    [forumButton setImage:[UIImage imageNamed:T(@"ic_add_white_24dp")] forState:UIControlStateNormal];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(12, 12, 23, 23)];
+    image.image = [UIImage imageNamed:T(@"ic_add_white_24dp")];
+    [forumButton addSubview:image];
+    [forumButton setBackgroundColor:ORANGECOLOR];
     [forumButton setRounded];
     [forumButton setIconFont:FONT_AWESOME_30];
     [forumButton addTarget:self action:@selector(onForumButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -157,9 +261,28 @@
     
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    contentSet = scrollView.contentOffset.y;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    NSLog(@"%f", scrollView.contentOffset.y);
+    if (contentSet < scrollView.contentOffset.y) {
+        if (forumButton.y == TOTAL_HEIGHT-H_80) {
+            [UIView animateWithDuration:0.3 animations:^{
+                forumButton.y = TOTAL_HEIGHT + H_10;
+            }];
+        }
+    } else {
+        
+        if (forumButton.y == TOTAL_HEIGHT + H_10) {
+            [UIView animateWithDuration:0.3 animations:^{
+                forumButton.y = TOTAL_HEIGHT - H_80;
+            }];
+        }
+    }
+    
+    
     if (scrollView.contentOffset.y > 0 && _contentOffsetY < scrollView.contentOffset.y && self.headImage.alpha < 1) {
         self.headImage.alpha += 0.02;
     }
@@ -177,11 +300,12 @@
         }];
     }
     _contentOffsetY = scrollView.contentOffset.y;
+
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -189,12 +313,13 @@
     if (!cell) {
         cell = [[ForumTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
     }
-    [cell setData];
+    ForumModel *model = self.dataArray[indexPath.row];
+    [cell setData:model];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 230;
+    return 240;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -216,6 +341,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)onRightBtnClick {
+    PostViewController *postVC = [[PostViewController alloc] init];
+    [self.navigationController pushViewController:postVC animated:YES];
+}
+
 - (void)onForumButtonClick {
     //    [self dismissViewControllerAnimated:YES completion:nil];
     ForumViewController *vc = [[ForumViewController alloc] init];
@@ -225,6 +355,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = YES;
 }
 
 @end

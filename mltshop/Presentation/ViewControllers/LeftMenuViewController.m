@@ -273,9 +273,17 @@
 - (void)refreshAvatarContainerView
 {
     self.nicknameLabel.text = XAppDelegate.me.username;
-    [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
-//    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
-//                                       placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
+    [self.avatarView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:XAppDelegate.me.avatarURL]
+                                       placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
+//    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"iconImage"]) {
+//        [self.avatarView.avatarImageView setImage:[[NSUserDefaults standardUserDefaults] valueForKey:@"iconImage"]];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"iconImage"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    } else {
+//      [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];  
+//    }
+//    [self.avatarView.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
+    
 
 }
 

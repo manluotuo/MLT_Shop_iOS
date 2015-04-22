@@ -10,4 +10,6 @@
 
 @interface ListMainViewController : MMViewController
 
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
+
 @end

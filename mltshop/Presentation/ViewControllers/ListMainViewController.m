@@ -18,6 +18,9 @@
 #import "GoodsDetailViewController.h"
 #import "CycleScrollView.h"
 #import "SVPullToRefresh.h"
+#import "FAHoverButton.h"
+#import "ForumRootViewController.h"
+#import "XXYNavigationController.h"
 
 static const NSInteger kTotalPageCount = 5;
 @interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate, PullListViewDelegate>
@@ -25,31 +28,45 @@ static const NSInteger kTotalPageCount = 5;
 @property(nonatomic, strong)UIScrollView *fixedView;
 @property (nonatomic, strong) GCPagedScrollView *pagedScrollView;
 @property (nonatomic , strong) CycleScrollView *mainScorllView;
+@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 
 @end
 
-@implementation ListMainViewController
+@implementation ListMainViewController {
+    CGFloat conuntSet;
+    BOOL select;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    select = YES;
     [self setupDataSource];
     [self createRefresh];
 }
-
 /*
-- (void)handleImageTap:(UIGestureRecognizer *)tap
-{
-    NSArray *items = [self.fixedData objectForKey:@"player"];
-    NSInteger tagag = tap.view.tag;
-    NSDictionary *item = items[tap.view.tag];
-    [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
-}
+ - (void)handleImageTap:(UIGestureRecognizer *)tap
+ {
+ NSArray *items = [self.fixedData objectForKey:@"player"];
+ NSInteger tagag = tap.view.tag;
+ NSDictionary *item = items[tap.view.tag];
+ [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
+ }
  */
-
-
-
-
+- (void)onForumButtonClick {
+    
+    ForumRootViewController *forumView = [[ForumRootViewController alloc] init];
+    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
+    //    self.tabbar = [[UITabBarController alloc] init];
+    //    self.tabbar.viewControllers = @[nav];
+    //     翻转 UIModalTransitionStyleFlipHorizontal
+    //    tabbar.tabBar.hidden = YES;
+    [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [self presentViewController:nav animated:NO completion:^{
+        [MobClick event:UM_FORUM];
+    }];
+    
+}
 -(void)passSignalValue:(NSString *)value andData:(id)data
 {
     if([value isEqualToString:SIGNAL_MAIN_PAGE_TAPPED] && data != nil){
@@ -87,13 +104,13 @@ static const NSInteger kTotalPageCount = 5;
             }
         }
     }
-
+    
 }
 
 - (void)createRefresh {
     __weak ListMainViewController *weakSelf = self;
     [weakSelf.fixedView addPullToRefreshWithActionHandler:^{
-//        [weakSelf refreshTable];
+        //        [weakSelf refreshTable];
     }];
 }
 
@@ -133,6 +150,11 @@ static const NSInteger kTotalPageCount = 5;
      */
     CGFloat fixedHeight = 0.0f;
     self.fixedView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, self.view.frame.size.height)];
+    self.fixedView.delegate = self;
+    self.rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    self.rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.fixedView addGestureRecognizer:self.rightSwipeGestureRecognizer];
+    
     [self.fixedView setBackgroundColor:WHITECOLOR];
     NSMutableArray *viewsArray = [@[] mutableCopy];
     for (NSString *key in [self.fixedData allKeys]) {
@@ -143,22 +165,22 @@ static const NSInteger kTotalPageCount = 5;
         if ([key isEqualToString:@"player"]) {
             CGFloat playerY = fixedHeight;
             CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
-/*
-            替换滚动试图
-            self.pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
-            self.pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-            self.pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
-            self.pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
-            self.pagedScrollView.maximumZoomScale = 3.0; //最大到3倍
-            self.pagedScrollView.clipsToBounds = YES;
-            self.pagedScrollView.scrollEnabled = YES;
-            self.pagedScrollView.pagingEnabled = YES;
-            self.pagedScrollView.delegate = self;
-            [self.pagedScrollView removeAllContentSubviews];
- */
+            /*
+             替换滚动试图
+             self.pagedScrollView = [[GCPagedScrollView alloc]initWithFrame:rect andPageControl:YES];
+             self.pagedScrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+             self.pagedScrollView.backgroundColor = GRAYEXLIGHTCOLOR;
+             self.pagedScrollView.minimumZoomScale = 1; //最小到0.3倍
+             self.pagedScrollView.maximumZoomScale = 3.0; //最大到3倍
+             self.pagedScrollView.clipsToBounds = YES;
+             self.pagedScrollView.scrollEnabled = YES;
+             self.pagedScrollView.pagingEnabled = YES;
+             self.pagedScrollView.delegate = self;
+             [self.pagedScrollView removeAllContentSubviews];
+             */
             CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
             for (int i = 0 ; i < [listData count]; i++) {
-
+                
                 UIImageView *page = [[UIImageView alloc]
                                      initWithFrame:scrollFrame];
                 [page setContentMode:UIViewContentModeScaleAspectFill];
@@ -166,19 +188,19 @@ static const NSInteger kTotalPageCount = 5;
                 [viewsArray addObject:page];
                 /*
                  替换滚动试图
-                // 点击事件
-                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageTap:)];
-                tap.cancelsTouchesInView = YES;
-                tap.numberOfTapsRequired = 1;
-                page.userInteractionEnabled = YES;
-                page.tag = i;
-                [page addGestureRecognizer:tap];
-
-                NSLog(@"%@", listData[i][@"photo"][@"thumb"]);
-                [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
-                [viewsArray addObject:page];
-                [self.pagedScrollView addContentSubview:page];
-                */
+                 // 点击事件
+                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleImageTap:)];
+                 tap.cancelsTouchesInView = YES;
+                 tap.numberOfTapsRequired = 1;
+                 page.userInteractionEnabled = YES;
+                 page.tag = i;
+                 [page addGestureRecognizer:tap];
+                 
+                 NSLog(@"%@", listData[i][@"photo"][@"thumb"]);
+                 [page sd_setImageWithURL:[NSURL URLWithString:listData[i][@"photo"][@"thumb"]]];
+                 [viewsArray addObject:page];
+                 [self.pagedScrollView addContentSubview:page];
+                 */
             }
             
             self.mainScorllView = [[CycleScrollView alloc] initWithFrame:rect animationDuration:3];
@@ -194,7 +216,7 @@ static const NSInteger kTotalPageCount = 5;
                 NSArray *items = [self.fixedData objectForKey:@"player"];
                 NSDictionary *item = items[pageIndex];
                 // TODO: 敏！
-// [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://192.168.1.107:8080/manluotuo/"];
+                // [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://192.168.1.107:8080/manluotuo/"];
                 [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
             };
             
@@ -213,21 +235,17 @@ static const NSInteger kTotalPageCount = 5;
             [self.fixedView addSubview:brandView];
             
             brandView.passDelegate = self;
-
+            
             fixedHeight += brandHeight;
             
         }
         //区域信息
         else if([key isEqualToString:@"area"]){
-            
-            
             for (NSDictionary *oneArea in listData) {
                 CGFloat height = AREA_FIX_HEIGHT;
                 if (StringHasValue(oneArea[@"title"])) {
                     height += H_30;
                 }
-                
-                
                 CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT*2, TOTAL_WIDTH, height);
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
                 [areaView initWithData:oneArea];
@@ -239,32 +257,48 @@ static const NSInteger kTotalPageCount = 5;
                  */
                 fixedHeight += height;
             }
-            
-        }else{
-            
         }
     }
-    
     [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
     [self.view addSubview:self.fixedView];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    conuntSet = scrollView.contentOffset.y;
+}
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+        if (conuntSet < scrollView.contentOffset.y) {
+            [self.passDelegate passSignalValue:@"40000" andData:nil];
+        } else {
+            
+            [self.passDelegate passSignalValue:@"40001" andData:nil];
+        }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    select = YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)handleSwipes:(UISwipeGestureRecognizer *)sender {
+    
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    
+}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

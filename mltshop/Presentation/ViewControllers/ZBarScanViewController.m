@@ -158,12 +158,6 @@
     }
 }
 
-
-- (void)requestDidFinishLoadingWithData:(NSData *)data {
-    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"%@", responseObject);
-}
-
 //数据请求成功
 - (void)httpRequestFinished:(HttpRequest *)request {
     
