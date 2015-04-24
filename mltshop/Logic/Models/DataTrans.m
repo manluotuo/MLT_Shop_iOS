@@ -233,6 +233,14 @@
     }
 }
 
++ (BOOL)noNullString:(NSString *)str {
+    if (str.length == 0) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 
 + (NSString *)stringFromVehicleStatus:(NSString *)statusType code:(NSInteger)code
 {

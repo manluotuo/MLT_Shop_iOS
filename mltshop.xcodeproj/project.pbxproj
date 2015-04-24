@@ -223,6 +223,9 @@
 		331639631AE8EDA300863428 /* icon_send_frs_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3316395B1AE8EDA300863428 /* icon_send_frs_bar.png */; };
 		331639671AE9114F00863428 /* bg_im_chat_face_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 331639661AE9114F00863428 /* bg_im_chat_face_bar.png */; };
 		331639691AE912A500863428 /* image_im_groupchat_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 331639681AE912A500863428 /* image_im_groupchat_bg.png */; };
+		3316396F1AE9E61B00863428 /* ForumDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3316396E1AE9E61B00863428 /* ForumDetailController.m */; };
+		331639721AE9E85D00863428 /* ForumDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331639711AE9E85D00863428 /* ForumDetailModel.m */; };
+		331639751AE9F4E400863428 /* ContentContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 331639741AE9F4E400863428 /* ContentContentModel.m */; };
 		3321EDD71AC5645300866FB9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD61AC5645300866FB9 /* libc++.dylib */; };
 		3321EDD91AC565A200866FB9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDD81AC565A200866FB9 /* AdSupport.framework */; };
 		3321EDDB1AC565B300866FB9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3321EDDA1AC565B300866FB9 /* CoreLocation.framework */; };
@@ -772,6 +775,12 @@
 		3316395B1AE8EDA300863428 /* icon_send_frs_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_send_frs_bar.png; sourceTree = "<group>"; };
 		331639661AE9114F00863428 /* bg_im_chat_face_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_im_chat_face_bar.png; sourceTree = "<group>"; };
 		331639681AE912A500863428 /* image_im_groupchat_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_im_groupchat_bg.png; sourceTree = "<group>"; };
+		3316396D1AE9E61B00863428 /* ForumDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumDetailController.h; sourceTree = "<group>"; };
+		3316396E1AE9E61B00863428 /* ForumDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumDetailController.m; sourceTree = "<group>"; };
+		331639701AE9E85D00863428 /* ForumDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumDetailModel.h; sourceTree = "<group>"; };
+		331639711AE9E85D00863428 /* ForumDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumDetailModel.m; sourceTree = "<group>"; };
+		331639731AE9F4E400863428 /* ContentContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentContentModel.h; sourceTree = "<group>"; };
+		331639741AE9F4E400863428 /* ContentContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentContentModel.m; sourceTree = "<group>"; };
 		3321EDD61AC5645300866FB9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		3321EDD81AC565A200866FB9 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		3321EDDA1AC565B300866FB9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -1975,8 +1984,12 @@
 			children = (
 				33971F711AE1FE93009AAB8D /* ForumModel.h */,
 				33971F721AE1FE93009AAB8D /* ForumModel.m */,
+				331639701AE9E85D00863428 /* ForumDetailModel.h */,
+				331639711AE9E85D00863428 /* ForumDetailModel.m */,
 				33971F741AE1FF23009AAB8D /* ContentModel.h */,
 				33971F751AE1FF24009AAB8D /* ContentModel.m */,
+				331639731AE9F4E400863428 /* ContentContentModel.h */,
+				331639741AE9F4E400863428 /* ContentContentModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1999,10 +2012,12 @@
 		3353FA071AC93FE800181EAA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3353FA081AC9459000181EAA /* ForumViewController.h */,
-				3353FA091AC9459000181EAA /* ForumViewController.m */,
 				33971F7D1AE22C6C009AAB8D /* ForumRootViewController.h */,
 				33971F7E1AE22C6C009AAB8D /* ForumRootViewController.m */,
+				3353FA081AC9459000181EAA /* ForumViewController.h */,
+				3353FA091AC9459000181EAA /* ForumViewController.m */,
+				3316396D1AE9E61B00863428 /* ForumDetailController.h */,
+				3316396E1AE9E61B00863428 /* ForumDetailController.m */,
 				33971F7A1AE22B48009AAB8D /* ContentViewController.h */,
 				33971F7B1AE22B48009AAB8D /* ContentViewController.m */,
 				33BDB9201AE66A1A000CA407 /* PostViewController.h */,
@@ -2603,6 +2618,7 @@
 				267B85EE1A360C170084DDEA /* ADBrandView.m in Sources */,
 				26BE3AA81A170421009F37B4 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				33D621C71ABD5542009D86A1 /* LimitGoodsTableViewCell.m in Sources */,
+				3316396F1AE9E61B00863428 /* ForumDetailController.m in Sources */,
 				26BE3AE61A197865009F37B4 /* MMNavigationController.m in Sources */,
 				265BB8851A1CE8020040ACC0 /* CommonListViewController.m in Sources */,
 				26BE3A911A170421009F37B4 /* NSDate-Utilities.m in Sources */,
@@ -2633,6 +2649,7 @@
 				26BE3A951A170421009F37B4 /* UIImage+ProportionalFill.m in Sources */,
 				26BE3AAA1A170421009F37B4 /* AppRequestManager.m in Sources */,
 				33D621CA1ABD5A5F009D86A1 /* LimitViewController.m in Sources */,
+				331639751AE9F4E400863428 /* ContentContentModel.m in Sources */,
 				26BE3AAD1A170464009F37B4 /* mltshop.xcdatamodeld in Sources */,
 				26DE7FD81A2C009C007F4B16 /* CategoryItemViewCell.m in Sources */,
 				33A5F7A11AE1F57600A3B0C1 /* ContentTableViewCell.m in Sources */,
@@ -2644,6 +2661,7 @@
 				33BDB9581AE75518000CA407 /* FaceIconView.m in Sources */,
 				26BE3ACB1A17377D009F37B4 /* CDatePickerViewEx.m in Sources */,
 				33971F791AE2059E009AAB8D /* AnswerTwoTableViewCell.m in Sources */,
+				331639721AE9E85D00863428 /* ForumDetailModel.m in Sources */,
 				33BDB9411AE73EE0000CA407 /* ZLPhotoAssets.m in Sources */,
 				26DE7FC91A29D5E6007F4B16 /* Me.m in Sources */,
 				33BDB9461AE73EE0000CA407 /* ZLPhotoPickerViewController.m in Sources */,

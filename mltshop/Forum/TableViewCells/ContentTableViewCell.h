@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class ContentModel;
+@class ForumDetailModel;
 @interface ContentTableViewCell : UITableViewCell
 
-- (void)setNewData:(ContentModel *)data;
+- (void)setNewData:(ForumDetailModel *)data;
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 @end

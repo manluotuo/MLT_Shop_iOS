@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "ForumModel.h"
 #import "PostViewController.h"
+#import "ForumDetailController.h"
 
 @interface ForumViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PassValueDelegate, PullListViewDelegate>
 
@@ -335,6 +336,13 @@
     return H_60 + titleSize.height + H_30;
     }
 
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ForumModel *model = self.dataArray[indexPath.row];
+    ForumDetailController *datailVC = [[ForumDetailController alloc] init];
+    datailVC.postid = model.postid;
+    [self.navigationController pushViewController:datailVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

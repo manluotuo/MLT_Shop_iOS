@@ -98,7 +98,7 @@
     
     /** 图片 */
     CGFloat imageX = self.titleLable.x;
-    CGFloat imageY = self.titleLable.y+self.titleLable.height+3*spacing;
+    CGFloat imageY = self.titleLable.y+self.titleLable.height+2*spacing;
     CGFloat imageW = (self.viewA.width-spacing)/3;
     self.image1 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY, imageW, imageW)];
     [self.backgroundView addSubview:self.image1];

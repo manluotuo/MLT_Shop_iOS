@@ -169,6 +169,6 @@
 + (UIView *)roundCornersOnView:(UIView *)view onTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
 + (BOOL)isCorrectResponseObject:(NSDictionary *)responseObject;
 
-
++ (BOOL)noNullString:(NSString *)str;
 
 @end
