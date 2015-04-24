@@ -449,6 +449,10 @@
 
 #define LOGBTN_CLICK                        @"70000"
 
+#define SETUP_DATA                          @"80000"
+#define ON_ADD_BTN                          @"90000"
+#define ON_DELETE_BTN                       @"90001"
+
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 #define NOWBUILD [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -546,6 +550,9 @@ alpha:(a)]
 #define ORANGE_LINE_COLOR [UIColor colorWithRed:255.0f/255.0f green:198.0f/255.0f blue:0.0f/255.0f alpha:1]
 
 #define SEPCOLOR [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f blue:200.0f/255.0f alpha:1]
+
+#define MY_BLACK [UIColor colorWithRed:50/255 green:50/255 blue:50/255 alpha:1]
+#define MY_WHITE [UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1]
 
 //#define WHITECOLOR [UIColor whiteColor];
 

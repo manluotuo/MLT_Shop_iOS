@@ -236,7 +236,6 @@
     [HUD showInView:self.view];
 
 
-
     [[AppRequestManager sharedManager] signInWithUsername:self.userTextView.text password:self.passTextView.text andBlock:^(id responseObject, NSError *error) {
 
         [HUD removeFromSuperview];
@@ -246,6 +245,25 @@
             NSLog(@"%@", responseObject);
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             dict[@"password"] = self.passTextView.text;
+            /** 获取用户信息 */
+            NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
+            AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
+            rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
+            NSDictionary *postDict = @{@"userid": [DataTrans
+                                                   noNullStringObj: XAppDelegate.me.userId]};
+            [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"%@", responseObject);
+                [HUD removeFromSuperview];
+                if ([responseObject[@"SUCESS"] integerValue] == 1) {
+                    Me *theMe = [[ModelHelper sharedHelper]findOnlyMe];
+                    theMe.avatarURL =  responseObject[@"data"][@"headerimg"];
+                    MRSave();
+                    XAppDelegate.me = theMe;
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [HUD removeFromSuperview];
+                NSLog(@"%@",error);
+            }];
 
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             [MobClick event:UM_LOGIN];

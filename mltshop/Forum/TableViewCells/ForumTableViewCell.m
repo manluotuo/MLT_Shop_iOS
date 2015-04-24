@@ -72,7 +72,7 @@
     [self.image setBackgroundColor:WHITECOLOR];
     [self.backgroundView addSubview:self.image];
     
-    self.viewA = [[UIView alloc] initWithFrame:CGRectMake(H_20, H_20, self.backgroundView.width-H_20, H_50)];
+    self.viewA = [[UIView alloc] initWithFrame:CGRectMake(H_20, H_20, self.backgroundView.width-H_20, H_40)];
     [self.backgroundView addSubview:self.viewA];
     
     /** 头像 */
@@ -98,14 +98,12 @@
     
     /** 图片 */
     CGFloat imageX = self.titleLable.x;
-    CGFloat imageY = self.titleLable.y+self.titleLable.height+spacing;
+    CGFloat imageY = self.titleLable.y+self.titleLable.height+3*spacing;
     CGFloat imageW = (self.viewA.width-spacing)/3;
     self.image1 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY, imageW, imageW)];
     [self.backgroundView addSubview:self.image1];
-    
     self.image2 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX+imageW+spacing/2, imageY, imageW, imageW)];
     [self.backgroundView addSubview:self.image2];
-    
     self.image3 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX+2*imageW+spacing, imageY, imageW, imageW)];
     [self.backgroundView addSubview:self.image3];
     
@@ -144,7 +142,7 @@
     
     if (model.image1.length != 0) {
         [self.image1 setHidden:NO];
-        [self.image1 sd_setImageWithURL:[NSURL URLWithString:model.image1]];
+        [self.image1 sd_setImageWithURL:[NSURL URLWithString:model.image1] placeholderImage:[UIImage imageNamed:@"defPic"]];
         self.viewB.y = self.image1.y+self.image1.width+5;
     } else {
         [self.image1 setHidden:YES];
@@ -153,22 +151,20 @@
     
     if (model.image2.length != 0) {
         [self.image2 setHidden:NO];
-        [self.image2 sd_setImageWithURL:[NSURL URLWithString:model.image2]];
+        [self.image2 sd_setImageWithURL:[NSURL URLWithString:model.image2] placeholderImage:[UIImage imageNamed:@"defPic"]];
         [self.backgroundView addSubview:self.image2];
         self.viewB.y = self.image1.y+self.image1.width+5;
     } else {
         [self.image2 setHidden:YES];
-        self.viewB.y = self.titleLable.y+self.titleLable.height;
     }
     
     if (model.image3.length != 0) {
         [self.image3 setHidden:NO];
-        [self.image3 sd_setImageWithURL:[NSURL URLWithString:model.image3]];
+        [self.image3 sd_setImageWithURL:[NSURL URLWithString:model.image3] placeholderImage:[UIImage imageNamed:@"defPic"]];
         [self.backgroundView addSubview:self.image3];
         self.viewB.y = self.image1.y+self.image1.width+5;
     } else {
         [self.image3 setHidden:YES];
-        self.viewB.y = self.titleLable.y+self.titleLable.height;
     }
     
     self.timeLable.text = [NSString stringTimeDescribeFromTimeString:model.time];

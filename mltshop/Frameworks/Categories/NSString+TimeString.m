@@ -34,6 +34,11 @@
     if (dd/3600 < 1) {
         timeString = [NSString stringWithFormat:@"%d", (int)dd/60];
         timeString = [NSString stringWithFormat:@"%@分钟前", timeString];
+        if ([timeString isEqualToString:@"0分钟前"]) {
+            timeString = [NSString stringWithFormat:@"刚刚"];
+            return timeString;
+        }
+
         
     }
     

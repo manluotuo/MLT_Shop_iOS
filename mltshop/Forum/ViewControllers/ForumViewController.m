@@ -17,7 +17,7 @@
 #import "ForumModel.h"
 #import "PostViewController.h"
 
-@interface ForumViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface ForumViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PassValueDelegate, PullListViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -34,6 +34,7 @@
     NSInteger contentSet;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     index = 1;
@@ -48,19 +49,27 @@
     [self createRefresh];
     /** 上拉加载 */
     [self createGetMoreData];
+//    [self setNewData];
+    [self firstLogin];
     [self setNewData];
     self.commonListDelegate = self;
-    [self firstLogin];
-    
+    self.passDelegate = self;
     //    self.automaticallyAdjustsScrollViewInsets = NO;
     //    self.tableView.y = IOS7_CONTENT_OFFSET_Y;
     //    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
     
 }
 
+- (void)passSignalValue:(NSString *)value andData:(id)data {
+    
+    if ([value isEqualToString:SETUP_DATA]) {
+        [self recomendNewItems];
+    }
+}
+
 - (void)firstLogin {
     /** 获取用户信息 */
-    NSString *httpUrl = @"http://192.168.1.199/home/user/info";
+    NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
     NSDictionary *postDict = @{@"userid": [DataTrans
@@ -103,14 +112,13 @@
 }
 
 - (void)setNewData {
-    NSString *httpUrl=@"http://192.168.1.199/home/post/home";
+    NSString *httpUrl=@"http://192.168.1.199:8080/home/post/home";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
     NSDictionary *postDict = @{@"page": [NSString stringWithFormat:@"%d", index],
                                @"pagecount": @"20"};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject[@"SUCESS"] integerValue] == 1) {
-            [self.dataArray removeAllObjects];
             for (NSDictionary *dict in responseObject[@"data"][@"data"]) {
                 ForumModel *model = [[ForumModel alloc] init];
                 [model setValuesForKeysWithDictionary:dict];
@@ -126,7 +134,7 @@
 
 /** 设置昵称 */
 - (void)setNickName:(NSString *)nickName {
-    NSString *httpUrl=@"http://192.168.1.199/home/user/changeNickName";
+    NSString *httpUrl=@"http://192.168.1.199:8080/home/user/changeNickName";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
     NSDictionary *postDict = @{@"userid": @"2032",
@@ -152,7 +160,7 @@
     [headView addSubview:self.headImage];
     
     CGFloat leftMargin = 10.0f;
-    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(15, 25, 12+leftMargin, 21)];
+    FAHoverButton *backButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(15, 30, 12+leftMargin, 21)];
     [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
     [backButton.titleLabel setFont:FONT_AWESOME_36];
     [backButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -164,12 +172,10 @@
     [headView addSubview:leftButton];
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setFrame:CGRectMake(WIDTH-80, 25, 80, 21)];
+    [rightButton setFrame:CGRectMake(WIDTH-80, 22, 80, 35)];
     [rightButton addTarget:self action:@selector(onRightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton setImage:[UIImage imageNamed:@"icon_send_frs_bar"] forState:UIControlStateNormal];
     [headView addSubview:rightButton];
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-80+15, 25, 12+leftMargin, 21)];
-    image.image = [UIImage imageNamed:@""];
-    [rightButton addSubview:image];
     
     
     UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, WIDTH, 30)];
@@ -221,6 +227,8 @@
 }
 
 - (void)recomendNewItems {
+    [self.dataArray removeAllObjects];
+    index = 1;
     [self setNewData];
 }
 
@@ -319,7 +327,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 240;
+    ForumModel *model = self.dataArray[indexPath.row];
+    CGSize titleSize = [(NSString *)model.text sizeWithWidth:WIDTH-H_40 andFont:FONT_14];
+    if (model.image1.length != 0 || model.image2.length != 0 || model.image3.length != 0) {
+    return H_60 + titleSize.height + (WIDTH-H_20)/3 + H_40;
+    } else {
+    return H_60 + titleSize.height + H_30;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -347,9 +362,7 @@
 }
 
 - (void)onForumButtonClick {
-    //    [self dismissViewControllerAnimated:YES completion:nil];
-    ForumViewController *vc = [[ForumViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -357,7 +370,12 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 }
 

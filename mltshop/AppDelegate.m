@@ -185,20 +185,14 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-    
-    NSLog(@"*********************************************************%@", XAppDelegate.me.userId);
     [APService setTags:[NSSet setWithObjects:@"aaaa", nil] alias:@"上传" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
-
-    
 }
 
 - (void)onlineConfigCallBack:(NSNotification *)note {
-    
     NSLog(@"online config has fininshed and note = %@", note.userInfo);
 }
 
-- (void)showDrawerView
-{
+- (void)showDrawerView {
     NSLog(@"showMainView");
     
     UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
@@ -220,9 +214,7 @@
     
 }
 
-- (void)skipIntroView
-{
-    
+- (void)skipIntroView {
     // 用户第一次打开
     NSNumber *result = GET_DEFAULT(@"HELPSEEN_INTRO");
     
@@ -242,44 +234,45 @@
 }
 
 // 利用现有的用户名密码登陆
-- (void)loginWithSavedUserInfo
-{
-    //    HTProgressHUD *HUD = [[HTProgressHUD alloc] init];
-    //    HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
-    //    HUD.text = T(@"登录中...");
-    //    [HUD showInView:self.window.rootViewController.view];
-    
+- (void)loginWithSavedUserInfo {
     // 缺一不可
     if (!StringHasValue(self.me.username) ||  !StringHasValue(self.me.password)) {
         [self showLoginView];
         return;
     }
-    
-    
     [self showDrawerView];
     
-    
-    
+    /** 获取用户信息 */
+    NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
+    AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
+    rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
+    NSDictionary *postDict = @{@"userid": [DataTrans
+                                           noNullStringObj: XAppDelegate.me.userId]};
+    [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [HUD removeFromSuperview];
+        if ([responseObject[@"SUCESS"] integerValue] == 1) {
+            Me *theMe = [[ModelHelper sharedHelper]findOnlyMe];
+            theMe.avatarURL =  responseObject[@"data"][@"headerimg"];
+            MRSave();
+            XAppDelegate.me = theMe;
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        NSLog(@"%@",error);
+    }];
+
     [[AppRequestManager sharedManager] signInWithUsername:self.me.username password:self.me.password andBlock:^(id responseObject, NSError *error) {
-        
-        //        [HUD removeFromSuperview];
-        
         if (responseObject != nil) {
-            
             [MobClick event:UM_LOGIN];
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
             // 显示主页面
         }
-        
-        if(error != nil)
-        {
+        if(error != nil) {
             // 显示登陆页面
             [self showLoginView];
         }
-        
     }];
-    
 }
 
 - (void)showIntroductionView

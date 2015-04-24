@@ -26,6 +26,9 @@
 
 - (void)initView {
     count = 0;
+    UIImageView *backImage = [[UIImageView alloc] initWithFrame:self.bounds];
+    [backImage setImage:[UIImage imageNamed:@"bg_im_chat_face_bar"]];
+    [self addSubview:backImage];
     self.userInteractionEnabled = YES;
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"FaceIcon"
                                                           ofType:@"plist"];
@@ -37,6 +40,8 @@
     self.scrollView.delegate = self;
     self.scrollView.contentSize = CGSizeMake(VIEW_WIDTH*(num/21+1), self.frame.size.height);
     self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
     for (NSInteger i = 0; i < num/21+1; i++) {
         self.view = [[UIView alloc] initWithFrame:CGRectMake(VIEW_WIDTH*i, 0, VIEW_WIDTH, self.frame.size.height)];
         [self loadSize:CGSizeMake(VIEW_WIDTH/7-10, VIEW_WIDTH/7-10)];
