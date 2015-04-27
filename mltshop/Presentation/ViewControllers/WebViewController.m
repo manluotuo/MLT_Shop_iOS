@@ -97,7 +97,8 @@
     }
     self.urlString = requestString;
     return YES;
-    
+}
+
     
 //    NSLog(@"******%@", requestString);
 //    NSArray *components = [requestString componentsSeparatedByString:@":"];//提交请求时候分割参数的分隔符
@@ -123,7 +124,7 @@
 //        
 //        return NO;
 //    }
-}
+
 
 - (void)openGood {
     NSLog(@"111");

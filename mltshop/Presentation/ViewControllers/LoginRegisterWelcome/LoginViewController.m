@@ -246,7 +246,7 @@
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             dict[@"password"] = self.passTextView.text;
             /** 获取用户信息 */
-            NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
+            NSString *httpUrl = @"http://sj.manluotuo.com/home/user/info";
             AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
             rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
             NSDictionary *postDict = @{@"userid": [DataTrans

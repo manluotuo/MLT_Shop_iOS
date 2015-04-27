@@ -563,8 +563,7 @@
     }
 }
 
--(void)initGalleryView
-{
+-(void)initGalleryView {
     // gallery view
     CGFloat playerY = fixedHeight;
     CGRect rect = CGRectMake(0, playerY, TOTAL_WIDTH, TOTAL_WIDTH);

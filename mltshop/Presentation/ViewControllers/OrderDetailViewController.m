@@ -523,7 +523,6 @@
 
 /** 支付 */
 - (void)doAlipayAction:(OrderDetailModel *)theOrder {
-    
     /*
      *商户的唯一的parnter和seller。
      *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。
@@ -678,6 +677,7 @@
         self.star = [NSString stringWithFormat:@"5"];
     }
 }
+
 /** 物流查询点击 */
 - (void)onLogisticsBtnCLick {
     NSLog(@"查看物流");

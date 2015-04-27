@@ -7,6 +7,9 @@
 //
 
 #import "AnswerTwoTableViewCell.h"
+#import "ContentContentModel.h"
+#import "NSString+TimeString.h"
+
 
 @interface AnswerTwoTableViewCell()
 /** 用户名 */
@@ -41,6 +44,9 @@
     [self addSubview:self.userBtn];
 }
 
+- (void)setNewData:(ContentContentModel *)model {
+    
+}
 
 - (void)onUserBtnClick {
     

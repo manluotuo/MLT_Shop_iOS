@@ -50,13 +50,13 @@
     timeLabel.font = FONT_12;
     timeLabel.textColor = GREENCOLOR;
     
-    actionBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    actionBtn.titleLabel.font = FONT_12;
-    [actionBtn setTitle:T(@"立即付款") forState:UIControlStateNormal];
-    [actionBtn setFrame:CGRectMake(H_220, H_10, H_70, H_30)];
-    [actionBtn addTarget:self action:@selector(opsAction) forControlEvents:UIControlEventTouchUpInside];
-    [actionBtn setTitleColor:WHITECOLOR andStyle:KKFlatButtonStyleLight];
-    [actionBtn setBackgroundColor:[UIColor orangeColor]];
+//    actionBtn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
+//    actionBtn.titleLabel.font = FONT_12;
+//    [actionBtn setTitle:T(@"立即付款") forState:UIdControlStateNormal];
+//    [actionBtn setFrame:CGRectMake(H_220, H_10, H_70, H_30)];
+//    [actionBtn addTarget:self action:@selector(opsAction) forControlEvents:UIControlEventTouchUpInside];
+//    [actionBtn setTitleColor:WHITECOLOR andStyle:KKFlatButtonStyleLight];
+//    [actionBtn setBackgroundColor:[UIColor orangeColor]];
     
     self.imageRight = RIGHT_FRAME;
     [self.imageRight setImage:RIGHT_IMAGE];

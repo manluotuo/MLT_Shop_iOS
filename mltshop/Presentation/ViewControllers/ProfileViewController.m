@@ -440,9 +440,9 @@
     HUD.text = T(@"正在上传头像");
     [HUD showInView:self.view];
     
-    NSString *postUrl = @"http://192.168.1.199:8080/home/user/changeHeaderPicture";
-    NSDictionary *postDict = @{@"userid": @"2032"};
-    NSData *imageData = UIImageJPEGRepresentation(mediaInfo.circularEditedImage, 0.0);
+    NSString *postUrl = @"http://sj.manluotuo.com/home/user/changeHeaderPicture";
+    NSDictionary *postDict = @{@"userid": XAppDelegate.me.userId};
+    NSData *imageData = UIImageJPEGRepresentation(mediaInfo.circularEditedImage, 0.5);
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:postUrl parameters:postDict constructingBodyWithBlock:^(id formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpg" mimeType:@"image/jpeg"];
     }];
@@ -450,7 +450,7 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         /** 获取用户信息 */
-        NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
+        NSString *httpUrl = @"http://sj.manluotuo.com/home/user/info";
         AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
         rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
         NSDictionary *postDict = @{@"userid": [DataTrans

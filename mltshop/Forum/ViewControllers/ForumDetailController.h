@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ForumDetailController : UITableViewController
+@interface ForumDetailController : UIViewController
 
 @property (nonatomic, strong) NSString *postid;
 

@@ -12,5 +12,6 @@
 @interface ForumTableViewCell : UITableViewCell
 
 - (void)setData:(ForumModel *)model;
+//@property (nonatomic, strong)
 
 @end

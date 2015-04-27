@@ -41,7 +41,6 @@
     index = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     [self.view setBackgroundColor:WHITECOLOR];
-    self.navigationController.navigationBarHidden = YES;
     /** 创建视图 */
     [self createUI];
     /** 创建导航栏 */
@@ -70,7 +69,7 @@
 
 - (void)firstLogin {
     /** 获取用户信息 */
-    NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
+    NSString *httpUrl = @"http://sj.manluotuo.com/home/user/info";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
     NSDictionary *postDict = @{@"userid": [DataTrans
@@ -78,7 +77,6 @@
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject[@"SUCESS"] integerValue] == 1) {
             NSString *str = responseObject[@"data"][@"nickname"];
-            NSLog(@"%@", str);
             if (str.length == 0) {
                 [self setUserName];
             }
@@ -103,6 +101,7 @@
                                                 [self setUserName];
                                                 return;
                                             }
+                                            
                                             if (result.length == 0) {
                                                 [DataTrans showWariningTitle:T(@"昵称应该在1-10个字符之间") andCheatsheet:nil andDuration:1.0f];
                                                 [self setUserName];
@@ -113,7 +112,7 @@
 }
 
 - (void)setNewData {
-    NSString *httpUrl=@"http://192.168.1.199:8080/home/post/home";
+    NSString *httpUrl=@"http://sj.manluotuo.com/home/post/home";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
     NSDictionary *postDict = @{@"page": [NSString stringWithFormat:@"%d", index],
@@ -135,16 +134,17 @@
 
 /** 设置昵称 */
 - (void)setNickName:(NSString *)nickName {
-    NSString *httpUrl=@"http://192.168.1.199:8080/home/user/changeNickName";
+    NSString *httpUrl=@"http://sj.manluotuo.com/home/user/changeNickName";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
-    NSDictionary *postDict = @{@"userid": @"2032",
+    NSDictionary *postDict = @{@"userid": XAppDelegate.me.userId,
                                @"nickname": nickName};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@", responseObject);
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
         NSLog(@"%@",error);
     }];
 }
@@ -204,8 +204,7 @@
     }];
 }
 
-- (void)refreshTable
-{
+- (void)refreshTable {
     __weak ForumViewController *weakSelf = self;
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -270,6 +269,7 @@
     
 }
 
+
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     contentSet = scrollView.contentOffset.y;
 }
@@ -290,7 +290,6 @@
             }];
         }
     }
-    
     
     if (scrollView.contentOffset.y > 0 && _contentOffsetY < scrollView.contentOffset.y && self.headImage.alpha < 1) {
         self.headImage.alpha += 0.02;

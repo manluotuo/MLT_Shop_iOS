@@ -216,7 +216,7 @@ static const NSInteger kTotalPageCount = 5;
                 NSArray *items = [self.fixedData objectForKey:@"player"];
                 NSDictionary *item = items[pageIndex];
                 // TODO: 敏！
-                // [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://192.168.1.107:8080/manluotuo/"];
+//                 [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:@"http://www.manluotuo.com/zhuanti/150424/150424.html"];
                 [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
             };
             

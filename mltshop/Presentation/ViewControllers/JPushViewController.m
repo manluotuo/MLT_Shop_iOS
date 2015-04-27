@@ -8,9 +8,10 @@
 
 #import "JPushViewController.h"
 #import "FAHoverButton.h"
+#import "GoodsDetailViewController.h"
 
 
-@interface JPushViewController ()
+@interface JPushViewController ()<UIWebViewDelegate ,PassValueDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -28,12 +29,14 @@
 - (void)customWebView {
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.webView setDelegate:self];
     [self.webView setBackgroundColor:WHITECOLOR];
     self.webView.y = IOS7_CONTENT_OFFSET_Y;
     self.webView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
     NSUserDefaults *user = USER_DEFAULTS;
     self.title = T(@"漫骆驼");
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[user valueForKey:@"url"]]]];
+    self.urlString = [user valueForKey:@"url"];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlString]]];
     [self.webView reload];
     [self.view addSubview:self.webView];
     [user removeObjectForKey:@"url"];
@@ -53,6 +56,28 @@
     [backButton addTarget:self action:@selector(onLeftBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barBackButtonItem;
     self.navigationItem.hidesBackButton = YES;
+}
+
+/** 敏！ */
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSString *requestString = [[request URL] absoluteString];//获取请求的绝对路径.
+    id parsed = [DataTrans parseDataFromURL:requestString];
+    if (![parsed isKindOfClass:[SearchModel class]]) {
+        if (DictionaryHasValue(parsed)) {
+            if ([parsed[@"type"] isEqualToString:@"goods"]){
+                GoodsDetailViewController *VC = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
+                VC.passDelegate = self;
+                GoodsModel *theGoods = [[GoodsModel alloc]init];
+                theGoods.goodsId = parsed[@"id"];
+                [VC setGoodsData:theGoods];
+                [self.navigationController presentViewController:VC animated:YES completion:nil];
+                return NO;
+            }
+        }
+    }
+    self.urlString = requestString;
+    return YES;
 }
 
 - (void)onLeftBtnClick {

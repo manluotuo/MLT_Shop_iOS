@@ -123,11 +123,10 @@
     HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeActivityIndicator];
     HUD.text = T(@"正在发送...请稍等");
     [HUD showInView:self.view];
-    NSString *postUrl = @"http://192.168.1.199:8080/home/post/add";
-    NSDictionary *postDict = @{@"userid": @"2032",
+    NSString *postUrl = @"http://sj.manluotuo.com/home/post/add";
+    NSDictionary *postDict = @{@"userid": [[NSUserDefaults standardUserDefaults] valueForKey:@"userid"],
                                @"context": self.textView.text};
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:postUrl parameters:postDict constructingBodyWithBlock:^(id formData) {
-        
         for (NSInteger i = 0; i < [self.assets count]; i++) {
             [formData appendPartWithFileData:UIImageJPEGRepresentation([self.assets[i] originImage], 1.0) name:[NSString stringWithFormat:@"file[%d]", i] fileName:[NSString stringWithFormat:@"file[%d].jpg", i] mimeType:@"image/jpeg"];
         }

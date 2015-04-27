@@ -61,8 +61,8 @@
 }
 
 - (void)initCellView {
-    /** 间隙 */
     
+    /** 间隙 */
     spacing = H_10;
     self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(H_10, H_10, WIDTH-H_20, H_200+H_30)];
     [self.backgroundView setBackgroundColor:GRAYEXLIGHTCOLOR];
@@ -133,6 +133,7 @@
 }
 
 - (void)setData:(ForumModel *)model {
+    
     self.titleLable.text = [model.text emojizedString];
     CGSize titleSize = [(NSString *)model.text sizeWithWidth:self.viewA.width andFont:FONT_14];
     self.titleLable.height = titleSize.height;

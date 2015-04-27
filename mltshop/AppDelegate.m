@@ -81,7 +81,7 @@
     
     //TODO: 发布时注释掉这行
     // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
-    // [MobClick setLogEnabled:YES];
+//     [MobClick setLogEnabled:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
     
@@ -185,7 +185,7 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-    [APService setTags:[NSSet setWithObjects:@"aaaa", nil] alias:@"上传" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    [APService setTags:[NSSet setWithObjects:@"xx", nil] alias:@"小新" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }
 
 - (void)onlineConfigCallBack:(NSNotification *)note {
@@ -243,11 +243,14 @@
     [self showDrawerView];
     
     /** 获取用户信息 */
-    NSString *httpUrl = @"http://192.168.1.199:8080/home/user/info";
+    NSString *httpUrl = @"http://sj.manluotuo.com/home/user/info";
     AFHTTPRequestOperationManager *rom=[AFHTTPRequestOperationManager manager];
     rom.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"text/json",@"text/html", nil];
     NSDictionary *postDict = @{@"userid": [DataTrans
                                            noNullStringObj: XAppDelegate.me.userId]};
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setValue:XAppDelegate.me.userId forKey:@"userid"];
+    [user synchronize];
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [HUD removeFromSuperview];
         if ([responseObject[@"SUCESS"] integerValue] == 1) {
@@ -444,15 +447,12 @@
     
 }
 
-
-
 /** 获取附加字段 */
 - (void)setJPushAvtion:(NSDictionary *)userInfo {
     
     //url 网页地址
     //goods  商品id
     //action 我们自己定
-    //app
     NSDictionary *aps = [userInfo valueForKey:@"aps"];
     NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
     NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
@@ -465,7 +465,6 @@
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setValue:url forKey:@"url"];
     [user setValue:goods forKey:@"goods"];
-
     [user synchronize];
     
     NSLog(@"content = [%@], badge = [%d], sound = [%@], goods = [%@], url = [%@]", content,badge,sound, goods, url);

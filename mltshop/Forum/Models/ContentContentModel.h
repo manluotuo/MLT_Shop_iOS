@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *postid;
 @property (nonatomic, strong) NSString *sendid;
 @property (nonatomic, strong) NSString *userid;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *context;
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic, strong) NSString *nickname;
 @property (nonatomic, strong) NSString *headerimg;

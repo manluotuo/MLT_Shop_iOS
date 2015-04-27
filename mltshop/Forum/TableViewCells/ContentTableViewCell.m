@@ -10,6 +10,9 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ForumDetailModel.h"
+#import "emojis.h"
+#import "NSString+TimeString.h"
+
 
 @interface ContentTableViewCell()
 
@@ -26,7 +29,11 @@
 
 @end
 
-@implementation ContentTableViewCell
+@implementation ContentTableViewCell {
+    CGFloat imagePhotoY;
+    CGFloat imagePhotoW;
+    CGFloat imagePhotoH;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -51,13 +58,14 @@
     [self.userLable setFont:FONT_12];
     [self addSubview:self.userLable];
     
-    self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userLable.x, self.userBtn.y+self.userBtn.height-H_15, H_100, H_10)];
-    [self.timeLable setTextColor:GRAYEXLIGHTCOLOR];
+    self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userLable.x, self.userBtn.y+self.userBtn.height-H_15, WIDTH, H_10)];
+    [self.timeLable setTextColor:GRAYLIGHTCOLOR];
     [self.timeLable setFont:FONT_12];
     [self addSubview:self.timeLable];
     
-    self.titleLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userBtn.x, self.userBtn.y+self.userBtn.height+H_15, WIDTH-self.userBtn.x*2, H_20)];
+    self.titleLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userBtn.x, self.userBtn.y+self.userBtn.height+H_10, WIDTH-self.userBtn.x*2, H_20)];
     [self.titleLable setFont:[UIFont boldSystemFontOfSize:H_15]];
+    [self.titleLable setNumberOfLines:0];
     [self addSubview:self.titleLable];
     
     self.contentLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userBtn.x, self.titleLable.y+self.titleLable.height+H_10, self.titleLable.width, H_10)];
@@ -66,10 +74,10 @@
 }
 
 - (void)setNewData:(ForumDetailModel *)data {
-    [self.userBtn sd_setImageWithURL:[NSURL URLWithString:data.headerimg] forState:UIControlStateNormal];
+    [self.userBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:data.headerimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
     self.userLable.text = data.nickname;
     self.timeLable.text = data.time;
-    self.titleLable.text = data.text;
+    self.titleLable.text = [data.text emojizedString];
     CGSize titleSize = [(NSString *)data.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
     self.titleLable.height = titleSize.height;
     NSLog(@"Y = %f, H = %f", self.titleLable.y, self.titleLable.height);
@@ -77,18 +85,52 @@
     CGFloat imageX = 10;
     CGFloat imageY = self.titleLable.y+self.titleLable.height+10;
     CGFloat imageW = WIDTH - 20;
-    CGFloat imageH = WIDTH - 20;
+    CGFloat imageH = WIDTH;
+    imagePhotoY = self.titleLable.y+self.titleLable.height+10;
     for (NSInteger i = 1; i <= array.count; i++) {
-        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY+((i-1)*imageH), imageW, imageH)];
+        UIImageView *imagePhoto = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY+((i-1)*(imageH + 10)), imageW, imageH)];
         UITapGestureRecognizer *photoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onPhotoTap:)];
-        image.tag = i;
-        image.userInteractionEnabled = YES;
-        [image addGestureRecognizer:photoTap];
-        [image sd_setImageWithURL:[NSURL URLWithString:array[i-1]] placeholderImage:[UIImage imageNamed:@"defPic"]];
-        [self addSubview:image];
+        imagePhoto.tag = i;
+        imagePhoto.userInteractionEnabled = YES;
+        [imagePhoto addGestureRecognizer:photoTap];
+        [self addSubview:imagePhoto];
+        [imagePhoto sd_setImageWithURL:[NSURL URLWithString:array[i-1]] placeholderImage:[UIImage imageNamed:@"defPic"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            if (i > 1) {
+                imagePhotoY += imagePhotoH+10;
+            }
+            
+            if (image.size.width > image.size.height) {
+                if (image.size.width > WIDTH - 10) {
+                    imagePhotoW = WIDTH-20;
+                    imagePhotoH = image.size.height-(image.size.width-WIDTH-20);
+                    if (imagePhotoH < 0) {
+                        imagePhotoH = imagePhotoH*(-1);
+                    }
+                } else {
+                    imagePhotoW = image.size.width;
+                    imagePhotoH = image.size.height;
+                }
+            } else {
+                if (image.size.width > WIDTH - 10) {
+                    imagePhotoW = WIDTH-20;
+                    imagePhotoH = (image.size.height-(image.size.width-WIDTH-20));
+                    if (imagePhotoH < 0) {
+                        imagePhotoH = imagePhotoH*(-1);
+                    }
+                } else {
+                    imagePhotoW = image.size.width;
+                    imagePhotoH = image.size.height;
+                }
+            }
+
+            NSLog(@"Y = %f", imagePhotoY);
+            NSLog(@"W = %f", imagePhotoW);
+            NSLog(@"H = %f", imagePhotoH);
+            NSLog(@"%f, %f", image.size.width, image.size.height);
+        }];
+        [imagePhoto setFrame:CGRectMake(imageX, imagePhotoY, imagePhotoW, imagePhotoH)];
     }
-    
-    
 }
 
 

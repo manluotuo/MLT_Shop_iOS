@@ -108,16 +108,16 @@
         // right
         goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(H_30, H_10, H_100, H_100)];
         
-        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_110, H_130, H_20)];
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_110, H_130, H_20)];
         [titleLabel setFont:[UIFont systemFontOfSize:12]];
         [titleLabel setTextColor:DARKCOLOR];
-        [titleLabel setTextAlignment:NSTextAlignmentLeft];
+        [titleLabel setTextAlignment:NSTextAlignmentCenter];
         titleLabel.numberOfLines = 0;
         
-        priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, H_110, TOTAL_WIDTH/2, H_20)];
+        priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_110, H_130, H_20)];
         [priceLabel setFont:LITTLECUSTOMFONT];
         [priceLabel setTextColor:GRAYLIGHTCOLOR];
-        [priceLabel setTextAlignment:NSTextAlignmentLeft];
+        [priceLabel setTextAlignment:NSTextAlignmentCenter];
         
         [self addSubview:goodsImg];
         [self addSubview:titleLabel];
@@ -128,12 +128,12 @@
 
 - (void)setup:(GoodsModel *)theGoods
 {
-    CGSize titleSize = [(NSString *)theGoods.goodsName sizeWithWidth:H_130 andFont:FONT_12];
+    CGSize titleSize = [[DataTrans getSepString:theGoods.goodsName] sizeWithWidth:H_130 andFont:FONT_12];
     titleLabel.height = titleSize.height;
     priceLabel.y = titleLabel.y + titleSize.height;
     
     [goodsImg sd_setImageWithURL:[NSURL URLWithString:theGoods.cover.thumb] placeholderImage:PLACEHOLDERIMAGE];
-    [titleLabel setText:theGoods.goodsName];
+    [titleLabel setText:[DataTrans getSepString:theGoods.goodsName]];
     
 //    显示特价
     if (theGoods.promotePrice.integerValue > 0) {

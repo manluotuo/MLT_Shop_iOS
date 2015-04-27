@@ -254,6 +254,10 @@
 		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
 		336D04601AB412CA00A87137 /* OrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045F1AB412CA00A87137 /* OrderDetailModel.m */; };
 		336D049E1AB4473400A87137 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336D049D1AB4473400A87137 /* 1.png */; };
+		336E265C1AEDDAE7003B7208 /* pic_talk_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 336E265B1AEDDAE7003B7208 /* pic_talk_background.jpg */; };
+		336E265F1AEE074F003B7208 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336E265E1AEE074F003B7208 /* DetailViewController.m */; };
+		336E26621AEE0C83003B7208 /* DetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336E26611AEE0C83003B7208 /* DetailHeaderCell.m */; };
+		336E26651AEE0C8F003B7208 /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 336E26641AEE0C8F003B7208 /* DetailCell.m */; };
 		3375328D1AC3ED9D00A95D4C /* text.png in Resources */ = {isa = PBXBuildFile; fileRef = 3375328C1AC3ED9D00A95D4C /* text.png */; };
 		337B33EA1AC02195000CAF14 /* RFExampleToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */; };
 		337B33EB1AC02195000CAF14 /* RFKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 337B33E71AC02195000CAF14 /* RFKeyboardToolbar.m */; };
@@ -828,6 +832,13 @@
 		336D045E1AB412CA00A87137 /* OrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailModel.h; sourceTree = "<group>"; };
 		336D045F1AB412CA00A87137 /* OrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailModel.m; sourceTree = "<group>"; };
 		336D049D1AB4473400A87137 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		336E265B1AEDDAE7003B7208 /* pic_talk_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic_talk_background.jpg; sourceTree = "<group>"; };
+		336E265D1AEE074F003B7208 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		336E265E1AEE074F003B7208 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		336E26601AEE0C83003B7208 /* DetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailHeaderCell.h; sourceTree = "<group>"; };
+		336E26611AEE0C83003B7208 /* DetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailHeaderCell.m; sourceTree = "<group>"; };
+		336E26631AEE0C8F003B7208 /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
+		336E26641AEE0C8F003B7208 /* DetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCell.m; sourceTree = "<group>"; };
 		3375328C1AC3ED9D00A95D4C /* text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text.png; sourceTree = "<group>"; };
 		337B33E41AC02195000CAF14 /* RFExampleToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFExampleToolbarButton.h; sourceTree = "<group>"; };
 		337B33E51AC02195000CAF14 /* RFExampleToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFExampleToolbarButton.m; sourceTree = "<group>"; };
@@ -1427,6 +1438,7 @@
 		26BE39E01A170421009F37B4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				336E265B1AEDDAE7003B7208 /* pic_talk_background.jpg */,
 				331639681AE912A500863428 /* image_im_groupchat_bg.png */,
 				331639661AE9114F00863428 /* bg_im_chat_face_bar.png */,
 				331639541AE8EDA300863428 /* btn_add_photo_n.png */,
@@ -2005,6 +2017,10 @@
 				33A5F79D1AE1F4F100A3B0C1 /* AnswerOneTableViewCell.m */,
 				33971F771AE2059E009AAB8D /* AnswerTwoTableViewCell.h */,
 				33971F781AE2059E009AAB8D /* AnswerTwoTableViewCell.m */,
+				336E26601AEE0C83003B7208 /* DetailHeaderCell.h */,
+				336E26611AEE0C83003B7208 /* DetailHeaderCell.m */,
+				336E26631AEE0C8F003B7208 /* DetailCell.h */,
+				336E26641AEE0C8F003B7208 /* DetailCell.m */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -2022,6 +2038,8 @@
 				33971F7B1AE22B48009AAB8D /* ContentViewController.m */,
 				33BDB9201AE66A1A000CA407 /* PostViewController.h */,
 				33BDB9211AE66A1A000CA407 /* PostViewController.m */,
+				336E265D1AEE074F003B7208 /* DetailViewController.h */,
+				336E265E1AEE074F003B7208 /* DetailViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2435,6 +2453,7 @@
 				262CD4811A5DB4A600A712BA /* M011.png in Resources */,
 				263386671A52FFEA00C94D8F /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				331639671AE9114F00863428 /* bg_im_chat_face_bar.png in Resources */,
+				336E265C1AEDDAE7003B7208 /* pic_talk_background.jpg in Resources */,
 				331639691AE912A500863428 /* image_im_groupchat_bg.png in Resources */,
 				331639621AE8EDA300863428 /* defPic@2x.png in Resources */,
 				26BE3A831A170421009F37B4 /* qqkongjian_share_ico.png in Resources */,
@@ -2593,6 +2612,7 @@
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,
 				3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */,
 				26B1C25F1A46BAC400295D32 /* AddressTableViewCell.m in Sources */,
+				336E26621AEE0C83003B7208 /* DetailHeaderCell.m in Sources */,
 				33BDB91F1AE65612000CA407 /* NSString+TimeString.m in Sources */,
 				33CB64F41AAAF83500D0BE8D /* CExpandHeader.m in Sources */,
 				263386641A52FFEA00C94D8F /* SVWebViewControllerActivityChrome.m in Sources */,
@@ -2627,6 +2647,7 @@
 				335FCBCC1ADCB66500D01615 /* EmojiEmoticons.m in Sources */,
 				3330F3041AC11B0400EEC898 /* ServiceViewController.m in Sources */,
 				33BDB9431AE73EE0000CA407 /* ZLPhotoPickerGroup.m in Sources */,
+				336E26651AEE0C8F003B7208 /* DetailCell.m in Sources */,
 				263386611A52FFEA00C94D8F /* SVWebViewController.m in Sources */,
 				33971F731AE1FE93009AAB8D /* ForumModel.m in Sources */,
 				33971F761AE1FF24009AAB8D /* ContentModel.m in Sources */,
@@ -2693,6 +2714,7 @@
 				26BE3AA31A170421009F37B4 /* SGGridMenu.m in Sources */,
 				263D3E3D1A4E6BEA004D8181 /* UITableView+FixedTableHeaderView.m in Sources */,
 				269FD8691A351B6600BF19B5 /* GoodsModel.m in Sources */,
+				336E265F1AEE074F003B7208 /* DetailViewController.m in Sources */,
 				26BE3A961A170421009F37B4 /* UIView+frameAdjust.m in Sources */,
 				2633865F1A52FFEA00C94D8F /* SVModalWebViewController.m in Sources */,
 				33BA87C01ACF89390087CE34 /* CommentViewController.m in Sources */,
