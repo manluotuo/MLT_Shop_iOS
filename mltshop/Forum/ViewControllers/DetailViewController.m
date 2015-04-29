@@ -21,6 +21,7 @@
 #import "DetailViewController.h"
 #import "DetailHeaderCell.h"
 #import "DetailCell.h"
+#import "NSString+TimeString.h"
 
 @interface DetailViewController ()<UITableViewDataSource, UITableViewDelegate, FaceIconDelegate>
 
@@ -44,11 +45,10 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.tableView setBackgroundColor:WHITECOLOR];
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.y = IOS7_CONTENT_OFFSET_Y;
-    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y-40;
+    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
     self.textView = [[UIView alloc] initWithFrame:CGRectMake(0, TOTAL_HEIGHT-H_40, WIDTH, 40)];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:self.textView];
@@ -83,15 +83,18 @@
     [faceBtn addTarget:self action:@selector(onFaceIconClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.textView addSubview:faceBtn];
     
+    
+    
     self.text = [[UITextView alloc] initWithFrame:CGRectMake(H_50, 5, WIDTH-H_120, H_30)];
     [self.text setFont:FONT_14];
     //    [self.text setDelegate:self];
+    [self.textView addSubview:self.text];
+    
     self.text.layer.cornerRadius = 5;
     self.text.clipsToBounds = YES;
     self.text.layer.borderWidth = 1.0;
     self.text.layer.cornerRadius = 5.0f;
     self.text.layer.borderColor = [GRAYLIGHTCOLOR CGColor];
-    [self.textView addSubview:self.text];
     
     UIButton *postButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [postButton setTitle:T(@"发送") forState:UIControlStateNormal];
@@ -120,13 +123,15 @@
         cell = [[DetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
     }
     ContentContentModel *model = self.dataSource[indexPath.row];
+    model.time = [NSString stringTimeDescribeFromTimeString:model.time];
+    
     [cell setNewData:model];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGSize titleSize = [(NSString *)self.model.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
-    return H_70+titleSize.height;
+    return 60+titleSize.height;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -196,6 +201,12 @@
             [DataTrans showWariningTitle:@"回复成功" andCheatsheet:nil andDuration:1.0f];
             self.text.text = @"";
             [self.text resignFirstResponder];
+            int64_t delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [[NSNotificationCenter defaultCenter] postNotificationName:SET_UP_DATA object:nil userInfo:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -221,6 +232,19 @@
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     self.textView.y = TOTAL_HEIGHT-H_40;
     
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (view != nil) {
+        [view removeFromSuperview];
+        [UIView animateWithDuration:0.3f animations:^{
+            self.textView.y = TOTAL_HEIGHT-H_40;
+        }];
+        faceBtn.selected = NO;
+        faceBtn.userInteractionEnabled = YES;
+        view = nil;
+    }
+    [self.text resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -49,7 +49,7 @@
 }
 
 - (void)onUserBtnClick {
-    
+    NSLog(@"点击了头像");
 }
 
 - (void)awakeFromNib {

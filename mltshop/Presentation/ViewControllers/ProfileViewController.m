@@ -64,6 +64,8 @@
     [self initOrderView];
     
     [self initLineView];
+    
+    [self setupLeftMMButton];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -71,6 +73,24 @@
     [self refreshCount];
 }
 
+
+//设置左侧按钮
+-(void)setupLeftMMButton{
+    FAHoverButton *leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
+    [leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
+    [leftDrawerAvatarButton setFrame:CGRectMake(20, 35, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
+    
+    [leftDrawerAvatarButton addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:leftDrawerAvatarButton];
+}
+
+- (void)setClick {
+    [self leftDrawerButtonPress:nil];
+}
+-(void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
 
 - (void)refreshCount
 {
@@ -208,33 +228,7 @@
     editIcon.text = [NSString fontAwesomeIconStringForEnum:FAPencil];
     editIcon.textColor = WHITECOLOR;
     
-    /*
-     // 头像
-     self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
-     [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
-     
-     [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-     //    [self.avatarButton addSubview:editIcon];
-     [self.avatarView addSubview:self.avatarButton];
-     
-     // 左右按钮
-     KKFlatButton *leftButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-     [leftButton setTitle:T(@"修改头像") forState:UIControlStateNormal];
-     [leftButton setFrame:CGRectMake(0, H_90/2-H_24/2, H_56, H_24)];
-     [leftButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
-     [leftButton.titleLabel setFont:FONT_12];
-     [leftButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
-     [leftButton setBackgroundColor:WHITEALPHACOLOR2];
-     [self.avatarView addSubview:leftButton];
-     
-     KKFlatButton *rightButton = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-     [rightButton setTitle:T(@"在线客服") forState:UIControlStateNormal];
-     [rightButton setFrame:CGRectMake(self.avatarView.width-H_56, H_90/2-H_24/2, H_56, H_24)];
-     [rightButton addTarget:self action:@selector(callcenterAction) forControlEvents:UIControlEventTouchUpInside];
-     [rightButton.titleLabel setFont:FONT_12];
-     [rightButton setTitleColor:DARKCOLOR forState:UIControlStateNormal];
-     [rightButton setBackgroundColor:WHITEALPHACOLOR2];
-     [self.avatarView addSubview:rightButton];*/
+
     
     
     [self.scrollView addSubview:self.avatarView];
@@ -405,31 +399,6 @@
     mediaPicker.delegate = self;
     [mediaPicker showFromView:self.avatarButton];
     return;
-   
-    /**
-     
-    已改为上传从本地上传头像
-    NSArray *imgs = @[@"F001",@"F002",@"F003",@"F004",@"F005",@"F006",@"F007",@"F008",@"F009",
-                      @"F010",@"F011",@"F012",@"M001",@"M002",@"M003",@"M004",@"M005",@"M006",
-                      @"M007",@"M008",@"M009",@"M010",@"M011",@"M012",@"avatarIronMan"];
-    
-    NSMutableArray *images = [[NSMutableArray alloc]init];
-    
-    for (NSString *img in imgs) {
-        [images addObject:[UIImage imageNamed:img]];
-    }
-    
-    
-    [SGActionView showGridMenuWithTitle:T(@"选择头像") itemTitles:imgs images:images selectedHandle:^(NSInteger index) {
-        Me *theMe = [[ModelHelper sharedHelper]findOnlyMe];
-        theMe.avatarURL =  imgs[index];
-        MRSave();
-        XAppDelegate.me = theMe;
-        NSLog(@"%@", XAppDelegate.me.avatarURL);
-        [self.avatarButton.avatarImageView setImage:[UIImage imageNamed:XAppDelegate.me.avatarURL]];
-        [self.passDelegate passSignalValue:SIGNAL_AVATAR_UPLOAD_DONE andData:nil];
-    }]; 
-     */
 }
 
 /** 敏！！！！！！ */

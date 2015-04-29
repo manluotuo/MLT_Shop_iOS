@@ -74,7 +74,7 @@
     [self addSubview:self.contentLable];
     
     /** 回复1 */
-    self.view1 = [[UIView alloc] initWithFrame:CGRectMake(self.contentLable.x, 10, WIDTH-10-self.contentLable.x, 10)];
+    self.view1 = [[UIView alloc] initWithFrame:CGRectMake(self.contentLable.x, 10, WIDTH-10-self.contentLable.x, 20)];
     UILabel *line1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view1.width, 0.1)];
 //    [line1 setBackgroundColor:GRAYEXLIGHTCOLOR];
     [line1 setBackgroundColor:BLACKCOLOR];
@@ -95,10 +95,11 @@
     
     /** 回复2 */
     self.view2 = [[UIView alloc] initWithFrame:CGRectMake(self.view1.x, 10, self.view1.width, 10)];
-    UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view2.width, 0.1)];
-//    [line2 setBackgroundColor:GRAYEXLIGHTCOLOR];
-    [line2 setBackgroundColor:BLACKCOLOR];
+//    UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view2.width, 0.1)];
+////    [line2 setBackgroundColor:GRAYEXLIGHTCOLOR];
+//    [line2 setBackgroundColor:BLACKCOLOR];
 //    [self.view2 addSubview:line2];
+    
     self.lable2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view2.width, 10)];
     [self.lable2 setFont:FONT_14];
     [self.view2 addSubview:self.lable2];

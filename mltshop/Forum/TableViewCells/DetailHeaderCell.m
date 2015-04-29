@@ -28,12 +28,12 @@
 
 @implementation DetailHeaderCell
 
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self setBackgroundColor:GRAYEXLIGHTCOLOR];
         [self initCellView];
     }
     return self;
@@ -54,6 +54,7 @@
     [self addSubview:self.userLable];
     
     self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userLable.x, self.userBtn.y+self.userBtn.height-H_15, WIDTH, H_10)];
+
     [self.timeLable setTextColor:GRAYLIGHTCOLOR];
     [self.timeLable setFont:FONT_12];
     [self addSubview:self.timeLable];
@@ -72,6 +73,7 @@
     [self.userBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:data.headerimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
     self.userLable.text = data.nickname;
     self.timeLable.text = [NSString stringTimeDescribeFromTimeString:data.time];
+    
     self.titleLable.text = [data.text emojizedString];
     CGSize titleSize = [(NSString *)data.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
     self.titleLable.height = titleSize.height;
@@ -90,5 +92,4 @@
 
     // Configure the view for the selected state
 }
-
 @end

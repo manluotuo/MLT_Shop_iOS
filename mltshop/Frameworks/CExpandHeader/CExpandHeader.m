@@ -31,6 +31,31 @@
     return expandHeader;
 }
 
++ (id)expandWithTableView:(UIScrollView*)scrollView expandView:(UIView*)expandView andHeight:(CGFloat)height {
+    CExpandHeader *expandHeader = [CExpandHeader new];
+    [expandHeader expandWithScrollView:scrollView expandView:expandView andHeight:height];
+    return expandHeader;
+}
+
+- (void)expandWithScrollView:(UIScrollView*)scrollView expandView:(UIView*)expandView andHeight:(CGFloat)height {
+    
+    _expandHeight = CGRectGetHeight(expandView.frame);
+    
+    _scrollView = scrollView;
+    _scrollView.contentInset = UIEdgeInsetsMake(_expandHeight, 0, 0, 0);
+    [_scrollView insertSubview:expandView atIndex:0];
+    [_scrollView addObserver:self forKeyPath:CExpandContentOffset options:NSKeyValueObservingOptionNew context:nil];
+    [_scrollView setContentOffset:CGPointMake(0, -height)];
+    
+    _expandView = expandView;
+    
+    //使View可以伸展效果  重要属性
+    _expandView.contentMode= UIViewContentModeScaleAspectFill;
+    _expandView.clipsToBounds = YES;
+    
+    [self reSizeView];
+    
+}
 
 
 - (void)expandWithScrollView:(UIScrollView*)scrollView expandView:(UIView*)expandView{

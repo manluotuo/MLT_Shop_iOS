@@ -19,9 +19,10 @@
 #import "FaceIconView.h"
 #import "NSString+TimeString.h"
 #import "DetailViewController.h"
+#import "ForumProfileController.h"
+#import "AppDelegate.h"
 
-
-@interface ForumDetailController ()<PassValueDelegate, UITableViewDataSource, UITableViewDelegate, FaceIconDelegate, UITextViewDelegate>
+@interface ForumDetailController ()<PassValueDelegate, UITableViewDataSource, UITableViewDelegate, FaceIconDelegate, UITextViewDelegate,contentTableViewCellDelegate>
 
 /** 详情数据 */
 @property (nonatomic, strong) NSMutableArray *detailArray;
@@ -45,13 +46,14 @@
 }
 
 - (void)viewDidLoad {
+
     [self.view setBackgroundColor:WHITECOLOR];
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
     self.detailArray = [[NSMutableArray alloc] init];
     self.contentArray = [[NSMutableArray alloc] init];
     self.conconArray = [[NSMutableArray alloc] init];
-    
+
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tableView setDelegate:self];
@@ -62,10 +64,12 @@
     self.textView = [[UIView alloc] initWithFrame:CGRectMake(0, TOTAL_HEIGHT-H_40, WIDTH, 40)];
     UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [image setImage:[UIImage imageNamed:@"pic_talk_background"]];
-    //    [self.textView addSubview:image];
+//    [self.textView addSubview:image];
     [self.view addSubview:self.textView];
     [self createTextView];
     [self setNewDataSource];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpNewData) name:SET_UP_DATA object:nil];
     
     //增加监听，当键盘出现或改变时收出消息
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -79,7 +83,10 @@
                                                object:nil];
     
     //     self.clearsSelectionOnViewWillAppear = NO;
+    
+    
 }
+
 
 - (void)createTextView {
     [self.textView setBackgroundColor:GRAYEXLIGHTCOLOR];
@@ -94,13 +101,14 @@
     
     self.text = [[UITextView alloc] initWithFrame:CGRectMake(H_50, 5, WIDTH-H_120, H_30)];
     [self.text setFont:FONT_14];
-    //    [self.text setDelegate:self];
+//    [self.text setDelegate:self];
+    [self.textView addSubview:self.text];
+    
     self.text.layer.cornerRadius = 5;
     self.text.clipsToBounds = YES;
     self.text.layer.borderWidth = 1.0;
     self.text.layer.cornerRadius = 5.0f;
     self.text.layer.borderColor = [GRAYLIGHTCOLOR CGColor];
-    [self.textView addSubview:self.text];
     
     UIButton *postButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [postButton setTitle:T(@"发送") forState:UIControlStateNormal];
@@ -201,42 +209,46 @@
         [cellview setNewData:self.detailArray[section]];
     }
     cellview.passDelegate = self;
+    cellview.delegate = self;
     return cellview;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.detailArray.count != 0) {
-        headerHeight = 65;
-        ForumDetailModel *model = self.detailArray[section];
-        CGSize titleSize = [(NSString *)model.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
-        headerHeight += titleSize.height;
-        NSArray *array = [self setImageNumber:model];
-        for (NSInteger i = 1; i <= array.count; i++) {
-            UIImageView *imagePhoto = [[UIImageView alloc] init];
-            [imagePhoto sd_setImageWithURL:[NSURL URLWithString:array[i-1]] placeholderImage:[UIImage imageNamed:@"defPic"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (image.size.width > image.size.height) {
-                    if (image.size.width > WIDTH - 10) {
-                        imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
-                        if (imagePhotoH < 0) {
-                            imagePhotoH = imagePhotoH*(-1);
+    if (section == 0) {
+        if (self.detailArray.count != 0) {
+            headerHeight = 65;
+            ForumDetailModel *model = self.detailArray[section];
+            CGSize titleSize = [(NSString *)model.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
+            headerHeight += titleSize.height;
+            NSArray *array = [self setImageNumber:model];
+            for (NSInteger i = 1; i <= array.count; i++) {
+                UIImageView *imagePhoto = [[UIImageView alloc] init];
+                [imagePhoto sd_setImageWithURL:[NSURL URLWithString:array[i-1]] placeholderImage:[UIImage imageNamed:@"defPic"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (image.size.width > image.size.height) {
+                        if (image.size.width > WIDTH - 10) {
+                            imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
+                            if (imagePhotoH < 0) {
+                                imagePhotoH = imagePhotoH*(-1);
+                            }
+                        } else {
+                            imagePhotoH = image.size.height;
                         }
                     } else {
-                        imagePhotoH = image.size.height;
-                    }
-                } else {
-                    if (image.size.width > WIDTH - 10) {
-                        imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
-                        if (imagePhotoH < 0) {
-                            imagePhotoH = imagePhotoH*(-1);
+                        if (image.size.width > WIDTH - 10) {
+                            imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
+                            if (imagePhotoH < 0) {
+                                imagePhotoH = imagePhotoH*(-1);
+                            }
+                        } else {
+                            imagePhotoH = image.size.height;
                         }
-                    } else {
-                        imagePhotoH = image.size.height;
                     }
-                }
-                headerHeight += imagePhotoH + 10;
-            }];
+                    headerHeight += imagePhotoH + 10;
+                }];
+            }
+            return headerHeight;
         }
-        return headerHeight;
+        return 0.001;
     } else {
         return 0.001;
     }
@@ -244,8 +256,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DetailViewController *detailVC = [[DetailViewController alloc] init];
-    
+
     ContentModel *model = self.contentArray[indexPath.row];
+    model.time = [NSString stringTimeDescribeFromTimeString:model.time];
     detailVC.model = model;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
@@ -342,16 +355,16 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    //    NSString *desContent = textView.text;//获取文本内容
-    //
-    //    CGRect orgRect=self.text.frame;//获取原始UITextView的frame
-    //    CGSize size = [desContent sizeWithWidth:WIDTH-H_120 andFont:FONT_14];
-    //
-    //    orgRect.size.height = size.height+10;//获取自适应文本内容高度
-    //
-    //    self.text.frame = orgRect;//重设UITextView的frame
-    //    self.textView.height += size.height+10;
-    //    self.text.text = desContent;
+//    NSString *desContent = textView.text;//获取文本内容
+//    
+//    CGRect orgRect=self.text.frame;//获取原始UITextView的frame
+//    CGSize size = [desContent sizeWithWidth:WIDTH-H_120 andFont:FONT_14];
+//    
+//    orgRect.size.height = size.height+10;//获取自适应文本内容高度
+//    
+//    self.text.frame = orgRect;//重设UITextView的frame
+//    self.textView.height += size.height+10;
+//    self.text.text = desContent;
 }
 
 //当键盘出现或改变时调用
@@ -372,11 +385,37 @@
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     self.textView.y = TOTAL_HEIGHT-H_40;
-    
+
+}
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (view != nil) {
+        [view removeFromSuperview];
+        [UIView animateWithDuration:0.3f animations:^{
+            self.textView.y = TOTAL_HEIGHT-H_40;
+        }];
+        faceBtn.selected = NO;
+        faceBtn.userInteractionEnabled = YES;
+        view = nil;
+    }
+    [self.text resignFirstResponder];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.text resignFirstResponder];
+    
+    
+}
+
+#pragma mark - 点击 ContentTableViewCell 头像时调用
+-(void)contentTableViewCellIconDidClick:(ContentTableViewCell *)cell{
+    ForumProfileController *forumVC = [[ForumProfileController alloc] init];
+    forumVC.userId = cell.userId;
+    [self.navigationController pushViewController:forumVC animated:YES];
+}
+
+- (void)setUpNewData {
+   [self setNewDataSource];
 }
 
 @end

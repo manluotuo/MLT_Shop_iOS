@@ -17,14 +17,18 @@
 #import "ForumModel.h"
 #import "PostViewController.h"
 #import "ForumDetailController.h"
+#import "ForumProfileController.h"
+#import "NSString+TimeString.h"
 
-@interface ForumViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PassValueDelegate, PullListViewDelegate>
+
+@interface ForumViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PassValueDelegate, PullListViewDelegate, forumTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) CExpandHeader *header;
 @property (nonatomic, strong) UIImageView *headImage;
 @property (nonatomic, strong) STAlertView *stAlertView;
+@property (nonatomic, copy) NSString *nickName;
 
 @end
 
@@ -33,10 +37,12 @@
     NSInteger index;
     FAHoverButton *forumButton;
     NSInteger contentSet;
+    
 }
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     index = 1;
     self.dataArray = [[NSMutableArray alloc] init];
@@ -54,9 +60,12 @@
     [self setNewData];
     self.commonListDelegate = self;
     self.passDelegate = self;
+    
     //    self.automaticallyAdjustsScrollViewInsets = NO;
     //    self.tableView.y = IOS7_CONTENT_OFFSET_Y;
     //    self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
+    
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setUpNewData) name:SET_UP_HOME_DATA object:nil];
     
 }
 
@@ -108,6 +117,7 @@
                                             } else {
                                                 [self setNickName:result];
                                             }
+                                            
                                         }];
 }
 
@@ -118,18 +128,18 @@
     NSDictionary *postDict = @{@"page": [NSString stringWithFormat:@"%d", index],
                                @"pagecount": @"20"};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (index == 1) {
-            [self.dataArray removeAllObjects];
-        }
         if ([responseObject[@"SUCESS"] integerValue] == 1) {
+            if (index == 1) {
+                [self.dataArray removeAllObjects];
+            }
             for (NSDictionary *dict in responseObject[@"data"][@"data"]) {
                 ForumModel *model = [[ForumModel alloc] init];
+                
                 [model setValuesForKeysWithDictionary:dict];
                 [self.dataArray addObject:model];
             }
             [self.tableView reloadData];
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -143,6 +153,8 @@
     NSDictionary *postDict = @{@"userid": XAppDelegate.me.userId,
                                @"nickname": nickName};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -174,7 +186,7 @@
     [headView addSubview:leftButton];
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setFrame:CGRectMake(WIDTH-80, 22, 80, 35)];
+    [rightButton setFrame:CGRectMake(WIDTH - 60, 20, 44, 44)];
     [rightButton addTarget:self action:@selector(onRightBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [rightButton setImage:[UIImage imageNamed:@"icon_send_frs_bar"] forState:UIControlStateNormal];
     [headView addSubview:rightButton];
@@ -190,7 +202,6 @@
 }
 
 - (void)createRefresh {
-    
     __weak ForumViewController *weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refreshTable];
@@ -206,6 +217,8 @@
 }
 
 - (void)refreshTable {
+    
+    
     __weak ForumViewController *weakSelf = self;
     int64_t delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -228,6 +241,7 @@
 }
 
 - (void)recomendNewItems {
+
     index = 1;
     [self setNewData];
 }
@@ -259,7 +273,7 @@
     forumButton = [[FAHoverButton alloc] initWithFrame:CGRectMake(WIDTH-H_80, TOTAL_HEIGHT-H_80, H_50, H_50)];
 //    [forumButton setImage:[UIImage imageNamed:T(@"ic_add_white_24dp")] forState:UIControlStateNormal];
     UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(12, 12, 23, 23)];
-    image.image = [UIImage imageNamed:T(@"ic_add_white_24dp")];
+    image.image = [UIImage imageNamed:T(@"tb_cart_icon_empty")];
     [forumButton addSubview:image];
     [forumButton setBackgroundColor:ORANGECOLOR];
     [forumButton setRounded];
@@ -321,7 +335,10 @@
     if (!cell) {
         cell = [[ForumTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellId"];
     }
+    cell.delegate = self;
+    cell.passDelegate = self;
     ForumModel *model = self.dataArray[indexPath.row];
+    
     [cell setData:model];
     return cell;
 }
@@ -339,6 +356,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ForumModel *model = self.dataArray[indexPath.row];
+    model.time = [NSString stringTimeDescribeFromTimeString:model.time];
     ForumDetailController *datailVC = [[ForumDetailController alloc] init];
     datailVC.postid = model.postid;
     [self.navigationController pushViewController:datailVC animated:YES];
@@ -384,6 +402,22 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+}
+
+#pragma mark - forumTableViewCellDelegete
+//点击头像事件
+- (void)passSignalValue:(NSString *)value andString:(NSString *)string {
+    
+    if ([value isEqualToString:@"onIcon"]) {
+        ForumProfileController *forumVC = [[ForumProfileController alloc] init];
+        forumVC.userId = string;
+        [self.navigationController pushViewController:forumVC animated:YES];
+    }
+    
+}
+
+- (void)setUpNewData {
+    [self recomendNewItems];
 }
 
 @end

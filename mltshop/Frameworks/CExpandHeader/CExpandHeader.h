@@ -32,6 +32,8 @@
  */
 - (void)expandWithScrollView:(UIScrollView*)scrollView expandView:(UIView*)expandView;
 
+
++ (id)expandWithTableView:(UIScrollView*)scrollView expandView:(UIView*)expandView andHeight:(CGFloat)height;
 /**
  *  监听scrollViewDidScroll方法
  *

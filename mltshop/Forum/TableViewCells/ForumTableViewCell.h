@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ForumModel.h"
-
+@class ForumTableViewCell;
+@protocol forumTableViewCellDelegate <NSObject>
+-(void) forumTableViewCellClickIcon:(NSString *)nameString iconView:(UIImage *)iconView id:(NSString *)userId;
+@end
 @interface ForumTableViewCell : UITableViewCell
 
 - (void)setData:(ForumModel *)model;
-//@property (nonatomic, strong)
-
+@property (nonatomic, assign) id<forumTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 @end

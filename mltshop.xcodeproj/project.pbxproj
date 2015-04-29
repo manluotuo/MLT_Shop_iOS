@@ -325,6 +325,7 @@
 		33F1C7B61AC4F54D0006974E /* LogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F1C7B51AC4F54D0006974E /* LogisticsViewController.m */; };
 		33FAFA861AE271F2001967AB /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAFA851AE271F2001967AB /* FSMediaPicker.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
+		EF8DA4071AF0D7F000641A93 /* ForumProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -956,6 +957,8 @@
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8DA4051AF0D7F000641A93 /* ForumProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumProfileController.h; sourceTree = "<group>"; };
+		EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumProfileController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2034,6 +2037,8 @@
 				3353FA091AC9459000181EAA /* ForumViewController.m */,
 				3316396D1AE9E61B00863428 /* ForumDetailController.h */,
 				3316396E1AE9E61B00863428 /* ForumDetailController.m */,
+				EF8DA4051AF0D7F000641A93 /* ForumProfileController.h */,
+				EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */,
 				33971F7A1AE22B48009AAB8D /* ContentViewController.h */,
 				33971F7B1AE22B48009AAB8D /* ContentViewController.m */,
 				33BDB9201AE66A1A000CA407 /* PostViewController.h */,
@@ -2631,6 +2636,7 @@
 				265BB8881A1CE8D90040ACC0 /* ListViewController.m in Sources */,
 				26BE3A9D1A170421009F37B4 /* GCPagedScrollView.m in Sources */,
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
+				EF8DA4071AF0D7F000641A93 /* ForumProfileController.m in Sources */,
 				262E1EDF1A5836A100C29059 /* base64.m in Sources */,
 				26BE3A921A170421009F37B4 /* NSObject+JSONWriting.m in Sources */,
 				262E1E711A5796B100C29059 /* ShippingTableViewCell.m in Sources */,

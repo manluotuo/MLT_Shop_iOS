@@ -40,9 +40,10 @@
     [super viewDidLoad];
     self.title = T(@"发帖");
     self.textString = @"";
+    [self.view setBackgroundColor:MY_WHITE];
     self.assets = [[NSMutableArray alloc] init];
     self.navigationController.navigationBarHidden = NO;
-    [self.view setBackgroundColor:MY_WHITE];
+    [self.view setBackgroundColor:WHITECOLOR];
     [self createUI];
     [self createRightBarButton];
     
@@ -137,6 +138,7 @@
         int64_t delayInSeconds = 1.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[NSNotificationCenter defaultCenter] postNotificationName:SET_UP_HOME_DATA object:nil userInfo:nil];
             [self.navigationController popViewControllerAnimated:YES];
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -204,7 +206,6 @@
 
 - (void)passSignalValue:(NSString *)value andData:(id)data {
     if ([value isEqualToString:ON_ADD_BTN]) {
-        self.selectPhoto.selected = NO;
         [photoScrollView removeFromSuperview];
             ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
             pickerVc.minCount = 9;
@@ -212,12 +213,12 @@
             pickerVc.callBack = ^(NSArray *status){
                 [self.assets removeAllObjects];
                 [self.assets addObjectsFromArray:status];
-                self.selectPhoto.selected = YES;
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.btnView.y = TOTAL_HEIGHT - H_160 - self.btnView.height;
-                    self.textView.height = TOTAL_HEIGHT - H_160 - self.btnView.height - H_40;
-                }];
                 photoScrollView = [[PhotoScrollView alloc] initWithFrame:CGRectMake(0, TOTAL_HEIGHT-160, WIDTH, 160)];
+                [UIView animateWithDuration:0.3 animations:^{
+                    view.alpha = 1;
+                    self.btnView.y = TOTAL_HEIGHT-160-self.btnView.height;
+                    self.textView.height = TOTAL_HEIGHT-H_40-self.btnView.height;
+                }];
                 NSLog(@"%d", self.assets.count);
                 [photoScrollView initData:self.assets];
                 photoScrollView.passDelegate = self;
@@ -262,6 +263,15 @@
 
 /** 发帖 */
 - (void)onRightBarBtnClick {
+    [self.textView resignFirstResponder];
+    if (view != nil) {
+        [view removeFromSuperview];
+        view = nil;
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        self.btnView.y = TOTAL_HEIGHT - H_160 - self.btnView.height;
+        self.textView.height = TOTAL_HEIGHT - H_160 - self.btnView.height - H_40;
+    }];
     [self postData];
 }
 
@@ -332,5 +342,9 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.btnView.y = TOTAL_HEIGHT-H_40;
+    self.textView.height = TOTAL_HEIGHT-H_40;
+}
 
 @end

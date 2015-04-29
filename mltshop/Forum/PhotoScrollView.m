@@ -19,7 +19,7 @@
 @implementation PhotoScrollView
 
 - (void)initData:(NSArray *)array {
-
+    
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:self.bounds];
     [backImage setImage:[UIImage imageNamed:@"bg_im_chat_face_bar"]];
@@ -60,8 +60,6 @@
     } else {
         [self.passDelegate passSignalValue:ON_DELETE_BTN andData:[NSNumber numberWithBool:sender.view.tag]];
     }
-    
-
 }
 
 @end

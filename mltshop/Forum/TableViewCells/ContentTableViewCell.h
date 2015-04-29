@@ -9,9 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @class ForumDetailModel;
-@interface ContentTableViewCell : UITableViewCell
+@class ContentTableViewCell;
+@protocol contentTableViewCellDelegate <NSObject>
 
+@optional
+-(void)contentTableViewCellIconDidClick:(ContentTableViewCell *)cell;
+@end
+
+
+@interface ContentTableViewCell : UITableViewCell
+/** 头像 */
+@property (nonatomic, strong) UIButton *userBtn;
+/** 用户名 */
+@property (nonatomic, strong) UILabel *userLable;
+
+@property (nonatomic, copy) NSString *userId;
 - (void)setNewData:(ForumDetailModel *)data;
+@property (nonatomic, weak) id<contentTableViewCellDelegate> delegate;
 @property (nonatomic, weak) id<PassValueDelegate> passDelegate;
 
 @end

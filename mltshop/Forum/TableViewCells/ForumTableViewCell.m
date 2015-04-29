@@ -11,6 +11,7 @@
 #import <UIButton+WebCache.h>
 #import "NSString+TimeString.h"
 #import "emojis.h"
+#import "appDelegate.h"
 
 @interface ForumTableViewCell()
 
@@ -39,6 +40,8 @@
 @property (nonatomic, strong) UIButton *zanBtn;
 /** 回复数 */
 @property (nonatomic, strong) UILabel *commentLable;
+
+@property (nonatomic, copy)NSString *userId;
 
 @property (nonatomic, strong) UIImageView *image1;
 @property (nonatomic, strong) UIImageView *image2;
@@ -102,14 +105,14 @@
     CGFloat imageW = (self.viewA.width-spacing)/3;
     self.image1 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY, imageW, imageW)];
     [self.backgroundView addSubview:self.image1];
-    self.image1.contentMode = UIViewContentModeScaleAspectFit;
     self.image2 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX+imageW+spacing/2, imageY, imageW, imageW)];
-    self.image2.contentMode = UIViewContentModeScaleAspectFit;
     [self.backgroundView addSubview:self.image2];
     self.image3 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX+2*imageW+spacing, imageY, imageW, imageW)];
-    self.image3.contentMode = UIViewContentModeScaleAspectFit;
     [self.backgroundView addSubview:self.image3];
     
+    self.image1.contentMode = UIViewContentModeScaleAspectFit;
+    self.image2.contentMode = UIViewContentModeScaleAspectFit;
+    self.image3.contentMode = UIViewContentModeScaleAspectFit;
     
     /** 容器B */
     self.viewB = [[UIView alloc] initWithFrame:CGRectMake(H_20, self.titleLable.y+self.titleLable.height+spacing*2+(self.viewA.width-spacing)/3, self.viewA.width, H_30)];
@@ -137,6 +140,7 @@
 
 - (void)setData:(ForumModel *)model {
     
+    self.userId = model.userid;
     self.titleLable.text = [model.text emojizedString];
     CGSize titleSize = [(NSString *)model.text sizeWithWidth:self.viewA.width andFont:FONT_14];
     self.titleLable.height = titleSize.height;
@@ -175,11 +179,11 @@
     self.backgroundView.height = self.viewB.y+self.viewB.height-H_10;
     self.image.height = self.backgroundView.height;
 }
-
 - (void)onIconImageClick {
     
-    NSLog(@"头像被点击");
+    [self.passDelegate passSignalValue:@"onIcon" andString:self.userId];
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

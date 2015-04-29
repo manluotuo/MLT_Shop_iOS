@@ -21,8 +21,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [self setBackgroundColor:GRAYEXLIGHTCOLOR];
         [self initCellView];
     }
     return self;
@@ -39,6 +37,7 @@
 - (void)setNewData:(ContentContentModel *)model {
     
     NSString *str = [[NSString stringWithFormat:@"%@: %@", model.nickname, model.context] emojizedString];
+    
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:str];
     [string addAttribute:NSForegroundColorAttributeName value:ORANGECOLOR range:NSMakeRange(0, model.nickname.length)];
     CGSize titleSize = [str sizeWithWidth:WIDTH-H_60 andFont:FONT_14];

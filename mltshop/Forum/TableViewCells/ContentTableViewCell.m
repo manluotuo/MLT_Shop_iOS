@@ -12,14 +12,10 @@
 #import "ForumDetailModel.h"
 #import "emojis.h"
 #import "NSString+TimeString.h"
-
-
+#import "Appdelegate.h"
 @interface ContentTableViewCell()
 
-/** 头像 */
-@property (nonatomic, strong) UIButton *userBtn;
-/** 用户名 */
-@property (nonatomic, strong) UILabel *userLable;
+
 /** 时间 */
 @property (nonatomic, strong) UILabel *timeLable;
 /** 标题 */
@@ -50,6 +46,7 @@
     
     self.userBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.userBtn setFrame:CGRectMake(H_10, H_10, H_40, H_40)];
+    self.userBtn.userInteractionEnabled = YES;
     [self.userBtn addTarget:self action:@selector(onUserBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.userBtn];
     
@@ -76,7 +73,7 @@
 - (void)setNewData:(ForumDetailModel *)data {
     [self.userBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:data.headerimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
     self.userLable.text = data.nickname;
-    self.timeLable.text = data.time;
+    self.timeLable.text = [NSString stringTimeDescribeFromTimeString:data.time];
     self.titleLable.text = [data.text emojizedString];
     CGSize titleSize = [(NSString *)data.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
     self.titleLable.height = titleSize.height;
@@ -112,7 +109,6 @@
                     imagePhotoH = image.size.height;
                 }
             } else {
-
                 if (image.size.width > WIDTH - 10) {
                     imagePhotoW = WIDTH-20;
                     imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
@@ -132,6 +128,8 @@
         }];
         [imagePhoto setFrame:CGRectMake(imageX, imagePhotoY, imagePhotoW, imagePhotoH)];
     }
+    
+    _userId = data.userid;
 }
 
 
@@ -174,7 +172,9 @@
 }
 
 - (void)onUserBtnClick {
-    
+    if ([_delegate respondsToSelector:@selector(contentTableViewCellIconDidClick:)]) {
+        [_delegate contentTableViewCellIconDidClick:self];
+    }
 }
 
 - (void)awakeFromNib {

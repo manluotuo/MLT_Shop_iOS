@@ -453,6 +453,8 @@
 #define ON_ADD_BTN                          @"90000"
 #define ON_DELETE_BTN                       @"90001"
 
+#define SET_UP_DATA                         @"90002"
+#define SET_UP_HOME_DATA                    @"90003"
 
 #define NOWVERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 #define NOWBUILD [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -518,7 +520,7 @@ alpha:(a)]
 #define GREENLIGHTCOLOR2 [UIColor colorWithRed:184.0f/255.0f green:233.0f/255.0f blue:134.0f/255.0f alpha:1]
 #define GREENDARKCOLOR [UIColor colorWithRed:0.0f/255.0f green:104.0f/255.0f blue:76.0f/255.0f alpha:1]
 
-
+#define NameBackgroundColor [UIColor colorWithRed:193.0f/255.0f green:204.0f/255.0f blue:220.0f/255.0f alpha:0.5]
 #define REDCOLOR [UIColor colorWithRed:225.0f/255.0f green:78.0f/255.0f blue:0.0f/255.0f alpha:1]
 #define GRAYCOLOR [UIColor colorWithRed:158.0f/255.0f green:158.0f/255.0f blue:158.0f/255.0f alpha:1]
 #define GRAYLIGHTCOLOR [UIColor colorWithRed:190.0f/255.0f green:190.0f/255.0f blue:190.0f/255.0f alpha:1]
