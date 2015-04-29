@@ -40,6 +40,7 @@
         [self initCellView];
     }
     return self;
+
 }
 
 - (void)initCellView {
