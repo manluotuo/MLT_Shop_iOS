@@ -49,6 +49,8 @@
     [self.userBtn setFrame:CGRectMake(H_10, H_10, H_40, H_40)];
     self.userBtn.userInteractionEnabled = YES;
     [self.userBtn addTarget:self action:@selector(onUserBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.userBtn.layer.cornerRadius = self.userBtn.width/2;
+    self.userBtn.clipsToBounds = YES;
     [self addSubview:self.userBtn];
     
     self.userLable = [[UILabel alloc] initWithFrame:CGRectMake(self.userBtn.x+self.userBtn.width+H_10, H_15, H_100, H_10)];

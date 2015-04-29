@@ -56,7 +56,6 @@
     for (NSDictionary *dict in self.model.reply) {
         ContentContentModel *model = [[ContentContentModel alloc] init];
         [model setValuesForKeysWithDictionary:dict];
-        NSLog(@"%@", model.replypostid);
         [self.dataSource addObject:model];
     }
     //增加监听，当键盘出现或改变时收出消息
@@ -195,9 +194,7 @@
                                @"postid": self.model.postid,
                                @"replyuserid": self.model.userid};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
         if ([responseObject[@"SUCESS"] integerValue] == 1) {
-            NSLog(@"成功");
             [DataTrans showWariningTitle:@"回复成功" andCheatsheet:nil andDuration:1.0f];
             self.text.text = @"";
             [self.text resignFirstResponder];

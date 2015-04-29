@@ -39,7 +39,7 @@
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 30, 12+leftMargin, 21)];
     [backButton setTitle:ICON_BACK forState:UIControlStateNormal];
     [backButton.titleLabel setFont:FONT_AWESOME_36];
-
+    
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, leftMargin, 0, 0)];
     [self.naView addSubview:backButton];
  

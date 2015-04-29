@@ -285,6 +285,7 @@
 		33D621F81ABDB7CB009D86A1 /* splash1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */; };
 		33D621F91ABDB7CB009D86A1 /* splash2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */; };
 		33D621FA1ABDB7CB009D86A1 /* splash3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */; };
+		33D746771AF0DD1200749E5E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33D746761AF0DD1200749E5E /* Info.plist */; };
 		33D8FE341AC658C000A6B974 /* LogisticsFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */; };
 		33D92C101AB95EC8004C1FA2 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */; };
 		33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C111AB95F11004C1FA2 /* CFNetwork.framework */; };
@@ -497,7 +498,6 @@
 		266B7E191A3DD25C0001835F /* GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
 		266B7E1A1A3DD25C0001835F /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		266FA7FA1A134A72000C2AAE /* mltshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mltshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		266FA7FE1A134A72000C2AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		266FA7FF1A134A72000C2AAE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		266FA8011A134A72000C2AAE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		266FA80D1A134A72000C2AAE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -885,6 +885,7 @@
 		33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash1@2x.jpg"; sourceTree = "<group>"; };
 		33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash2@2x.jpg"; sourceTree = "<group>"; };
 		33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash3@2x.jpg"; sourceTree = "<group>"; };
+		33D746761AF0DD1200749E5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33D8FE321AC658C000A6B974 /* LogisticsFirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticsFirstTableViewCell.h; sourceTree = "<group>"; };
 		33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsFirstTableViewCell.m; sourceTree = "<group>"; };
 		33D92C0E1AB95EC8004C1FA2 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -1231,8 +1232,8 @@
 			children = (
 				33BDB9591AE757FF000CA407 /* FaceIcon.plist */,
 				26BE3ACD1A1738A6009F37B4 /* mltshop-Prefix.pch */,
-				266FA7FE1A134A72000C2AAE /* Info.plist */,
 				266FA7FF1A134A72000C2AAE /* main.m */,
+				33D746761AF0DD1200749E5E /* Info.plist */,
 				26435AC21A20B44F00E117A0 /* InfoPlist.strings */,
 				33D92C1D1AB96089004C1FA2 /* PushConfig.plist */,
 			);
@@ -2355,6 +2356,7 @@
 				332FD74F1AD6255400935D22 /* pic_background.png in Resources */,
 				33D621F81ABDB7CB009D86A1 /* splash1@2x.jpg in Resources */,
 				26BB7D651A6BA9F9002F4030 /* zbar-help.html in Resources */,
+				33D746771AF0DD1200749E5E /* Info.plist in Resources */,
 				26BE3A8C1A170421009F37B4 /* ding.caf in Resources */,
 				262E1E7D1A58352300C29059 /* AlipaySDK.bundle in Resources */,
 				26435AC11A208F9200E117A0 /* logo_luotuo@2x.png in Resources */,
