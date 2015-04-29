@@ -98,7 +98,7 @@
     UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view2.width, 0.1)];
 //    [line2 setBackgroundColor:GRAYEXLIGHTCOLOR];
     [line2 setBackgroundColor:BLACKCOLOR];
-    [self.view2 addSubview:line2];
+//    [self.view2 addSubview:line2];
     self.lable2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view2.width, 10)];
     [self.lable2 setFont:FONT_14];
     [self.view2 addSubview:self.lable2];
@@ -169,7 +169,7 @@
         CGSize titleSize2 = [str2 sizeWithWidth:WIDTH-10-self.contentLable.x andFont:FONT_14];
         self.lable2.height = titleSize2.height;
         [self.lable2 setNumberOfLines:0];
-        self.view2.y = self.view1.y+self.view1.height+5;
+        self.view2.y = self.view1.y+self.view1.height;
         self.view2.height = self.lable2.y+self.lable2.height;
         [self.iconBtn2 setText:model2.nickname];
     }

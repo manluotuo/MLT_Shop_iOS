@@ -103,7 +103,7 @@
             if (image.size.width > image.size.height) {
                 if (image.size.width > WIDTH - 10) {
                     imagePhotoW = WIDTH-20;
-                    imagePhotoH = image.size.height-(image.size.width-WIDTH-20);
+                    imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
                     if (imagePhotoH < 0) {
                         imagePhotoH = imagePhotoH*(-1);
                     }
@@ -112,9 +112,10 @@
                     imagePhotoH = image.size.height;
                 }
             } else {
+
                 if (image.size.width > WIDTH - 10) {
                     imagePhotoW = WIDTH-20;
-                    imagePhotoH = (image.size.height-(image.size.width-WIDTH-20));
+                    imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
                     if (imagePhotoH < 0) {
                         imagePhotoH = imagePhotoH*(-1);
                     }

@@ -24,22 +24,23 @@
     UIImageView *backImage = [[UIImageView alloc] initWithFrame:self.bounds];
     [backImage setImage:[UIImage imageNamed:@"bg_im_chat_face_bar"]];
     [self addSubview:backImage];
-    if (array.count < 4) {
-        if (array.count == 3) {
-            self.scrollView.contentSize = CGSizeMake(WIDTH+H_50, H_160);
+    if (array.count < 3) {
+        if (array.count == 2) {
+            self.scrollView.contentSize = CGSizeMake(WIDTH+H_100, H_160);
         } else {
             self.scrollView.contentSize = CGSizeMake(WIDTH+H_10, H_160);
         }
     } else {
-        self.scrollView.contentSize = CGSizeMake(array.count * 90 + 120, H_160);
+        self.scrollView.contentSize = CGSizeMake(array.count * 140 + 140, H_160);
     }
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     
     [self addSubview:self.scrollView];
     for (NSInteger i = 0; i <= array.count; i++) {
-        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(20+(90*i), 10, 80, 130)];
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(20+(140*i), 10, 130, 130)];
         image.userInteractionEnabled = YES;
+        image.contentMode = UIViewContentModeScaleAspectFit;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap:)];
         [image addGestureRecognizer:tap];
         if (i == array.count) {

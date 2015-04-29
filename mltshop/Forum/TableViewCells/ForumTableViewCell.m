@@ -102,9 +102,12 @@
     CGFloat imageW = (self.viewA.width-spacing)/3;
     self.image1 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, imageY, imageW, imageW)];
     [self.backgroundView addSubview:self.image1];
+    self.image1.contentMode = UIViewContentModeScaleAspectFit;
     self.image2 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX+imageW+spacing/2, imageY, imageW, imageW)];
+    self.image2.contentMode = UIViewContentModeScaleAspectFit;
     [self.backgroundView addSubview:self.image2];
     self.image3 = [[UIImageView alloc] initWithFrame:CGRectMake(imageX+2*imageW+spacing, imageY, imageW, imageW)];
+    self.image3.contentMode = UIViewContentModeScaleAspectFit;
     [self.backgroundView addSubview:self.image3];
     
     

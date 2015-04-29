@@ -44,6 +44,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self.tableView setBackgroundColor:WHITECOLOR];
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView.y = IOS7_CONTENT_OFFSET_Y;
@@ -85,6 +86,11 @@
     self.text = [[UITextView alloc] initWithFrame:CGRectMake(H_50, 5, WIDTH-H_120, H_30)];
     [self.text setFont:FONT_14];
     //    [self.text setDelegate:self];
+    self.text.layer.cornerRadius = 5;
+    self.text.clipsToBounds = YES;
+    self.text.layer.borderWidth = 1.0;
+    self.text.layer.cornerRadius = 5.0f;
+    self.text.layer.borderColor = [GRAYLIGHTCOLOR CGColor];
     [self.textView addSubview:self.text];
     
     UIButton *postButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -120,7 +126,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGSize titleSize = [(NSString *)self.model.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
-    return 60+titleSize.height;
+    return H_70+titleSize.height;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

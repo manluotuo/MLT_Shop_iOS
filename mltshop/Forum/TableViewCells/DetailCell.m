@@ -21,7 +21,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [self setBackgroundColor:GRAYEXLIGHTCOLOR];
         [self initCellView];
     }
     return self;

@@ -42,6 +42,7 @@
     self.tableView.height = TOTAL_HEIGHT - IOS7_CONTENT_OFFSET_Y;
 }
 
+
 - (void)setupLeftMenuButton {
     
     self.leftDrawerAvatarButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];

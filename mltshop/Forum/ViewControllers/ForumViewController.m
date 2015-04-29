@@ -118,6 +118,9 @@
     NSDictionary *postDict = @{@"page": [NSString stringWithFormat:@"%d", index],
                                @"pagecount": @"20"};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (index == 1) {
+            [self.dataArray removeAllObjects];
+        }
         if ([responseObject[@"SUCESS"] integerValue] == 1) {
             for (NSDictionary *dict in responseObject[@"data"][@"data"]) {
                 ForumModel *model = [[ForumModel alloc] init];
@@ -140,8 +143,6 @@
     NSDictionary *postDict = @{@"userid": XAppDelegate.me.userId,
                                @"nickname": nickName};
     [rom POST:httpUrl parameters:postDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -227,7 +228,6 @@
 }
 
 - (void)recomendNewItems {
-    [self.dataArray removeAllObjects];
     index = 1;
     [self setNewData];
 }
@@ -330,7 +330,7 @@
     ForumModel *model = self.dataArray[indexPath.row];
     CGSize titleSize = [(NSString *)model.text sizeWithWidth:WIDTH-H_40 andFont:FONT_14];
     if (model.image1.length != 0 || model.image2.length != 0 || model.image3.length != 0) {
-    return H_60 + titleSize.height + (WIDTH-H_20)/3 + H_40;
+    return H_60 + titleSize.height + (WIDTH-H_20)/3 + H_30;
     } else {
     return H_60 + titleSize.height + H_30;
     }

@@ -40,10 +40,9 @@
     [super viewDidLoad];
     self.title = T(@"发帖");
     self.textString = @"";
-    [self.view setBackgroundColor:MY_WHITE];
     self.assets = [[NSMutableArray alloc] init];
     self.navigationController.navigationBarHidden = NO;
-    [self.view setBackgroundColor:WHITECOLOR];
+    [self.view setBackgroundColor:MY_WHITE];
     [self createUI];
     [self createRightBarButton];
     
@@ -205,6 +204,7 @@
 
 - (void)passSignalValue:(NSString *)value andData:(id)data {
     if ([value isEqualToString:ON_ADD_BTN]) {
+        self.selectPhoto.selected = NO;
         [photoScrollView removeFromSuperview];
             ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
             pickerVc.minCount = 9;
@@ -212,6 +212,11 @@
             pickerVc.callBack = ^(NSArray *status){
                 [self.assets removeAllObjects];
                 [self.assets addObjectsFromArray:status];
+                self.selectPhoto.selected = YES;
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.btnView.y = TOTAL_HEIGHT - H_160 - self.btnView.height;
+                    self.textView.height = TOTAL_HEIGHT - H_160 - self.btnView.height - H_40;
+                }];
                 photoScrollView = [[PhotoScrollView alloc] initWithFrame:CGRectMake(0, TOTAL_HEIGHT-160, WIDTH, 160)];
                 NSLog(@"%d", self.assets.count);
                 [photoScrollView initData:self.assets];
@@ -221,6 +226,10 @@
                 self.selectPhoto.userInteractionEnabled = YES;
             };
         [pickerVc show];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.btnView.y = TOTAL_HEIGHT-H_40;
+            self.textView.height = TOTAL_HEIGHT-H_40;
+        }];
     }
     /** 删除图片 */
     if ([value isEqualToString:ON_DELETE_BTN]) {
@@ -323,9 +332,5 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    self.btnView.y = TOTAL_HEIGHT-H_40;
-    self.textView.height = TOTAL_HEIGHT-H_40;
-}
 
 @end

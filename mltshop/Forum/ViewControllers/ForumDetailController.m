@@ -51,7 +51,7 @@
     self.detailArray = [[NSMutableArray alloc] init];
     self.contentArray = [[NSMutableArray alloc] init];
     self.conconArray = [[NSMutableArray alloc] init];
-
+    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.tableView setDelegate:self];
@@ -62,7 +62,7 @@
     self.textView = [[UIView alloc] initWithFrame:CGRectMake(0, TOTAL_HEIGHT-H_40, WIDTH, 40)];
     UIImageView *image = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [image setImage:[UIImage imageNamed:@"pic_talk_background"]];
-//    [self.textView addSubview:image];
+    //    [self.textView addSubview:image];
     [self.view addSubview:self.textView];
     [self createTextView];
     [self setNewDataSource];
@@ -94,7 +94,12 @@
     
     self.text = [[UITextView alloc] initWithFrame:CGRectMake(H_50, 5, WIDTH-H_120, H_30)];
     [self.text setFont:FONT_14];
-//    [self.text setDelegate:self];
+    //    [self.text setDelegate:self];
+    self.text.layer.cornerRadius = 5;
+    self.text.clipsToBounds = YES;
+    self.text.layer.borderWidth = 1.0;
+    self.text.layer.cornerRadius = 5.0f;
+    self.text.layer.borderColor = [GRAYLIGHTCOLOR CGColor];
     [self.textView addSubview:self.text];
     
     UIButton *postButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -200,41 +205,38 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        if (self.detailArray.count != 0) {
-            headerHeight = 65;
-            ForumDetailModel *model = self.detailArray[section];
-            CGSize titleSize = [(NSString *)model.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
-            headerHeight += titleSize.height;
-            NSArray *array = [self setImageNumber:model];
-            for (NSInteger i = 1; i <= array.count; i++) {
-                UIImageView *imagePhoto = [[UIImageView alloc] init];
-                [imagePhoto sd_setImageWithURL:[NSURL URLWithString:array[i-1]] placeholderImage:[UIImage imageNamed:@"defPic"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    if (image.size.width > image.size.height) {
-                        if (image.size.width > WIDTH - 10) {
-                            imagePhotoH = image.size.height-(image.size.width-WIDTH-20);
-                            if (imagePhotoH < 0) {
-                                imagePhotoH = imagePhotoH*(-1);
-                            }
-                        } else {
-                            imagePhotoH = image.size.height;
+    if (self.detailArray.count != 0) {
+        headerHeight = 65;
+        ForumDetailModel *model = self.detailArray[section];
+        CGSize titleSize = [(NSString *)model.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
+        headerHeight += titleSize.height;
+        NSArray *array = [self setImageNumber:model];
+        for (NSInteger i = 1; i <= array.count; i++) {
+            UIImageView *imagePhoto = [[UIImageView alloc] init];
+            [imagePhoto sd_setImageWithURL:[NSURL URLWithString:array[i-1]] placeholderImage:[UIImage imageNamed:@"defPic"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (image.size.width > image.size.height) {
+                    if (image.size.width > WIDTH - 10) {
+                        imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
+                        if (imagePhotoH < 0) {
+                            imagePhotoH = imagePhotoH*(-1);
                         }
                     } else {
-                        if (image.size.width > WIDTH - 10) {
-                            imagePhotoH = (image.size.height-(image.size.width-WIDTH-20));
-                            if (imagePhotoH < 0) {
-                                imagePhotoH = imagePhotoH*(-1);
-                            }
-                        } else {
-                            imagePhotoH = image.size.height;
-                        }
+                        imagePhotoH = image.size.height;
                     }
-                    headerHeight += imagePhotoH + 10;
-                }];
-            }
-            return headerHeight;
+                } else {
+                    if (image.size.width > WIDTH - 10) {
+                        imagePhotoH = image.size.height*((WIDTH-20)/image.size.width);
+                        if (imagePhotoH < 0) {
+                            imagePhotoH = imagePhotoH*(-1);
+                        }
+                    } else {
+                        imagePhotoH = image.size.height;
+                    }
+                }
+                headerHeight += imagePhotoH + 10;
+            }];
         }
-        return 0.001;
+        return headerHeight;
     } else {
         return 0.001;
     }
@@ -242,7 +244,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DetailViewController *detailVC = [[DetailViewController alloc] init];
-
+    
     ContentModel *model = self.contentArray[indexPath.row];
     detailVC.model = model;
     [self.navigationController pushViewController:detailVC animated:YES];
@@ -340,16 +342,16 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-//    NSString *desContent = textView.text;//获取文本内容
-//    
-//    CGRect orgRect=self.text.frame;//获取原始UITextView的frame
-//    CGSize size = [desContent sizeWithWidth:WIDTH-H_120 andFont:FONT_14];
-//    
-//    orgRect.size.height = size.height+10;//获取自适应文本内容高度
-//    
-//    self.text.frame = orgRect;//重设UITextView的frame
-//    self.textView.height += size.height+10;
-//    self.text.text = desContent;
+    //    NSString *desContent = textView.text;//获取文本内容
+    //
+    //    CGRect orgRect=self.text.frame;//获取原始UITextView的frame
+    //    CGSize size = [desContent sizeWithWidth:WIDTH-H_120 andFont:FONT_14];
+    //
+    //    orgRect.size.height = size.height+10;//获取自适应文本内容高度
+    //
+    //    self.text.frame = orgRect;//重设UITextView的frame
+    //    self.textView.height += size.height+10;
+    //    self.text.text = desContent;
 }
 
 //当键盘出现或改变时调用
@@ -370,7 +372,7 @@
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     self.textView.y = TOTAL_HEIGHT-H_40;
-
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

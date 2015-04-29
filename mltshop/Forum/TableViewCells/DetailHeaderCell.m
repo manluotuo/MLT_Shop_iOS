@@ -8,7 +8,7 @@
 
 #import "DetailHeaderCell.h"
 #import <SDWebImage/UIButton+WebCache.h>
-
+#import "NSString+TimeString.h"
 
 
 @interface DetailHeaderCell()
@@ -33,6 +33,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self setBackgroundColor:GRAYEXLIGHTCOLOR];
         [self initCellView];
     }
     return self;
@@ -70,7 +71,7 @@
 - (void)setNewData:(ContentModel *)data {
     [self.userBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:data.headerimg] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
     self.userLable.text = data.nickname;
-    self.timeLable.text = data.time;
+    self.timeLable.text = [NSString stringTimeDescribeFromTimeString:data.time];
     self.titleLable.text = [data.text emojizedString];
     CGSize titleSize = [(NSString *)data.text sizeWithWidth:WIDTH-H_20 andFont:FONT_15];
     self.titleLable.height = titleSize.height;

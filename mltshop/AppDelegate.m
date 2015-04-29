@@ -112,6 +112,7 @@
     self.rightSideDrawerViewController = [[RightMenuViewController alloc]init];
     
     UINavigationController * navigationController = [[MMNavigationController alloc] initWithRootViewController:self.centerViewController];
+    
     [navigationController setRestorationIdentifier:@"MMExampleCenterNavigationControllerRestorationKey"];
     
     UINavigationController * rightSideNavController = [[MMNavigationController alloc] initWithRootViewController:self.rightSideDrawerViewController];
