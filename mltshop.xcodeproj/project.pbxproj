@@ -302,6 +302,7 @@
 		33FAFA861AE271F2001967AB /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAFA851AE271F2001967AB /* FSMediaPicker.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
 		EF8DA4071AF0D7F000641A93 /* ForumProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */; };
+		EF8DA4091AF0DBE400641A93 /* tb_cart_icon_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8DA4081AF0DBE400641A93 /* tb_cart_icon_empty.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -911,6 +912,7 @@
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF8DA4051AF0D7F000641A93 /* ForumProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumProfileController.h; sourceTree = "<group>"; };
 		EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumProfileController.m; sourceTree = "<group>"; };
+		EF8DA4081AF0DBE400641A93 /* tb_cart_icon_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tb_cart_icon_empty.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1363,6 +1365,7 @@
 			isa = PBXGroup;
 			children = (
 				336E265B1AEDDAE7003B7208 /* pic_talk_background.jpg */,
+				EF8DA4081AF0DBE400641A93 /* tb_cart_icon_empty.png */,
 				331639681AE912A500863428 /* image_im_groupchat_bg.png */,
 				331639661AE9114F00863428 /* bg_im_chat_face_bar.png */,
 				331639541AE8EDA300863428 /* btn_add_photo_n.png */,
@@ -2410,6 +2413,7 @@
 				26BB7D691A6BA9F9002F4030 /* WeiboSDK.bundle in Resources */,
 				26BE3A801A170421009F37B4 /* link@2x.png in Resources */,
 				331639611AE8EDA300863428 /* add_pic_s.png in Resources */,
+				EF8DA4091AF0DBE400641A93 /* tb_cart_icon_empty.png in Resources */,
 				26BE3A881A170421009F37B4 /* weixin_share_ico.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
