@@ -390,15 +390,15 @@
 }
 
 - (void)onForumButtonClick {
-    
-//    ForumRootViewController *forumView = [[ForumRootViewController alloc] init];
-//    XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
+    if (XAppDelegate.me.userId == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"登录后才能使用社区功能哦" delegate: self cancelButtonTitle:@"确定" otherButtonTitles: nil, nil];
+        [alert show];
+        return;
+    }
+
     ForumViewController *forVC = [[ForumViewController alloc] init];
     XXYNavigationController *navc = [[XXYNavigationController alloc] initWithRootViewController:forVC];
-    //    self.tabbar = [[UITabBarController alloc] init];
-    //    self.tabbar.viewControllers = @[nav];
-    //     翻转 UIModalTransitionStyleFlipHorizontal
-    //    tabbar.tabBar.hidden = YES;
+
     [navc setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentViewController:navc animated:YES completion:^{
         [MobClick event:UM_FORUM];

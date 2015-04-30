@@ -186,7 +186,7 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-    [APService setTags:[NSSet setWithObjects:@"xx", nil] alias:@"小新" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    [APService setTags:[NSSet setWithObjects:@"", nil] alias:@"" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }
 
 - (void)onlineConfigCallBack:(NSNotification *)note {

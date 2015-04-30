@@ -45,11 +45,14 @@
     UIButton *faceBtn;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
 
     [self.view setBackgroundColor:WHITECOLOR];
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
     self.detailArray = [[NSMutableArray alloc] init];
     self.contentArray = [[NSMutableArray alloc] init];
     self.conconArray = [[NSMutableArray alloc] init];

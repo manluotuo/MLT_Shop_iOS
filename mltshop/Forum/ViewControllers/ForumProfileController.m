@@ -11,13 +11,24 @@
 #import "FAHoverButton.h"
 #import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "AppDelegate.h"
 #import "FSMediaPicker.h"
 #import "ModelHelper.h"
 #import "KKFlatButton.h"
+#import "RoundedAvatarButton.h"
+
+#define iOS7   ([UIDevice currentDevice].systemVersion.floatValue < 8.0)
+#define AVATAR_Y_OFFSET -20.0f
+#define LINE_W          0.5f
+
+#define AWAIT_PAY_TAG       201
+#define AWAIT_SHIPPING_TAG  202
+#define SHIPPED_TAG         203
+#define ALL_ORDER_TAG       204
 
 @interface ForumProfileController ()<UIScrollViewDelegate,FSMediaPickerDelegate>
-@property (nonatomic, strong)CExpandHeader *expandView;
+@property (nonatomic, strong)CExpandHeader *header;
 @property (nonatomic, strong)UIView *customView;
 @property (nonatomic, weak)UIButton *iconView;
 @property (nonatomic, strong)UILabel *nameView;
@@ -28,6 +39,9 @@
 @property (nonatomic, strong) UIView *FootView;
 @property (nonatomic, strong) UIView *naView;
 @property (nonatomic, assign)BOOL isMe;
+@property (nonatomic, strong) RoundedAvatarButton *avatarButton;
+@property(nonatomic, strong)UIView *avatarView;
+
 @end
 
 @implementation ForumProfileController
@@ -63,29 +77,59 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBarHidden = YES;
     if ([self.userId isEqualToString:XAppDelegate.me.userId])
         _isMe = YES;
     [self getUserInfo];
     [self setUpScrollView];
-    [self setUpCustomView];
+
     [self setUpFootView];
     [self setUpNavigation];
+}
+
+- (void)setHeaderImage {
+    self.customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 300)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, 300)];
+    [imageView setImage:[UIImage imageNamed:@"image"]];
     
-    self.expandView = [CExpandHeader expandWithScrollView:self.scrollView expandView:self.customView];
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleWidth;
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.customView addSubview:imageView];
+    [self initOtherView];
+    self.header = [CExpandHeader expandWithTableView:self.scrollView expandView:self.customView andHeight:300];
+}
+
+- (void)initOtherView {
+    // 头像
+    self.avatarButton = [[RoundedAvatarButton alloc]initWithFrame:CGRectMake(self.avatarView.width/2-H_90/2, 0, H_90, H_90)];
+    self.avatarButton.userInteractionEnabled = self.isMe;
+    //[self.avatarButton.avatarImageView setImage:[UIImage imageNamed:self.iconURL]];
+    [self.avatarButton.avatarImageView sd_setImageWithURL:self.iconURL placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
+    NSLog(@"%@",XAppDelegate.me.avatarURL);
+    [self.avatarButton addTarget:self action:@selector(avatarAction) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.avatarButton addSubview:editIcon];
+    [self.avatarView addSubview:self.avatarButton];
+    
+    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(0, 105, self.avatarView.width, 30)];
+    [lable setText:self.nickName];
+    lable.textColor = ORANGECOLOR;
+    lable.textAlignment = UIBaselineAdjustmentAlignCenters;
+    [lable setFont:FONT_16];
+    [self.avatarView addSubview:lable];
+    
 }
 
 - (void) setUpScrollView{
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, TOTAL_HEIGHT + H_20 )];
-    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT-200)];
+    [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, TOTAL_HEIGHT-150)];
     self.scrollView.delegate = self;
     self.scrollView.backgroundColor = [UIColor whiteColor];
     [self.scrollView setContentOffset:CGPointMake(0, -20)];
-    KKFlatButton *btn = [KKFlatButton buttonWithType:UIButtonTypeCustom];
-    [btn setBackgroundColor:WHITECOLOR];
-    btn.frame = CGRectMake(1, 10, WIDTH-2, 60);
-    
     [self.view addSubview:self.scrollView];
+    
+    self.avatarView = [[UIView alloc]initWithFrame:CGRectMake(H_30, -200, H_260, H_180)];
+    [self.scrollView addSubview:self.avatarView];
 }
 
 -(void) setUpFootView{
@@ -124,8 +168,7 @@
             
             _iconURL = responseObject[@"data"][@"headerimg"];
             _nickName = responseObject[@"data"][@"nickname"];
-            [self setUpIconView];
-            [self setUpNickName];
+            [self setHeaderImage];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -133,35 +176,7 @@
 
 }
 
--(void) setUpNickName{
-    self.nameView = [[UILabel alloc] init];
-    [self.nameView setText:self.nickName];
-    [_nameView setFrame:CGRectMake(0, self.iconView.y+self.iconView.height+H_20, WIDTH, 30)];
-    CGSize titleSize = [self.nameView.text sizeWithFont:[UIFont systemFontOfSize:18] constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
-    _nameView.width = titleSize.width;
-    _nameView.height = titleSize.height;
-    _nameView.x = WIDTH/2 - titleSize.width/2;
-    _nameView.textAlignment = NSTextAlignmentCenter;
-    _nameView.font = [UIFont systemFontOfSize:15];
-    _nameView.backgroundColor = NameBackgroundColor;
-    _nameView.layer.cornerRadius = 5;
-    _nameView.layer.masksToBounds = YES;
-    _nameView.textColor = ORANGECOLOR;
-    [self.customView addSubview:self.nameView];
-}
-
--(void) setUpIconView{
-    _iconView = [UIButton buttonWithType:UIButtonTypeCustom];
-    _iconView.frame = CGRectMake(WIDTH/2-50, 100, 100, 100);
-    [self.iconView.layer setCornerRadius:_iconView.width/2];
-    self.iconView.layer.masksToBounds = YES;
-    [_iconView sd_setImageWithURL:self.iconURL forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"logo_luotuo"]];
-    [_iconView addTarget:self action:@selector(iconClick) forControlEvents:UIControlEventTouchUpInside];
-    _iconView.userInteractionEnabled = self.isMe;
-    [self.customView addSubview:self.iconView];
-}
-
--(void)iconClick{
+-(void)avatarAction{
     FSMediaPicker *mediaPicker = [[FSMediaPicker alloc] init];
     mediaPicker.mediaType = FSMediaTypePhoto;
     mediaPicker.editMode = FSEditModeCircular;
@@ -219,4 +234,9 @@
     }];
     [operation start];
 }
+
+- (void)viewDidDisappear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+}
+
 @end

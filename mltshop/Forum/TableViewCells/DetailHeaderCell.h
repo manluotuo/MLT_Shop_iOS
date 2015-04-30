@@ -2,7 +2,7 @@
 //  DetailHeaderCell.h
 //  mltshop
 //
-//  Created by 小新 on 15/4/27.
+//  Created by 小新 on 15/4\/27.
 //  Copyright (c) 2015年 manluotuo. All rights reserved.
 //
 
