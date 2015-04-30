@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSArray *faceArray;
 @property (nonatomic, strong) UIView *view;
+@property (nonatomic, strong) UIPageControl *pageControl;
 
 @end
 
@@ -81,8 +82,26 @@
             count++;
         }
     }
+    CGFloat pageW = 100;
+    CGFloat pageH = 50;
+    CGFloat pageX = self.view.width/2 - pageW/2;
+    CGFloat pageY = self.view.height - pageH;
+    UIPageControl *page = [[UIPageControl alloc] initWithFrame:CGRectMake(pageX, pageY, pageW, pageH)];
+    page.numberOfPages = 2;
+    page.pageIndicatorTintColor = GRAYCOLOR;
+    page.currentPageIndicatorTintColor = WHITECOLOR;
+    self.pageControl = page;
+    [self addSubview: self.pageControl];
 }
 
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.x>=self.width/2) {
+        self.pageControl.currentPage = 1;
+    }else{
+        self.pageControl.currentPage = 0;
+    }
+}
 
 -(void)selected:(UIButton*)bt
 {

@@ -85,9 +85,7 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    //     self.clearsSelectionOnViewWillAppear = NO;
-    
-    
+    self.title = @"帖子详情";
 }
 
 

@@ -359,8 +359,6 @@
                  [DataTrans showWariningTitle:T(@"您取消了支付") andCheatsheet:ICON_TIMES];
                  
              }
-             
-             
          }];
     }
     
