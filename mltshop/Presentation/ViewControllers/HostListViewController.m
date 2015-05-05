@@ -39,6 +39,8 @@
     self.commonListDelegate = self;
     self.dataSourceType = ListDataSourceTwoInLine;
     
+    //self.tableView.pagingEnabled = YES;
+
     [self initDataSource];
     
 }

@@ -26,6 +26,7 @@
 + (CGRect)calcRect:(NSInteger)index preLine:(NSInteger)preLine withRect:(CGRect)rect;
 + (NSString *)getSepString:(NSString *)inputString;
 
++ (NSString *)getSepLastString:(NSString *)inputString;
 //// Vehilce Info
 //+ (NSNumber *)getVehicleAccident:(id)jsonData;
 //+ (NSNumber *)getVehicleMaintenance:(id)jsonData;

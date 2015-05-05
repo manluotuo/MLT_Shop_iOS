@@ -12,7 +12,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "ContentContentModel.h"
 #import "NSString+TimeString.h"
-
+#import "ForumProfileController.h"
 
 @interface AnswerOneTableViewCell()
 

@@ -22,6 +22,7 @@
 #import "NoDataView.h"
 #import "NSString+Size.h"
 #import "PassValueDelegate.h"
+#import "DataTrans.h"
 
 
 @interface CommonListViewController ()<UITableViewDataSource, UITableViewDelegate, PassValueDelegate>
@@ -72,7 +73,7 @@
     self.tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = BGCOLOR;
     self.tableView.separatorStyle = UITableViewCellSelectionStyleGray;
-    self.tableView.separatorColor = SEPCOLOR;
+    self.tableView.separatorColor = [UIColor clearColor];
     
     self.tableView.delegate = self;
     self.tableView.dataSource  = self;
@@ -99,7 +100,8 @@
     }
     self.tableView.contentInset = currentInset;
     
-    
+#warning - 点击状态栏返回顶部失效
+    self.tableView.scrollsToTop = YES;
     
     [self.view addSubview:self.tableView];
     
@@ -126,6 +128,7 @@
                                              selector:@selector(handleNextStep:)
                                                  name:NOTIFICATION_VEHICLE_EDIT_DONE object:nil];
     // if no network set enable
+    
 }
 
 - (void)createRefresh {
@@ -257,7 +260,7 @@
         [self.noDataView setHidden:YES];
         
         //        [self makeMaxAndMinID];
-        NSLog(@"setupDataSource %ld 条", [self.dataSource count]);
+        NSLog(@"setupDataSource %ld 条", (unsigned long)[self.dataSource count]);
     }
     
     if (error != nil) {
@@ -342,6 +345,9 @@
         //        [self makeMaxAndMinID];
         
     }
+    if ([responseObject count] == 0) {
+        [DataTrans showWariningTitle:@"没有更多啦~" andCheatsheet:ICON_TIMES];
+    }
 //    }else{
 //        if ([self.dataSource count] > 0 ) {
 //
@@ -395,7 +401,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataSourceType == ListDataSourceTwoInLine){
-        return GOODS_CELL_HEIGHT + H_30;
+        return (TOTAL_WIDTH + 45) * 2;
     }else if(self.dataSourceType == ListDataSourceOneInLine){
         return GOODS_CELL_HEIGHT;
     }else if(self.dataSourceType == ListDataSourceCart){
@@ -513,7 +519,7 @@
             cell.passDelegate = self;
         }
         [cell setNewData:cellData];
-        
+            
         return cell;
     }
 }

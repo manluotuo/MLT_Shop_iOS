@@ -69,6 +69,7 @@
     [self addSubview:idLabel];
     [self addSubview:amountLabel];
 //    [self addSubview:actionBtn];
+
 }
 
 - (void)setNewData:(OrderModel *)_newData

@@ -76,6 +76,8 @@
         
     }
     
+    
+    
     //  TODO click logo and refresh current view
     UILabel *logoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, TITLE_HEIGHT)];
     [logoLabel setText:T(@"漫骆驼")];
@@ -322,6 +324,7 @@
 
 - (void)viewPager:(ViewPagerController *)viewPager didChangeTabToIndex:(NSUInteger)index
 {
+    
     indexNum = (NSInteger)index;
     NSLog(@"didChangeTabToIndex index: %lu",(unsigned long)index);
 }

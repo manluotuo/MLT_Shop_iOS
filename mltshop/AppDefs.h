@@ -166,6 +166,7 @@
 #define CUSTOMFONT [UIFont fontWithName:@"Museo" size:16.0f]
 #define LITTLECUSTOMFONT [UIFont fontWithName:@"Museo" size:13.0f]
 #define CUSTOMFONT_12 [UIFont fontWithName:@"Museo" size:12.0f]
+#define CUSTOMFONT_17 [UIFont fontWithName:@"Museo" size:17.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
 #define TINYCUSTOMFONT [UIFont fontWithName:@"Museo" size:11.0f]
 #define FONT_DIN_14 [UIFont fontWithName:@"DIN Alternate" size:14.0f]

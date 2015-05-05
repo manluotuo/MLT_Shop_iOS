@@ -72,6 +72,7 @@
                       action:@selector(tapSingleAction:)];
     self.singleTap.numberOfTapsRequired = 1;
     [self addGestureRecognizer:self.singleTap];
+    
 }
 
 - (void)setNewData:(GoodsModel *)_newData

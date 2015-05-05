@@ -19,16 +19,9 @@
 #import "ProfileViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 
-
-//#import "LoginViewController.h"
-//#import "WelcomeViewController.h"
-//#import "InitDataHelper.h"
-//#import "ModelHelper.h"
 #import "FirstHelpViewController.h"
 #import "RegisterViewController.h"
 #import "LoginViewController.h"
-//#import "ProfileFormViewController.h"
-//#import "AccountListViewController.h"
 
 #import "ShareHelper.h"
 #import "WXApi.h"

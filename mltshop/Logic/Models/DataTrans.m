@@ -139,6 +139,18 @@
     return [temp firstObject];
 }
 
++ (NSString *)getSepLastString:(NSString *)inputString
+{
+    NSArray *temp = [[NSArray alloc]init];
+    if (([inputString rangeOfString:@"+"].location != NSNotFound)) {
+        temp = [inputString componentsSeparatedByString:@"+"];
+    }
+    if (([inputString rangeOfString:@"-"].location != NSNotFound)) {
+        temp = [inputString componentsSeparatedByString:@"-"];
+    }
+    
+    return [temp lastObject];
+}
 
 
 

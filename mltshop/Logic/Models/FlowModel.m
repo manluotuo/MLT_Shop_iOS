@@ -15,7 +15,6 @@
     if (DictionaryHasValue(dict)) {
         
     }
-    
     return self;
 }
 @end
@@ -44,7 +43,7 @@
                 
                 /** 敏 - 微信支付，在这加判断 */
 //                if ([item[@"pay_code"] isEqualToString:@"alipay"] || [item[@"pay_code"] isEqualToString:@"chinabank"])
-                if ([item[@"pay_code"] isEqualToString:@"alipay"]) {
+                 if ([item[@"pay_code"] isEqualToString:@"alipay"]) {
                     NSLog(@"!!!!!!!!!!!!!!%@", item);
                     [_paymentList addObject:[[PayModel alloc]initWithDict:item]];
                 }

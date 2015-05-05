@@ -135,9 +135,10 @@
     _userId = data.userid;
 }
 
-
+//点击帖子内的图片
 - (void)onPhotoTap:(UITapGestureRecognizer *)sender {
-    NSLog(@"%d", sender.view.tag);
+    NSLog(@"%d****", sender.view.tag);
+    
 }
 
 - (NSArray *)setImageNumber:(NSObject *)data {
