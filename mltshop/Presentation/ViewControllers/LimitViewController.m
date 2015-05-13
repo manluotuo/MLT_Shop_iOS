@@ -66,6 +66,7 @@
 - (void)setData {
     
     [[AppRequestManager sharedManager]setLimitDataBlock:^(id responseObject, NSError *error) {
+        NSLog(@"%@***",responseObject);
         if (responseObject != nil) {
             for (NSDictionary *dict in responseObject[@"data"]) {
             LimitModel *model = [[LimitModel alloc] init];
@@ -94,6 +95,7 @@
     
     LimitModel *model = self.dataArray[indexPath.section];
     [cell setCellData:model];
+
     return cell;
 }
 

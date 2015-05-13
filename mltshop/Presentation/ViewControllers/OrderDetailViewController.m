@@ -351,7 +351,9 @@
     
 }
 
-/** 设置导航栏按钮 */
+/**
+ *  设置导航栏按钮
+ */
 - (void)setupleftButton
 {
     CGFloat leftMargin = 10.0f;
@@ -366,21 +368,30 @@
     self.navigationItem.leftBarButtonItem = barBackButtonItem;
     self.navigationItem.hidesBackButton = YES;
 }
-/** 导航栏按钮点击事件 */
+/**
+ *  导航栏按钮点击事件
+ */
 - (void)onLeftBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 
-/** 确认收货/立即付款按钮点击事件 */
+/**
+ *  确认收货/立即付款点击事件
+ */
 - (void)onBtnCLick {
     
-
     if (button.selected == NO) {
         if (self.dataArray.count > 0) {
             OrderDetailModel *model = [self.dataArray lastObject];
-            [self doAlipayAction:model];
+
+            if ([model.pay_name isEqualToString:@"支付宝"]) {
+                [self doAlipayAction:model];
+            }else if ([model.pay_name isEqualToString:@"网银在线"]){
+#warning 在这里填写调用微信支付
+                NSLog(@"微信支付");
+            }
         }
     } else {
         

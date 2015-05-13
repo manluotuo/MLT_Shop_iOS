@@ -302,8 +302,17 @@
 		33F1C7B61AC4F54D0006974E /* LogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F1C7B51AC4F54D0006974E /* LogisticsViewController.m */; };
 		33FAFA861AE271F2001967AB /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAFA851AE271F2001967AB /* FSMediaPicker.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
+		EF61B2581B00BF25001D0EE7 /* skuview_decrease@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2541B00BF25001D0EE7 /* skuview_decrease@2x.png */; };
+		EF61B2591B00BF25001D0EE7 /* skuview_decrease2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2551B00BF25001D0EE7 /* skuview_decrease2@2x.png */; };
+		EF61B25A1B00BF25001D0EE7 /* skuview_increase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2561B00BF25001D0EE7 /* skuview_increase@2x.png */; };
+		EF61B25B1B00BF25001D0EE7 /* skuview_increase2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2571B00BF25001D0EE7 /* skuview_increase2@2x.png */; };
+		EF61B25E1B00BF4B001D0EE7 /* CartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61B25D1B00BF4B001D0EE7 /* CartView.m */; };
+		EF61B2611B00BF6A001D0EE7 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61B2601B00BF6A001D0EE7 /* UIViewController+KNSemiModal.m */; };
+		EF61B2631B01D31F001D0EE7 /* LLMainPageRecommDishDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2621B01D31F001D0EE7 /* LLMainPageRecommDishDefault@2x.png */; };
+		EF845E3E1AFB13E30045E6B7 /* wxpay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF845E3D1AFB13E30045E6B7 /* wxpay@2x.png */; };
 		EF8DA4071AF0D7F000641A93 /* ForumProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */; };
 		EF8DA4091AF0DBE400641A93 /* tb_cart_icon_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8DA4081AF0DBE400641A93 /* tb_cart_icon_empty.png */; };
+		EFCDE4AC1AFDFD4D00D7BAC4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EFCDE4AB1AFDFD4D00D7BAC4 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -911,9 +920,21 @@
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF61B2541B00BF25001D0EE7 /* skuview_decrease@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_decrease@2x.png"; sourceTree = "<group>"; };
+		EF61B2551B00BF25001D0EE7 /* skuview_decrease2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_decrease2@2x.png"; sourceTree = "<group>"; };
+		EF61B2561B00BF25001D0EE7 /* skuview_increase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_increase@2x.png"; sourceTree = "<group>"; };
+		EF61B2571B00BF25001D0EE7 /* skuview_increase2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_increase2@2x.png"; sourceTree = "<group>"; };
+		EF61B25C1B00BF4B001D0EE7 /* CartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartView.h; sourceTree = "<group>"; };
+		EF61B25D1B00BF4B001D0EE7 /* CartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartView.m; sourceTree = "<group>"; };
+		EF61B25F1B00BF6A001D0EE7 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
+		EF61B2601B00BF6A001D0EE7 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
+		EF61B2621B01D31F001D0EE7 /* LLMainPageRecommDishDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LLMainPageRecommDishDefault@2x.png"; sourceTree = "<group>"; };
+		EF845E3D1AFB13E30045E6B7 /* wxpay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wxpay@2x.png"; sourceTree = "<group>"; };
 		EF8DA4051AF0D7F000641A93 /* ForumProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumProfileController.h; sourceTree = "<group>"; };
 		EF8DA4061AF0D7F000641A93 /* ForumProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumProfileController.m; sourceTree = "<group>"; };
 		EF8DA4081AF0DBE400641A93 /* tb_cart_icon_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tb_cart_icon_empty.png; sourceTree = "<group>"; };
+		EFCDE4AA1AFDFD4D00D7BAC4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		EFCDE4AB1AFDFD4D00D7BAC4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1365,10 +1386,15 @@
 		26BE39E01A170421009F37B4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				EF61B2541B00BF25001D0EE7 /* skuview_decrease@2x.png */,
+				EF61B2551B00BF25001D0EE7 /* skuview_decrease2@2x.png */,
+				EF61B2561B00BF25001D0EE7 /* skuview_increase@2x.png */,
+				EF61B2571B00BF25001D0EE7 /* skuview_increase2@2x.png */,
 				336E265B1AEDDAE7003B7208 /* pic_talk_background.jpg */,
 				EF8DA4081AF0DBE400641A93 /* tb_cart_icon_empty.png */,
 				331639681AE912A500863428 /* image_im_groupchat_bg.png */,
 				331639661AE9114F00863428 /* bg_im_chat_face_bar.png */,
+				EF61B2621B01D31F001D0EE7 /* LLMainPageRecommDishDefault@2x.png */,
 				331639541AE8EDA300863428 /* btn_add_photo_n.png */,
 				331639551AE8EDA300863428 /* btn_add_photo_n@2x.png */,
 				331639561AE8EDA300863428 /* expression_n.png */,
@@ -1412,6 +1438,7 @@
 				33D621F11ABDB3DA009D86A1 /* splash3-568@2x.jpg */,
 				331612261AB02F9300F47730 /* userVC */,
 				262E1E6D1A555B2A00C29059 /* alipay@2x.png */,
+				EF845E3D1AFB13E30045E6B7 /* wxpay@2x.png */,
 				26DE7FCA1A2A12B8007F4B16 /* avatarIronMan@2x.png */,
 				336D049D1AB4473400A87137 /* 1.png */,
 				26435ACD1A20CA7900E117A0 /* Default@2x.png */,
@@ -1465,6 +1492,7 @@
 		26BE3A141A170421009F37B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EFCDE4A91AFDFD4D00D7BAC4 /* Reachability */,
 				33BDB9231AE73EE0000CA407 /* ZLPhotoPicker */,
 				3306DB9B1AE4F17B0009BC9B /* STAlertView */,
 				33FAFA6F1AE27162001967AB /* FSMediaPicker */,
@@ -1504,6 +1532,8 @@
 				33BDB91D1AE65612000CA407 /* NSString+TimeString.h */,
 				33BDB91E1AE65612000CA407 /* NSString+TimeString.m */,
 				26BE3A161A170421009F37B4 /* NSData+Conversion.h */,
+				EF61B25F1B00BF6A001D0EE7 /* UIViewController+KNSemiModal.h */,
+				EF61B2601B00BF6A001D0EE7 /* UIViewController+KNSemiModal.m */,
 				26BE3A171A170421009F37B4 /* NSData+Conversion.m */,
 				26BE3A181A170421009F37B4 /* NSDate+timesince.h */,
 				26BE3A191A170421009F37B4 /* NSDate+timesince.m */,
@@ -1753,6 +1783,8 @@
 		26BE3A601A170421009F37B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF61B25C1B00BF4B001D0EE7 /* CartView.h */,
+				EF61B25D1B00BF4B001D0EE7 /* CartView.m */,
 				26BB7D821A6BB703002F4030 /* ScanOverlayView.m */,
 				26BB7D831A6BB703002F4030 /* ScanOverlayView.h */,
 				267B85EB1A360BDF0084DDEA /* Template */,
@@ -2246,6 +2278,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EFCDE4A91AFDFD4D00D7BAC4 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				EFCDE4AA1AFDFD4D00D7BAC4 /* Reachability.h */,
+				EFCDE4AB1AFDFD4D00D7BAC4 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2348,7 +2389,9 @@
 				26435ACC1A20C55000E117A0 /* MLTLogo-60@3x.png in Resources */,
 				3354850A1AD6834B00E51DAF /* touming.jpg in Resources */,
 				26BE3A851A170421009F37B4 /* shoucang_btn_pressed.png in Resources */,
+				EF61B2591B00BF25001D0EE7 /* skuview_decrease2@2x.png in Resources */,
 				26BE3A8D1A170421009F37B4 /* ding.wav in Resources */,
+				EF61B2581B00BF25001D0EE7 /* skuview_decrease@2x.png in Resources */,
 				26BB7D661A6BA9F9002F4030 /* zbar-helpicons.png in Resources */,
 				33D92C241AB98373004C1FA2 /* collect_sel.png in Resources */,
 				3362E1F91ABBF9E000D0704B /* SIAlertView.bundle in Resources */,
@@ -2364,10 +2407,13 @@
 				262E1E791A58348F00C29059 /* pkcs8.txt in Resources */,
 				33BDB94B1AE73EE0000CA407 /* ZLPhotoPickerGroupTableViewCell.xib in Resources */,
 				33CB64F51AAAF83500D0BE8D /* image.png in Resources */,
+				EF61B25B1B00BF25001D0EE7 /* skuview_increase2@2x.png in Resources */,
 				26BE3A7F1A170421009F37B4 /* email_share_ico.png in Resources */,
 				26BE3A891A170421009F37B4 /* weixinpengyou_share_ico.png in Resources */,
 				3316395C1AE8EDA300863428 /* btn_add_photo_n.png in Resources */,
+				EF61B2631B01D31F001D0EE7 /* LLMainPageRecommDishDefault@2x.png in Resources */,
 				263386661A52FFEA00C94D8F /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
+				EF845E3E1AFB13E30045E6B7 /* wxpay@2x.png in Resources */,
 				26BE3A9B1A170421009F37B4 /* FontAwesome.ttf in Resources */,
 				263386671A52FFEA00C94D8F /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				331639671AE9114F00863428 /* bg_im_chat_face_bar.png in Resources */,
@@ -2408,6 +2454,7 @@
 				26BE3A861A170421009F37B4 /* sina_share_ico.png in Resources */,
 				26BE3A8A1A170421009F37B4 /* yixin_share_ico.png in Resources */,
 				263386631A52FFEA00C94D8F /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
+				EF61B25A1B00BF25001D0EE7 /* skuview_increase@2x.png in Resources */,
 				26BE3A8B1A170421009F37B4 /* yixinpengyou_share_ico.png in Resources */,
 				266FA80E1A134A72000C2AAE /* Images.xcassets in Resources */,
 				3316122A1AB0316700F47730 /* right.png in Resources */,
@@ -2518,6 +2565,7 @@
 				26B1C2561A46876E00295D32 /* AddressModel.m in Sources */,
 				26BE3AA61A170421009F37B4 /* SGSheetMenu.m in Sources */,
 				3316122E1AB03FA100F47730 /* CollectViewController.m in Sources */,
+				EF61B25E1B00BF4B001D0EE7 /* CartView.m in Sources */,
 				26B1C25F1A46BAC400295D32 /* AddressTableViewCell.m in Sources */,
 				336E26621AEE0C83003B7208 /* DetailHeaderCell.m in Sources */,
 				33BDB91F1AE65612000CA407 /* NSString+TimeString.m in Sources */,
@@ -2540,6 +2588,7 @@
 				26BE3AF21A19796E009F37B4 /* HostViewController.m in Sources */,
 				EF8DA4071AF0D7F000641A93 /* ForumProfileController.m in Sources */,
 				262E1EDF1A5836A100C29059 /* base64.m in Sources */,
+				EF61B2611B00BF6A001D0EE7 /* UIViewController+KNSemiModal.m in Sources */,
 				26BE3A921A170421009F37B4 /* NSObject+JSONWriting.m in Sources */,
 				262E1E711A5796B100C29059 /* ShippingTableViewCell.m in Sources */,
 				262E1E6B1A55517000C29059 /* PaymentTableViewCell.m in Sources */,
@@ -2646,6 +2695,7 @@
 				2658A8FA1A3A78B000D9C011 /* SearchModel.m in Sources */,
 				266B7E181A3D67D20001835F /* GoodsTwoTableViewCell.m in Sources */,
 				33C666C81AB4EC26005ACDD5 /* BonusListModel.m in Sources */,
+				EFCDE4AC1AFDFD4D00D7BAC4 /* Reachability.m in Sources */,
 				262E1EE11A5836A100C29059 /* DataVerifier.m in Sources */,
 				33BDB9441AE73EE0000CA407 /* ZLPhotoPickerAssetsViewController.m in Sources */,
 				26875B581A4FDFC300FA5335 /* CartListViewController.m in Sources */,

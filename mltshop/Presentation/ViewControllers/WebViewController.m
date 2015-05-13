@@ -11,6 +11,7 @@
 #import <NJKWebViewProgress/NJKWebViewProgressView.h>
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
 #import "GoodsDetailViewController.h"
+#import "MJRefresh.h"
 
 @interface WebViewController ()<UIWebViewDelegate, NJKWebViewProgressDelegate, PassValueDelegate>
 {

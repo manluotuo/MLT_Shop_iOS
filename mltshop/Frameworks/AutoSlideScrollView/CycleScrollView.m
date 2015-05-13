@@ -130,6 +130,7 @@
         self.scrollView.contentSize = CGSizeMake(3 * CGRectGetWidth(self.scrollView.frame), CGRectGetHeight(self.scrollView.frame));
         self.scrollView.delegate = self;
         self.scrollView.pagingEnabled = YES;
+
         [self addSubview:self.scrollView];
         self.currentPageIndex = 0;
     }

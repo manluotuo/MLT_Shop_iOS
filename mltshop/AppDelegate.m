@@ -31,6 +31,10 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SDWebImage/SDImageCache.h>
 
+#import "JPushViewController.h"
+
+#import "Reachability.h"
+
 //#import "HYBJPushHelper.h"
 #import "APService.h"
 
@@ -41,6 +45,8 @@
 @property(nonatomic, strong)LoginViewController *loginViewController;
 @property(nonatomic, strong)RegisterViewController *registerViewController;
 @property(nonatomic, strong)FirstHelpViewController *firstHelpViewController;
+@property (nonatomic, strong) Reachability *reachabilityManager;
+
 @property(nonatomic, strong)NSString *versonUrl;
 
 @end
@@ -55,6 +61,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+#warning 0511 -  现有的Bug 当网络发生改变时, 已登录的用户会丢失链接, 导致获取不到商品详情数据
+    //监测网络情况, 网络改变后重新登录
+    _reachabilityManager = [Reachability reachabilityWithHostName:@"baidu.com"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkStatus) name:kReachabilityChangedNotification object:nil];
+    // 启动监听
+    [self.reachabilityManager startNotifier];
+    
+    
+    
     //     Override point for customization after application launch.
     //    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:BATCH channelId:nil];
     //    NSString *nowVersion = NOWVERSION;
@@ -131,8 +147,7 @@
     [self.drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
     //    [self checkUserLogin];
-    
-    
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     [[UINavigationBar appearance] setTintColor:WHITECOLOR];
     
@@ -140,9 +155,42 @@
     //        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     //    }
     
+    
     [self skipIntroView];
     
     return YES;
+}
+/**
+ *  监测网络情况
+ */
+- (void)checkStatus {
+    if (XAppDelegate.me.userId) {
+        switch (self.reachabilityManager.currentReachabilityStatus) {
+            case ReachableViaWiFi:
+                [self reLogin];
+                break;
+            case ReachableViaWWAN:
+                [self reLogin];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+-(void)reLogin{
+    [[AppRequestManager sharedManager] signInWithUsername:XAppDelegate.me.username password:XAppDelegate.me.password andBlock:^(id responseObject, NSError *error) {
+        //NSLog(@"%@**************",responseObject);
+        if (responseObject != nil) {
+            [MobClick event:UM_LOGIN];
+            NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
+            [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
+        }
+        if(error != nil) {
+            [self reLogin];
+        }
+    }];
+
 }
 
 /** 极光推送 */
@@ -179,7 +227,8 @@
 #endif
     // Required
     [APService setupWithOption:launchOptions];
-    [APService setTags:[NSSet setWithObjects:@"", nil] alias:@"" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+#warning 设备标签与别名 - 发布时删除
+    [APService setTags:[NSSet setWithObjects:@"800049", nil] alias:@"可宁" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }
 
 - (void)onlineConfigCallBack:(NSNotification *)note {
@@ -204,8 +253,6 @@
             [self.window makeKeyAndVisible];
         }
     }];
-    
-    
 }
 
 - (void)skipIntroView {
@@ -340,10 +387,6 @@
              if([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
                  [MobClick event:UM_PAY];
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"tongzhi" object:nil userInfo:nil];
-                 //                 [self showDrawerView];
-                 // FIXME: 清掉所有的app  如果在 详情页点过去 profile页面会显示不出来
-                 //                 ProfileViewController *VC = [[ProfileViewController alloc]init];
-                 //                 [self.drawerController setCenterViewController:VC];
              }
              if ([resultDic[@"resultStatus"] isEqualToString:@"4000"]) {
                  [MobClick event:UM_PAY_BAD];
@@ -398,6 +441,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //    [HYBJPushHelper registerDeviceToken:deviceToken];
     [APService registerDeviceToken:deviceToken];
+    
     return;
 }
 
@@ -409,6 +453,8 @@
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSLog(@"Error in registration. Error: %@", err);
 }
+
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [application setApplicationIconBadgeNumber:0];
@@ -468,12 +514,16 @@
     [self setJPushAvtion:userInfo];
     // Required
     [APService handleRemoteNotification:userInfo];
+    
+    NSLog(@"%@",userInfo);
+    
 }
 
 //iOS 7 Remote Notification
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:  (NSDictionary *)userInfo fetchCompletionHandler:(void (^)   (UIBackgroundFetchResult))completionHandler {
     // 取得 APNs 标准信息内容
     [self setJPushAvtion:userInfo];
+    
     // Required
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNoData);

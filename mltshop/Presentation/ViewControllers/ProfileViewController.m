@@ -82,7 +82,7 @@
     
     [leftDrawerAvatarButton addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:leftDrawerAvatarButton];
+    [self.customView addSubview:leftDrawerAvatarButton];
 }
 
 - (void)setClick {
@@ -212,16 +212,12 @@
     [self.scrollView setContentSize:CGSizeMake(TOTAL_WIDTH, self.scrollView.frame.size.height-VIEW_HEIGHT+H_200+H_30)];
     [self.view addSubview:self.scrollView];
     
-    
     self.avatarView = [[UIView alloc]initWithFrame:CGRectMake(H_30, AVATAR_Y_OFFSET, H_260, H_90)];
     
     UILabel *editIcon = [[UILabel alloc]initWithFrame:CGRectMake(H_70, 0, H_30, H_30)];
     editIcon.font = FONT_AWESOME_24;
     editIcon.text = [NSString fontAwesomeIconStringForEnum:FAPencil];
     editIcon.textColor = WHITECOLOR;
-    
-
-    
     
     [self.scrollView addSubview:self.avatarView];
     self.scrollView.delegate = self;

@@ -172,6 +172,7 @@
     [self.leftDrawerAvatarButton setTitle:ICON_BARS forState:UIControlStateNormal];
     [self.leftDrawerAvatarButton setFrame:CGRectMake(0, 0, ROUNDED_BUTTON_HEIGHT, ROUNDED_BUTTON_HEIGHT)];
     
+    
     [self.leftDrawerAvatarButton addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem * leftDrawerButton = [[UIBarButtonItem alloc]initWithCustomView:self.leftDrawerAvatarButton];
@@ -184,6 +185,7 @@
 }
 
 -(void)setupRightMenuButton{
+    
     FAHoverButton *rightButton = [FAHoverButton buttonWithType:UIButtonTypeCustom];
     
     [rightButton setTitle:[NSString fontAwesomeIconStringForEnum:FAQrcode] forState:UIControlStateNormal];
@@ -326,6 +328,7 @@
 {
     
     indexNum = (NSInteger)index;
+    
     NSLog(@"didChangeTabToIndex index: %lu",(unsigned long)index);
 }
 

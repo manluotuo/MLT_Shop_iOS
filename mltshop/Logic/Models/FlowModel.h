@@ -13,6 +13,7 @@
 @property(nonatomic, strong)NSString *payId;
 @property(nonatomic, strong)NSString *shippingId;
 @property(nonatomic, strong)NSString *bounsId;
+@property(nonatomic, strong)NSNumber *bouns;
 @property(nonatomic, strong)NSNumber *usedIntegral;
 
 - (id)initWithDict:(NSDictionary *)dict;
@@ -74,6 +75,7 @@
  */
 @interface BonusModel : NSObject
 
+@property(nonatomic, strong)NSNumber *bonus;
 @property(nonatomic, strong)NSString *bonusId;
 @property(nonatomic, strong)NSString *bonusName;
 @property(nonatomic, strong)NSNumber *bonusMoney;

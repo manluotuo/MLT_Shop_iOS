@@ -173,8 +173,6 @@
 {
     GoodsModel *theOne = data;
     
-    NSLog(@"%@", theOne);
-    
     if ([value isEqualToString:SIGNAL_TAP_VEHICLE]) {
         
         GoodsDetailViewController *vc = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];

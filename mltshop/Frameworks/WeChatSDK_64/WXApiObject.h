@@ -49,11 +49,17 @@ enum WXAPISupport {
  *
  */
 @interface BaseResp : NSObject
-/** 错误码 */
+/**
+ *  错误码
+ */
 @property (nonatomic, assign) int errCode;
-/** 错误提示字符串 */
+/**
+ *  错误提示字符串
+ */
 @property (nonatomic, retain) NSString *errStr;
-/** 响应类型 */
+/**
+ *  响应类型
+ */
 @property (nonatomic, assign) int type;
 
 @end
@@ -67,17 +73,29 @@ enum WXAPISupport {
  */
 @interface PayReq : BaseReq
 
-/** 商家向财付通申请的商家id */
+/**
+ *  商家向财付通申请的商家 id
+ */
 @property (nonatomic, retain) NSString *partnerId;
-/** 预支付订单 */
+/**
+ *   预支付订单
+ */
 @property (nonatomic, retain) NSString *prepayId;
-/** 随机串，防重发 */
+/**
+ *  随机字符串,防重发
+ */
 @property (nonatomic, retain) NSString *nonceStr;
-/** 时间戳，防重发 */
+/**
+ *  时间戳, 防重发
+ */
 @property (nonatomic, assign) UInt32 timeStamp;
-/** 商家根据财付通文档填写的数据和签名 */
+/**
+ *  商家根据财付通文档填写的数据和签名
+ */
 @property (nonatomic, retain) NSString *package;
-/** 商家根据微信开放平台文档对数据做的签名 */
+/**
+ *  商家根据微信开放平台文档对数据做的签名
+ */
 @property (nonatomic, retain) NSString *sign;
 
 @end
@@ -88,7 +106,9 @@ enum WXAPISupport {
  */
 @interface PayResp : BaseResp
 
-/** 财付通返回给商家的信息 */
+/**
+ *  财付通返回商家的信息
+ */
 @property (nonatomic, retain) NSString *returnKey;
 
 @end

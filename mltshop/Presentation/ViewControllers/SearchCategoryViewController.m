@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, IOS7_CONTENT_OFFSET_Y, CGRectGetWidth(self.view.frame), H_40)];
     self.searchBar.placeholder = @"搜索（商品名称）";
-    self.searchBar.barTintColor = GREENLIGHTCOLOR2;
+    self.searchBar.barTintColor = GRAYLELIGHTCOLOR;
     [self.searchBar setImage:[UIImage imageNamed:@"search_btn"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
@@ -132,6 +132,7 @@ typedef NS_ENUM(NSInteger,recommendListType) {
     [self setupDataSource];
 }
 
+
 - (void)passSignalValue:(NSString *)value andData:(id)data
 {
     if ([value isEqualToString:SIGNAL_SEARCH_CATEGORY_BUTTON_CLICKED]) {
@@ -148,14 +149,11 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         GoodsDetailViewController *vc = [[GoodsDetailViewController alloc]initWithNibName:nil bundle:nil];
         vc.passDelegate = self;
         [vc setGoodsData:theOne];
-        
         [self.navigationController presentViewController:vc animated:YES completion:nil];
     }
 }
 
-//////////////////////////////////////////////////
 #pragma mark -- UISearchBar delegate
-//////////////////////////////////////////////////
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
@@ -198,13 +196,10 @@ typedef NS_ENUM(NSInteger,recommendListType) {
                 CategoryModel *model = [[CategoryModel alloc]initWithDict:responseObject[i]];
                 [self.cateDataSource addObject:model];
             }
-
             [self.cateView reloadData];
         }
     }];
-    
 }
-
 
 - (void)searchAndRefreshTableView{
     searchStart = 1;
@@ -365,22 +360,6 @@ typedef NS_ENUM(NSInteger,recommendListType) {
         [self.navigationController pushViewController:VC animated:YES];
         //
     }];
-    
-//
-//    // open subcategory
-//    for (int i = 0; i<[self.cateDataSource count]; i++) {
-//        CategoryModel *cellData = self.cateDataSource[i];
-//        if (i == index) {
-//            cellData.isPicked = YES;
-//        }else{
-//            cellData.isPicked = NO;
-//        }
-//    }
-//
-//    
-//    pickedSection = indexPath.section;
-//
-//    [self.cateView reloadData];
 }
 
 
@@ -389,17 +368,5 @@ typedef NS_ENUM(NSInteger,recommendListType) {
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

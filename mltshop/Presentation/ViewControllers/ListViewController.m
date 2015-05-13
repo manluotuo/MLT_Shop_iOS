@@ -46,6 +46,9 @@
     [self initDataSource];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoIndexAction) name:SIGNAL_GO object:nil];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:251/255.0 green:247/255.0 blue:237/255.0 alpha:1];
+
 }
 
 - (void)gotoIndexAction

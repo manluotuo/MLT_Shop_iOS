@@ -41,9 +41,8 @@
 //    rightCell = [[GoodsHalfCell alloc]initWithFrame:CGRectMake(TOTAL_WIDTH/2, 0, TOTAL_WIDTH/2, GOODS_CELL_HEIGHT)];
 
     leftCell = [[GoodsHalfCell alloc] initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH, TOTAL_WIDTH + 55)];
-    rightCell  = [[GoodsHalfCell alloc] initWithFrame:CGRectMake(0, leftCell.height - 10, TOTAL_WIDTH, TOTAL_HEIGHT - 108)];
-    
-    
+    rightCell  = [[GoodsHalfCell alloc] initWithFrame:CGRectMake(0, leftCell.height - 15, TOTAL_WIDTH, TOTAL_HEIGHT - 108)];
+
     self.leftTap = [[UITapGestureRecognizer alloc]
                       initWithTarget:self
                       action:@selector(tapLeftAction:)];
@@ -58,7 +57,7 @@
     
     [self addSubview:leftCell];
     [self addSubview:rightCell];
-    
+
     self.backgroundColor = [UIColor colorWithRed:111/225.0 green:111/225.0 blue:111/225.0 alpha:0.08];
     
 }
@@ -111,11 +110,11 @@
     self = [super initWithFrame:frame];
     
     if(self){
-        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(H_5, H_15, TOTAL_WIDTH - H_10, TOTAL_WIDTH + H_30)];
+        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(H_5, H_5, TOTAL_WIDTH - H_10, TOTAL_WIDTH + 35)];
         
         
         //[containView setBackgroundColor:GRAYLIGHTCOLOR];
-        containView.layer.borderColor = [UIColor whiteColor].CGColor;
+        containView.layer.borderColor = [UIColor clearColor].CGColor;
         containView.layer.borderWidth = 2.0;
         containView.layer.cornerRadius = 5;
         containView.layer.masksToBounds = YES;
@@ -123,29 +122,28 @@
         containView.backgroundColor = WHITECOLOR;
         
         // right
-        goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(2, 0, containView.width - H_4, containView.width - 20)];
+        goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, containView.width, containView.width - 20)];
         goodsImg.layer.cornerRadius = 2;
         goodsImg.layer.masksToBounds = YES;
 
-        nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, CGRectGetMaxY(goodsImg.frame) + H_10, H_130, H_20)];
-        [nameLabel setFont:[UIFont systemFontOfSize:15]];
+        nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, CGRectGetMaxY(goodsImg.frame) + H_5, H_130, H_36)];
+        [nameLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
         [nameLabel setTextColor:DARKCOLOR];
         //[titleLabel setTextAlignment:NSTextAlignmentCenter];
-        nameLabel.numberOfLines = 0;
         
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x + H_5, CGRectGetMaxY(nameLabel.frame), containView.width, 50)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(nameLabel.x, CGRectGetMaxY(nameLabel.frame), containView.width - 20, 70)];
         //titleLabel.backgroundColor = GREENCOLOR;
-        titleLabel.font = [UIFont systemFontOfSize:12];
+        titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
         titleLabel.textColor = GRAYLIGHTCOLOR;
+        titleLabel.numberOfLines = 0;
+        titleLabel.lineBreakMode = UILineBreakModeWordWrap;
         
-        
-        priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_110, H_130, H_20)];
-        priceLabel.x = CGRectGetMaxX(containView.frame) - H_150;
-        [priceLabel setFont:CUSTOMFONT_17];
-        [priceLabel setTextColor:ORANGECOLOR];
+        priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_10, H_110, H_100,H_15)];
+        priceLabel.x = CGRectGetMaxX(containView.frame) - H_110;
+        [priceLabel setFont: [UIFont fontWithName:@"Helvetica-Bold" size:13]];
+        [priceLabel setTextColor:ORANGE_DARK_COLOR];
         [priceLabel setTextAlignment:NSTextAlignmentRight];
     
-        
         [containView addSubview:priceLabel];
         [containView addSubview:titleLabel];
         [containView addSubview:goodsImg];
@@ -162,19 +160,39 @@
 
 - (void)setup:(GoodsModel *)theGoods
 {
+    [nameLabel setText:theGoods.goodsName];
+    [titleLabel setText:theGoods.goodsBrief];
+    nameLabel.numberOfLines = 0;
+    
     CGSize titleSize = [[DataTrans getSepString:theGoods.goodsName] sizeWithWidth:H_130 andFont:FONT_12];
     titleLabel.height = titleSize.height;
     priceLabel.y = nameLabel.y;
     
-    [goodsImg sd_setImageWithURL:[NSURL URLWithString:theGoods.cover.thumb] placeholderImage:PLACEHOLDERIMAGE];
-    [titleLabel setText:[DataTrans getSepLastString:theGoods.goodsName]];
-    [nameLabel setText:[DataTrans getSepString:theGoods.goodsName]];
+    [goodsImg sd_setImageWithURL:[NSURL URLWithString:theGoods.cover.original] placeholderImage:PLACEHOLDERIMAGE];
 
+    //[nameLabel setText:[DataTrans getSepString:theGoods.goodsName]];
+//    nameLabel.backgroundColor = [UIColor redColor];
+//    priceLabel.backgroundColor = [UIColor greenColor];
+//    titleLabel.backgroundColor = [UIColor blueColor];
+
+    nameLabel.width = self.width - priceLabel.width;
+    CGSize nameSize = [nameLabel.text sizeWithFont:nameLabel.font constrainedToSize:CGSizeMake(nameLabel.frame.size.width, MAXFLOAT)];
+    nameLabel.size = nameSize;
+    titleLabel.y = CGRectGetMaxY(nameLabel.frame);
+
+    if (nameLabel.height < 29) {
+        nameLabel.y = CGRectGetMaxY(goodsImg.frame) + H_12;
+        priceLabel.y = nameLabel.y;
+        titleLabel.y = CGRectGetMaxY(nameLabel.frame) + H_5;
+    }
+    
 //    显示特价
     if (theGoods.promotePrice.integerValue > 0) {
-        [priceLabel setText:[[theGoods.promotePrice stringValue] stringByAppendingString:@"元"]];
+        [priceLabel setText:[[theGoods.promotePrice stringValue] stringByAppendingString:@".00元"]];
+        [priceLabel setText:[NSString stringWithFormat:@"￥%@",priceLabel.text]];
     }else{
-        [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@"元"]];
+        [priceLabel setText:[[theGoods.shopPrice stringValue] stringByAppendingString:@".00元"]];
+        [priceLabel setText:[NSString stringWithFormat:@"￥%@",priceLabel.text]];
     }
 
 }

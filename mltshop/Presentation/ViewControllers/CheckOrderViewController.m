@@ -22,6 +22,9 @@
 #import <HTProgressHUD/HTProgressHUD.h>
 #import <HTProgressHUD/HTProgressHUDIndicatorView.h>
 
+#import "BonusListModel.h"
+
+#import "WXApi.h"
 
 #define CART_TAG        0
 #define CONSIGNEE_TAG   1
@@ -100,7 +103,7 @@
         if(responseObject != nil) {
             
             self.dataSource =  [[FlowModel alloc]initWithDict:responseObject];
-            
+
             // 如果支付和快递  默认选第一个
             if ([self.dataSource.shippingList count] >= 1) {
                 
@@ -109,12 +112,13 @@
                 self.flowDoneData.shippingId = item.shippingId;
                 
             }
-            
             if ([self.dataSource.paymentList count] >=  1) {
                 PayModel *item = [self.dataSource.paymentList firstObject];
                 item.selected = YES;
                 self.flowDoneData.payId = item.payId;
             }
+            
+            
             
             [self.tableView reloadData];
             
@@ -130,10 +134,17 @@
                                  andDuration:3.0f];
                 
             }
-            
-            
-            
         }
+    }];
+
+    [[AppRequestManager sharedManager] getBonusListWithBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            for (NSDictionary *dict in responseObject[@"data"]) {
+                BonusModel *model = [[BonusModel alloc] initWithDict:dict];
+                [self.dataSource.bonusList addObject:model];
+            }
+        }
+        [self.tableView reloadData];
     }];
 }
 
@@ -219,9 +230,20 @@
     }
 }
 
-/** 微信支付 */
+/**
+ *  微信支付
+ */
 - (void)doWeiXinAction {
+    
     NSLog(@"填写微信支付");
+//    PayReq *request = [[PayReq alloc] init];
+//    request.partnerId = @"10000100";
+//    request.prepayId= @"1101000000140415649af9fc314aa427";
+//    request.package = @"Sign=WXPay";
+//    request.nonceStr= @"a462b76e7436e98e0ed6e13c64b4fd1c";
+//    request.timeStamp= @"1397527777";
+//    request.sign= @"582282D72DD2B03AD892830965F428CB16E7A256";
+//    [WXApi sendReq:request];
 }
 
 - (void)doneAction
@@ -247,7 +269,6 @@
                     if ([payType isEqualToString:T(@"支付宝付款")]) {
                         [self doAlipayAction:theOrder];
                     } else {
-                        
                         NSLog(@"调用微信支付");
                         [self doWeiXinAction];
                     }
@@ -287,7 +308,7 @@
         }
     }
     
-    // 红白
+    // 红包
     for (BonusModel * bonus in self.dataSource.bonusList) {
         if (bonus.selected) {
             bonusLabel.text = [NSString stringWithFormat:@"%@, -%@ 元",
@@ -453,11 +474,13 @@
         
         // 更新一条
         BonusModel *theShip = self.dataSource.bonusList[indexPath.row];
+        
         BonusTableViewCell *cell = (BonusTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         theShip.selected = YES;
         [cell setNewData:theShip];
         self.flowDoneData.bounsId = theShip.bonusId;
-        
+        self.flowDoneData.bouns = theShip.bonusMoney;
+
     }
     
     [self refreshInfoView];
@@ -473,6 +496,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     switch (section) {
         case CART_TAG:
             return [self.dataSource.goodsList count];
@@ -487,8 +511,7 @@
             return [self.dataSource.shippingList count];
             break;
         case BONUS_TAG:
-            NSLog(@"%@", self.dataSource.bonusList);
-            return [self.dataSource.bonusList count];
+            return self.dataSource.bonusList.count;
             break;
         default:
             return 1;
@@ -510,7 +533,6 @@
         [cell.imageRight setHidden:YES];
         [cell.changeCountBtn setHidden:YES];
         [cell setNewData:cellData];
-        
         return cell;
     }else if (indexPath.section == CONSIGNEE_TAG){
         AddressModel *cellData = self.dataSource.consignee;
@@ -521,6 +543,12 @@
         return cell;
     }else if (indexPath.section == PAYMENT_TAG){
         PayModel *cellData = self.dataSource.paymentList[indexPath.row];
+
+        if ([cellData.payName isEqualToString:@"网银在线"]) {
+            cellData.payCode = @"wxpay@2x";
+            cellData.payName = @"微信支付";
+        }
+        
         PaymentTableViewCell *cell = [[PaymentTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.passDelegate = self;
         [cell setNewData:cellData];
@@ -534,6 +562,7 @@
     }else if (indexPath.section == BONUS_TAG){
         /** 红包 */
         BonusModel *cellData = self.dataSource.bonusList[indexPath.row];
+
         BonusTableViewCell *cell = [[BonusTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.passDelegate = self;
         [cell setNewData:cellData];

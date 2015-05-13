@@ -12,6 +12,7 @@
 #import "AFURLSessionManager.h"
 #import <AFNetworking/AFNetworking.h>
 
+#import "ModelHelper.h"
 
 static NSString * const kAppNetworkAPIBaseURLString = BASE_API;
 static AppRequestManager *_sharedManager = nil;
@@ -466,7 +467,6 @@ static dispatch_once_t onceToken;
         if([DataTrans isCorrectResponseObject:responseObject]) {
             // 刷新本地数据 需要写入数据库
             if (block) {
-                NSLog(@"%@", responseObject);
                 block(responseObject, nil);
             }
         }else{
@@ -477,7 +477,7 @@ static dispatch_once_t onceToken;
         }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@ %@",postURL, error);
+
         if (block) {
             block(nil , error);
         }
@@ -515,6 +515,7 @@ static dispatch_once_t onceToken;
 }
 - (void)getGoodsDetailWithGoodsId:(NSString *)goodsId andBlcok:(void (^)(id responseObject, NSError *error))block
 {
+    
     NSString *postURL = API_GOODS_DETAILS_PATH;
     
     NSDictionary *postDict = @{@"goods_id" :goodsId,
@@ -532,13 +533,13 @@ static dispatch_once_t onceToken;
                 block(responseObject[@"data"] , nil);
             }
         }else{
+            
             NSError *error = [NSError errorWithDomain:NSURLErrorDomain
                                                  code:200
                                              userInfo:responseObject[@"status"]];
             block(nil,error);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"%@ %@",postURL, error);
         if (block) {
             block(nil , error);
         }
@@ -701,7 +702,7 @@ static dispatch_once_t onceToken;
  *  购物车操作
  *
  *  @param theCart   <#theCart description#>
- *  @param operation <#operation description#>
+ *  @param operation operation description
  *  @param block     <#block description#>
  */
 - (void)operateOrderWithOrderModel:(OrderModel *)theOrder
@@ -801,7 +802,6 @@ static dispatch_once_t onceToken;
                                                      @"sid": [DataTrans noNullStringObj:XAppDelegate.me.sessionId]
                                                      }}];
     
-    NSLog(@"%@", baseDict);
     //    NSDictionary * postDict = [DataTrans makePostDict:baseDict];
     [[AppRequestManager sharedManager]POST:postURL parameters:baseDict success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -809,6 +809,7 @@ static dispatch_once_t onceToken;
             // 刷新本地数据 需要写入数据库
             if (block) {
                 block(responseObject[@"data"] , nil);
+
             }
             
         }else{
@@ -838,7 +839,8 @@ static dispatch_once_t onceToken;
     
     baseDict[@"pay_id"] = [DataTrans noNullStringObj:flowModel.payId];
     baseDict[@"shipping_id"] = [DataTrans noNullStringObj:flowModel.shippingId];
-    baseDict[@"bonus"] = [DataTrans noNullStringObj:flowModel.bounsId];
+    baseDict[@"bonus"] = [DataTrans noNullStringObj:flowModel.bouns];
+    baseDict[@"bonus_id"] = flowModel.bounsId;
     baseDict[@"integral"] = [DataTrans noNullStringObj:[flowModel.usedIntegral stringValue]];
     baseDict[@"inv_type"] = @"0";
     baseDict[@"inv_content"] = @"";

@@ -131,9 +131,11 @@
     
 }
 
+#warning - 需要在这里判断支付方式
 - (void)onPayBtnClick {
     if (self.payBtn.selected == NO) {
         [self.passDelegate passSignalValue:SIGNAL_ORDER_ACTION andData:self.data];
+
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:T(@"确定收货") delegate:self cancelButtonTitle:T(@"取消") otherButtonTitles:T(@"确认"), nil];
         alert.delegate = self;

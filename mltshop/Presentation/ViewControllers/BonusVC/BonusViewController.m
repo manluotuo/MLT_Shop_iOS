@@ -37,6 +37,7 @@
     self.tableView.separatorStyle = UITableViewCellSelectionStyleBlue;
     [self setupDataSource];
     [self setupleftButton];
+
 }
 
 - (void)setupDataSource {

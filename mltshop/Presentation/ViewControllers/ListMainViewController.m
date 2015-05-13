@@ -22,6 +22,7 @@
 #import "ForumRootViewController.h"
 #import "XXYNavigationController.h"
 
+#import "Appdelegate.h"
 static const NSInteger kTotalPageCount = 5;
 @interface ListMainViewController ()<UIScrollViewDelegate,PassValueDelegate, PullListViewDelegate>
 @property(nonatomic, strong)YWDictionary *fixedData;
@@ -44,23 +45,12 @@ static const NSInteger kTotalPageCount = 5;
     [self setupDataSource];
     [self createRefresh];
 }
-/*
- - (void)handleImageTap:(UIGestureRecognizer *)tap
- {
- NSArray *items = [self.fixedData objectForKey:@"player"];
- NSInteger tagag = tap.view.tag;
- NSDictionary *item = items[tap.view.tag];
- [self passSignalValue:SIGNAL_MAIN_PAGE_TAPPED andData:item[@"url"]];
- }
- */
+
 - (void)onForumButtonClick {
     
     ForumRootViewController *forumView = [[ForumRootViewController alloc] init];
     XXYNavigationController *nav = [[XXYNavigationController alloc] initWithRootViewController:forumView];
-    //    self.tabbar = [[UITabBarController alloc] init];
-    //    self.tabbar.viewControllers = @[nav];
-    //     翻转 UIModalTransitionStyleFlipHorizontal
-    //    tabbar.tabBar.hidden = YES;
+    
     [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentViewController:nav animated:NO completion:^{
         [MobClick event:UM_FORUM];
@@ -97,6 +87,7 @@ static const NSInteger kTotalPageCount = 5;
                     VC.passDelegate = self;
                     GoodsModel *theGoods = [[GoodsModel alloc]init];
                     theGoods.goodsId = parsed[@"id"];
+
                     [VC setGoodsData:theGoods];
                     
                     [self.navigationController presentViewController:VC animated:YES completion:nil];
@@ -122,7 +113,7 @@ static const NSInteger kTotalPageCount = 5;
             
             // 对首页数据进行排序
             NSArray *keys = [responseObject allKeys];
-            
+            NSLog(@"%@",[keys lastObject]);
             if ([keys containsObject:@"player"]) {
                 [self.fixedData setObject:responseObject[@"player"] forKey:@"player"];
             }
@@ -135,6 +126,9 @@ static const NSInteger kTotalPageCount = 5;
                 [self.fixedData setObject:responseObject[@"area"] forKey:@"area"];
             }
             
+            if ([keys containsObject:@"promote_goods"]) {
+                [self.fixedData setObject:responseObject[@"promote_goods"] forKey:@"promote_goods"];
+            }
             
             [self buildFixedView];
         }
@@ -160,7 +154,7 @@ static const NSInteger kTotalPageCount = 5;
     for (NSString *key in [self.fixedData allKeys]) {
         
         NSArray *listData = [self.fixedData objectForKey:key];
-        
+
         // 滚动广告屏
         if ([key isEqualToString:@"player"]) {
             CGFloat playerY = fixedHeight;
@@ -177,6 +171,7 @@ static const NSInteger kTotalPageCount = 5;
              self.pagedScrollView.pagingEnabled = YES;
              self.pagedScrollView.delegate = self;
              [self.pagedScrollView removeAllContentSubviews];
+             
              */
             CGRect scrollFrame = CGRectMake(0, 0, TOTAL_WIDTH, SLIDE_FIX_HEIGHT);
             for (int i = 0 ; i < [listData count]; i++) {
@@ -242,15 +237,18 @@ static const NSInteger kTotalPageCount = 5;
         //区域信息
         else if([key isEqualToString:@"area"]){
             for (NSDictionary *oneArea in listData) {
+                
                 CGFloat height = AREA_FIX_HEIGHT;
                 if (StringHasValue(oneArea[@"title"])) {
                     height += H_30;
                 }
+                
                 CGRect rect = CGRectMake(0, fixedHeight+SEP_HEIGHT*2, TOTAL_WIDTH, height);
                 ADAreaView *areaView = [[ADAreaView alloc]initWithFrame:rect];
+                
                 [areaView initWithData:oneArea];
                 [self.fixedView addSubview:areaView];
-                
+               
                 areaView.passDelegate = self;
                 /**
                  *  高度-1 为了 获得一个像素的感觉
@@ -258,9 +256,24 @@ static const NSInteger kTotalPageCount = 5;
                 fixedHeight += height;
             }
         }
+        
+        //设置品牌街下面的image
+//        if ([key isEqualToString:@"promote_goods"]) {
+//            CGFloat height =SLIDE_FIX_HEIGHT;
+//            UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.mainScorllView.frame)*2-H_5, TOTAL_WIDTH, height)];
+//            image.layer.borderWidth = 1.0;
+//            image.layer.borderColor = GRAYEXLIGHTCOLOR.CGColor;
+//            NSURL *url = [NSURL URLWithString:@"http://www.manluotuo.com/data/afficheimg/20150430roeiye.jpg"];
+//            [image sd_setImageWithURL:url];
+//            [self.fixedView addSubview:image];
+//            fixedHeight += height;
+//        }
     }
     [self.fixedView setContentSize:CGSizeMake(TOTAL_WIDTH, fixedHeight)];
     [self.view addSubview:self.fixedView];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:251/255.0 green:247/255.0 blue:237/255.0 alpha:1];
+
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

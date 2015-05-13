@@ -82,6 +82,8 @@
 }
 -(void)leftDrawerButtonPress:(id)sender{
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+
 }
 
 -(void)rightDrawerButtonPress:(id)sender{

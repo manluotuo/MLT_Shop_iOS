@@ -115,7 +115,11 @@
     self.theOrder = theOrder;
     if([value isEqualToString:SIGNAL_ORDER_ACTION]){
         if ([theOrder.paymentType isEqualToString:@"UNPAYED"]) {
-            [self doAlipayAction:theOrder];
+            if ([theOrder.payCode isEqualToString:@"alipay"]) {
+                [self doAlipayAction:theOrder];
+            }else if ([theOrder.payCode isEqualToString:@"chinabank"]){
+                NSLog(@"微信支付");
+            }
         }
     }
     if ([value isEqualToString:CERTRAL_BTN_CLICK]) {

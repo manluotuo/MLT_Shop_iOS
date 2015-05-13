@@ -16,6 +16,10 @@
 @end
 
 
+@interface ADAreaOnlyView : UIButton
+- (void) initWithItemData:(NSDictionary *)item;
+@end
+
 @interface ADAreaOneHeightView : UIButton
 
 - (void)initWithItemData:(NSDictionary *)item;

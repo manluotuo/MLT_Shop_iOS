@@ -20,7 +20,8 @@
 #import "CartListViewController.h"
 #import "ShareHelper.h"
 #import "SVPullToRefresh.h"
-
+#import "CartView.h"
+#import "UIViewController+KNSemiModal.h"
 #import "CommentTableViewCell.h"
 #import "AppDelegate.h"
 
@@ -28,7 +29,7 @@
 #define ADD_CART_TAB_TAG    102
 #define CART_TAB_TAG        103
 
-@interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface GoodsDetailViewController ()<UIScrollViewDelegate,UIWebViewDelegate,UITableViewDataSource,UITableViewDelegate,catrViewDelegete>
 {
     CGFloat fixedHeight;
     CGFloat htmlHeight;
@@ -97,6 +98,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self buildFixedView];
     state = NO;
     self.commentData = [[NSMutableArray alloc] init];
@@ -133,37 +135,12 @@
             if ([self.theGoods.goodsInvertory integerValue] == 0) {
                 [DataTrans showWariningTitle:T(@"该商品库存不足\n无法添加购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
             } else {
-                /**
-                 *  如果只有一个 那么默认选第一个
-                 */
-                if ([self.theGoods.spec.values count] == 1) {
-                    SpecItemModel *item = [self.theGoods.spec.values firstObject];
-                    CartModel *newCartItem = [[CartModel alloc]init];
-                    newCartItem.goodsId = self.theGoods.goodsId;
-                    newCartItem.goodsCount = INT(1);
-                    newCartItem.goodsAttrId = item.itemId;
-                    [self addToCart:newCartItem];
-                }else if ([self.theGoods.spec.values count] > 1){
-                    for (SpecItemModel *item in self.theGoods.spec.values) {
-                        [titleArray addObject:item.label];
-                    }
-                    [SGActionView showSheetWithTitle:T(@"选择尺码/颜色分类")  itemTitles:titleArray selectedIndex:100 selectedHandle:^(NSInteger index) {
-                        SpecItemModel *specItem = [self.theGoods.spec.values objectAtIndex:index];
-                        CartModel *newCartItem = [[CartModel alloc]init];
-                        newCartItem.goodsId = self.theGoods.goodsId;
-                        newCartItem.goodsCount = INT(1);
-                        newCartItem.goodsAttrId = specItem.itemId;
-                        [self addToCart:newCartItem];
-                    }];
-                }else{
-                    // 没有spec 的
-                    CartModel *newCartItem = [[CartModel alloc]init];
-                    newCartItem.goodsId = self.theGoods.goodsId;
-                    newCartItem.goodsCount = INT(1);
-                    newCartItem.goodsAttrId = @"";
-                    
-                    [self addToCart:newCartItem];
-                }
+                //弹出购物车视图
+                CartView *cartView = [[CartView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 130)];
+                cartView.delegete = self;
+                [cartView setData:self.theGoods];
+                UIImageView *bgView = [[UIImageView alloc] init];
+                [self presentSemiView:cartView withOptions:@{ KNSemiModalOptionKeys.backgroundView:bgView }];
             }
         } else {
             [DataTrans showWariningTitle:T(@"您还没有登陆\n无法添加购物车") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:1.0f];
@@ -188,22 +165,20 @@
     }
 }
 
+-(void)donebtnClick:(CartModel *)cartModel{
+    
+    [self addToCart:cartModel];
+}
+
 - (void)addToCart:(CartModel *)cartModel
 {
-    [SGActionView resetSGActionViewInstance:nil];
-    NSArray *titles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7"];
-    [SGActionView showGridMenuWithTitle:T(@"选择数量") itemTitles:titles images:nil selectedHandle:^(NSInteger index) {
-        NSLog(@"%d", index);
-        cartModel.goodsCount = INT(index+1);
-        [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
-            if (responseObject != nil) {
-                [DataTrans showWariningTitle:T(@"成功加入购物车") andCheatsheet:ICON_CHECK];
-                [self refreshCartCount];
-            }
-        }];
-        
+
+    [[AppRequestManager sharedManager]operateCartWithCartModel:cartModel operation:CartOpsCreate andBlock:^(id responseObject, NSError *error) {
+        if (responseObject != nil) {
+            [DataTrans showWariningTitle:T(@"成功加入购物车") andCheatsheet:ICON_CHECK];
+            [self refreshCartCount];
+        }
     }];
-    
 }
 
 /**
@@ -369,11 +344,11 @@
     
     self.briefLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_45, H_260, H_40)];
     [self.briefLabel setFont:FONT_12];
+    [self.briefLabel setNumberOfLines:0];
     [self.briefLabel setTextColor:GRAYCOLOR];
     [self.briefLabel setTextAlignment:NSTextAlignmentLeft];
     [self.briefLabel setLineBreakMode:NSLineBreakByClipping];
     [self.briefLabel setLineBreakMode:NSLineBreakByCharWrapping];
-//    self.briefLabel.numberOfLines = 0;
     
     self.priceTitle = [[UILabel alloc]initWithFrame:CGRectMake(H_18, H_90+H_15, H_60, H_24)];
     self.priceTitle.text = T(@"本店价");
@@ -590,8 +565,8 @@
     
     [[AppRequestManager sharedManager]getGoodsDetailWithGoodsId:_goods.goodsId andBlcok:^(id responseObject, NSError *error) {
         if (responseObject != nil) {
-//            __weak GoodsDetailViewController *weakSelf = self;
-//            [weakSelf.fixedView.pullToRefreshView stopAnimating];
+            //            __weak GoodsDetailViewController *weakSelf = self;
+            //            [weakSelf.fixedView.pullToRefreshView stopAnimating];
             [self refreshTable];
             self.theGoods = [[GoodsModel alloc]initWithDict:responseObject];
             [self refreshViewWithData];
@@ -651,7 +626,7 @@
     self.titleLabel.height = height.height;
     self.briefLabel.text = self.theGoods.goodsBrief;
     if (height.height > 25) {
-    self.briefLabel.height += 5;
+        self.briefLabel.height += 5;
     }
     
     // 售价

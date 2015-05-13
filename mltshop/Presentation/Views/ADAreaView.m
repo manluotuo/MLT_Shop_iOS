@@ -31,6 +31,7 @@
     if (ArrayHasValue(oneArea[@"items"])) {
         self.items = oneArea[@"items"];
     }
+    
     self.backgroundColor = WHITECOLOR;
     CGFloat offsetY = 0.0f;
     if (StringHasValue(oneArea[@"title"])) {
@@ -48,7 +49,23 @@
         [self addSubview:titleLabel];
     }
     
-    if ([oneArea[@"template"] isEqualToString:@"L1R2"]) {
+    
+    if ([oneArea[@"template"] isEqualToString:@"only"]) {
+    
+        ADAreaOnlyView *leftView = [[ADAreaOnlyView alloc]initWithFrame:CGRectMake(0, offsetY, TOTAL_WIDTH, AREA_FIX_HEIGHT)];
+        NSLog(@"%@888888888",self.items[0]);
+        [leftView initWithItemData:self.items[0]];
+        UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, offsetY, TOTAL_WIDTH, 1)];
+        lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
+        
+        [self addSubview:leftView];
+        [self addSubview:lineView1];
+        
+        leftView.tag = 0;
+        [leftView addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }else if ([oneArea[@"template"] isEqualToString:@"L1R2"]) {
+
         ADAreaOneHeightView *leftView = [[ADAreaOneHeightView alloc]initWithFrame:CGRectMake(0, offsetY, TOTAL_WIDTH/2, AREA_FIX_HEIGHT)];
         [leftView initWithItemData:self.items[0]];
         
@@ -176,6 +193,50 @@
     [self addSubview:goodsImg];
     [self addSubview:titleLabel];
     [self addSubview:priceLabel];
+    [self addSubview:lineView1];
+    [self addSubview:lineView2];
+    
+}
+
+
+@end
+
+
+/**
+ only 区域
+ */
+@implementation ADAreaOnlyView
+
+-(void)initWithItemData:(NSDictionary *)item
+{
+    UIImageView *goodsImg = [[UIImageView alloc]initWithFrame:CGRectMake(H_0, H_0, TOTAL_WIDTH - H_10, H_150)];
+    
+    
+    
+    [goodsImg sd_setImageWithURL:[NSURL URLWithString:item[@"img"]] placeholderImage:PLACEHOLDERIMAGE];
+    
+//    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_130, TOTAL_WIDTH/2, H_20)];
+//    [titleLabel setText:[DataTrans getSepString:item[@"name"]]];
+//    [titleLabel setFont:FONT_12];
+//    [titleLabel setTextColor:DARKCOLOR];
+//    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+//    
+//    UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, H_130+H_20, TOTAL_WIDTH/2, H_14)];
+//    [priceLabel setText:[item[@"price"] stringByAppendingString:@"元"]];
+//    [priceLabel setFont:LITTLECUSTOMFONT];
+//    [priceLabel setTextColor:GRAYLIGHTCOLOR];
+//    [priceLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    
+    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, TOTAL_WIDTH/2, 1)];
+    lineView1.backgroundColor = GRAYEXLIGHTCOLOR;
+    
+    UIView *lineView2 = [[UIView alloc]initWithFrame:CGRectMake(0, AREA_FIX_HEIGHT-1, TOTAL_WIDTH/2, 1)];
+    lineView2.backgroundColor = GRAYEXLIGHTCOLOR;
+    
+    [self addSubview:goodsImg];
+//    [self addSubview:titleLabel];
+//    [self addSubview:priceLabel];
     [self addSubview:lineView1];
     [self addSubview:lineView2];
     

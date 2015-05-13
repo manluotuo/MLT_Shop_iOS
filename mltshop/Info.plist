@@ -60,11 +60,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-<<<<<<< Updated upstream
-	<string>4313</string>
-=======
-	<string>4321</string>
->>>>>>> Stashed changes
+	<string>5677</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

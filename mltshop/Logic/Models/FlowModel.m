@@ -38,13 +38,16 @@
         
         _consignee = [[AddressModel alloc]initWithDict:dict[@"consignee"]];
         
-        if (ArrayHasValue( dict[@"payment_list"])) {
+        if (ArrayHasValue(dict[@"payment_list"])) {
             for (NSDictionary *item in [dict objectForKey:@"payment_list"]) {
                 
                 /** 敏 - 微信支付，在这加判断 */
-//                if ([item[@"pay_code"] isEqualToString:@"alipay"] || [item[@"pay_code"] isEqualToString:@"chinabank"])
-                 if ([item[@"pay_code"] isEqualToString:@"alipay"]) {
-                    NSLog(@"!!!!!!!!!!!!!!%@", item);
+                if ([item[@"pay_code"] isEqualToString:@"chinabank"]){
+                    [_paymentList addObject:[[PayModel alloc]initWithDict:item]];
+
+                }
+                else if ([item[@"pay_code"] isEqualToString:@"alipay"]) {
+                    
                     [_paymentList addObject:[[PayModel alloc]initWithDict:item]];
                 }
             }

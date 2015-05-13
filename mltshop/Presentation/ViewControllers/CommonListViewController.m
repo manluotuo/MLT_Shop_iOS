@@ -105,7 +105,6 @@
     
     [self.view addSubview:self.tableView];
     
-    
     self.maxID = @"";
     self.minID = @"";
     
@@ -128,6 +127,8 @@
                                              selector:@selector(handleNextStep:)
                                                  name:NOTIFICATION_VEHICLE_EDIT_DONE object:nil];
     // if no network set enable
+    
+    //    self.tableView.backgroundColor = [UIColor colorWithRed:111/255.0 green:111/255.0 blue:111/255.0 alpha:1];
     
 }
 
@@ -277,11 +278,11 @@
         return ;
     }
     __weak CommonListViewController *weakSelf = self;
-
+    
     
     NSMutableArray *data = [DataTrans getDataArrayWithExtendData:responseObject];
     
-//    NSLog(@"new data : %ld",[data count]);
+    //    NSLog(@"new data : %ld",[data count]);
     // 大于20条清空列表
     //    if ([data count] >= 20) {
     //        self.dataSource = [[NSMutableArray alloc]init];
@@ -307,19 +308,16 @@
             [weakSelf.dataSource insertObject:object atIndex:0];
             
             [indexPaths addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
-            
         }
         
         [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         [weakSelf.tableView endUpdates];
-        
         
         NSString *message = [NSString stringWithFormat:T(@"为您推荐了%d辆车"),[data count]];
         [TSMessage setDefaultViewController:self];
         [TSMessage showNotificationWithTitle:message type:TSMessageNotificationTypeSuccess];
         
         //        [self makeMaxAndMinID];
-        
     }
     
 }
@@ -346,16 +344,16 @@
         
     }
     if ([responseObject count] == 0) {
-        [DataTrans showWariningTitle:@"没有更多啦~" andCheatsheet:ICON_TIMES];
+        [DataTrans showWariningTitle:T(@"没有更多啦~") andCheatsheet:[NSString fontAwesomeIconStringForEnum:FAInfoCircle] andDuration:0.4f];
     }
-//    }else{
-//        if ([self.dataSource count] > 0 ) {
-//
-//            [weakSelf.tableView.infiniteScrollingView setTitle:T(@"全部加载完成") forState:SVInfiniteScrollingStateStopped];
-//            
-//            [weakSelf.tableView.infiniteScrollingView setEnabled:NO];
-//        }
-//    }
+    //    }else{
+    //        if ([self.dataSource count] > 0 ) {
+    //
+    //            [weakSelf.tableView.infiniteScrollingView setTitle:T(@"全部加载完成") forState:SVInfiniteScrollingStateStopped];
+    //
+    //            [weakSelf.tableView.infiniteScrollingView setEnabled:NO];
+    //        }
+    //    }
 }
 
 
@@ -401,7 +399,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataSourceType == ListDataSourceTwoInLine){
-        return (TOTAL_WIDTH + 45) * 2;
+        return (TOTAL_WIDTH + 40) * 2;
     }else if(self.dataSourceType == ListDataSourceOneInLine){
         return GOODS_CELL_HEIGHT;
     }else if(self.dataSourceType == ListDataSourceCart){
@@ -425,6 +423,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    
     return [self.dataSource count];
 }
 
@@ -496,6 +496,9 @@
         
         return cell;
     }
+    
+    
+    
     //    else if(self.dataSourceType == ListDataSourceOrder){
     //        OrderModel *cellData = [self.dataSource objectAtIndex:indexPath.row];
     //        cellData.indexPath = indexPath;
@@ -519,10 +522,11 @@
             cell.passDelegate = self;
         }
         [cell setNewData:cellData];
-            
+        
         return cell;
     }
 }
+
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //{

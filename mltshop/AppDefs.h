@@ -30,17 +30,20 @@
 #define COPYRIGHT                   @"\u00a9"
 
 
-
+#warning 测试地址
 //测试地址e
-#ifdef  USE_DEV
+//#define BASE_API        @"http://192.168.1.199:8080"
 #define BASE_API        @"http://www.manluotuo.com"
 
-#else
-//#define NSLog(...) LogMessageF( __FILE__,__LINE__,__FUNCTION__, NULL, 0, __VA_ARGS__)
-
-//#define BASE_API        @"http://appdemo.manluotuo.com"
-#define BASE_API        @"http://www.manluotuo.com"
-#endif
+//#ifdef  USE_DEV
+//#define BASE_API        @"http://www.manluotuo.com"
+//
+//#else
+////#define NSLog(...) LogMessageF( __FILE__,__LINE__,__FUNCTION__, NULL, 0, __VA_ARGS__)
+//
+////#define BASE_API        @"http://appdemo.manluotuo.com"
+//#define BASE_API        @"http://www.manluotuo.com"
+//#endif
 
 #define CUSTOMER_SERVICE_URL    @"http://webim.qiao.baidu.com/im/gateway?ucid=7217349&siteid=5114738&bid=be5ff86b6371ca9b1efa980a"
 
@@ -84,6 +87,8 @@
 //#define WXAPI_APP_ID        @"wxfad0032de4fc339a"
 
 #define WXAPI_APP_ID        @"wx18098a9221270776"
+#define WXPackage           @"Sign=WXPay"
+
 
 #define QQ_API_URL_ID       @"tencent1104058323"
 #define QQ_API_ID           @"1104058323"
@@ -542,7 +547,11 @@ alpha:(a)]
 
 #define BlACKALPHACOLOR [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.2]
 
-#define ORANGECOLOR [UIColor colorWithRed:245.0f/255.0f green:166.0f/255.0f blue:35.0f/255.0f alpha:1]
+
+//#define ORANGECOLOR [UIColor colorWithRed:254/255.0 green:124/255.0 blue:7/255.0 alpha:1]
+
+#define ORANGECOLOR [UIColor colorWithRed:254.0f/255.0f green:143.0f/255.0f blue:7.0f/255.0f alpha:1]
+
 #define ORANGE_DARK_COLOR [UIColor colorWithRed:239.0f/255.0f green:105.0f/255.0f blue:6.0f/255.0f alpha:1]
 #define ORANGE_LIGHT_COLOR [UIColor colorWithRed:252.0f/255.0f green:242.0f/255.0f blue:174.0f/255.0f alpha:0.4f]
 
