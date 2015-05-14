@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PassValueDelegate.h"
 
 @interface AddressTableViewCell : UITableViewCell
-
 - (void)setNewData:(AddressModel *)_newData;
-@property (nonatomic, weak) id<PassValueDelegate> passDelegate;
+
 
 @end

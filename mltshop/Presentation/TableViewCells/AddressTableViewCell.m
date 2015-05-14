@@ -11,7 +11,7 @@
 @interface AddressTableViewCell(){
     UILabel *consigneeLabel;
     UILabel *detailLabel;
-    UILabel *districtLabel;
+    UILabel *phoneLabel;
 }
 
 @property(nonatomic, strong)AddressModel *data;
@@ -33,21 +33,26 @@
 - (void)initCellView
 {
     consigneeLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING, H_100, H_20)];
-    consigneeLabel.font = FONT_14;
-    consigneeLabel.textColor = GREENCOLOR;
+    consigneeLabel.font = FONT_16;
+    consigneeLabel.textColor = BLACKCOLOR;
+    [self addSubview:consigneeLabel];
+
+    phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(consigneeLabel.frame) + H_10, consigneeLabel.y, H_200, H_20)];
+    phoneLabel.font = CUSTOMFONT_16;
+    phoneLabel.textColor = BLACKCOLOR;
+    [self addSubview:phoneLabel];
     
-    districtLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_90, TOP_PADDING, H_200, H_20)];
-    districtLabel.textColor = GRAYCOLOR;
-    districtLabel.textAlignment = NSTextAlignmentRight;
-    districtLabel.font = FONT_12;
-    
-    detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING+H_24, H_280, H_30)];
+    detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(H_20, TOP_PADDING+H_20, H_280, H_30)];
     detailLabel.numberOfLines = 0;
     detailLabel.font = FONT_12;
-    
-    [self addSubview:consigneeLabel];
-    [self addSubview:districtLabel];
+    detailLabel.textColor = GRAYCOLOR;
     [self addSubview:detailLabel];
+
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(H_5, CGRectGetMaxY(detailLabel.frame) + H_5, TOTAL_HEIGHT - H_5, 0.8)];
+    line.backgroundColor = [UIColor colorWithRed:111.0f/255.0f green:111.0f/255.0f blue:111.0f/255.0f alpha:0.2];
+    [self addSubview:line];
+    
+    
 }
 
 
@@ -59,12 +64,10 @@
     }else{
         consigneeLabel.text = self.data.consignee;
     }
-    districtLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@",
-                          self.data.countryName,
-                          self.data.provinceName,
-                          self.data.cityName,
-                          self.data.districtName];
-    detailLabel.text = self.data.address;
+    
+    phoneLabel.text = self.data.tel;
+    
+    detailLabel.text = [NSString stringWithFormat:@"%@ %@ %@",self.data.cityName,self.data.districtName,self.data.address];
 }
 
 

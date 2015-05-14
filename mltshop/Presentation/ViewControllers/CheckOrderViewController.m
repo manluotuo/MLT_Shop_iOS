@@ -7,7 +7,6 @@
 //
 
 #import "CheckOrderViewController.h"
-#import "AddressTableViewCell.h"
 #import "CartTableViewCell.h"
 #import "PaymentTableViewCell.h"
 #import "ShippingTableViewCell.h"
@@ -15,6 +14,7 @@
 #import "AppRequestManager.h"
 #import "SGActionView.h"
 #import "AppDelegate.h"
+#import "CheckOrderAddressCell.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
@@ -537,7 +537,7 @@
     }else if (indexPath.section == CONSIGNEE_TAG){
         AddressModel *cellData = self.dataSource.consignee;
         cellData.indexPath = indexPath;
-        AddressTableViewCell *cell = [[AddressTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        CheckOrderAddressCell *cell = [[CheckOrderAddressCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.passDelegate = self;
         [cell setNewData:cellData];
         return cell;

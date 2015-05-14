@@ -302,6 +302,7 @@
 		33F1C7B61AC4F54D0006974E /* LogisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F1C7B51AC4F54D0006974E /* LogisticsViewController.m */; };
 		33FAFA861AE271F2001967AB /* FSMediaPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAFA851AE271F2001967AB /* FSMediaPicker.m */; };
 		C35F25B6A37D4C2BBEA11D50 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C41C99F2716B4A278B8C21BB /* libPods.a */; };
+		EF20E7A51B0355BB0038010F /* CheckOrderAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF20E7A41B0355BB0038010F /* CheckOrderAddressCell.m */; };
 		EF61B2581B00BF25001D0EE7 /* skuview_decrease@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2541B00BF25001D0EE7 /* skuview_decrease@2x.png */; };
 		EF61B2591B00BF25001D0EE7 /* skuview_decrease2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2551B00BF25001D0EE7 /* skuview_decrease2@2x.png */; };
 		EF61B25A1B00BF25001D0EE7 /* skuview_increase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF61B2561B00BF25001D0EE7 /* skuview_increase@2x.png */; };
@@ -920,6 +921,8 @@
 		4C091F7463655AEB9D9E6215 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6F65776EF66E7C56C2777D8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C41C99F2716B4A278B8C21BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF20E7A31B0355BB0038010F /* CheckOrderAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckOrderAddressCell.h; sourceTree = "<group>"; };
+		EF20E7A41B0355BB0038010F /* CheckOrderAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckOrderAddressCell.m; sourceTree = "<group>"; };
 		EF61B2541B00BF25001D0EE7 /* skuview_decrease@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_decrease@2x.png"; sourceTree = "<group>"; };
 		EF61B2551B00BF25001D0EE7 /* skuview_decrease2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_decrease2@2x.png"; sourceTree = "<group>"; };
 		EF61B2561B00BF25001D0EE7 /* skuview_increase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skuview_increase@2x.png"; sourceTree = "<group>"; };
@@ -1720,6 +1723,8 @@
 			isa = PBXGroup;
 			children = (
 				26EC86321A6549B400307120 /* OrderTableViewCell.h */,
+				EF20E7A31B0355BB0038010F /* CheckOrderAddressCell.h */,
+				EF20E7A41B0355BB0038010F /* CheckOrderAddressCell.m */,
 				26EC86331A6549B400307120 /* OrderTableViewCell.m */,
 				339AEB021ACA693200F8ED3B /* OrderFootTableViewCell.h */,
 				339AEB031ACA693200F8ED3B /* OrderFootTableViewCell.m */,
@@ -2573,6 +2578,7 @@
 				263386641A52FFEA00C94D8F /* SVWebViewControllerActivityChrome.m in Sources */,
 				331639531AE8D9A800863428 /* PhotoScrollView.m in Sources */,
 				3306DB9E1AE4F17B0009BC9B /* STAlertView.m in Sources */,
+				EF20E7A51B0355BB0038010F /* CheckOrderAddressCell.m in Sources */,
 				33BDB9451AE73EE0000CA407 /* ZLPhotoPickerGroupViewController.m in Sources */,
 				26FF358C1A429AE80014A38F /* SpecModel.m in Sources */,
 				26BE3AED1A197936009F37B4 /* LeftMenuViewController.m in Sources */,

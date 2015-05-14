@@ -35,13 +35,14 @@
     self.dataArray = [[NSMutableArray alloc]init];
     
     button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(H_10, H_10, WIDTH-H_20, H_40);
+    button.frame = CGRectMake(H_10, TOTAL_HEIGHT - H_50, WIDTH-H_20, H_40);
     [button setBackgroundColor:[UIColor orangeColor]];
     button.clipsToBounds = YES;
-    button.layer.cornerRadius = 5;
+    button.layer.cornerRadius = 3;
     [button setTitle:T(@"新增地址") forState:UIControlStateNormal];
     [button addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.tableView addSubview:button];
+    [self.view addSubview:button];
+
     
     [self initDataSource];
     [self setUpImageDownButton:0];
@@ -129,7 +130,7 @@
         [user setValue:@"YES" forKey:@"address"];
         [user synchronize];
     }
-    button.y = self.dataSource.count*H_60+H_10;
+//    button.y = self.dataSource.count*H_60+H_10;
     return [self.dataSource count];
 }
 
@@ -184,6 +185,10 @@
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"OK"] isEqualToString:@"NO"]) {
         [self addAction];
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return H_110;
 }
 
 /*

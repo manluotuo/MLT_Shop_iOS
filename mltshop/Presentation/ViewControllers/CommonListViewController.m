@@ -413,6 +413,7 @@
     }else{
         return CELL_HEIGHT;
     }
+    
 }
 
 #pragma mark -
@@ -463,9 +464,10 @@
         
         if (cell == nil) {
             cell = [[AddressTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            cell.passDelegate = self;
+            
         }
         [cell setNewData:cellData];
+        cell.height = 100;
         
         return cell;
     }
