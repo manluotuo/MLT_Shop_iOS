@@ -72,6 +72,7 @@ static dispatch_once_t onceToken;
         [_sharedManager.requestSerializer setValue:XAppDelegate.me.userToken forHTTPHeaderField:@"X-AUTH-TOKEN"];
     }
 }
+
 + (AppRequestManager *)nodejsManager {
     static AppRequestManager *_sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -82,6 +83,7 @@ static dispatch_once_t onceToken;
     
     return _sharedManager;
 }
+
 
 -(void)networkRequestDidFinish: (NSNotification *) notification
 {
@@ -132,7 +134,7 @@ static dispatch_once_t onceToken;
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //
-        NSLog(@"%@ %@",postURL, error);
+        NSLog(@"%@ %@  %@",postURL, error, task);
         
         if (block) {
             block(nil , error);

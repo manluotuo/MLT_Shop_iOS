@@ -232,7 +232,7 @@
             //            dict[@"token"]  = responseObject[@"token"];
             dict[@"password"] = self.passTextView.text;
             
-            [[ModelHelper sharedHelper]updateMeWithJsonData:dict];
+            [[ModelHelper sharedHelper] updateMeWithJsonData:dict];
             [MobClick event:UM_LOGIN];
             [XAppDelegate skipIntroView];
         }

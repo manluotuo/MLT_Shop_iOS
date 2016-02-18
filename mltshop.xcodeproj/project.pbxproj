@@ -225,6 +225,7 @@
 		3362E2CD1ABC4CC900D0704B /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362E2A61ABC4CC900D0704B /* NSTimer+Addition.m */; };
 		3362E2CE1ABC4CC900D0704B /* AutoSlideScrollView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3362E2A81ABC4CC900D0704B /* AutoSlideScrollView.bundle */; };
 		33670FDE1AE4B7DE00404816 /* SetNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33670FDD1AE4B7DE00404816 /* SetNameView.m */; };
+		3368C49F1BB8C2F100D2BCD2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3368C49E1BB8C2F100D2BCD2 /* Info.plist */; };
 		336B62AC1AB16CD500476A93 /* BonusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336B62AB1AB16CD500476A93 /* BonusViewController.m */; };
 		336D045A1AB40E0A00A87137 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D04591AB40E0A00A87137 /* OrderDetailViewController.m */; };
 		336D045D1AB411F800A87137 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D045C1AB411F800A87137 /* OrderModel.m */; };
@@ -285,7 +286,6 @@
 		33D621F81ABDB7CB009D86A1 /* splash1@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */; };
 		33D621F91ABDB7CB009D86A1 /* splash2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */; };
 		33D621FA1ABDB7CB009D86A1 /* splash3@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */; };
-		33D746771AF0DD1200749E5E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33D746761AF0DD1200749E5E /* Info.plist */; };
 		33D8FE341AC658C000A6B974 /* LogisticsFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */; };
 		33D92C101AB95EC8004C1FA2 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C0F1AB95EC8004C1FA2 /* libPushSDK-1.8.2.a */; };
 		33D92C121AB95F11004C1FA2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D92C111AB95F11004C1FA2 /* CFNetwork.framework */; };
@@ -787,6 +787,7 @@
 		3362E2A81ABC4CC900D0704B /* AutoSlideScrollView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AutoSlideScrollView.bundle; sourceTree = "<group>"; };
 		33670FDC1AE4B7DE00404816 /* SetNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetNameView.h; path = Views/SetNameView.h; sourceTree = "<group>"; };
 		33670FDD1AE4B7DE00404816 /* SetNameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetNameView.m; path = Views/SetNameView.m; sourceTree = "<group>"; };
+		3368C49E1BB8C2F100D2BCD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		336B62AA1AB16CD500476A93 /* BonusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BonusViewController.h; path = BonusVC/BonusViewController.h; sourceTree = "<group>"; };
 		336B62AB1AB16CD500476A93 /* BonusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BonusViewController.m; path = BonusVC/BonusViewController.m; sourceTree = "<group>"; };
 		336D04581AB40E0A00A87137 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
@@ -895,7 +896,6 @@
 		33D621F51ABDB7CB009D86A1 /* splash1@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash1@2x.jpg"; sourceTree = "<group>"; };
 		33D621F61ABDB7CB009D86A1 /* splash2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash2@2x.jpg"; sourceTree = "<group>"; };
 		33D621F71ABDB7CB009D86A1 /* splash3@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "splash3@2x.jpg"; sourceTree = "<group>"; };
-		33D746761AF0DD1200749E5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33D8FE321AC658C000A6B974 /* LogisticsFirstTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticsFirstTableViewCell.h; sourceTree = "<group>"; };
 		33D8FE331AC658C000A6B974 /* LogisticsFirstTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticsFirstTableViewCell.m; sourceTree = "<group>"; };
 		33D92C0E1AB95EC8004C1FA2 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -1254,10 +1254,10 @@
 		266FA7FD1A134A72000C2AAE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3368C49E1BB8C2F100D2BCD2 /* Info.plist */,
 				33BDB9591AE757FF000CA407 /* FaceIcon.plist */,
 				26BE3ACD1A1738A6009F37B4 /* mltshop-Prefix.pch */,
 				266FA7FF1A134A72000C2AAE /* main.m */,
-				33D746761AF0DD1200749E5E /* Info.plist */,
 				26435AC21A20B44F00E117A0 /* InfoPlist.strings */,
 				33D92C1D1AB96089004C1FA2 /* PushConfig.plist */,
 			);
@@ -2344,7 +2344,7 @@
 				TargetAttributes = {
 					266FA7F91A134A72000C2AAE = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 2H428L3T6B;
+						DevelopmentTeam = G7WC9TEX5H;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2404,7 +2404,7 @@
 				332FD74F1AD6255400935D22 /* pic_background.png in Resources */,
 				33D621F81ABDB7CB009D86A1 /* splash1@2x.jpg in Resources */,
 				26BB7D651A6BA9F9002F4030 /* zbar-help.html in Resources */,
-				33D746771AF0DD1200749E5E /* Info.plist in Resources */,
+				3368C49F1BB8C2F100D2BCD2 /* Info.plist in Resources */,
 				26BE3A8C1A170421009F37B4 /* ding.caf in Resources */,
 				262E1E7D1A58352300C29059 /* AlipaySDK.bundle in Resources */,
 				26435AC11A208F9200E117A0 /* logo_luotuo@2x.png in Resources */,
@@ -2836,6 +2836,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/mltshop/Frameworks/Alipay",
@@ -2946,6 +2947,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/mltshop/Frameworks/Alipay",
@@ -3051,6 +3053,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yang chunliu (YKJ878A4B4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -3062,6 +3065,7 @@
 				INFOPLIST_FILE = mltshopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6223704e-8216-44a5-8418-6d9fe5ac531e";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mltshop.app/mltshop";
 			};
 			name = Debug;
@@ -3070,6 +3074,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: yang chunliu (YKJ878A4B4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -3077,6 +3082,7 @@
 				INFOPLIST_FILE = mltshopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6223704e-8216-44a5-8418-6d9fe5ac531e";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mltshop.app/mltshop";
 			};
 			name = Release;

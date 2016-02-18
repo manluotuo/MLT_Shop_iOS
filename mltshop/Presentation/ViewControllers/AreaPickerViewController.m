@@ -78,8 +78,6 @@
 
     self.pickerDataSource = [[NSMutableArray alloc]initWithObjects:[[NSMutableArray alloc]init],[[NSMutableArray alloc]init],[[NSMutableArray alloc]init], nil];
     
-    [self setUpImageDownButton:0];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -246,6 +244,7 @@
     cell.textLabel.textColor = [UIColor grayColor];
     
 }
+
 - (void)multiTablesView:(MultiTablesView *)multiTablesView level:(NSInteger)level didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (multiTablesView.currentTableViewIndex == level) {
