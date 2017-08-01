@@ -4,9 +4,7 @@ var plist = require('plist');
 //
 var OSS = require('aliyun-oss');
 var option = {
-  accessKeyId : "KWIlr6mqBb9r2Yel",
-  accessKeySecret : "2xZh7uSnwP5DI30fyIZDtNqWlakO3e",
-  host:'oss-cn-beijing.aliyuncs.com'
+
 };
 
 var oss = OSS.createClient(option);
